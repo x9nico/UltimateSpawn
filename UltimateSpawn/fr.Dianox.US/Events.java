@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -12,7 +13,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import fr.Dianox.US.config.ConfigMessage;
 import fr.Dianox.US.config.MainConfig;
 
-public class Events {
+public class Events implements Listener {
 	 public Events() {}
 	  
 	  
@@ -40,19 +41,19 @@ public class Events {
 	    if (p.hasPlayedBefore()) {
 	      if (MainConfig.getConfig().getBoolean("spawn.Teleport-to-spawn-on.join")) {
 	        Utils.teleportToSpawn(p);
-	      }
-	    } else {
-	      if (MainConfig.getConfig().getBoolean("spawn.Teleport-to-spawn-on.first-join")) {
-	        Utils.teleportToSpawn(p);
-	      }
-	      if (MainConfig.getConfig().getBoolean("broadcast.first-join.enabled")) {
-	        org.bukkit.Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("join.broadcast.First-join-message").replaceAll("%player%", p.getName())));
-	      }
-	      if (MainConfig.getConfig().getBoolean("Join.First-join-message-enabled")) {
-	        for (String message : ConfigMessage.getConfig().getStringList("join.broadcast.Join-message")) {
-	          p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%player%", p.getName())));
-	        }
-	      }
+	      } else {
+		      if (MainConfig.getConfig().getBoolean("spawn.Teleport-to-spawn-on.first-join")) {
+			        Utils.teleportToSpawn(p);
+			  }
+			  if (MainConfig.getConfig().getBoolean("broadcast.first-join.enabled")) {
+			     org.bukkit.Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("join.broadcast.First-join-message").replaceAll("%player%", p.getName())));
+			 }
+			}
+		    if (MainConfig.getConfig().getBoolean("Join.First-join-message-enabled")) {
+				  for (String message : ConfigMessage.getConfig().getStringList("join.broadcast.Join-message")) {
+				   p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%player%", p.getName())));
+				  }
+				}
 	    }
 	    
 	    int gm = MainConfig.getConfig().getInt("options.set-gamemode-on-join.gamemode");
