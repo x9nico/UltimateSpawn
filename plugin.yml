@@ -1,0 +1,17 @@
+name: UltimateSpawn
+version: 0.0.1
+author: Dianox
+main: fr.Dianox.US.MainClass
+commands:
+    spawn:
+        usage: /<command>
+        description: Teleports player to the spawn
+        aliases: [hub, lobby, l, h]
+    setspawn:
+        usage: /<command>
+        description: Set the spawn
+        aliases: [sethub, setlobby]
+    ultimatespawn:
+        usage: /<command>
+        description: Show help of UltimateSpawn
+        aliases: us
