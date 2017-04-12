@@ -1,5 +1,7 @@
 package fr.Dianox.US;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.Dianox.US.Commands.CommandSpawn;
@@ -26,6 +28,9 @@ public class MainClass extends JavaPlugin{
 		getCommand("spawn").setExecutor(new CommandSpawn());
 		getCommand("setspawn").setExecutor(new CommandSpawn());
 		getCommand("ultimatespawn").setExecutor(new MainCommand());
+		
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new Events(), this);
 		
 		System.out.println("|=============================");
 		System.out.println("|");
