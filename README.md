@@ -1,5 +1,7 @@
 # UltimateSpawn
-A plugin for lobby server
+A MineCraft plugin for lobby server
+
+Version: 1.8x-1.9.x-1.10.x-1.11.x
 
 # Terms and condition
 
