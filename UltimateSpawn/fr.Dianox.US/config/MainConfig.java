@@ -65,25 +65,32 @@ public class MainConfig {
 			Config.set("spawn.Teleport-to-spawn-on.first-join", Boolean.valueOf(true));
 			Config.set("spawn.Teleport-to-spawn-on.join", Boolean.valueOf(true));
 			Config.set("spawn.Teleport-to-spawn-on.respawn", Boolean.valueOf(true));
-			Config.set("spawn.Teleport-to-spawn-on.void-fall", Boolean.valueOf(false));
+			Config.set("spawn.Teleport-to-spawn-on.void-fall", Boolean.valueOf(true));
 			//Options
-			Config.set("options.set-gamemode-on-join.enabled", Boolean.valueOf(false));
-			Config.set("options.set-gamemode-on-join.gamemode", Integer.valueOf(0));
-			Config.set("options.set-fly-on-join.enabled", Boolean.valueOf(false));
-			Config.set("options.set-fly-on-join.fly", Boolean.valueOf(false));
-	      		Config.set("options.set-max-health-on-join", Boolean.valueOf(false));
-	    	  	Config.set("options.set-max-food-level-on-join", Boolean.valueOf(false));
-	      		//Broadcast
-	      		Config.set("broadcast.player-join.enabled", Boolean.valueOf(false));
-	     	 	Config.set("broadcast.player-join.hide", Boolean.valueOf(false));
-	      		Config.set("broadcast.player-quit.enabled", Boolean.valueOf(false));
-	     	 	Config.set("broadcast.player-quit.hide", Boolean.valueOf(false));
-	     	 	Config.set("broadcast.first-join.enabled", Boolean.valueOf(false));
-	     	 	//Join
-	      		Config.set("Join.Join-message-enabled", Boolean.valueOf(false));
-	      		Config.set("Join.First-join-message-enabled", Boolean.valueOf(false));
+			Config.set("options.set-gamemode-on-join.enabled", Boolean.valueOf(true));
+			Config.set("options.set-gamemode-on-join.gamemode", Integer.valueOf(2));
+			Config.set("options.set-fly-on-join.enabled", Boolean.valueOf(true));
+			Config.set("options.set-fly-on-join.fly", Boolean.valueOf(true));
+	      		Config.set("options.set-max-health-on-join", Boolean.valueOf(true));
+	     	 	Config.set("options.set-max-food-level-on-join", Boolean.valueOf(true));
+	    	  	//Broadcast
+	    	  	Config.set("broadcast.player-join.enabled", Boolean.valueOf(true));
+	      		Config.set("broadcast.player-join.hide", Boolean.valueOf(true));
+	    	  	Config.set("broadcast.player-quit.enabled", Boolean.valueOf(true));
+	    	  	Config.set("broadcast.player-quit.hide", Boolean.valueOf(true));
+	      		Config.set("broadcast.first-join.enabled", Boolean.valueOf(true));
+	      		//Join
+	      		Config.set("Join.Join-message-enabled", Boolean.valueOf(true));
+	      		Config.set("Join.First-join-message-enabled", Boolean.valueOf(true));
+	      		//Protection
+	      		Config.set("Protection.Block.Place-block", Boolean.valueOf(true));
+	      		Config.set("Protection.Block.Place-block-message", Boolean.valueOf(true));
+	      		Config.set("Protection.Block.Place-block-bypass", Boolean.valueOf(false));
+	      		Config.set("Protection.Block.Break-block", Boolean.valueOf(true));
+	      		Config.set("Protection.Block.Break-block-message", Boolean.valueOf(true));
+	      		Config.set("Protection.Block.Break-block-bypass", Boolean.valueOf(false));
 	      
-	      		saveConfigFile();
+	 	     	saveConfigFile();
 		}
 	}
 }
