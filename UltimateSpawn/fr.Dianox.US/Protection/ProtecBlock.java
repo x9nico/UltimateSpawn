@@ -41,7 +41,7 @@ public class ProtecBlock implements Listener {
         
         if (MainConfig.getConfig().getBoolean("Protection.Block.Break-block")) {
         	if (MainConfig.getConfig().getBoolean("Protection.Block.Break-block-bypass")) {
-        		if (p.hasPermission("UltimateSpawn.bypass.placeblock")){
+        		if (p.hasPermission("UltimateSpawn.bypass.breakblock")){
         			//nothing
         		} else {
         			e.setCancelled(true);
