@@ -68,13 +68,16 @@ public class ConfigMessage {
 			configmessage.set("join.broadcast.Join-message", java.util.Arrays.asList(new String[] { "&6%player% joined the lobby!" }));
 			//Quit
 			configmessage.set("quit.broadcast.Quit-message", java.util.Arrays.asList(new String[] { "&6%player% left the lobby!" }));
+			//Protection
+			configmessage.set("Protection.Block.Place-block", "&cSorry, you can't place block");
+			configmessage.set("Protection.Block.Break-block", "&cSorry, you can't break block");
 			//Others
-		    	configmessage.set("others.No-permission-message", "&cSorry, but you don't have permission to execute this command!");
-		   	configmessage.set("others.Player-not-found", "&cPlayer not found.");
-		   	configmessage.set("others.Console-use-command", "&eUltimate&cSpawn &7: &cOnly players can run this command.");
-		    	configmessage.set("others.Config-reloaded", "&eUltimate&cSpawn &7: &eConfig reloaded.");
+		    configmessage.set("others.No-permission-message", "&cSorry, but you don't have permission to execute this command!");
+		    configmessage.set("others.Player-not-found", "&cPlayer not found.");
+		    configmessage.set("others.Console-use-command", "&eUltimate&cSpawn &7: &cOnly players can run this command.");
+		    configmessage.set("others.Config-reloaded", "&eUltimate&cSpawn &7: &eConfig reloaded.");
 	      
-		   	 saveConfigFile();
+		    saveConfigFile();
 		}
 	}
 
