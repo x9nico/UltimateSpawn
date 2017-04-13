@@ -71,19 +71,19 @@ public class MainConfig {
 			Config.set("options.set-gamemode-on-join.gamemode", Integer.valueOf(0));
 			Config.set("options.set-fly-on-join.enabled", Boolean.valueOf(false));
 			Config.set("options.set-fly-on-join.fly", Boolean.valueOf(false));
-	      	Config.set("options.set-max-health-on-join", Boolean.valueOf(false));
-	      	Config.set("options.set-max-food-level-on-join", Boolean.valueOf(false));
-	      	//Broadcast
-	      	Config.set("broadcast.player-join.enabled", Boolean.valueOf(false));
-	      	Config.set("broadcast.player-join.hide", Boolean.valueOf(false));
-	      	Config.set("broadcast.player-quit.enabled", Boolean.valueOf(false));
-	      	Config.set("broadcast.player-quit.hide", Boolean.valueOf(false));
-	      	Config.set("broadcast.first-join.enabled", Boolean.valueOf(false));
-	      	//Join
-	      	Config.set("Join.Join-message-enabled", Boolean.valueOf(false));
-	      	Config.set("Join.First-join-message-enabled", Boolean.valueOf(false));
+	      		Config.set("options.set-max-health-on-join", Boolean.valueOf(false));
+	    	  	Config.set("options.set-max-food-level-on-join", Boolean.valueOf(false));
+	      		//Broadcast
+	      		Config.set("broadcast.player-join.enabled", Boolean.valueOf(false));
+	     	 	Config.set("broadcast.player-join.hide", Boolean.valueOf(false));
+	      		Config.set("broadcast.player-quit.enabled", Boolean.valueOf(false));
+	     	 	Config.set("broadcast.player-quit.hide", Boolean.valueOf(false));
+	     	 	Config.set("broadcast.first-join.enabled", Boolean.valueOf(false));
+	     	 	//Join
+	      		Config.set("Join.Join-message-enabled", Boolean.valueOf(false));
+	      		Config.set("Join.First-join-message-enabled", Boolean.valueOf(false));
 	      
-	      	saveConfigFile();
+	      		saveConfigFile();
 		}
 	}
 }
