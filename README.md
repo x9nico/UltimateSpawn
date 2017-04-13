@@ -3,6 +3,8 @@ A MineCraft plugin for lobby server
 
 Version: 1.8x-1.9.x-1.10.x-1.11.x
 
+# Version - 0.0.3
+
 # Terms and condition
 
 Free plugin, free source code ! Enjoy <3
