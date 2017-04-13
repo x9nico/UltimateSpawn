@@ -19,10 +19,11 @@ public class MainCommand implements CommandExecutor {
 	
 	public MainCommand() {}
 	
+	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		if(!(sender instanceof Player)){
-	        sender.sendMessage(ConfigUtils.console_use_command);
+			sender.sendMessage(ConfigUtils.console_use_command);
 	        return true;
 		}
 		
@@ -39,25 +40,23 @@ public class MainCommand implements CommandExecutor {
 				p.sendMessage("§3\\\\§m---------------§r §c[§rUltimateSpawn§c] §3§m---------------§r§3//");
 			}
 		    else if (args[0].equalsIgnoreCase("reload")) {
-		        if (p.hasPermission("UltimateSpawn.reload")) {
-		          MainConfig.reloadConfig();
-		          ConfigMessage.reloadConfig();
-		          ConfigSpawn.reloadConfig();
-		          ConfigUtils.load();
+		    	if (p.hasPermission("UltimateSpawn.reload")) {
+		    		MainConfig.reloadConfig();
+		    		ConfigMessage.reloadConfig();
+		    		ConfigSpawn.reloadConfig();
+		    		ConfigUtils.load();
 		          
-		        if ((sender instanceof Player)) {
-		            Bukkit.getLogger().info("UltimateSpawn : Config reloaded");
-		        }
-		          sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("others.Config-reloaded")));
-		        } else {
-		          sender.sendMessage(ConfigUtils.no_permission);
-		        }
+		    		if ((sender instanceof Player)) {
+		    			Bukkit.getLogger().info("UltimateSpawn : Config reloaded");
+		    		}
+		    		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("others.Config-reloaded")));
+		    	} else {
+		    		sender.sendMessage(ConfigUtils.no_permission);
+		    	}
 		          
-		   }
+		    }
 		} else {
 			sender.sendMessage(ConfigUtils.no_permission);
 		}
 		return true;
 	}
-
-}
