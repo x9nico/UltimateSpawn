@@ -89,6 +89,10 @@ public class MainConfig {
 	      		Config.set("Protection.Block.Break-block", Boolean.valueOf(true));
 	      		Config.set("Protection.Block.Break-block-message", Boolean.valueOf(true));
 	      		Config.set("Protection.Block.Break-block-bypass", Boolean.valueOf(false));
+			Config.set("Protection.Drop.Item", Boolean.valueOf(true));
+	      		Config.set("Protection.Drop.Item-bypass", Boolean.valueOf(false));
+	      		Config.set("Protection.Pickup.Item", Boolean.valueOf(true));
+	      		Config.set("Protection.Pickup.Item-bypass", Boolean.valueOf(false));
 	      
 	 	     	saveConfigFile();
 		}
