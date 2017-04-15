@@ -1,0 +1,18 @@
+package fr.Dianox.US.Protection;
+
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.weather.WeatherChangeEvent;
+
+import fr.Dianox.US.config.MainConfig;
+
+public class AntiWeather implements Listener {
+	
+	@EventHandler
+	public void onWeather(WeatherChangeEvent e){
+        if (MainConfig.getConfig().getBoolean("Protection.AntiWeather")) {
+        	e.setCancelled(true);
+        }
+	}
+
+}
