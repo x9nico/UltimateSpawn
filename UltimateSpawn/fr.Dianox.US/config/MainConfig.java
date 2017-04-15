@@ -93,6 +93,10 @@ public class MainConfig {
 	      		Config.set("Protection.Drop.Item-bypass", Boolean.valueOf(false));
 	      		Config.set("Protection.Pickup.Item", Boolean.valueOf(true));
 	      		Config.set("Protection.Pickup.Item-bypass", Boolean.valueOf(false));
+			Config.set("Protection.Explosion", Boolean.valueOf(true));
+	      		Config.set("Protection.AntiWeather", Boolean.valueOf(true));
+	      		Config.set("Protection.MobSpawning", Boolean.valueOf(true));
+	      		Config.set("Protection.DamageEvent", Boolean.valueOf(true));
 	      
 	 	     	saveConfigFile();
 		}
