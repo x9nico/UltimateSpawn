@@ -9,6 +9,7 @@ import fr.Dianox.US.config.MainConfig;
 
 public class ProtectItem implements Listener {
 	
+	@EventHandler
 	public void onDrop(PlayerDropItemEvent e){
         Player p = e.getPlayer();
         
@@ -25,6 +26,7 @@ public class ProtectItem implements Listener {
         }
 	}
 	
+	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e){
         Player p = e.getPlayer();
         
