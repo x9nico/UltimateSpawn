@@ -14,7 +14,7 @@ You can use the source code without problems ^^
 You can not resell these source codes ^^
 
 This plugin will only grow... If you contribute to the project
-----------------------------------------------------------------
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
