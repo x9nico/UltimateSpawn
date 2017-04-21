@@ -1,5 +1,6 @@
 package fr.Dianox.US;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -10,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
+import fr.Dianox.US.Scoreboard.Board;
 import fr.Dianox.US.config.ConfigMessage;
 import fr.Dianox.US.config.MainConfig;
 
@@ -124,4 +126,17 @@ public class Events implements Listener {
 			e.setCancelled(true);
 		}
 	}
+	
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e)
+    {
+      new Board(e.getPlayer());
+    }
+    
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e)
+    {
+      e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+      Board.boards.remove(e.getPlayer());
+    }
 }
