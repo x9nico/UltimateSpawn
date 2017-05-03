@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -14,9 +13,8 @@ import org.bukkit.scoreboard.Team;
 
 import fr.Dianox.US.MainClass;
 import fr.Dianox.US.config.ScoreboardConfig;
-import me.clip.placeholderapi.PlaceholderAPI;
 
-public class Board implements Listener {
+public class Board{
 	
 	  public static ArrayList<Board> boards = new ArrayList();
 	  public static ArrayList<Player> disabled = new ArrayList();
@@ -30,8 +28,7 @@ public class Board implements Listener {
 	  ArrayList<String> cache = new ArrayList();
 	  ArrayList<Line> lines = new ArrayList();
 	  
-	  public Board(Player p)
-	  {
+	  public Board(Player p){
 	    boards.add(this);
 	    btp.put(p, this);
 	    
@@ -48,19 +45,14 @@ public class Board implements Listener {
 	    
 	    int score = this.c;
 	    int count = 0;
-	    for (String key : config.getConfigurationSection("animatedboard").getKeys(false))
-	    {
+	    for (String key : config.getConfigurationSection("animatedboard").getKeys(false)){
 	      int keyInt = 1;
-	      try
-	      {
+	      try{
 	        keyInt = Integer.parseInt(key);
-	      }
-	      catch (NumberFormatException e)
-	      {
+	      }catch (NumberFormatException e){
 	        SBUtils.fatal("Line number " + (count + 1) + " has a non-numeric name.", p);
 	      }
-	      if (keyInt != 1)
-	      {
+	      if (keyInt != 1){
 	        Team t = this.scoreboard.registerNewTeam(""+count+"");
 	        t.addEntry(String.valueOf(org.bukkit.ChatColor.values()[count]));
 	        
@@ -81,8 +73,7 @@ public class Board implements Listener {
 
 	String last = "";
 	  
-	  private void title(String s)
-	  {
+	  private void title(String s){
 	    if (this.last == s) {
 	      return;
 	    }
@@ -90,8 +81,7 @@ public class Board implements Listener {
 	    this.objective.setDisplayName(s);
 	  }
 	  
-	  public void update()
-	  {
+	  public void update(){
 	    if (disabled.contains(this.player)) {
 	      return;
 	    }
@@ -99,20 +89,25 @@ public class Board implements Listener {
 	    
 	    int count = 0;
 	    boolean first = true;
-	    for (Line line : this.lines)
-	    {
+	    for (Line line : this.lines){
 	      String s = line.next();
-	      if (first)
-	      {
+	      if (first){
 	        title(s);
 	        first = false;
-	      }
-	      else
-	      {
+	      }else{
 	        first = false;
-	        if (MainClass.placeholders) {
-	          s = PlaceholderAPI.setPlaceholders(this.player, s);
+	        if (MainClass.hook_placeholderapi) {
+	          s = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(this.player, s);
 	        }
+	        
+	        if (MainClass.hook_mvdw) {
+	            if (MainClass.uses_uuid) {
+	              s = be.maximvdw.placeholderapi.PlaceholderAPI.replacePlaceholders(Bukkit.getOfflinePlayer(this.player.getUniqueId()), s);
+	            } else {
+	              s = be.maximvdw.placeholderapi.PlaceholderAPI.replacePlaceholders(Bukkit.getOfflinePlayer(this.player.getName()), s);
+	            }
+	          }
+	        
 	        newCache.add(s);
 	        if (this.cache.contains(s))
 	        {
@@ -120,6 +115,9 @@ public class Board implements Listener {
 	        }
 	        else
 	        {
+	          if (s.length() > 31) {
+	            s.substring(31);
+	          }
 	          if (s.length() > 16)
 	          {
 	            String last = "";
@@ -132,19 +130,23 @@ public class Board implements Listener {
 	            }
 	            String s1 = s.substring(0, 16);
 	            String s2 = s.substring(16, s.length());
+	            if (s2.length() > 15) {
+	              s2 = s.substring(0, 15);
+	            }
 	            if (!last.isEmpty()) {
 	              s2 = last + s2;
 	            } else {
 	              s2 = "�f" + s2;
 	            }
-	            Team t = this.scoreboard.getTeam(""+count+"");
+	            Team t = this.scoreboard.getTeam(""+count);
 	            t.setPrefix(SBUtils.color(s1));
 	            t.setSuffix(SBUtils.color(s2));
 	          }
 	          else
 	          {
-	            Team t = this.scoreboard.getTeam(""+count+"");
+	            Team t = this.scoreboard.getTeam(""+count);
 	            t.setPrefix(SBUtils.color(s));
+	            t.setSuffix("");
 	          }
 	          count++;
 	        }
