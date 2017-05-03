@@ -66,4 +66,6 @@ public class Utils {
 			sender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("spawn.Spawn-not-set")));
 		}
 	}
+	
+	
 }
