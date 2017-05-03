@@ -1,5 +1,7 @@
 package fr.Dianox.US;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -10,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 import fr.Dianox.US.Scoreboard.Board;
 import fr.Dianox.US.config.ConfigMessage;
@@ -138,5 +141,28 @@ public class Events implements Listener {
     {
       e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
       Board.boards.remove(e.getPlayer());
+    }
+    
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent e){
+      List<String> disabled = MainConfig.getConfig().getStringList("Scoreboard.disabled_worlds");
+      if (disabled != null){
+        boolean isDisabled = false;
+        for (String world : disabled) {
+          if (world.toLowerCase().equals(e.getPlayer().getLocation().getWorld().getName().toLowerCase())){
+            isDisabled = true;
+            
+            Board.disabled.add(e.getPlayer());
+            Board b = (Board)Board.btp.get(e.getCause());
+            Board.btp.remove(b);
+            Board.boards.remove(b);
+            e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+          }
+        }
+        if ((!isDisabled) && (Board.disabled.contains(e.getPlayer()))){
+          Board.disabled.remove(e.getPlayer());
+          new Board(e.getPlayer());
+        }
+      }
     }
 }
