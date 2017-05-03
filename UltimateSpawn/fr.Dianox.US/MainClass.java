@@ -24,22 +24,38 @@ import fr.Dianox.US.config.ScoreboardConfig;
 public class MainClass extends JavaPlugin{
 	
 	private static MainClass instance;
-	public static boolean placeholders = false;
+	public static boolean hook_placeholderapi = false;
+	public static boolean hook_mvdw = false;
+	public static boolean uses_uuid = true;
 	
 	public MainClass(){}
 	
 	public void onEnable(){
+		System.out.println("|=============================");
+		System.out.println("|");
+		System.out.println("| Ultimate Spawn load ! Please wait !");
+		System.out.println("| ");
+		
 		instance = this;
 		
 		ScoreboardConfig.loadConfig(this);
+		System.out.println("| Config for Scoreboard loaded");
 		ConfigSpawn.loadSpawnConfig(this);
+		System.out.println("| Config for Spawn loaded");
 		ConfigMessage.loadMessageConfig(this);
+		System.out.println("| Config for Message loaded");
 		MainConfig.loadConfig(this);
+		System.out.println("| Main config loaded");
+		System.out.println("| ");
 		ConfigUtils.load();
+		System.out.println("| Utils for config loaded");
+		System.out.println("| ");
 		
 		getCommand("spawn").setExecutor(new CommandSpawn());
 		getCommand("setspawn").setExecutor(new CommandSpawn());
 		getCommand("ultimatespawn").setExecutor(new MainCommand());
+		System.out.println("| Commands loaded");
+		System.out.println("| ");
 		
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new Events(), this);
@@ -49,18 +65,30 @@ public class MainClass extends JavaPlugin{
 		pm.registerEvents(new AntiWeather(), this);
 		pm.registerEvents(new AntiSpawning(), this);
 		pm.registerEvents(new AntiDamage(), this);
+		System.out.println("| Events loaded");
+		System.out.println("| ");
 		
-	    if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-	        placeholders = true;
+	    if ((Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) && (MainConfig.getConfig().getBoolean("Placeholder.PlaceholderAPI"))){
+	      hook_placeholderapi = true;
+	      System.out.println("| Detected PlaceholderAPI, hooking in");
 	    }
+	    if ((Bukkit.getPluginManager().isPluginEnabled("MVdWPlaceholderAPI")) && (MainConfig.getConfig().getBoolean("Placeholder.MVdWPlaceholderAPI"))){
+	      hook_placeholderapi = true;
+	      System.out.println("| Detected MVdWPlaceholderAPI, hooking in");
+	    }
+	    System.out.println("| ");
 	    
-	    for (Player p : Bukkit.getOnlinePlayers()) {
+	    if (!MainConfig.getConfig().getBoolean("Set_UUID")){
+	      uses_uuid = false;
+	    }	    
+	    for (Player p : Bukkit.getOnlinePlayers()){
 	        new Board(p);
 	    }
 	    
 	    new Updater();
 	    
-		System.out.println("|=============================");
+	    System.out.println("| And many things... loaded !");
+	    
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn loaded !");
 		System.out.println("|");
