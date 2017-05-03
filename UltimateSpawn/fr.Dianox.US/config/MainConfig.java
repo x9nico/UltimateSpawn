@@ -71,34 +71,41 @@ public class MainConfig {
 			Config.set("options.set-gamemode-on-join.gamemode", Integer.valueOf(2));
 			Config.set("options.set-fly-on-join.enabled", Boolean.valueOf(true));
 			Config.set("options.set-fly-on-join.fly", Boolean.valueOf(true));
-	      		Config.set("options.set-max-health-on-join", Boolean.valueOf(true));
-	     	 	Config.set("options.set-max-food-level-on-join", Boolean.valueOf(true));
-	    	  	//Broadcast
-	    	  	Config.set("broadcast.player-join.enabled", Boolean.valueOf(true));
-	      		Config.set("broadcast.player-join.hide", Boolean.valueOf(true));
-	    	  	Config.set("broadcast.player-quit.enabled", Boolean.valueOf(true));
-	    	  	Config.set("broadcast.player-quit.hide", Boolean.valueOf(true));
-	      		Config.set("broadcast.first-join.enabled", Boolean.valueOf(true));
-	      		//Join
-	      		Config.set("Join.Join-message-enabled", Boolean.valueOf(true));
-	      		Config.set("Join.First-join-message-enabled", Boolean.valueOf(true));
-	      		//Protection
-	      		Config.set("Protection.Block.Place-block", Boolean.valueOf(true));
-	      		Config.set("Protection.Block.Place-block-message", Boolean.valueOf(true));
-	      		Config.set("Protection.Block.Place-block-bypass", Boolean.valueOf(false));
-	      		Config.set("Protection.Block.Break-block", Boolean.valueOf(true));
-	      		Config.set("Protection.Block.Break-block-message", Boolean.valueOf(true));
-	      		Config.set("Protection.Block.Break-block-bypass", Boolean.valueOf(false));
-			Config.set("Protection.Drop.Item", Boolean.valueOf(true));
-	      		Config.set("Protection.Drop.Item-bypass", Boolean.valueOf(false));
-	      		Config.set("Protection.Pickup.Item", Boolean.valueOf(true));
-	      		Config.set("Protection.Pickup.Item-bypass", Boolean.valueOf(false));
-			Config.set("Protection.Explosion", Boolean.valueOf(true));
-	      		Config.set("Protection.AntiWeather", Boolean.valueOf(true));
-	      		Config.set("Protection.MobSpawning", Boolean.valueOf(true));
-	      		Config.set("Protection.DamageEvent", Boolean.valueOf(true));
+	      	Config.set("options.set-max-health-on-join", Boolean.valueOf(true));
+	      	Config.set("options.set-max-food-level-on-join", Boolean.valueOf(true));
+	      	//Broadcast
+	      	Config.set("broadcast.player-join.enabled", Boolean.valueOf(true));
+	      	Config.set("broadcast.player-join.hide", Boolean.valueOf(true));
+	      	Config.set("broadcast.player-quit.enabled", Boolean.valueOf(true));
+	      	Config.set("broadcast.player-quit.hide", Boolean.valueOf(true));
+	      	Config.set("broadcast.first-join.enabled", Boolean.valueOf(true));
+	      	//Join
+	      	Config.set("Join.Join-message-enabled", Boolean.valueOf(true));
+	      	Config.set("Join.First-join-message-enabled", Boolean.valueOf(true));
+	      	//Protection
+	      	Config.set("Protection.Block.Place-block", Boolean.valueOf(true));
+	      	Config.set("Protection.Block.Place-block-message", Boolean.valueOf(true));
+	      	Config.set("Protection.Block.Place-block-bypass", Boolean.valueOf(false));
+	      	Config.set("Protection.Block.Break-block", Boolean.valueOf(true));
+	      	Config.set("Protection.Block.Break-block-message", Boolean.valueOf(true));
+	      	Config.set("Protection.Block.Break-block-bypass", Boolean.valueOf(false));
+	      	Config.set("Protection.Drop.Item", Boolean.valueOf(true));
+	      	Config.set("Protection.Drop.Item-bypass", Boolean.valueOf(false));
+	      	Config.set("Protection.Pickup.Item", Boolean.valueOf(true));
+	      	Config.set("Protection.Pickup.Item-bypass", Boolean.valueOf(false));
+	      	Config.set("Protection.Explosion", Boolean.valueOf(true));
+	      	Config.set("Protection.AntiWeather", Boolean.valueOf(true));
+	      	Config.set("Protection.MobSpawning", Boolean.valueOf(true));
+	      	Config.set("Protection.DamageEvent", Boolean.valueOf(true));
+	      	// Placeholder
+	      	Config.set("Placeholder.PlaceholderAPI", Boolean.valueOf(true));
+	      	Config.set("Placeholder.MVdWPlaceholderAPI", Boolean.valueOf(true));
+	      	// Scoreboard
+	      	Config.set("Scoreboard.disabled_worlds", java.util.Arrays.asList(new String[] { "world1", "world2"}));
+	      	// Others
+	      	Config.set("Set_UUID", Boolean.valueOf(true));
 	      
-	 	     	saveConfigFile();
+	      	saveConfigFile();
 		}
 	}
 }
