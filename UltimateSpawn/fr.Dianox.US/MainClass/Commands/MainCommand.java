@@ -21,7 +21,7 @@ public class MainCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		if(!(sender instanceof Player)){
-			sender.sendMessage(ConfigMessage.getConfig().getString("Error.Only-Player"));
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Only-Player")));
 	        return true;
 		}
 		
@@ -47,12 +47,12 @@ public class MainCommand implements CommandExecutor {
 		    		}
 		    		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
 		    	} else {
-		    		sender.sendMessage(ConfigMessage.getConfig().getString("Error.No-permission"));
+		    		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
 		    	}
 		          
 		    }
 		} else {
-			sender.sendMessage(ConfigMessage.getConfig().getString("Error.No-permission"));
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
 		}
 		return true;
 		
