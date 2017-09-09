@@ -57,7 +57,7 @@ public class SpawnUtils {
 			player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
 	      
 			player.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Teleport.To-spawn")));
-			sender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Teleport.To-spawn-other\"")).replaceAll("%target%", player.getName()));
+			sender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Teleport.To-spawn-other")).replaceAll("%target%", player.getName()));
 		} catch (Exception e) {
 			org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
 	      
@@ -66,3 +66,4 @@ public class SpawnUtils {
 }
 
 }
+
