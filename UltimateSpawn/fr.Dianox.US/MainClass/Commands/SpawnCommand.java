@@ -23,7 +23,7 @@ public class SpawnCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		if(!(sender instanceof Player)){
-			sender.sendMessage(ConfigMessage.getConfig().getString("Error.Only-Player"));
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Only-Player")));
 			return true;
 		}
 		
@@ -32,7 +32,7 @@ public class SpawnCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("setspawn") || cmd.getName().equalsIgnoreCase("sethub") || cmd.getName().equalsIgnoreCase("setlobby")) {
 			if(p.hasPermission("UltimateSpawn.SetSpawn")){
 				if (!(sender instanceof Player)) {
-					sender.sendMessage(ConfigMessage.getConfig().getString("Error.Only-Player"));
+					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Only-Player")));
 					return true;
 				}
 					      
@@ -51,14 +51,14 @@ public class SpawnCommand implements CommandExecutor {
 				        
 			    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Spawn.Set")));
 			} else {
-				sender.sendMessage(ConfigMessage.getConfig().getString("Error.No-permission"));
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
 			}
 		} 
 		
 		else if(label.equalsIgnoreCase("spawn") || label.equalsIgnoreCase("hub") || label.equalsIgnoreCase("lobby") || label.equalsIgnoreCase("h") || label.equalsIgnoreCase("l")){
 			if(args.length == 0){
 				if (!(sender instanceof Player)) {
-					sender.sendMessage(ConfigMessage.getConfig().getString("Error.Only-Player"));
+					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Only-Player")));
 		            return true;
 				}
 				SpawnUtils.teleportToSpawn(p, true);
@@ -67,19 +67,20 @@ public class SpawnCommand implements CommandExecutor {
 					Player target = Bukkit.getServer().getPlayer(args[0]);
 			          
 					if (target == null) {
-						sender.sendMessage(ConfigMessage.getConfig().getString("Error.Player-not-found"));
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player-not-found")));
 						return true;
 					}
 			          
 					SpawnUtils.teleportToSpawn(target, sender);
 				} else {
-					sender.sendMessage(ConfigMessage.getConfig().getString("Error.No-permission"));
+					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
 				}
 			}
 		} else {
-			sender.sendMessage(ConfigMessage.getConfig().getString("Error.No-permission"));
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
 		}
 		return true;
 }
 
 }
+
