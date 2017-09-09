@@ -100,7 +100,7 @@ public class ConfigGlobal {
 			Config.set("On-Join.Spawn.Message.First-Join.Enable", Boolean.valueOf(true));
 			Config.set("On-Join.Spawn.Message.First-Join.Message", java.util.Arrays.asList(new String[] { "&6Welcome %player%!", "&cDon't forget to see our rules" }));
 			Config.set("On-Join.Spawn.Message.Join.Enable", Boolean.valueOf(true));
-			Config.set("On-Join.Spawn.Message.Join.Message", java.util.Arrays.asList(new String[] { "&8&m<=====-------<&r &6UltimeSpawn &8&m>-------=====>", "&cHello %player%", "&cDon't forget to see our rules", "&8&m<=====-------<&r &6UltimeSpawn &8&m>-------=====>" }));			
+			Config.set("On-Join.Spawn.Message.Join.Message", java.util.Arrays.asList(new String[] { "&8&m<=====-------<&r &6UltimateSpawn &8&m>-------=====>", "&cHello %player%", "&cDon't forget to see our rules", "&8&m<=====-------<&r &6UltimateSpawn &8&m>-------=====>" }));			
 			Config.set("On-Join.Spawn.Gamemode.Change", Boolean.valueOf(true));
 			Config.set("On-Join.Spawn.Gamemode.Gamemode", Integer.valueOf(2));
 			Config.set("On-Join.Spawn.Fly", Boolean.valueOf(true));
