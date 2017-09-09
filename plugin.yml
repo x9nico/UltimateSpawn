@@ -1,8 +1,7 @@
 name: UltimateSpawn
-version: 0.0.7
+version: 0.1
 author: Dianox
-main: fr.Dianox.US.MainClass
-SoftDepend: [PlaceholderAPI]
+main: fr.Dianox.US.MainClass.MainClass
 LOAD: POSTWORLD
 commands:
     spawn:
