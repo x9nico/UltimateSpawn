@@ -6,6 +6,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.Dianox.US.MainClass.Commands.MainCommand;
+import fr.Dianox.US.MainClass.Commands.PingCommand;
 import fr.Dianox.US.MainClass.Commands.SpawnCommand;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
@@ -40,6 +41,7 @@ public class MainClass extends JavaPlugin {
 		getCommand("ultimatespawn").setExecutor(new MainCommand());
 		getCommand("spawn").setExecutor(new SpawnCommand());
 		getCommand("setspawn").setExecutor(new SpawnCommand());
+		getCommand("ping").setExecutor(new PingCommand());
 		System.out.println("| Commands loaded");
 		
 		System.out.println("|");
