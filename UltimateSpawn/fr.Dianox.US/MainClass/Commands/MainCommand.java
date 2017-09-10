@@ -34,6 +34,7 @@ public class MainCommand implements CommandExecutor {
 				p.sendMessage(" §8>> §7/setspawn - §eSet the spawn");
 				p.sendMessage(" §8>> §7/spawn - §eGo to spawn");
 				p.sendMessage(" §8>> §7/us reload - §eReload the plugin");
+				p.sendMessage(" §8>> §7/cc - §eHelp of clearchat");
 				p.sendMessage("");
 				p.sendMessage("§3\\\\§m---------------§r §c[§rUltimateSpawn§c] §3§m---------------§r§3//");
 			}
