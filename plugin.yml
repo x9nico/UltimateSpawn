@@ -1,5 +1,5 @@
 name: UltimateSpawn
-version: 0.1.1
+version: 0.1.2
 author: Dianox
 main: fr.Dianox.US.MainClass.MainClass
 LOAD: POSTWORLD
@@ -15,3 +15,5 @@ commands:
         aliases: us
     ping:
         description: Show the ping
+    cc:
+        description: Show help of clearchat
