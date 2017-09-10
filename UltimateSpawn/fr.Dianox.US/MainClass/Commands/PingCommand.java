@@ -44,7 +44,7 @@ public class PingCommand implements CommandExecutor {
 				Player other = Bukkit.getPlayer(args[0]);
 				if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Other.Enable")) {	
 					if (other == null) {
-				          p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player-not-found")));
+				          p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
 				          return true;
 					}
 					int po = getPing(Bukkit.getPlayer(other.getName()));
@@ -55,6 +55,8 @@ public class PingCommand implements CommandExecutor {
 					}
 				}
 			}
+		} else {
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
 		}
 		
 		return true;
