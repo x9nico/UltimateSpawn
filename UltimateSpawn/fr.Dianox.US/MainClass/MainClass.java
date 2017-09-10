@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.Dianox.US.MainClass.Commands.ClearChatCommand;
 import fr.Dianox.US.MainClass.Commands.MainCommand;
 import fr.Dianox.US.MainClass.Commands.PingCommand;
 import fr.Dianox.US.MainClass.Commands.SpawnCommand;
@@ -34,7 +35,7 @@ public class MainClass extends JavaPlugin {
 		ConfigMessage.loadConfig((Plugin) this);
 		System.out.println("| Message config loaded");
 		ConfigSpawn.loadConfig((Plugin) this);
-		System.out.println("| Message config loaded");
+		System.out.println("| Spawn config loaded");
 		
 		System.out.println("|");
 		
@@ -42,6 +43,7 @@ public class MainClass extends JavaPlugin {
 		getCommand("spawn").setExecutor(new SpawnCommand());
 		getCommand("setspawn").setExecutor(new SpawnCommand());
 		getCommand("ping").setExecutor(new PingCommand());
+		getCommand("cc").setExecutor(new ClearChatCommand());
 		System.out.println("| Commands loaded");
 		
 		System.out.println("|");
