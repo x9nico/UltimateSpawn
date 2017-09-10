@@ -117,6 +117,27 @@ public class ConfigGlobal {
 			Config.set("On-Join.Spawn.Broadcast.Quit.Hide", Boolean.valueOf(false));
 			Config.set("On-Join.Spawn.Broadcast.Quit.Message", java.util.Arrays.asList(new String[] { "&8[&c-&8] [&c-&8] [&c-&8] ", "Hey, %player%" }));
 			
+			// Command 
+			Config.set("Command.Ping.Self.Enable", Boolean.valueOf(true));
+			Config.set("Command.Ping.Self.Disable-Message", Boolean.valueOf(true));
+			Config.set("Command.Ping.Other.Enable", Boolean.valueOf(true));
+			Config.set("Command.Ping.Other.Disable-Message", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Enable", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Lines-To-Clear", Integer.valueOf(150));
+			Config.set("Command.ClearChat.Disable-Message", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Anonymous.Enable", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Anonymous.Message-Clear", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Anonymous.Disable-Message", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Normal.Enable", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Normal.Message-Clear", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Normal.Disable-Message", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Own.Enable", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Own.Message-Clear", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Own.Disable-Message", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Other.Enable", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Other.Message-Clear", Boolean.valueOf(true));
+			Config.set("Command.ClearChat.Other.Disable-Message", Boolean.valueOf(true));
+			
 			// Debug
 			Config.set("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING", Boolean.valueOf(false));
 			
