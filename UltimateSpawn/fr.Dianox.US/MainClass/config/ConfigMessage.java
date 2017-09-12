@@ -67,6 +67,7 @@ public class ConfigMessage {
 			Config.set("Admin.ClearChat.Own", "&cChat clear");
 			Config.set("Admin.ClearChat.Normal", "&cChat clear by %player%");
 			Config.set("Admin.ClearChat.Other", "&cYour chat has been clear");
+			Config.set("Admin.Broadcast", "&8[&eBroadcast&8]&r ");
 			Config.set("Error.Only-Player", "&cSorry, only players can use this command !");
 			Config.set("Error.No-permission", "&cSorry, you don't have the permission !");
 			Config.set("Error.Spawn-not-set", "&cSorry, the spawn isn't set");
