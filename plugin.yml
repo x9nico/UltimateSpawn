@@ -17,3 +17,6 @@ commands:
         description: Show the ping
     cc:
         description: Show help of clearchat
+    bc:
+        description: Broadcast
+        aliases: [broadcast]
