@@ -137,6 +137,12 @@ public class ConfigGlobal {
 			Config.set("Command.ClearChat.Other.Enable", Boolean.valueOf(true));
 			Config.set("Command.ClearChat.Other.Message-Clear", Boolean.valueOf(true));
 			Config.set("Command.ClearChat.Other.Disable-Message", Boolean.valueOf(true));
+			Config.set("Command.Broadcast.Enable", Boolean.valueOf(true));
+			Config.set("Command.Broadcast.Disable-Message", Boolean.valueOf(true));
+			Config.set("Command.Broadcast.Sounds.Enabled", Boolean.valueOf(true));
+			Config.set("Command.Broadcast.Sounds.Sound", "NOTE_PIANO");
+			Config.set("Command.Broadcast.Sounds.Volume", Integer.valueOf(10));
+			Config.set("Command.Broadcast.Sounds.Pitch", Integer.valueOf(1));
 			
 			// Debug
 			Config.set("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING", Boolean.valueOf(false));
