@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.Dianox.US.MainClass.Commands.AnnounceCommand;
 import fr.Dianox.US.MainClass.Commands.ClearChatCommand;
 import fr.Dianox.US.MainClass.Commands.MainCommand;
 import fr.Dianox.US.MainClass.Commands.PingCommand;
