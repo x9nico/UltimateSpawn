@@ -44,6 +44,7 @@ public class MainClass extends JavaPlugin {
 		getCommand("setspawn").setExecutor(new SpawnCommand());
 		getCommand("ping").setExecutor(new PingCommand());
 		getCommand("cc").setExecutor(new ClearChatCommand());
+		getCommand("bc").setExecutor(new AnnounceCommand());
 		System.out.println("| Commands loaded");
 		
 		System.out.println("|");
