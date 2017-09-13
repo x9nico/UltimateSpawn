@@ -21,6 +21,7 @@ public class MainClass extends JavaPlugin {
 	
 	private static MainClass instance;
 	
+	
 	public MainClass() {}
 	
 	public void onEnable() {
