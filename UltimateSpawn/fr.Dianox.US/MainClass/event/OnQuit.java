@@ -1,33 +1,67 @@
-package fr.Dianox.US.MainClass.event;
+package fr.Dianox.US.MainClass.Utils;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
 
-import fr.Dianox.US.MainClass.config.ConfigGlobal;
+import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.ConfigSpawn;
 
-public class OnQuit implements Listener {
+public class SpawnUtils {
 
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        Player p = e.getPlayer();
+    public static void teleportToSpawn(Player player) {
+        try {
+            org.bukkit.World w = org.bukkit.Bukkit.getServer().getWorld(ConfigSpawn.getConfig().getString("spawn.world"));
+            double x = ConfigSpawn.getConfig().getDouble("spawn.x");
+            double y = ConfigSpawn.getConfig().getDouble("spawn.y");
+            double z = ConfigSpawn.getConfig().getDouble("spawn.z");
+            float yaw = ConfigSpawn.getConfig().getInt("spawn.yaw");
+            float pitch = ConfigSpawn.getConfig().getInt("spawn.pitch");
 
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Fly")) {
-            p.setAllowFlight(false);
-            p.setFlying(false);
+            player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
+        } catch (Exception e) {
+            org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
+
+            player.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("spawn.Spawn-not-set")));
         }
+    }
 
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Broadcast.Quit.Enable")) {
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Broadcast.Quit.Hide")) {
-                e.setQuitMessage(null);
-            } else {
-                for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Broadcast.Quit.Message")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%player%", p.getName())));
-                }
-                e.setQuitMessage(null);
+    public static void teleportToSpawn(Player player, boolean message) {
+        try {
+            org.bukkit.World w = org.bukkit.Bukkit.getServer().getWorld(ConfigSpawn.getConfig().getString("spawn.world"));
+            double x = ConfigSpawn.getConfig().getDouble("spawn.x");
+            double y = ConfigSpawn.getConfig().getDouble("spawn.y");
+            double z = ConfigSpawn.getConfig().getDouble("spawn.z");
+            float yaw = ConfigSpawn.getConfig().getInt("spawn.yaw");
+            float pitch = ConfigSpawn.getConfig().getInt("spawn.pitch");
+
+            player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
+
+            if (message) {
+                player.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Teleport.To-spawn")));
             }
+        } catch (Exception e) {
+            org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
+
+            player.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Spawn-not-set")));
+        }
+    }
+
+    public static void teleportToSpawn(Player player, org.bukkit.command.CommandSender sender) {
+        try {
+            org.bukkit.World w = org.bukkit.Bukkit.getServer().getWorld(ConfigSpawn.getConfig().getString("spawn.world"));
+            double x = ConfigSpawn.getConfig().getDouble("spawn.x");
+            double y = ConfigSpawn.getConfig().getDouble("spawn.y");
+            double z = ConfigSpawn.getConfig().getDouble("spawn.z");
+            float yaw = ConfigSpawn.getConfig().getInt("spawn.yaw");
+            float pitch = ConfigSpawn.getConfig().getInt("spawn.pitch");
+
+            player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
+
+            player.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Teleport.To-spawn")));
+            sender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Teleport.To-spawn-other")).replaceAll("%target%", player.getName()));
+        } catch (Exception e) {
+            org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
+
+            sender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Spawn-not-set")));
         }
     }
 
