@@ -32,6 +32,8 @@ public class MainCommand implements CommandExecutor {
                     sender.sendMessage(" §8>> §7/cc - §eHelp of clearchat");
                     sender.sendMessage(" §8>> §7/bc - §eBroadcast ");
                     sender.sendMessage(" §8>> §7/ping - §ePing ");
+                    sender.sendMessage(" §8>> §7/gmute - §eMute chat ");
+                    sender.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat ");
                     sender.sendMessage("");
                     sender.sendMessage("§3\\\\§m---------------§r §c[§bUltimateSpawn§c] §3§m---------------§r§3//");
                 } else if (args[0].equalsIgnoreCase("reload")) {
@@ -58,6 +60,8 @@ public class MainCommand implements CommandExecutor {
                 p.sendMessage(" §8>> §7/cc - §eHelp of clearchat");
                 p.sendMessage(" §8>> §7/bc - §eBroadcast ");
                 p.sendMessage(" §8>> §7/ping - §ePing ");
+                p.sendMessage(" §8>> §7/gmute - §eMute chat ");
+                p.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat ");
                 p.sendMessage("");
                 p.sendMessage("§3\\\\§m---------------§r §c[§bUltimateSpawn§c] §3§m---------------§r§3//");
             } else if (args[0].equalsIgnoreCase("reload")) {
