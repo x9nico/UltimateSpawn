@@ -79,7 +79,6 @@ public class ConfigMessage {
             Config.set("Error.Spawn-not-set", "&cSorry, the spawn isn't set");
             Config.set("Error.Command-disable", "&cSorry, this command is disable");
             Config.set("Error.Arguments-Missing", "&cI'm sorry, but there must be one or two arguments missing.");
-            Config.set("Error.Player.Enter-Player-Name", "&cThanks to enter a player name");
             Config.set("Error.Player.Not-found", "&cSorry, but... The player are online ? If it's the case, check the playername");
             Config.set("Error.Player.Enter-Player-Name", "&cThanks to enter a player name");
 
