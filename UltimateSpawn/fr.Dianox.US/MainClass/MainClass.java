@@ -6,14 +6,17 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.Dianox.US.MainClass.Commands.AnnounceCommand;
-import fr.Dianox.US.MainClass.Commands.ClearChatCommand;
 import fr.Dianox.US.MainClass.Commands.MainCommand;
 import fr.Dianox.US.MainClass.Commands.PingCommand;
 import fr.Dianox.US.MainClass.Commands.SpawnCommand;
+import fr.Dianox.US.MainClass.Commands.Chat.ClearChatCommand;
+import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
+import fr.Dianox.US.MainClass.Commands.Chat.MuteChatCommand;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.event.BasicFeatures;
+import fr.Dianox.US.MainClass.event.OnChat;
 import fr.Dianox.US.MainClass.event.OnJoin;
 import fr.Dianox.US.MainClass.event.OnQuit;
 
@@ -47,6 +50,8 @@ public class MainClass extends JavaPlugin {
 		getCommand("ping").setExecutor(new PingCommand());
 		getCommand("cc").setExecutor(new ClearChatCommand());
 		getCommand("bc").setExecutor(new AnnounceCommand());
+		getCommand("GlobalMute").setExecutor(new MuteChatCommand());
+		getCommand("DelayChat").setExecutor(new DelaychatCommand());
 		System.out.println("| Commands loaded");
 		
 		System.out.println("|");
@@ -55,6 +60,7 @@ public class MainClass extends JavaPlugin {
 		pm.registerEvents(new BasicFeatures(), this);
 		pm.registerEvents(new OnJoin(), this);
 		pm.registerEvents(new OnQuit(), this);
+		pm.registerEvents(new OnChat(), this);
 		System.out.println("| Events loaded");
 		
 		System.out.println("| And many things....");
