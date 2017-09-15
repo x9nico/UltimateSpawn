@@ -1,5 +1,5 @@
 name: UltimateSpawn
-version: 0.1.4
+version: 0.1.5
 author: Dianox
 main: fr.Dianox.US.MainClass.MainClass
 LOAD: POSTWORLD
@@ -20,3 +20,9 @@ commands:
     bc:
         description: Broadcast
         aliases: [broadcast]
+    GlobalMute:
+        description: GlobalMute
+        aliases: [gmute]
+    DelayChat:
+        description: DelayChat
+        aliases: [dchat]
