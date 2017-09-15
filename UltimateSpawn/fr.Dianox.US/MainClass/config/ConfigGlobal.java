@@ -167,6 +167,15 @@ public class ConfigGlobal {
             Config.set("Command.Broadcast.Sounds-Console.Sound", "NOTE_PIANO");
             Config.set("Command.Broadcast.Sounds-Console.Volume", Integer.valueOf(10));
             Config.set("Command.Broadcast.Sounds-Console.Pitch", Integer.valueOf(1));
+            Config.set("Command.MuteChat.Enable", Boolean.valueOf(true));
+            Config.set("Command.MuteChat.Mute.Enable", Boolean.valueOf(false));
+            Config.set("Command.MuteChat.Mute.Bypass", Boolean.valueOf(false));
+            Config.set("Command.MuteChat.Disable-Message", Boolean.valueOf(true));
+            Config.set("Command.DelayChat.Enable", Boolean.valueOf(true));
+            Config.set("Command.DelayChat.Delay.Enable", Boolean.valueOf(true));
+            Config.set("Command.DelayChat.Delay.Delay_By_Default", Integer.valueOf(3));
+            Config.set("Command.DelayChat.Delay.Bypass", Boolean.valueOf(true));
+            Config.set("Command.DelayChat.Disable-Message", Boolean.valueOf(true));
 
             // Debug
             Config.set("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING", Boolean.valueOf(false));
