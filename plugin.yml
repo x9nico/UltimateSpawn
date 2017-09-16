@@ -1,8 +1,9 @@
 name: UltimateSpawn
-version: 0.1.5
+version: 0.1.6
 author: Dianox
 main: fr.Dianox.US.MainClass.MainClass
 LOAD: POSTWORLD
+softdepend: [PlaceholderAPI]
 commands:
     spawn:
         description: Teleports player to the spawn
