@@ -1,4 +1,4 @@
-package fr.Dianox.US.MainClass.Commands;
+package fr.Dianox.US.MainClass.Commands.Chat;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 
@@ -38,6 +39,7 @@ public class ClearChatCommand implements CommandExecutor {
                             Bukkit.broadcastMessage(" ");
                         }
 
+                        Bukkit.getLogger().info("Chat Clear");
                         ccac();
                     }
                 } else if (args[0].equalsIgnoreCase("c")) {
@@ -45,6 +47,7 @@ public class ClearChatCommand implements CommandExecutor {
                         Bukkit.broadcastMessage(" ");
                     }
 
+                    Bukkit.getLogger().info("Chat Clear by CONSOLE");
                     cccc();
                 } else if (args[0].equalsIgnoreCase("other")) {
 
@@ -64,7 +67,7 @@ public class ClearChatCommand implements CommandExecutor {
                         target.sendMessage(" ");
                     }
 
-                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.ClearChat.Other")));
+                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Other"), target);
                 }
             }
 
@@ -91,10 +94,12 @@ public class ClearChatCommand implements CommandExecutor {
                         for (int i = 0; i < lines; i++) {
                             Bukkit.broadcastMessage(" ");
                         }
-                        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.ClearChat.Anonymously")));
+                        Bukkit.getLogger().info("Chat Clear");
+                        PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Anonymously"), Bukkit.getServer());
                     } else {
                         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Anonymous.Console.Message-Clear")) {
-                            Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.ClearChat.Anonymously")));
+                        	Bukkit.getLogger().info("Chat Clear");
+                            PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Anonymously"), Bukkit.getServer());
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("c")) {
@@ -103,11 +108,12 @@ public class ClearChatCommand implements CommandExecutor {
                             Bukkit.broadcastMessage(" ");
                         }
                         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Normal.Message-Clear")) {
-                            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.ClearChat.Normal").replaceAll("%player%", p.getName())));
+                            Bukkit.getLogger().info("Chat clear by "+p);
+                            PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Normal"), Bukkit.getServer());
                         }
                     } else {
                         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Normal.Disable-Message")) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Command-disable")));
+                        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("o")) {
@@ -116,25 +122,25 @@ public class ClearChatCommand implements CommandExecutor {
                             p.sendMessage(" ");
                         }
                         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Own.Message-Clear")) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.ClearChat.Own")));
+                            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Own"), p);
                         }
                     } else {
                         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Own.Disable-Message")) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Command-disable")));
+                        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("other")) {
                     if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Other.Enable")) {
 
                         if (args.length != 2) {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Enter-Player-Name")));
+                            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Enter-Player-Name"), (Player) sender);
                             sender.sendMessage(ChatColor.RED + "/cc other [player]");
                             return true;
                         }
                         Player target = Bukkit.getServer().getPlayer(args[1]);
 
                         if (target == null) {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
+                            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Not-found"), (Player) sender);
                             return true;
                         }
 
@@ -142,10 +148,12 @@ public class ClearChatCommand implements CommandExecutor {
                             target.sendMessage(" ");
                         }
                         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Other.Message-Clear")) {
-                            target.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.ClearChat.Other")));
+                            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Other"), target);
                         }
                     }
                 }
+            } else {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
             }
         }
 
@@ -154,13 +162,13 @@ public class ClearChatCommand implements CommandExecutor {
 
     public void ccac() {
         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Console.Anonymous-Message-Clear")) {
-            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.ClearChat.Anonymously")));
+            PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Anonymously"), Bukkit.getServer());
         }
     }
 
     public void cccc() {
         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Console.Normal-Message-Clear")) {
-            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.ClearChat.Normal").replaceAll("%player%", "CONSOLE")));
+            PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerExceptionConsole(ConfigMessage.getConfig().getString("Admin.ClearChat.Normal"), Bukkit.getServer());
         }
     }
 
