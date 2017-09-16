@@ -63,13 +63,26 @@ public class MainClass extends JavaPlugin {
 		pm.registerEvents(new OnChat(), this);
 		System.out.println("| Events loaded");
 		
-		System.out.println("| And many things....");
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            Bukkit.getPluginManager().registerEvents(this, this);
+        	System.out.println("|");
+        	System.out.println("| PlaceHolderApi detected");
+        	System.out.println("|");
+        } else {
+        	ConfigGlobal.getConfig().set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
+        	System.out.println("|");
+        	System.out.println("| USE PLACEHOLDERAPI IS VERY VERY HIGHLY RECOMMENDED");
+        	System.out.println("|");
+        }
+		
+		System.out.println("| And many things.... I think... x'D");
 		System.out.println("|");
 		
 		System.out.println("| Ultimate Spawn loaded!");
 		System.out.println("|");
 		System.out.println("|=============================");
 	}
+
 
 	public void onDisable() {
 		
