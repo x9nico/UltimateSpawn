@@ -3,13 +3,13 @@ package fr.Dianox.US.MainClass.Commands;
 import java.util.Objects;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 
@@ -31,9 +31,11 @@ public class AnnounceCommand implements CommandExecutor {
                 }
                 msg = msg + s;
             }
+            
+            System.out.println("Broadcast: "+msg);
 
-            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Broadcast")) + msg);
-
+            PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.Broadcast") + msg, Bukkit.getServer());
+            
             MusicConsole();
 
             return true;
@@ -56,8 +58,10 @@ public class AnnounceCommand implements CommandExecutor {
                     msg = msg + s;
                 }
 
-                Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Broadcast")) + msg);
+                System.out.println("Broadcast: "+msg);
 
+                PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.Broadcast") + msg, Bukkit.getServer());
+                
                 if (ConfigGlobal.getConfig().getBoolean("Command.Broadcast.Sounds.Enabled")) {
                     for (Player player: Bukkit.getServer().getOnlinePlayers()) {
                         String sound = ConfigGlobal.getConfig().getString("Command.Broadcast.Sounds.Sound");
@@ -68,11 +72,11 @@ public class AnnounceCommand implements CommandExecutor {
                 }
 
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
+                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
             }
         } else {
             if (ConfigGlobal.getConfig().getBoolean("Command.Broadcast.Disable-Message")) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Command-disable")));
+                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
             }
         }
 
