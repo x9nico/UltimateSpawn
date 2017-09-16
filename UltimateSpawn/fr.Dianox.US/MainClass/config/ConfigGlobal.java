@@ -176,6 +176,9 @@ public class ConfigGlobal {
             Config.set("Command.DelayChat.Delay.Delay_By_Default", Integer.valueOf(3));
             Config.set("Command.DelayChat.Delay.Bypass", Boolean.valueOf(true));
             Config.set("Command.DelayChat.Disable-Message", Boolean.valueOf(true));
+            
+            // Plugin
+            Config.set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
 
             // Debug
             Config.set("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING", Boolean.valueOf(false));
