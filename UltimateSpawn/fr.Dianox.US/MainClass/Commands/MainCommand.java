@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.MainClass;
+import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
@@ -42,7 +43,6 @@ public class MainCommand implements CommandExecutor {
                     ConfigSpawn.reloadConfig();
 
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
-
                 }
             }
             return true;
@@ -51,8 +51,8 @@ public class MainCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("UltimateSpawn") || cmd.getName().equalsIgnoreCase("Us") && p.hasPermission("UltimateSpawn.help")) {
-            if ((args.length == 0) || (args[0].equalsIgnoreCase("help"))) {
-                p.sendMessage("§3//§m---------------§r §c[§bUltimateSpawn§c] §3§m---------------§r§3\\\\");
+            if ((args.length == 0) || (args[0].equalsIgnoreCase("help") && p.hasPermission("UltimateSpawn.help"))) {
+            	p.sendMessage("§3//§m---------------§r §c[§bUltimateSpawn§c] §3§m---------------§r§3\\\\");
                 p.sendMessage("");
                 p.sendMessage(" §8>> §7/setspawn - §eSet the spawn");
                 p.sendMessage(" §8>> §7/spawn - §eGo to spawn");
@@ -70,17 +70,22 @@ public class MainCommand implements CommandExecutor {
                     ConfigMessage.reloadConfig();
                     ConfigSpawn.reloadConfig();
 
+                    if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+                    	ConfigGlobal.getConfig().set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
+                    }
+                    
                     if ((sender instanceof Player)) {
                         Bukkit.getLogger().info("UltimateSpawn : Config reloaded (Just config.yml, message.yml and spawn.yml)");
                     }
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
+                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Plugin-Reload"), p);
+
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
+                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
                 }
 
             }
         } else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
+        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
         }
         return true;
 
