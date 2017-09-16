@@ -1,6 +1,5 @@
 package fr.Dianox.US.MainClass.event;
 
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
@@ -11,6 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 
@@ -69,12 +69,12 @@ public class OnJoin implements Listener {
             }
             if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Broadcast.First-Join.Enable")) {
                 for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Broadcast.First-Join.Message")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%player%", p.getName())));
+                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
                 }
             }
             if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Message.First-Join.Enable")) {
                 for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Message.First-Join.Message")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%player%", p.getName())));
+                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
                 }
             }
         }
@@ -127,7 +127,7 @@ public class OnJoin implements Listener {
                 e.setJoinMessage(null);
             } else {
                 for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Broadcast.Join.Message")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%player%", p.getName())));
+                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
                 }
                 e.setJoinMessage(null);
             }
@@ -136,7 +136,7 @@ public class OnJoin implements Listener {
         //Message join
         if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Message.Join.Enable")) {
             for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Message.Join.Message")) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%player%", p.getName())));
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
             }
         }
     }
