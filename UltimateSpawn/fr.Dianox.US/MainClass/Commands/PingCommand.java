@@ -10,13 +10,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
+import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
+import me.clip.placeholderapi.PlaceholderAPI;
 
 public class PingCommand implements CommandExecutor {
-
-    private static Method getHandleMethod;
-    private static Field pingField;
 
     public PingCommand() {}
 
@@ -28,80 +28,74 @@ public class PingCommand implements CommandExecutor {
             if ((args.length == 0)) {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
                 return true;
-            }
-
-            final int ping_by_console = getPing(Bukkit.getPlayer(sender.getName()));
-
-            String console_player_ping = new String(args[0]);
-
-            if ((args.length == 1)) {
-                Player other = Bukkit.getPlayer(args[0]);
-
-                if (cmd.getName().equalsIgnoreCase("ping")) {
-                    if (other == null) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
-                        return true;
-                    }
-
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Ping.Other")).replaceAll("%ping%", String.valueOf(ping_by_console)).replace("%target%", console_player_ping));
-                }
-            } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
+            } else if ((args.length == 1)) {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Ping.Other")).replaceAll("%ping%", "Error no seriously ? But... Why ? you can only execute this command in game").replaceAll("%target%", args[0]));
             }
 
             return true;
         }
 
         Player p = (Player) sender;
-        final int ping = getPing(Bukkit.getPlayer(p.getName()));
 
         if (cmd.getName().equalsIgnoreCase("ping") && p.hasPermission("UltimateSpawn.ping")) {
             if ((args.length == 0)) {
                 if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Self.Enable")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Ping.Self")).replaceAll("%ping%", String.valueOf(ping)).replaceAll("%player%", p.getName()));
+                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Ping.Self"), p);
                 } else {
                     if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Self.Disable-Message")) {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Command-disable")));
+                    	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
                     }
                 }
             } else if ((args.length == 1)) {
                 Player other = Bukkit.getPlayer(args[0]);
                 if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Other.Enable")) {
                     if (other == null) {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
+                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Not-found"), p);
                         return true;
                     }
-                    int po = getPing(Bukkit.getPlayer(other.getName()));
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Ping.Other")).replaceAll("%ping%", String.valueOf(po)).replaceAll("%target%", other.getName()));
+            		if (ConfigGlobal.getConfig().getBoolean("Plugin.Use.PlaceholderAPI")) {
+            			p.sendMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(p, ConfigMessage.getConfig().getString("Player.Ping.Other"))
+            					.replaceAll("%target%", other.getName())
+            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
+            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
+            					));
+            		} else {
+            			p.sendMessage(ChatColor.translateAlternateColorCodes('&', str
+            					.replaceAll("%target%", other.getName())
+            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
+            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
+            					));
+            		}
                 } else {
                     if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Other.Disable-Message")) {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Command-disable")));
+                    	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
                     }
                 }
             }
         } else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
+        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
         }
 
         return true;
     }
 
     public static int getPing(Player p) {
+        String bpName = Bukkit.getServer().getClass().getPackage().getName();
+        String version = bpName.substring(bpName.lastIndexOf(".") + 1, bpName.length());
         try {
-            if (getHandleMethod == null) {
-                getHandleMethod = p.getClass().getDeclaredMethod("getHandle", new Class[0]);
-                getHandleMethod.setAccessible(true);
-            }
-            Object entityPlayer = getHandleMethod.invoke(p, new Object[0]);
-            if (pingField == null) {
-                pingField = entityPlayer.getClass().getDeclaredField("ping");
-                pingField.setAccessible(true);
-            }
-            int ping = pingField.getInt(entityPlayer);
-
-            return ping > 0 ? ping : 0;
-        } catch (Exception e) {}
-        return 1;
+          Class<?> CPClass = Class.forName("org.bukkit.craftbukkit." + version + ".entity.CraftPlayer");
+          Object CraftPlayer = CPClass.cast(p);
+          
+          Method getHandle = CraftPlayer.getClass().getMethod("getHandle", new Class[0]);
+          Object EntityPlayer = getHandle.invoke(CraftPlayer, new Object[0]);
+          
+          Field ping = EntityPlayer.getClass().getDeclaredField("ping");
+          
+          return ping.getInt(EntityPlayer);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        return 0;
     }
 
 }
