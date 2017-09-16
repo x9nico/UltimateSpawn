@@ -1,6 +1,5 @@
 package fr.Dianox.US.MainClass.event;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +19,7 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
+import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 
@@ -76,13 +76,13 @@ public class BasicFeatures implements Listener {
                 if (!p.hasPermission("UltimateSpawn.bypass.Construct")) {
                     e.setCancelled(true);
                     if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Protection.Construct-Message").replaceAll("%player%", p.getName())));
+                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Messaged"), p);
                     }
                 }
             } else {
                 e.setCancelled(true);
                 if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Protection.Construct-Message").replaceAll("%player%", p.getName())));
+                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Messaged"), p);
                 }
             }
         }
@@ -97,13 +97,13 @@ public class BasicFeatures implements Listener {
                 if (!p.hasPermission("UltimateSpawn.bypass.Construct")) {
                     e.setCancelled(true);
                     if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Protection.Construct-Message").replaceAll("%player%", p.getName())));
+                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Messaged"), p);
                     }
                 }
             } else {
                 e.setCancelled(true);
                 if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Protection.Construct-Message").replaceAll("%player%", p.getName())));
+                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Messaged"), p);
                 }
             }
         }
