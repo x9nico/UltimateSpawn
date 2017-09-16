@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 
@@ -35,17 +36,17 @@ public class DelaychatCommand implements CommandExecutor {
 			if (ConfigGlobal.getConfig().getBoolean("Command.DelayChat.Enable")) {
 				if (args.length == 1) {
 					delay = Integer.parseInt(args[0]);
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.DelayChat.Set").replaceAll("%player%", p.getName()).replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))));
+					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.DelayChat.Set"), p);
 				} else {
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Arguments-Missing")));
+					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
 				}
 			} else {
 	            if (ConfigGlobal.getConfig().getBoolean("Command.DelayChat.Disable-Message")) {
-	                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Command-disable")));
+	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
 	            }
 	        }
 		} else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.No-permission")));
+			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
         }
 		
 		return true;
