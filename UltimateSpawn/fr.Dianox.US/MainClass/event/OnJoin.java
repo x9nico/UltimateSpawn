@@ -12,11 +12,13 @@ import org.bukkit.inventory.PlayerInventory;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
+import fr.Dianox.US.MainClass.Utils.TitleUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 
 public class OnJoin implements Listener {
 
-    @EventHandler
+    @SuppressWarnings("deprecation")
+	@EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         PlayerInventory inv = p.getInventory();
@@ -138,6 +140,16 @@ public class OnJoin implements Listener {
             for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Message.Join.Message")) {
             	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
             }
+        }
+        
+        // TitleJoin
+        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Enable")) {
+        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Title.Enable")) {
+        		TitleUtils.sendTitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Title.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Title.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Title.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Title.Message"));
+        	}
+        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.SubTitle.Enable")) {
+        		TitleUtils.sendSubtitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.SubTitle.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.SubTitle.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.SubTitle.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.SubTitle.Message"));
+        	}
         }
     }
 
