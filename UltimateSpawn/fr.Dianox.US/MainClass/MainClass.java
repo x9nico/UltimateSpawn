@@ -1,6 +1,7 @@
 package fr.Dianox.US.MainClass;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,10 +21,9 @@ import fr.Dianox.US.MainClass.event.OnChat;
 import fr.Dianox.US.MainClass.event.OnJoin;
 import fr.Dianox.US.MainClass.event.OnQuit;
 
-public class MainClass extends JavaPlugin {
+public class MainClass extends JavaPlugin implements Listener {
 	
 	private static MainClass instance;
-	
 	
 	public MainClass() {}
 	
@@ -31,6 +31,7 @@ public class MainClass extends JavaPlugin {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
+		System.out.println("| >>> Version 0.2-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -82,7 +83,6 @@ public class MainClass extends JavaPlugin {
 		System.out.println("|");
 		System.out.println("|=============================");
 	}
-
 
 	public void onDisable() {
 		
