@@ -19,11 +19,11 @@ public class OnQuit implements Listener {
             p.setFlying(false);
         }
 
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Broadcast.Quit.Enable")) {
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Broadcast.Quit.Hide")) {
+        if (ConfigGlobal.getConfig().getBoolean("On-Quit.Broadcast.Quit.Enable")) {
+            if (ConfigGlobal.getConfig().getBoolean("On-Quit.Broadcast.Quit.Hide")) {
                 e.setQuitMessage(null);
             } else {
-                for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Broadcast.Quit.Message")) {
+                for (String message: ConfigGlobal.getConfig().getStringList("On-Quit.Broadcast.Quit.Message")) {
                 	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
                 }
                 e.setQuitMessage(null);
