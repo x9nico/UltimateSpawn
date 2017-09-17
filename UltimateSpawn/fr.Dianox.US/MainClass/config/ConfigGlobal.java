@@ -125,11 +125,23 @@ public class ConfigGlobal {
             Config.set("On-Join.Spawn.Sounds.Sound", "NOTE_PIANO");
             Config.set("On-Join.Spawn.Sounds.Volume", Integer.valueOf(10));
             Config.set("On-Join.Spawn.Sounds.Pitch", Integer.valueOf(1));
+            Config.set("On-Join.Spawn.Title.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.Title.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.Title.FadeIn", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.Title.Stay", Integer.valueOf(150));
+            Config.set("On-Join.Spawn.Title.Title.FadeOut", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.Title.Message", "&6Welcome %player%");
+            
+            Config.set("On-Join.Spawn.Title.SubTitle.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.SubTitle.FadeIn", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.SubTitle.Stay", Integer.valueOf(150));
+            Config.set("On-Join.Spawn.Title.SubTitle.FadeOut", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.SubTitle.Message", "&eThanks to choose &6US");
 
             // On quit
-            Config.set("On-Join.Spawn.Broadcast.Quit.Enable", Boolean.valueOf(true));
-            Config.set("On-Join.Spawn.Broadcast.Quit.Hide", Boolean.valueOf(false));
-            Config.set("On-Join.Spawn.Broadcast.Quit.Message", java.util.Arrays.asList(new String[] {
+            Config.set("On-Quit.Broadcast.Quit.Enable", Boolean.valueOf(true));
+            Config.set("On-Quit.Broadcast.Quit.Hide", Boolean.valueOf(false));
+            Config.set("On-Quit.Broadcast.Quit.Message", java.util.Arrays.asList(new String[] {
                 "&8[&c-&8] [&c-&8] [&c-&8] ",
                 "Hey, %player%"
             }));
