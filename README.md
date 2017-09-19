@@ -27,3 +27,9 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+# These people share my plugin
+
+I didn't know my Japanese plugin could do that: p
+Thanks kanming for your help
+http://www.mcbbs.net/thread-728350-1-2.html
