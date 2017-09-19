@@ -126,18 +126,32 @@ public class ConfigGlobal {
             Config.set("On-Join.Spawn.Sounds.Volume", Integer.valueOf(10));
             Config.set("On-Join.Spawn.Sounds.Pitch", Integer.valueOf(1));
             Config.set("On-Join.Spawn.Title.Enable", Boolean.valueOf(true));
-            Config.set("On-Join.Spawn.Title.Title.Enable", Boolean.valueOf(true));
-            Config.set("On-Join.Spawn.Title.Title.FadeIn", Integer.valueOf(20));
-            Config.set("On-Join.Spawn.Title.Title.Stay", Integer.valueOf(150));
-            Config.set("On-Join.Spawn.Title.Title.FadeOut", Integer.valueOf(20));
-            Config.set("On-Join.Spawn.Title.Title.Message", "&6Welcome %player%");
             
-            Config.set("On-Join.Spawn.Title.SubTitle.Enable", Boolean.valueOf(true));
-            Config.set("On-Join.Spawn.Title.SubTitle.FadeIn", Integer.valueOf(20));
-            Config.set("On-Join.Spawn.Title.SubTitle.Stay", Integer.valueOf(150));
-            Config.set("On-Join.Spawn.Title.SubTitle.FadeOut", Integer.valueOf(20));
-            Config.set("On-Join.Spawn.Title.SubTitle.Message", "&eThanks to choose &6US");
+            Config.set("On-Join.Spawn.Title.First-Join.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.First-Join.Title.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.First-Join.Title.FadeIn", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.First-Join.Title.Stay", Integer.valueOf(150));
+            Config.set("On-Join.Spawn.Title.First-Join.Title.FadeOut", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.First-Join.Title.Message", "&6Welcome %player%");
+            
+            Config.set("On-Join.Spawn.Title.First-Join.SubTitle.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.First-Join.SubTitle.FadeIn", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.First-Join.SubTitle.Stay", Integer.valueOf(150));
+            Config.set("On-Join.Spawn.Title.First-Join.SubTitle.FadeOut", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.First-Join.SubTitle.Message", "&eThanks to choose &6US");
 
+            Config.set("On-Join.Spawn.Title.Join.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.Join.Title.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.Join.Title.FadeIn", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.Join.Title.Stay", Integer.valueOf(150));
+            Config.set("On-Join.Spawn.Title.Join.Title.FadeOut", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.Join.Title.Message", "&6Welcome %player%");
+            
+            Config.set("On-Join.Spawn.Title.Join.SubTitle.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Title.Join.SubTitle.FadeIn", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.Join.SubTitle.Stay", Integer.valueOf(150));
+            Config.set("On-Join.Spawn.Title.Join.SubTitle.FadeOut", Integer.valueOf(20));
+            Config.set("On-Join.Spawn.Title.Join.SubTitle.Message", "&eThanks to choose &6US");
             // On quit
             Config.set("On-Quit.Broadcast.Quit.Enable", Boolean.valueOf(true));
             Config.set("On-Quit.Broadcast.Quit.Hide", Boolean.valueOf(false));
