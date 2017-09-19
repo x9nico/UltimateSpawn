@@ -144,12 +144,36 @@ public class OnJoin implements Listener {
         
         // TitleJoin
         if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Enable")) {
-        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Title.Enable")) {
-        		TitleUtils.sendTitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Title.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Title.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Title.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Title.Message"));
+        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.First-Join.Enable")) {
+        		if (p.hasPlayedBefore()) {
+            		if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.Enable")) {
+    		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.Title.Enable")) {
+    		        		TitleUtils.sendTitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Join.Title.Message"));
+    		        	}
+    		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.SubTitle.Enable")) {
+    		        		TitleUtils.sendSubtitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Join.SubTitle.Message"));
+    		        	}
+            		}
+        		} else {
+        			if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.First-Join.Title.Enable")) {
+		        		TitleUtils.sendTitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.Title.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.Title.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.Title.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.First-Join.Title.Message"));
+		        	}
+		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.First-Join.SubTitle.Enable")) {
+		        		TitleUtils.sendSubtitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.SubTitle.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.SubTitle.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.SubTitle.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.First-Join.SubTitle.Message"));
+		        	}
+        		}
+	        	
+        	} else {
+        		if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.Enable")) {
+		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.Title.Enable")) {
+		        		TitleUtils.sendTitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Join.Title.Message"));
+		        	}
+		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.SubTitle.Enable")) {
+		        		TitleUtils.sendSubtitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Join.SubTitle.Message"));
+		        	}
+        		}
         	}
-        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.SubTitle.Enable")) {
-        		TitleUtils.sendSubtitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.SubTitle.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.SubTitle.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.SubTitle.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.SubTitle.Message"));
-        	}
+        	
         }
     }
 
