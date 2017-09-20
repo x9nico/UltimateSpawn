@@ -91,6 +91,7 @@ public class ConfigGlobal {
             Config.set("On-Join.Clear.Chat.Bypass", Boolean.valueOf(true));
             Config.set("On-Join.Clear.Chat.Lines-To-Clear", Integer.valueOf(150));
             Config.set("On-Join.Spawn.Teleport.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location", Boolean.valueOf(false));
             Config.set("On-Join.Spawn.Teleport.On-First-Join", Boolean.valueOf(true));
             Config.set("On-Join.Spawn.Broadcast.First-Join.Enable", Boolean.valueOf(true));
             Config.set("On-Join.Spawn.Broadcast.First-Join.Message", java.util.Arrays.asList(new String[] {
@@ -152,6 +153,7 @@ public class ConfigGlobal {
             Config.set("On-Join.Spawn.Title.Join.SubTitle.Stay", Integer.valueOf(150));
             Config.set("On-Join.Spawn.Title.Join.SubTitle.FadeOut", Integer.valueOf(20));
             Config.set("On-Join.Spawn.Title.Join.SubTitle.Message", "&eThanks to choose &6US");
+
             // On quit
             Config.set("On-Quit.Broadcast.Quit.Enable", Boolean.valueOf(true));
             Config.set("On-Quit.Broadcast.Quit.Hide", Boolean.valueOf(false));
@@ -205,6 +207,7 @@ public class ConfigGlobal {
             
             // Plugin
             Config.set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
+            Config.set("Plugin.Create.Stats", Boolean.valueOf(true));
 
             // Debug
             Config.set("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING", Boolean.valueOf(false));
