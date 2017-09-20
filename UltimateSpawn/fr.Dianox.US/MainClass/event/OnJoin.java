@@ -1,6 +1,9 @@
 package fr.Dianox.US.MainClass.event;
 
+import java.util.UUID;
+
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -14,6 +17,8 @@ import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.Utils.TitleUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
+import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
+import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 
 public class OnJoin implements Listener {
 
@@ -21,10 +26,49 @@ public class OnJoin implements Listener {
 	@EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        UUID pU = e.getPlayer().getUniqueId();
         PlayerInventory inv = p.getInventory();
+        Location l = p.getLocation();
 
         int lines = ConfigGlobal.getConfig().getInt("On-Join.Clear.Chat.Lines-To-Clear");
 
+        // Options
+        if (!ConfigPlayerOptions.getConfig().contains(String.valueOf(pU))) {
+        	ConfigPlayerOptions.getConfig().set(pU+".Player", String.valueOf(p));
+        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly", ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Fly"));
+        	
+        	ConfigPlayerOptions.saveConfigFile();
+        } else {
+        	// Check player name
+        	if (ConfigPlayerOptions.getConfig().getString(pU+".Player") != String.valueOf(p)) {
+        		ConfigPlayerOptions.getConfig().set(pU+".Player", String.valueOf(p));
+        		
+        		ConfigPlayerOptions.saveConfigFile();
+        	}
+        }
+        
+        // Stats
+        if (ConfigGlobal.getConfig().getBoolean("Plugin.Create.Stats")) {
+	        if (!ConfigPlayerStats.getConfig().contains(String.valueOf(pU))) {
+	        	ConfigPlayerStats.getConfig().set(pU+".Player", String.valueOf(p));
+	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.World", l.getWorld().getName());
+	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.x", Double.valueOf(l.getX()));
+	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.y", Double.valueOf(l.getY()));
+	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.z", Double.valueOf(l.getZ()));
+	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.yaw", Float.valueOf(l.getYaw()));
+	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.pitch", Float.valueOf(l.getPitch()));
+	        	
+	        	ConfigPlayerStats.saveConfigFile();
+	        } else {
+	        	// Check player name
+	        	if (ConfigPlayerStats.getConfig().getString(pU+".Player") != String.valueOf(p)) {
+	        		ConfigPlayerStats.getConfig().set(pU+".Player", String.valueOf(p));
+	        		
+	        		ConfigPlayerStats.saveConfigFile();
+	        	}
+	        }
+    	}
+        
         // Inventory
         if (ConfigGlobal.getConfig().getBoolean("On-Join.Clear.Inventory.Enable")) {
             if (ConfigGlobal.getConfig().getBoolean("On-Join.Clear.Inventory.Bypass")) {
@@ -63,7 +107,13 @@ public class OnJoin implements Listener {
         // Teleport spawn // broadcast new
         if (p.hasPlayedBefore()) {
             if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Teleport.Enable")) {
-                SpawnUtils.teleportToSpawn(p);
+            	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
+            		SpawnUtils.teleportToSpawnStats(p);
+            	} else {
+            		SpawnUtils.teleportToSpawn(p);
+            	}
+            } else if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Teleport.If_stats_is_enable.If_Teleport_on_join_is_disable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
+            	SpawnUtils.teleportToSpawnStats(p);
             }
         } else {
             if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Teleport.On-First-Join")) {
@@ -98,8 +148,8 @@ public class OnJoin implements Listener {
 
         // Fly
         if ((ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Fly")) && (gm != 3)) {
-            p.setAllowFlight(ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Fly"));
-            p.setFlying(ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Fly"));
+            p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
+            p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
         }
 
         // Restore Health and food
