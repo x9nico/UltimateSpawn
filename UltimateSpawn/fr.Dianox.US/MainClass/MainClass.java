@@ -15,6 +15,8 @@ import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.MuteChatCommand;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
+import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.event.BasicFeatures;
 import fr.Dianox.US.MainClass.event.OnChat;
@@ -31,7 +33,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.2-Alpha");
+		System.out.println("| >>> Version 0.2.2-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -42,6 +44,10 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("| Message config loaded");
 		ConfigSpawn.loadConfig((Plugin) this);
 		System.out.println("| Spawn config loaded");
+		ConfigPlayerOptions.loadConfig((Plugin) this);
+		System.out.println("| Player config 1/2 loaded");
+		ConfigPlayerStats.loadConfig((Plugin) this);
+		System.out.println("|               2/2 loaded");
 		
 		System.out.println("|");
 		
