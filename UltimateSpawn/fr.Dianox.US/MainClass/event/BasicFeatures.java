@@ -76,13 +76,13 @@ public class BasicFeatures implements Listener {
                 if (!p.hasPermission("UltimateSpawn.bypass.Construct")) {
                     e.setCancelled(true);
                     if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Messaged"), p);
+                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message"), p);
                     }
                 }
             } else {
                 e.setCancelled(true);
                 if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Messaged"), p);
+                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message"), p);
                 }
             }
         }
@@ -97,13 +97,13 @@ public class BasicFeatures implements Listener {
                 if (!p.hasPermission("UltimateSpawn.bypass.Construct")) {
                     e.setCancelled(true);
                     if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Messaged"), p);
+                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message"), p);
                     }
                 }
             } else {
                 e.setCancelled(true);
                 if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Messaged"), p);
+                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message"), p);
                 }
             }
         }
