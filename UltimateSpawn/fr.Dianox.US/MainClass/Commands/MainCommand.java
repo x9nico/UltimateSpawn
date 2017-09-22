@@ -25,18 +25,20 @@ public class MainCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             if (cmd.getName().equalsIgnoreCase("UltimateSpawn") || cmd.getName().equalsIgnoreCase("Us")) {
                 if ((args.length == 0) || (args[0].equalsIgnoreCase("help"))) {
-                    sender.sendMessage("§3//§m---------------§r §c[§bUltimateSpawn§c] §3§m---------------§r§3\\\\");
+                    sender.sendMessage("§8//§7§m---------------§r§8\\\\ §3[§bUltimateSpawn§3] §8//§7§m---------------§r§8\\\\");
+                    sender.sendMessage("");
+                    sender.sendMessage("     §l>> §e§o§lGlobal Help");
                     sender.sendMessage("");
                     sender.sendMessage(" §8>> §7/setspawn - §cSet the spawn (You can't)");
                     sender.sendMessage(" §8>> §7/spawn - §cGo to spawn (You can't)");
                     sender.sendMessage(" §8>> §7/us reload - §eReload the plugin");
-                    sender.sendMessage(" §8>> §7/cc - §eHelp of clearchat");
+                    sender.sendMessage(" §8>> §7/cc - §bHelp of clearchat");
                     sender.sendMessage(" §8>> §7/bc - §eBroadcast ");
                     sender.sendMessage(" §8>> §7/ping - §ePing ");
                     sender.sendMessage(" §8>> §7/gmute - §eMute chat ");
                     sender.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat ");
                     sender.sendMessage("");
-                    sender.sendMessage("§3\\\\§m---------------§r §c[§bUltimateSpawn§c] §3§m---------------§r§3//");
+                    sender.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
                 } else if (args[0].equalsIgnoreCase("reload")) {
                     ConfigGlobal.reloadConfig();
                     ConfigMessage.reloadConfig();
@@ -52,18 +54,20 @@ public class MainCommand implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("UltimateSpawn") || cmd.getName().equalsIgnoreCase("Us") && p.hasPermission("UltimateSpawn.help")) {
             if ((args.length == 0) || (args[0].equalsIgnoreCase("help") && p.hasPermission("UltimateSpawn.help"))) {
-            	p.sendMessage("§3//§m---------------§r §c[§bUltimateSpawn§c] §3§m---------------§r§3\\\\");
+            	p.sendMessage("§8//§7§m---------------§r§8\\\\ §3[§bUltimateSpawn§3] §8//§7§m---------------§r§8\\\\");
+                p.sendMessage("");
+                p.sendMessage("     §l>> §e§o§lGlobal Help");
                 p.sendMessage("");
                 p.sendMessage(" §8>> §7/setspawn - §eSet the spawn");
                 p.sendMessage(" §8>> §7/spawn - §eGo to spawn");
                 p.sendMessage(" §8>> §7/us reload - §eReload the plugin");
-                p.sendMessage(" §8>> §7/cc - §eHelp of clearchat");
+                p.sendMessage(" §8>> §7/cc - §bHelp of clearchat");
                 p.sendMessage(" §8>> §7/bc - §eBroadcast ");
                 p.sendMessage(" §8>> §7/ping - §ePing ");
                 p.sendMessage(" §8>> §7/gmute - §eMute chat ");
                 p.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat ");
                 p.sendMessage("");
-                p.sendMessage("§3\\\\§m---------------§r §c[§bUltimateSpawn§c] §3§m---------------§r§3//");
+                p.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
             } else if (args[0].equalsIgnoreCase("reload")) {
                 if (p.hasPermission("UltimateSpawn.reload")) {
                     ConfigGlobal.reloadConfig();
@@ -75,7 +79,7 @@ public class MainCommand implements CommandExecutor {
                     }
                     
                     if ((sender instanceof Player)) {
-                        Bukkit.getLogger().info("UltimateSpawn : Config reloaded (Just config.yml, message.yml and spawn.yml)");
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
                     }
                     PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Plugin-Reload"), p);
 
