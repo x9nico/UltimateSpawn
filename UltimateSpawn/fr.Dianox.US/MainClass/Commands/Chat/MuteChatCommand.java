@@ -1,6 +1,7 @@
 package fr.Dianox.US.MainClass.Commands.Chat;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,11 +28,11 @@ public class MuteChatCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("GlobalMute") || cmd.getName().equalsIgnoreCase("gmute") && p.hasPermission("UltimateSpawn.mutechat")) {
 			if (ConfigGlobal.getConfig().getBoolean("Command.MuteChat.Enable")) {
 				if (ConfigGlobal.getConfig().getBoolean("Command.MuteChat.Mute.Enable")) {
-					Bukkit.getLogger().info("UltimateSpawn : Chat - ON");
+					Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.ON")));
 					PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.MuteChat.On"), Bukkit.getServer());
 					ConfigGlobal.getConfig().set("Command.MuteChat.Mute.Enable", Boolean.valueOf(false));
 				} else {
-					Bukkit.getLogger().info("UltimateSpawn : Chat - OFF");
+					Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.OFF")));
 					PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.MuteChat.Off"), Bukkit.getServer());
 					ConfigGlobal.getConfig().set("Command.MuteChat.Mute.Enable", Boolean.valueOf(true));
 				}
@@ -49,11 +50,11 @@ public class MuteChatCommand implements CommandExecutor {
 	
 	public void consoleMuteChatGLobal() {
 		if (ConfigGlobal.getConfig().getBoolean("Command.MuteChat.Mute.Enable")) {
-			Bukkit.getLogger().info("UltimateSpawn : Chat - ON");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.ON")));
 			PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerExceptionConsole(ConfigMessage.getConfig().getString("Admin.MuteChat.On"), Bukkit.getServer());
 			ConfigGlobal.getConfig().set("Command.MuteChat.Mute.Enable", Boolean.valueOf(false));
 		} else {
-			Bukkit.getLogger().info("UltimateSpawn : Chat - OFF");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.OFF")));
 			PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerExceptionConsole(ConfigMessage.getConfig().getString("Admin.MuteChat.Off"), Bukkit.getServer());
 			ConfigGlobal.getConfig().set("Command.MuteChat.Mute.Enable", Boolean.valueOf(true));
 		}
