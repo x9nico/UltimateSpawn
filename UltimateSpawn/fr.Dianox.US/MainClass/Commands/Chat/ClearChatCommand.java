@@ -23,23 +23,23 @@ public class ClearChatCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             if (label.equalsIgnoreCase("cc")) {
                 if ((args.length == 0)) {
-                    sender.sendMessage("§3//§m---------------§r §c[§rUltimateSpawn§c] §3§m---------------§r§3\\\\");
+                	sender.sendMessage("§8//§7§m---------------§r§8\\\\ §3[§bUltimateSpawn§3] §8//§7§m---------------§r§8\\\\");
                     sender.sendMessage("");
-                    sender.sendMessage(" >> ClearChat");
+                    sender.sendMessage("     §l>> §e§o§lClearChat Help");
                     sender.sendMessage("");
                     sender.sendMessage(" §8>> §7/cc a - §eClear the chat anonymously");
                     sender.sendMessage(" §8>> §7/cc o - §cClear your own chat (You can't)");
                     sender.sendMessage(" §8>> §7/cc c - §eClear the chat");
                     sender.sendMessage(" §8>> §7/cc other [player] - §eClear someone elses chat");
                     sender.sendMessage("");
-                    sender.sendMessage("§3\\\\§m---------------§r §c[§rUltimateSpawn§c] §3§m---------------§r§3//");
+                    sender.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
                 } else if (args[0].equalsIgnoreCase("a")) {
                     if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Anonymous.Enable")) {
                         for (int i = 0; i < lines; i++) {
                             Bukkit.broadcastMessage(" ");
                         }
 
-                        Bukkit.getLogger().info("Chat Clear");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.ClearChat.Anonymously")));
                         ccac();
                     }
                 } else if (args[0].equalsIgnoreCase("c")) {
@@ -47,7 +47,7 @@ public class ClearChatCommand implements CommandExecutor {
                         Bukkit.broadcastMessage(" ");
                     }
 
-                    Bukkit.getLogger().info("Chat Clear by CONSOLE");
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.ClearChat.Normal.Console")));
                     cccc();
                 } else if (args[0].equalsIgnoreCase("other")) {
 
@@ -79,26 +79,26 @@ public class ClearChatCommand implements CommandExecutor {
         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Enable")) {
             if (label.equalsIgnoreCase("cc") && p.hasPermission("UltimateSpawn.clearchat")) {
                 if ((args.length == 0)) {
-                    p.sendMessage("§3//§m---------------§r §c[§rUltimateSpawn§c] §3§m---------------§r§3\\\\");
+                    p.sendMessage("§8//§7§m---------------§r§8\\\\ §3[§bUltimateSpawn§3] §8//§7§m---------------§r§8\\\\");
                     p.sendMessage("");
-                    p.sendMessage(" >> ClearChat");
+                    p.sendMessage("     §l>> §e§o§lClearChat Help");
                     p.sendMessage("");
                     p.sendMessage(" §8>> §7/cc a - §eClear the chat anonymously");
                     p.sendMessage(" §8>> §7/cc o - §eClear your own chat");
                     p.sendMessage(" §8>> §7/cc c - §eClear the chat");
                     p.sendMessage(" §8>> §7/cc other [player] - §eClear someone elses chat");
                     p.sendMessage("");
-                    p.sendMessage("§3\\\\§m---------------§r §c[§rUltimateSpawn§c] §3§m---------------§r§3//");
+                    p.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
                 } else if (args[0].equalsIgnoreCase("a")) {
                     if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Anonymous.Enable")) {
                         for (int i = 0; i < lines; i++) {
                             Bukkit.broadcastMessage(" ");
                         }
-                        Bukkit.getLogger().info("Chat Clear");
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.ClearChat.Anonymously")));
                         PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Anonymously"), Bukkit.getServer());
                     } else {
                         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Anonymous.Console.Message-Clear")) {
-                        	Bukkit.getLogger().info("Chat Clear");
+                        	Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.ClearChat.Anonymously")));
                             PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Anonymously"), Bukkit.getServer());
                         }
                     }
@@ -108,7 +108,7 @@ public class ClearChatCommand implements CommandExecutor {
                             Bukkit.broadcastMessage(" ");
                         }
                         if (ConfigGlobal.getConfig().getBoolean("Command.ClearChat.Normal.Message-Clear")) {
-                            Bukkit.getLogger().info("Chat clear by "+p);
+                        	Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.ClearChat.Normal.Player").replaceAll("%player%", String.valueOf(p))));
                             PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.ClearChat.Normal"), Bukkit.getServer());
                         }
                     } else {
