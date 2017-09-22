@@ -152,6 +152,16 @@ public class OnJoin implements Listener {
             p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
         }
 
+        // Reset XP
+        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.XP.Enable")) {
+        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.XP.Options.Exp")) {
+        		p.setExp(0.0F);
+        	}
+        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.XP.Options.Level")) {
+        		p.setLevel(0);
+        	}
+        }
+        
         // Restore Health and food
         if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.Health")) {
             p.setHealth(20.0D);
@@ -190,6 +200,11 @@ public class OnJoin implements Listener {
             for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Message.Join.Message")) {
             	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
             }
+        }
+        
+        // Force selected slot
+        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Force-Selected-Slot.Enable")) {
+        	inv.setHeldItemSlot(ConfigGlobal.getConfig().getInt("On-Join.Spawn.Force-Selected-Slot.Slot") - 1);
         }
         
         // TitleJoin
