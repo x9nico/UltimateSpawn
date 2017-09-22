@@ -3,6 +3,7 @@ package fr.Dianox.US.MainClass.Commands;
 import java.util.Objects;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,6 +22,7 @@ public class AnnounceCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
 
             if (args.length == 0) {
+            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Arguments-Missing")));
                 return true;
             }
 
@@ -32,7 +34,7 @@ public class AnnounceCommand implements CommandExecutor {
                 msg = msg + s;
             }
             
-            System.out.println("Broadcast: "+msg);
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.Broadcast")+msg));
 
             PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.Broadcast") + msg, Bukkit.getServer());
             
@@ -47,6 +49,7 @@ public class AnnounceCommand implements CommandExecutor {
             if (cmd.getName().equalsIgnoreCase("bc") || cmd.getName().equalsIgnoreCase("broadcast") && p.hasPermission("UltimateSpawn.Broadcast")) {
 
                 if (args.length == 0) {
+                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), Bukkit.getServer());
                     return true;
                 }
 
@@ -58,7 +61,7 @@ public class AnnounceCommand implements CommandExecutor {
                     msg = msg + s;
                 }
 
-                System.out.println("Broadcast: "+msg);
+                Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.Broadcast")+msg));
 
                 PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.Broadcast") + msg, Bukkit.getServer());
                 
