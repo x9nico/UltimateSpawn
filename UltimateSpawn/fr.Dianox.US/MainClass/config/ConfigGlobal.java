@@ -119,8 +119,13 @@ public class ConfigGlobal {
             Config.set("On-Join.Spawn.Gamemode.Change", Boolean.valueOf(true));
             Config.set("On-Join.Spawn.Gamemode.Gamemode", Integer.valueOf(2));
             Config.set("On-Join.Spawn.Fly", Boolean.valueOf(true));
+            
             Config.set("On-Join.Spawn.Restore.Health", Boolean.valueOf(true));
             Config.set("On-Join.Spawn.Restore.Food", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Restore.XP.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Restore.XP.Options.Exp", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Restore.XP.Options.Level", Boolean.valueOf(true));
+            
             Config.set("On-Join.Spawn.Firework", Boolean.valueOf(true));
             Config.set("On-Join.Spawn.Sounds.Enabled", Boolean.valueOf(true));
             Config.set("On-Join.Spawn.Sounds.Sound", "NOTE_PIANO");
@@ -153,6 +158,9 @@ public class ConfigGlobal {
             Config.set("On-Join.Spawn.Title.Join.SubTitle.Stay", Integer.valueOf(150));
             Config.set("On-Join.Spawn.Title.Join.SubTitle.FadeOut", Integer.valueOf(20));
             Config.set("On-Join.Spawn.Title.Join.SubTitle.Message", "&eThanks to choose &6US");
+            
+            Config.set("On-Join.Spawn.Force-Selected-Slot.Enable", Boolean.valueOf(true));
+            Config.set("On-Join.Spawn.Force-Selected-Slot.Slot", Integer.valueOf(1));
 
             // On quit
             Config.set("On-Quit.Broadcast.Quit.Enable", Boolean.valueOf(true));
