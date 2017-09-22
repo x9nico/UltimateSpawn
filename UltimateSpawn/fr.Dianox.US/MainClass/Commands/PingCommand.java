@@ -60,7 +60,7 @@ public class PingCommand implements CommandExecutor {
             					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
             					));
             		} else {
-            			p.sendMessage(ChatColor.translateAlternateColorCodes('&', str
+            			p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Ping.Other")
             					.replaceAll("%target%", other.getName())
             					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
             					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
