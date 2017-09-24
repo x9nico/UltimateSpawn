@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
+import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
@@ -28,41 +29,70 @@ public class BasicFeatures implements Listener {
     //Disable Hunger
     @EventHandler
     public void foodChangeLevel(FoodLevelChangeEvent e) {
-
-        if (e.getEntityType() == EntityType.PLAYER) {
-            if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Hunger")) {
-                e.setCancelled(true);
-            }
-
-            if (ConfigGlobal.getConfig().getBoolean("Server.Disable-Hunger")) {
-                Player p = (Player) e.getEntity();
-
-                if (p.getFoodLevel() < 19.0D) {
-                    p.setFoodLevel(20);
-                }
-            }
-        }
+    	if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Hunger.Enable")) {
+    		if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Hunger.World.All_World")) {
+    			if (MainClass.getWH().contains(e.getEntity().getLocation().getWorld().getName())) {
+			        if (e.getEntityType() == EntityType.PLAYER) {
+			            Player p = (Player) e.getEntity();
+			            	
+			            e.setCancelled(true);
+			                
+			            if (p.getFoodLevel() < 19.0D) {
+			            	p.setFoodLevel(20);
+			            }
+			        }
+    			}
+    		} else {
+    			if (e.getEntityType() == EntityType.PLAYER) {
+		            Player p = (Player) e.getEntity();
+		            	
+		            e.setCancelled(true);
+		                
+		            if (p.getFoodLevel() < 19.0D) {
+		            	p.setFoodLevel(20);
+		            }
+		        }
+    		}
+    	}
     }
 
     //Disable Damage
     @EventHandler
     public void DisableDamage(EntityDamageEvent e) {
-        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Damage")) {
-            if (ConfigGlobal.getConfig().getBoolean("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING")) {
-                e.setCancelled(true);
-            } else {
-                if (e.getEntity() instanceof Player) {
-                    e.setCancelled(true);
-                }
-            }
-        }
+    	if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Damage.Enable")) {
+    		if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Damage.World.All_World")) {
+		    	if (MainClass.getWD().contains(e.getEntity().getLocation().getWorld().getName())) {
+		    		if (ConfigGlobal.getConfig().getBoolean("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING")) {
+		    			e.setCancelled(true);
+		    		} else {
+		    			if (e.getEntity() instanceof Player) {
+		    				e.setCancelled(true);
+		    			}
+		    		}
+		    	}
+    		} else {
+	    		if (ConfigGlobal.getConfig().getBoolean("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING")) {
+	    			e.setCancelled(true);
+	    		} else {
+	    			if (e.getEntity() instanceof Player) {
+	    				e.setCancelled(true);
+	    			}
+	    		}
+    		}
+    	}
     }
 
     //Disable Weather
     @EventHandler
     public void WeatherDisable(WeatherChangeEvent e) {
-        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Weather")) {
-            e.setCancelled(true);
+    	if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Weather.Enable")) {
+    		if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Weather.World.All_World")) {
+    			if (MainClass.getWW().contains(e.getWorld().getName())) {
+    				e.setCancelled(true);
+    			}
+    		} else {
+    			e.setCancelled(true);
+    		}
         }
     }
 
@@ -71,20 +101,38 @@ public class BasicFeatures implements Listener {
     public void onPlace(BlockPlaceEvent e) {
         Player p = e.getPlayer();
 
-        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Construct")) {
-            if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Construct-Bypass")) {
-                if (!p.hasPermission("UltimateSpawn.bypass.Construct")) {
-                    e.setCancelled(true);
-                    if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message"), p);
-                    }
-                }
-            } else {
-                e.setCancelled(true);
-                if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message"), p);
-                }
-            }
+        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.Enable")) {
+        	if (!ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.World.All_World")) {
+        		if (MainClass.getWPCP().contains(p.getWorld().getName())) {
+        			if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.Bypass")) {
+        		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructPlace")) {
+        		            e.setCancelled(true);
+        		            if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.Message")) {
+        		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Place"), p);
+        		            }
+        		        }
+        		    } else {
+        		        e.setCancelled(true);
+        		        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.Message")) {
+        		            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Place"), p);
+        		        }
+        		    }
+        		}
+        	} else {
+        		if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.Bypass")) {
+        	        if (!p.hasPermission("UltimateSpawn.bypass.ConstructPlace")) {
+        	            e.setCancelled(true);
+        	            if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.Message")) {
+        	                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Place"), p);
+        	            }
+        	        }
+        	    } else {
+        	        e.setCancelled(true);
+        	        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.Message")) {
+        	            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Place"), p);
+        	        }
+        	    }
+        	}
         }
     }
 
@@ -92,28 +140,52 @@ public class BasicFeatures implements Listener {
     public void onBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Construct")) {
-            if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Construct-Bypass")) {
-                if (!p.hasPermission("UltimateSpawn.bypass.Construct")) {
-                    e.setCancelled(true);
-                    if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message"), p);
-                    }
-                }
-            } else {
-                e.setCancelled(true);
-                if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Message")) {
-                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message"), p);
-                }
-            }
+        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.Enable")) {
+        	if (!ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.World.All_World")) {
+        		if (MainClass.getWPCB().contains(p.getWorld().getName())) {
+        			if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.Bypass")) {
+        		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructBreak")) {
+        		            e.setCancelled(true);
+        		            if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.Message")) {
+        		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Break"), p);
+        		            }
+        		        }
+        		    } else {
+        		        e.setCancelled(true);
+        		        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.Message")) {
+        		            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Break"), p);
+        		        }
+        		    }
+        		}
+        	} else {
+        		if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.Bypass")) {
+    		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructBreak")) {
+    		            e.setCancelled(true);
+    		            if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.Message")) {
+    		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Break"), p);
+    		            }
+    		        }
+    		    } else {
+    		        e.setCancelled(true);
+    		        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.Message")) {
+    		            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Break"), p);
+    		        }
+    		    }
+        	}
         }
     }
 
     // Block Burn
     @EventHandler
     public void BlockBurn(BlockBurnEvent e) {
-        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Burn-block")) {
-            e.setCancelled(true);
+    	if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Burn-block.Enable")) {
+    		if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Burn-block.World.All_World")) {
+    			if (MainClass.getWBB().contains(e.getBlock().getWorld().getName())) {
+    				e.setCancelled(true);
+    			}
+    		} else {
+    			e.setCancelled(true);
+    		}
         }
     }
 
@@ -181,8 +253,14 @@ public class BasicFeatures implements Listener {
     // Explosion
     @EventHandler
     public void onExplode(ExplosionPrimeEvent e) {
-        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Explosion")) {
-            e.setCancelled(true);
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Explosion.Enable")) {
+        	if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Explosion.World.All_World")) {
+        		if (MainClass.getWE().contains(e.getEntity().getWorld().getName())) {
+        			e.setCancelled(true);
+        		}
+        	} else {
+        		e.setCancelled(true);
+        	}
         }
     }
 
@@ -190,9 +268,15 @@ public class BasicFeatures implements Listener {
     @EventHandler
     public void onDeathEvent(PlayerDeathEvent e) {
         Player p = e.getEntity();
-
-        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Death-Message")) {
-            e.setDeathMessage(null);
+        
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Death-Message.Enable")) {
+        	if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Death-Message.World.All_World")) {
+        		if (MainClass.getWDM().contains(e.getEntity().getWorld().getName())) {
+        			e.setDeathMessage(null);
+        		}
+        	} else {
+        		e.setDeathMessage(null);
+        	}
         }
 
         if (ConfigGlobal.getConfig().getBoolean("Server.Items.Clear-Drops-On-Death.Enable")) {
@@ -220,8 +304,14 @@ public class BasicFeatures implements Listener {
     // Disable Spawning
     @EventHandler
     public void onSpawning(CreatureSpawnEvent e) {
-        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals")) {
-            e.setCancelled(true);
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals.Enable")) {
+        	if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals.World.All_World")) {
+        		if (MainClass.getWSMA().contains(e.getEntity().getWorld().getName())) {
+        			e.setCancelled(true);
+        		}
+        	} else {
+        		e.setCancelled(true);
+        	}
         }
     }
 
