@@ -63,9 +63,10 @@ public class ConfigMessage {
             Config.set("Player.Chat.Can_t_speak", "&cThe chat is disable");
             Config.set("Player.Chat.Delay", "&cChat is currently dealyed of %DELAY% seconds");
             
-            Config.set("Protection.Construct-Message", "&cSorry, you can't construct here !");
+            Config.set("Protection.Construct-Message.Place", "&cSorry, you can't place block here !");
+            Config.set("Protection.Construct-Message.Break", "&cSorry, you can't break block here !");
             
-            Config.set("Admin.Plugin-Reload", "&6US &7| &eConfig reloaded &7&oThis command has just reload config.yml, messages.yml and spawn.yml");
+            Config.set("Admin.Plugin-Reload", "&6US &7| &eConfig reloaded &7&oThis command has just reload config.yml, messages.yml and spawn.yml... This command is not fully supported by the plugin");
             Config.set("Admin.Spawn.Set", "&6US &7| &eSpawn &cset &e!");
             Config.set("Admin.ClearChat.Anonymously", "&cChat clear");
             Config.set("Admin.ClearChat.Own", "&cChat clear");
@@ -84,6 +85,10 @@ public class ConfigMessage {
             Config.set("Error.Arguments-Missing", "&cI'm sorry, but there must be one or two arguments missing.");
             Config.set("Error.Player.Not-found", "&cSorry, but... The player are online ? If it's the case, check the playername");
             Config.set("Error.Player.Enter-Player-Name", "&cThanks to enter a player name");
+            
+            Config.set("Others.Hours", "hour(s)");
+            Config.set("Others.Minutes", "minute(s)");
+            Config.set("Others.Seconds", "second(s)");
             
             Config.set("Console.Broadcast", "&8[&eBroadcast&8]&r ");
             Config.set("Console.ClearChat.Anonymously", "&cChat clear");
