@@ -8,8 +8,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
+import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 
 public class OnQuit implements Listener {
@@ -38,6 +40,7 @@ public class OnQuit implements Listener {
         
         // Stats
         if (ConfigGlobal.getConfig().getBoolean("Plugin.Create.Stats")) {
+        	ConfigPlayerStats.getConfig().set(pU+".Date.Last_logout", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
 	        ConfigPlayerStats.getConfig().set(pU+".Position.Last_logout.World", l.getWorld().getName());
 	        ConfigPlayerStats.getConfig().set(pU+".Position.Last_logout.x", Double.valueOf(l.getX()));
 	        ConfigPlayerStats.getConfig().set(pU+".Position.Last_logout.y", Double.valueOf(l.getY()));
