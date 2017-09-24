@@ -62,13 +62,48 @@ public class ConfigGlobal {
             }
 
             //Server
-            Config.set("Server.Disable.Hunger", Boolean.valueOf(true));
-            Config.set("Server.Disable.Damage", Boolean.valueOf(true));
-            Config.set("Server.Disable.Weather", Boolean.valueOf(true));
-            Config.set("Server.Disable.Burn-block", Boolean.valueOf(true));
-            Config.set("Server.Disable.Explosion", Boolean.valueOf(true));
-            Config.set("Server.Disable.Death-Message", Boolean.valueOf(true));
-            Config.set("Server.Disable.Spawning-Monster-Animals", Boolean.valueOf(true));
+            Config.set("Server.Disable.Hunger.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Hunger.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Hunger.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.Damage.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Damage.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Damage.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.Weather.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Weather.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Weather.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.Burn-block.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Burn-block.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Burn-block.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.Explosion.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Explosion.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Explosion.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.Death-Message.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Death-Message.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Death-Message.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.Spawning-Monster-Animals.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Spawning-Monster-Animals.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Spawning-Monster-Animals.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
             Config.set("Server.Items.Drop.Disable", Boolean.valueOf(true));
             Config.set("Server.Items.Drop.Bypass", Boolean.valueOf(true));
             Config.set("Server.Items.PickUp.Disable", Boolean.valueOf(true));
@@ -79,9 +114,23 @@ public class ConfigGlobal {
             Config.set("Server.Items.Clear-Drops-On-Death.Bypass", Boolean.valueOf(true));
 
             // Construct
-            Config.set("Protection.Construct.Construct", Boolean.valueOf(true));
-            Config.set("Protection.Construct.Construct-Bypass", Boolean.valueOf(true));
-            Config.set("Protection.Construct.Message", Boolean.valueOf(true));
+            Config.set("Protection.Construct.Place.Enable", Boolean.valueOf(true));
+            Config.set("Protection.Construct.Place.Bypass", Boolean.valueOf(true));
+            Config.set("Protection.Construct.Place.Message", Boolean.valueOf(true));
+            Config.set("Protection.Construct.Place.World.All_World", Boolean.valueOf(false));
+            Config.set("Protection.Construct.Place.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            
+            Config.set("Protection.Construct.Break.Enable", Boolean.valueOf(true));
+            Config.set("Protection.Construct.Break.Bypass", Boolean.valueOf(true));
+            Config.set("Protection.Construct.Break.Message", Boolean.valueOf(true));
+            Config.set("Protection.Construct.Break.World.All_World", Boolean.valueOf(false));
+            Config.set("Protection.Construct.Break.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
 
             // On join
             Config.set("On-Join.Clear.Inventory.Enable", Boolean.valueOf(true));
@@ -216,6 +265,7 @@ public class ConfigGlobal {
             // Plugin
             Config.set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
             Config.set("Plugin.Create.Stats", Boolean.valueOf(true));
+            Config.set("Plugin.Date-Format", String.valueOf("dd-MM-yyyy"));
 
             // Debug
             Config.set("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING", Boolean.valueOf(false));
