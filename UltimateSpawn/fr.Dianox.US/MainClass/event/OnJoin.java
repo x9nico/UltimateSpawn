@@ -13,10 +13,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.Utils.TitleUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
+import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 
@@ -51,6 +53,8 @@ public class OnJoin implements Listener {
         if (ConfigGlobal.getConfig().getBoolean("Plugin.Create.Stats")) {
 	        if (!ConfigPlayerStats.getConfig().contains(String.valueOf(pU))) {
 	        	ConfigPlayerStats.getConfig().set(pU+".Player", String.valueOf(p));
+	        	ConfigPlayerStats.getConfig().set(pU+".IP", String.valueOf(e.getPlayer().getAddress()));
+	        	ConfigPlayerStats.getConfig().set(pU+".Date.Last_login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
 	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.World", l.getWorld().getName());
 	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.x", Double.valueOf(l.getX()));
 	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.y", Double.valueOf(l.getY()));
@@ -63,6 +67,8 @@ public class OnJoin implements Listener {
 	        	// Check player name
 	        	if (ConfigPlayerStats.getConfig().getString(pU+".Player") != String.valueOf(p)) {
 	        		ConfigPlayerStats.getConfig().set(pU+".Player", String.valueOf(p));
+	        		ConfigPlayerStats.getConfig().set(pU+".IP", String.valueOf(e.getPlayer().getAddress()));
+	        		ConfigPlayerStats.getConfig().set(pU+".Date.Last_login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
 	        		
 	        		ConfigPlayerStats.saveConfigFile();
 	        	}
