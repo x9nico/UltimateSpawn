@@ -1,5 +1,8 @@
 package fr.Dianox.US.MainClass;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -26,6 +29,15 @@ import fr.Dianox.US.MainClass.event.OnQuit;
 public class MainClass extends JavaPlugin implements Listener {
 	
 	private static MainClass instance;
+	public static List<String> worlds_damage = new ArrayList<String>();
+	public static List<String> worlds_hunger = new ArrayList<String>();
+	public static List<String> worlds_weather = new ArrayList<String>();
+	public static List<String> worlds_burn_block = new ArrayList<String>();
+	public static List<String> worlds_explosions = new ArrayList<String>();
+	public static List<String> worlds_death_message = new ArrayList<String>();
+	public static List<String> worlds_spawning_mob_animals = new ArrayList<String>();
+	public static List<String> worlds_c_place = new ArrayList<String>();
+	public static List<String> worlds_c_break = new ArrayList<String>();
 	
 	public MainClass() {}
 	
@@ -33,7 +45,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.2.2-Alpha");
+		System.out.println("| >>> Version 0.3-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -82,9 +94,116 @@ public class MainClass extends JavaPlugin implements Listener {
         	System.out.println("|");
         }
 		
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Hunger.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Hunger.World.All_World")) {
+	            for (String worldHunger : ConfigGlobal.getConfig().getStringList("Server.Disable.Hunger.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldHunger) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Server.Disable.Hunger.World: "+worldHunger);
+	            	} else {
+	            		worlds_hunger.add(worldHunger);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Damage.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Damage.World.All_World")) {
+	            for (String worldDamage : ConfigGlobal.getConfig().getStringList("Server.Disable.Damage.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldDamage) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Server.Disable.Damage.World: "+worldDamage);
+	            	} else {
+	            		worlds_damage.add(worldDamage);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Weather.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Weather.World.All_World")) {
+	            for (String worldWeather : ConfigGlobal.getConfig().getStringList("Server.Disable.Weather.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldWeather) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Server.Disable.Weather.World: "+worldWeather);
+	            	} else {
+	            		worlds_weather.add(worldWeather);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Burn-block.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Burn-block.World.All_World")) {
+	            for (String worldBurnblock : ConfigGlobal.getConfig().getStringList("Server.Disable.Burn-block.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldBurnblock) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Server.Disable.Burn-block.World: "+worldBurnblock);
+	            	} else {
+	            		worlds_burn_block.add(worldBurnblock);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Explosion.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Explosion.World.All_World")) {
+	            for (String worldExplosion : ConfigGlobal.getConfig().getStringList("Server.Disable.Explosion.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldExplosion) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Server.Disable.Explosion.World: "+worldExplosion);
+	            	} else {
+	            		worlds_explosions.add(worldExplosion);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Death-Message.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Death-Message.World.All_World")) {
+	            for (String worldDM : ConfigGlobal.getConfig().getStringList("Server.Disable.Death-Message.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldDM) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Server.Disable.Death-Message.World: "+worldDM);
+	            	} else {
+	            		worlds_death_message.add(worldDM);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGlobal.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals.World.All_World")) {
+	            for (String worldSMA : ConfigGlobal.getConfig().getStringList("Server.Disable.Spawning-Monster-Animals.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldSMA) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Server.Disable.Spawning-Monster-Animals.World: "+worldSMA);
+	            	} else {
+	            		worlds_spawning_mob_animals.add(worldSMA);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Protection.Construct.Place.World.All_World")) {
+	            for (String world : ConfigGlobal.getConfig().getStringList("Protection.Construct.Place.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Protection.Construct.Place.World: "+world);
+	            	} else {
+	            		worlds_c_place.add(world);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.Enable")) {
+	        if (!ConfigGlobal.getConfig().getBoolean("Protection.Construct.Break.World.All_World")) {
+	            for (String world : ConfigGlobal.getConfig().getStringList("Protection.Construct.Break.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in Config.yml, Protection.Construct.Break.World: "+world);
+	            	} else {
+	            		worlds_c_break.add(world);
+	            	}
+	            }
+	        }
+        }
+        
 		System.out.println("| And many things.... I think... x'D");
 		System.out.println("|");
-		
 		System.out.println("| Ultimate Spawn loaded!");
 		System.out.println("|");
 		System.out.println("|=============================");
@@ -96,6 +215,42 @@ public class MainClass extends JavaPlugin implements Listener {
 		
 	public static MainClass getInstance() {
 		return instance;
+	}
+	
+	public static List<String> getWD () {
+		return worlds_damage;
+	}
+	
+	public static List<String> getWH () {
+		return worlds_hunger;
+	}
+	
+	public static List<String> getWW () {
+		return worlds_weather;
+	}
+	
+	public static List<String> getWBB () {
+		return worlds_burn_block;
+	}
+	
+	public static List<String> getWE () {
+		return worlds_explosions;
+	}
+	
+	public static List<String> getWDM () {
+		return worlds_death_message;
+	}
+	
+	public static List<String> getWSMA () {
+		return worlds_spawning_mob_animals;
+	}
+	
+	public static List<String> getWPCP () {
+		return worlds_c_place;
+	}
+	
+	public static List<String> getWPCB () {
+		return worlds_c_break;
 	}
 
 }
