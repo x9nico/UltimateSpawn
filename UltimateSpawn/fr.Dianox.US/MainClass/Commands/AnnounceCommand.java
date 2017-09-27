@@ -11,8 +11,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
 
 public class AnnounceCommand implements CommandExecutor {
 
@@ -45,7 +45,7 @@ public class AnnounceCommand implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        if (ConfigGlobal.getConfig().getBoolean("Command.Broadcast.Enable")) {
+        if (ConfigCGlobal.getConfig().getBoolean("Command.Broadcast.Enable")) {
             if (cmd.getName().equalsIgnoreCase("bc") || cmd.getName().equalsIgnoreCase("broadcast") && p.hasPermission("UltimateSpawn.Broadcast")) {
 
                 if (args.length == 0) {
@@ -65,11 +65,11 @@ public class AnnounceCommand implements CommandExecutor {
 
                 PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.Broadcast") + msg, Bukkit.getServer());
                 
-                if (ConfigGlobal.getConfig().getBoolean("Command.Broadcast.Sounds.Enabled")) {
+                if (ConfigCGlobal.getConfig().getBoolean("Command.Broadcast.Sounds.Enabled")) {
                     for (Player player: Bukkit.getServer().getOnlinePlayers()) {
-                        String sound = ConfigGlobal.getConfig().getString("Command.Broadcast.Sounds.Sound");
-                        int volume = ConfigGlobal.getConfig().getInt("Command.Broadcast.Sounds.Volume");
-                        int pitch = ConfigGlobal.getConfig().getInt("Command.Broadcast.Sounds.Pitch");
+                        String sound = ConfigCGlobal.getConfig().getString("Command.Broadcast.Sounds.Sound");
+                        int volume = ConfigCGlobal.getConfig().getInt("Command.Broadcast.Sounds.Volume");
+                        int pitch = ConfigCGlobal.getConfig().getInt("Command.Broadcast.Sounds.Pitch");
                         player.playSound(player.getLocation(), Sound.valueOf(sound), volume, pitch);
                     }
                 }
@@ -78,7 +78,7 @@ public class AnnounceCommand implements CommandExecutor {
                 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
             }
         } else {
-            if (ConfigGlobal.getConfig().getBoolean("Command.Broadcast.Disable-Message")) {
+            if (ConfigCGlobal.getConfig().getBoolean("Command.Broadcast.Disable-Message")) {
                 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
             }
         }
@@ -87,11 +87,11 @@ public class AnnounceCommand implements CommandExecutor {
     }
 
     private static void MusicConsole() {
-        if (ConfigGlobal.getConfig().getBoolean("Command.Broadcast.Sounds-Console.Enabled")) {
+        if (ConfigCGlobal.getConfig().getBoolean("Command.Broadcast.Sounds-Console.Enabled")) {
             for (Player player: Bukkit.getServer().getOnlinePlayers()) {
-                String sound = ConfigGlobal.getConfig().getString("Command.Broadcast.Sounds-Console.Sound");
-                int volume = ConfigGlobal.getConfig().getInt("Command.Broadcast.Sounds-Console.Volume");
-                int pitch = ConfigGlobal.getConfig().getInt("Command.Broadcast.Sounds-Console.Pitch");
+                String sound = ConfigCGlobal.getConfig().getString("Command.Broadcast.Sounds-Console.Sound");
+                int volume = ConfigCGlobal.getConfig().getInt("Command.Broadcast.Sounds-Console.Volume");
+                int pitch = ConfigCGlobal.getConfig().getInt("Command.Broadcast.Sounds-Console.Pitch");
                 player.playSound(player.getLocation(), Sound.valueOf(sound), volume, pitch);
             }
         }
