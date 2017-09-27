@@ -14,6 +14,7 @@ import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
 import me.clip.placeholderapi.PlaceholderAPI;
 
 public class PingCommand implements CommandExecutor {
@@ -39,16 +40,16 @@ public class PingCommand implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("ping") && p.hasPermission("UltimateSpawn.ping")) {
             if ((args.length == 0)) {
-                if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Self.Enable")) {
+                if (ConfigCGlobal.getConfig().getBoolean("Command.Ping.Self.Enable")) {
                     PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Ping.Self"), p);
                 } else {
-                    if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Self.Disable-Message")) {
+                    if (ConfigCGlobal.getConfig().getBoolean("Command.Ping.Self.Disable-Message")) {
                     	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
                     }
                 }
             } else if ((args.length == 1)) {
                 Player other = Bukkit.getPlayer(args[0]);
-                if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Other.Enable")) {
+                if (ConfigCGlobal.getConfig().getBoolean("Command.Ping.Other.Enable")) {
                     if (other == null) {
                         PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Not-found"), p);
                         return true;
@@ -67,7 +68,7 @@ public class PingCommand implements CommandExecutor {
             					));
             		}
                 } else {
-                    if (ConfigGlobal.getConfig().getBoolean("Command.Ping.Other.Disable-Message")) {
+                    if (ConfigCGlobal.getConfig().getBoolean("Command.Ping.Other.Disable-Message")) {
                     	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
                     }
                 }
