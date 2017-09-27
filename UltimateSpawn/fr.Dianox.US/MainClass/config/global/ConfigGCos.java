@@ -77,6 +77,21 @@ public class ConfigGCos {
                     "BLUE",
                     "WHITE"
                 }));
+            Config.set("Cosmetics.Firework.World.All_World", Boolean.valueOf(false));
+            Config.set("Cosmetics.Firework.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            
+            Config.set("Cosmetics.Sounds.Enabled", Boolean.valueOf(true));
+            Config.set("Cosmetics.Sounds.Sound", "NOTE_PIANO");
+            Config.set("Cosmetics.Sounds.Volume", Integer.valueOf(10));
+            Config.set("Cosmetics.Sounds.Pitch", Integer.valueOf(1));
+            Config.set("Cosmetics.Sounds.World.All_World", Boolean.valueOf(false));
+            Config.set("Cosmetics.Sounds.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
             
             saveConfigFile();
 
