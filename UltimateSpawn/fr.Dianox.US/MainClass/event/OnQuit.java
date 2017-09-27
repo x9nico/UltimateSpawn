@@ -8,11 +8,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
+import fr.Dianox.US.MainClass.config.global.ConfigGFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 
 public class OnQuit implements Listener {
 
@@ -22,20 +25,33 @@ public class OnQuit implements Listener {
         Location l = p.getLocation();
         UUID pU = e.getPlayer().getUniqueId();
 
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Fly")) {
+        if (ConfigGFly.getConfig().getBoolean("Fly.Enable")) {
             p.setAllowFlight(false);
             p.setFlying(false);
         }
 
-        if (ConfigGlobal.getConfig().getBoolean("On-Quit.Broadcast.Quit.Enable")) {
-            if (ConfigGlobal.getConfig().getBoolean("On-Quit.Broadcast.Quit.Hide")) {
-                e.setQuitMessage(null);
-            } else {
-                for (String message: ConfigGlobal.getConfig().getStringList("On-Quit.Broadcast.Quit.Message")) {
-                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
-                }
-                e.setQuitMessage(null);
-            }
+        if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Enable")) {
+        	if (!ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.World.All_World")) {
+        		if (MainClass.getWBroadcastQuit().contains(p.getWorld().getName())) {
+		            if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
+		                e.setQuitMessage(null);
+		            } else {
+		                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
+		                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+		                }
+		                e.setQuitMessage(null);
+		            }
+        		}
+        	} else {
+        		if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
+	                e.setQuitMessage(null);
+	            } else {
+	                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
+	                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+	                }
+	                e.setQuitMessage(null);
+	            }
+        	}
         }
         
         // Stats
