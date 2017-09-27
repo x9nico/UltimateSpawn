@@ -3,7 +3,7 @@ A MineCraft plugin for lobby server
 
 Version: 1.8x-(1.9.x-1.10.x-1.11.x-1.12.x  not work very fine)
 
-# Version - 0.3
+# Version - 0.4
 
 # Terms and condition
 
