@@ -46,7 +46,9 @@ public class OnJoin implements Listener {
         // Options
         if (!ConfigPlayerOptions.getConfig().contains(String.valueOf(pU))) {
         	ConfigPlayerOptions.getConfig().set(pU+".Player", String.valueOf(p));
-        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly", ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Fly"));
+        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Enable", ConfigGFly.getConfig().getBoolean("Fly.Enable"));
+        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetFlying", ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying"));
+        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetAllowFlight", ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight"));
         	
         	ConfigPlayerOptions.saveConfigFile();
         } else {
@@ -246,20 +248,24 @@ public class OnJoin implements Listener {
         if ((ConfigGFly.getConfig().getBoolean("Fly.Enable")) && (gm != 3)) {
         	if (!ConfigGFly.getConfig().getBoolean("Fly.World.All_World")) {
 	       		if (MainClass.getWFly().contains(p.getWorld().getName())) {
-	       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
-	       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
-	       			}
-	       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
-	       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
+	       			if (ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+		       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
+		       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
+		       			}
+		       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
+		       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.setFlying"));
+		       			}
 	       			}
 	       		}
         	} else {
-        		if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
-       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
-       			}
-       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
-       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
-       			}
+        		if (ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+	        		if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
+	        			p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
+	       			}
+	       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
+	       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.setFlying"));
+	       			}
+        		}
         	}
         }
 
