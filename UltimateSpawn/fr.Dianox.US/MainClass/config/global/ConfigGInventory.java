@@ -25,12 +25,6 @@ public class ConfigGInventory {
         }
 
         create();
-
-        int gamemode = Config.getInt("On-Join.Spawn.Gamemode.Gamemode");
-
-        if ((gamemode != 0) && (gamemode != 1) && (gamemode != 2) && (gamemode != 3)) {
-            Config.set("Gamemode.Value", Integer.valueOf(0));
-        }
     }
 
     public static File getFile() {
