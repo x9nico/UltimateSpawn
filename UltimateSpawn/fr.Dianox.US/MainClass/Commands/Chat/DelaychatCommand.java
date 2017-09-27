@@ -7,12 +7,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
 
 public class DelaychatCommand implements CommandExecutor {
 
-	public static int delay = ConfigGlobal.getConfig().getInt("Command.DelayChat.Delay.Delay_By_Default");
+	public static int delay = ConfigCGlobal.getConfig().getInt("Command.DelayChat.Delay.Delay_By_Default");
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
@@ -33,7 +33,7 @@ public class DelaychatCommand implements CommandExecutor {
 		Player p = (Player)sender;
 		
 		if (cmd.getName().equalsIgnoreCase("DelayChat") || cmd.getName().equalsIgnoreCase("dchat") && p.hasPermission("UltimateSpawn.delaychat")) {
-			if (ConfigGlobal.getConfig().getBoolean("Command.DelayChat.Enable")) {
+			if (ConfigCGlobal.getConfig().getBoolean("Command.DelayChat.Enable")) {
 				if (args.length == 1) {
 					delay = Integer.parseInt(args[0]);
 					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.DelayChat.Set"), p);
@@ -41,7 +41,7 @@ public class DelaychatCommand implements CommandExecutor {
 					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
 				}
 			} else {
-	            if (ConfigGlobal.getConfig().getBoolean("Command.DelayChat.Disable-Message")) {
+	            if (ConfigCGlobal.getConfig().getBoolean("Command.DelayChat.Disable-Message")) {
 	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
 	            }
 	        }
