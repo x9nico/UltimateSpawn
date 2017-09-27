@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +12,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
@@ -21,9 +21,18 @@ import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
+import fr.Dianox.US.MainClass.config.global.ConfigGCos;
+import fr.Dianox.US.MainClass.config.global.ConfigGFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGGM;
+import fr.Dianox.US.MainClass.config.global.ConfigGHF;
+import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
+import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
+import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
+import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
+import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 
 public class OnJoin implements Listener {
-
+	
     @SuppressWarnings("deprecation")
 	@EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -32,7 +41,7 @@ public class OnJoin implements Listener {
         PlayerInventory inv = p.getInventory();
         Location l = p.getLocation();
 
-        int lines = ConfigGlobal.getConfig().getInt("On-Join.Clear.Chat.Lines-To-Clear");
+        int lines = ConfigGMessage.getConfig().getInt("Chat.Clear.Lines-To-Clear");
 
         // Options
         if (!ConfigPlayerOptions.getConfig().contains(String.valueOf(pU))) {
@@ -75,177 +84,405 @@ public class OnJoin implements Listener {
 	        }
     	}
         
+        // Force selected slot
+        if (ConfigGInventory.getConfig().getBoolean("Inventory.Force-Selected-Slot.Enable")) {
+        	if (!ConfigGInventory.getConfig().getBoolean("Inventory.Force-Selected-Slot.World.All_World")) {
+        		if (MainClass.getWOForceSelectedSlot().contains(p.getWorld().getName())) {
+        			inv.setHeldItemSlot(ConfigGInventory.getConfig().getInt("Inventory.Force-Selected-Slot.Slot") - 1);
+        		}
+        	} else {
+        		inv.setHeldItemSlot(ConfigGInventory.getConfig().getInt("Inventory.Force-Selected-Slot.Slot") - 1);
+        	}
+        }
+        
         // Inventory
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Clear.Inventory.Enable")) {
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Clear.Inventory.Bypass")) {
-                if (!p.hasPermission("UltimateSpawn.bypass.ClearInvOnJoin")) {
-                    inv.clear();
-
-                    if (ConfigGlobal.getConfig().getBoolean("On-Join.Clear.Inventory.Armor")) {
+        if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Enable")) {
+        	if (!ConfigGInventory.getConfig().getBoolean("Inventory.Clear.World.All_World")) {
+        		if (MainClass.getWInventory().contains(p.getWorld().getName())) {
+        	        if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Bypass")) {
+        	            if (!p.hasPermission("UltimateSpawn.bypass.ClearInvOnJoin")) {
+        	            	if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Inventory")) {
+        	            		inv.clear();
+        	            	}
+        	                if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Armor")) {
+        	                    inv.setArmorContents(new ItemStack[4]);
+        	                }
+        	            }
+        	        } else {
+        	        	if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Inventory")) {
+        	        		inv.clear();
+        	        	}
+        	            if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Armor")) {
+        	                inv.setArmorContents(new ItemStack[4]);
+        	            }
+        	        }
+        		}
+        	} else {
+                if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Bypass")) {
+                    if (!p.hasPermission("UltimateSpawn.bypass.ClearInvOnJoin")) {
+                    	if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Inventory")) {
+                    		inv.clear();
+                    	}
+                        if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Armor")) {
+                            inv.setArmorContents(new ItemStack[4]);
+                        }
+                    }
+                } else {
+                	if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Inventory")) {
+                		inv.clear();
+                	}
+                    if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Armor")) {
                         inv.setArmorContents(new ItemStack[4]);
                     }
                 }
-            } else {
-                inv.clear();
-
-                if (ConfigGlobal.getConfig().getBoolean("On-Join.Clear.Inventory.Armor")) {
-                    inv.setArmorContents(new ItemStack[4]);
-                }
-            }
+        	}
         }
 
         // Chat
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Clear.Chat.Enable")) {
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Clear.Chat.Bypass")) {
-                if (!p.hasPermission("UltimateSpawn.bypass.ClearChatOnJoin")) {
-                    for (int i = 0; i < lines; i++) {
-                        p.sendMessage("");
-                    }
-                }
-            } else {
-                for (int i = 0; i < lines; i++) {
-                    p.sendMessage("");
-                }
-            }
+        if (ConfigGMessage.getConfig().getBoolean("Chat.Clear.Enable")) {
+        	if (!ConfigGMessage.getConfig().getBoolean("Chat.Clear.World.All_World")) {
+        		if (MainClass.getWClearChat().contains(p.getWorld().getName())) {
+		            if (ConfigGMessage.getConfig().getBoolean("Chat.Clear.Bypass")) {
+		                if (!p.hasPermission("UltimateSpawn.bypass.ClearChatOnJoin")) {
+		                    for (int i = 0; i < lines; i++) {
+		                        p.sendMessage("");
+		                    }
+		                }
+		            } else {
+		                for (int i = 0; i < lines; i++) {
+		                    p.sendMessage("");
+		                }
+		            }
+	        	}
+        	} else {
+        		if (ConfigGMessage.getConfig().getBoolean("Chat.Clear.Bypass")) {
+	                if (!p.hasPermission("UltimateSpawn.bypass.ClearChatOnJoin")) {
+	                    for (int i = 0; i < lines; i++) {
+	                        p.sendMessage("");
+	                    }
+	                }
+	            } else {
+	                for (int i = 0; i < lines; i++) {
+	                    p.sendMessage("");
+	                }
+	            }
+        	}
         }
 
 
-        // Teleport spawn // broadcast new
+        // Teleport spawn || broadcast new
         if (p.hasPlayedBefore()) {
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Teleport.Enable")) {
-            	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
+            if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.Enable")) {
+            	if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
             		SpawnUtils.teleportToSpawnStats(p);
             	} else {
             		SpawnUtils.teleportToSpawn(p);
             	}
-            } else if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Teleport.If_stats_is_enable.If_Teleport_on_join_is_disable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
+            } else if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.If_stats_is_enable.If_Teleport_on_join_is_disable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
             	SpawnUtils.teleportToSpawnStats(p);
             }
         } else {
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Teleport.On-First-Join")) {
+            if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.On-First-Join")) {
                 SpawnUtils.teleportToSpawn(p);
             }
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Broadcast.First-Join.Enable")) {
-                for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Broadcast.First-Join.Message")) {
-                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
-                }
+            if (ConfigGMessage.getConfig().getBoolean("Broadcast.First-Join.Enable")) {
+            	if (!ConfigGMessage.getConfig().getBoolean("Broadcast.First-Join.World.All_World")) {
+            		if (MainClass.getWNewBroadcastMsgJoin().contains(p.getWorld().getName())) {
+		                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.First-Join.Message")) {
+		                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+		                }
+            		}
+            	} else {
+            		for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.First-Join.Message")) {
+                    	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+                    }
+            	}
             }
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Message.First-Join.Enable")) {
-                for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Message.First-Join.Message")) {
-                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
-                }
+            if (ConfigGMessage.getConfig().getBoolean("Message.First-Join.Enable")) {
+            	if (!ConfigGMessage.getConfig().getBoolean("Message.First-Join.World.All_World")) {
+            		if (MainClass.getWNewMsgJoin().contains(p.getWorld().getName())) {
+    		            for (String message: ConfigGMessage.getConfig().getStringList("Message.First-Join.Message")) {
+    		            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    		            }
+            		}
+            	} else {
+            		for (String message: ConfigGMessage.getConfig().getStringList("Message.First-Join.Message")) {
+    	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    	            }
+            	}
             }
         }
 
         // Gamemode
         int gm = ConfigGlobal.getConfig().getInt("On-Join.Spawn.Gamemode.Gamemode");
-
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Gamemode.Change")) {
-            if (gm == 0) {
-                p.setGameMode(GameMode.SURVIVAL);
-            } else if (gm == 1) {
-                p.setGameMode(GameMode.CREATIVE);
-            } else if (gm == 2) {
-                p.setGameMode(GameMode.ADVENTURE);
-            } else if (gm == 3) {
-                p.setGameMode(GameMode.SPECTATOR);
-            }
+        
+        if (ConfigGGM.getConfig().getBoolean("Gamemode.Value")) {
+        	if (!ConfigGGM.getConfig().getBoolean("Gamemode.World.All_World")) {
+        		if (MainClass.getWGM().contains(p.getWorld().getName())) {
+		            if (gm == 0) {
+		                p.setGameMode(GameMode.SURVIVAL);
+		            } else if (gm == 1) {
+		                p.setGameMode(GameMode.CREATIVE);
+		            } else if (gm == 2) {
+		                p.setGameMode(GameMode.ADVENTURE);
+		            } else if (gm == 3) {
+		                p.setGameMode(GameMode.SPECTATOR);
+		            }
+        		}
+        	} else {
+        		if (gm == 0) {
+	                p.setGameMode(GameMode.SURVIVAL);
+	            } else if (gm == 1) {
+	                p.setGameMode(GameMode.CREATIVE);
+	            } else if (gm == 2) {
+	                p.setGameMode(GameMode.ADVENTURE);
+	            } else if (gm == 3) {
+	                p.setGameMode(GameMode.SPECTATOR);
+	            }
+        	}
         }
 
         // Fly
-        if ((ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Fly")) && (gm != 3)) {
-            p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
-            p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
+        if ((ConfigGFly.getConfig().getBoolean("Fly.Enable")) && (gm != 3)) {
+        	if (!ConfigGFly.getConfig().getBoolean("Fly.World.All_World")) {
+	       		if (MainClass.getWFly().contains(p.getWorld().getName())) {
+	       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
+	       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
+	       			}
+	       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
+	       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
+	       			}
+	       		}
+        	} else {
+        		if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
+       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
+       			}
+       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
+       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly"));
+       			}
+        	}
         }
 
         // Reset XP
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.XP.Enable")) {
-        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.XP.Options.Exp")) {
-        		p.setExp(0.0F);
+        String XPValueEXP = String.valueOf(ConfigGXP.getConfig().getDouble("XP.Options.Exp.Value"));
+        String XPValueLvl = String.valueOf(ConfigGXP.getConfig().getInt("XP.Options.Level.Value"));
+        
+        if (ConfigGXP.getConfig().getBoolean("XP.Enable")) {
+        	if (ConfigGXP.getConfig().getBoolean("XP.Options.Exp.Enable")) {
+        		if (!ConfigGXP.getConfig().getBoolean("XP.Options.Exp.World.All_World")) {
+	        		if (MainClass.getWXPEXP().contains(p.getWorld().getName())) {
+	        			p.setExp(Float.valueOf(XPValueEXP));
+	        		}
+        		} else {
+        			p.setExp(Float.valueOf(XPValueEXP));
+        		}
         	}
-        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.XP.Options.Level")) {
-        		p.setLevel(0);
+        	if (ConfigGXP.getConfig().getBoolean("XP.Options.Level.Enable")) {
+        		if (!ConfigGXP.getConfig().getBoolean("XP.Options.Level.World.All_World")) {
+	        		if (MainClass.getWXPLVL().contains(p.getWorld().getName())) {
+	        			p.setLevel(Integer.valueOf(XPValueLvl));
+	        		}
+        		} else {
+        			p.setLevel(Integer.valueOf(XPValueLvl));
+        		}
         	}
         }
         
         // Restore Health and food
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.Health")) {
-            p.setHealth(20.0D);
+        String FoodValue = String.valueOf(ConfigGHF.getConfig().getInt("Restore.Food.Value"));
+        String HealthValue = String.valueOf(ConfigGHF.getConfig().getDouble("Restore.Health.Value"));
+        
+        if (ConfigGHF.getConfig().getBoolean("Restore.Food.Enable")) {
+        	if (!ConfigGHF.getConfig().getBoolean("Restore.Food.World.All_World")) {
+	       		if (MainClass.getWFood().contains(p.getWorld().getName())) {
+	       			p.setFoodLevel(Integer.valueOf(FoodValue));
+	       		}
+        	} else {
+        		p.setFoodLevel(Integer.valueOf(FoodValue));
+        	}
         }
-
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Restore.Food")) {
-            p.setFoodLevel(20);
+        
+        if (ConfigGHF.getConfig().getBoolean("Restore.Health.Enable")) {
+        	if (!ConfigGHF.getConfig().getBoolean("Restore.Health.World.All_World")) {
+	       		if (MainClass.getWHealth().contains(p.getWorld().getName())) {
+	       			p.setHealth(Double.valueOf(HealthValue));
+	       		}
+        	} else {
+        		p.setHealth(Double.valueOf(HealthValue));
+        	}
         }
 
         // Cosmetics
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Firework")) {
-            p.getWorld().spawnEntity(p.getLocation(), EntityType.FIREWORK);
-        }
-
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Sounds.Enabled")) {
-            String sound = ConfigGlobal.getConfig().getString("On-Join.Spawn.Sounds.Sound");
-            int volume = ConfigGlobal.getConfig().getInt("On-Join.Spawn.Sounds.Volume");
-            int pitch = ConfigGlobal.getConfig().getInt("On-Join.Spawn.Sounds.Pitch");
-            p.playSound(p.getLocation(), Sound.valueOf(sound), volume, pitch);
-        }
-
-        // Join
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Broadcast.Join.Enable")) {
-            if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Broadcast.Join.Hide")) {
-                e.setJoinMessage(null);
-            } else {
-                for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Broadcast.Join.Message")) {
-                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
-                }
-                e.setJoinMessage(null);
-            }
-        }
-
-        //Message join
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Message.Join.Enable")) {
-            for (String message: ConfigGlobal.getConfig().getStringList("On-Join.Spawn.Message.Join.Message")) {
-            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
-            }
-        }
         
-        // Force selected slot
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Force-Selected-Slot.Enable")) {
-        	inv.setHeldItemSlot(ConfigGlobal.getConfig().getInt("On-Join.Spawn.Force-Selected-Slot.Slot") - 1);
+        // Firework ==> MainClass //
+        // Sounds
+        if (ConfigGCos.getConfig().getBoolean("Cosmetics.Sounds.Enable")) {
+        	if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Sounds.World.All_World")) {
+        		if (MainClass.getWSoundsJoin().contains(p.getWorld().getName())) {
+		            String sound = ConfigGCos.getConfig().getString("Cosmetics.Sounds.Sound");
+		            int volume = ConfigGCos.getConfig().getInt("Cosmetics.Sounds.Volume");
+		            int pitch = ConfigGCos.getConfig().getInt("Cosmetics.Sounds.Pitch");
+		            p.playSound(p.getLocation(), Sound.valueOf(sound), volume, pitch);
+        		}
+        	} else {
+	            String sound = ConfigGCos.getConfig().getString("Cosmetics.Sounds.Sound");
+	            int volume = ConfigGCos.getConfig().getInt("Cosmetics.Sounds.Volume");
+	            int pitch = ConfigGCos.getConfig().getInt("Cosmetics.Sounds.Pitch");
+	            p.playSound(p.getLocation(), Sound.valueOf(sound), volume, pitch);
+        	}
+        }
+
+        // Broadcast Join Player
+        if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Enable")) {
+        	if (!ConfigGMessage.getConfig().getBoolean("Broadcast.Join.World.All_World")) {
+        		if (MainClass.getWBroadcastMsgJoin().contains(p.getWorld().getName())) {
+		        	if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
+		        		if (p.hasPlayedBefore()) {
+				            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+				                e.setJoinMessage(null);
+				            } else {
+				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+				                }
+				                e.setJoinMessage(null);
+				            }
+		        		}
+		        	} else {
+		        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+			                e.setJoinMessage(null);
+			            } else {
+			                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+			                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+			                }
+			                e.setJoinMessage(null);
+			            }
+		        	}
+        		}
+        	} else {
+        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
+	        		if (p.hasPlayedBefore()) {
+			            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+			                e.setJoinMessage(null);
+			            } else {
+			                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+			                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+			                }
+			                e.setJoinMessage(null);
+			            }
+	        		}
+	        	} else {
+	        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+		                e.setJoinMessage(null);
+		            } else {
+		                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+		                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+		                }
+		                e.setJoinMessage(null);
+		            }
+	        	}
+        	}
+        }
+
+        // Message join
+        if (ConfigGMessage.getConfig().getBoolean("Message.Join.Enable")) {
+        	if (!ConfigGMessage.getConfig().getBoolean("Message.Join.World.All_World")) {
+        		if (MainClass.getWMsgJoin().contains(p.getWorld().getName())) {
+		            for (String message: ConfigGMessage.getConfig().getStringList("Message.Join.Message")) {
+		            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+		            }
+        		}
+        	} else {
+        		for (String message: ConfigGMessage.getConfig().getStringList("Message.Join.Message")) {
+	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+	            }
+        	}
         }
         
         // TitleJoin
-        if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Enable")) {
-        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.First-Join.Enable")) {
-        		if (p.hasPlayedBefore()) {
-            		if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.Enable")) {
-    		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.Title.Enable")) {
-    		        		TitleUtils.sendTitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Join.Title.Message"));
-    		        	}
-    		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.SubTitle.Enable")) {
-    		        		TitleUtils.sendSubtitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Join.SubTitle.Message"));
-    		        	}
-            		}
+        if (ConfigGTitle.getConfig().getBoolean("Title.Enable")) {
+        	if (ConfigGTitle.getConfig().getBoolean("Title.First-Join.Enable")) {
+        		if (!ConfigGTitle.getConfig().getBoolean("Title.First-Join.World.All_World")) {
+        			if (MainClass.getWFirstJoinTitle().contains(p.getWorld().getName())) {
+		        		if (p.hasPlayedBefore()) {
+		            		if (ConfigGTitle.getConfig().getBoolean("Title.Join.Enable")) {
+		            			if (!ConfigGTitle.getConfig().getBoolean("Title.Join.World.All_World")) {
+		            				if (MainClass.getWJoinTitle().contains(p.getWorld().getName())) {
+		    				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
+		    				        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
+		    				        	}
+		    				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.SubTitle.Enable")) {
+		    				        		TitleUtils.sendSubtitle(p, ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.SubTitle.Message"));
+		    				        	}
+		            				}
+		            			} else {
+		            				if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
+		    			        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
+		    			        	}
+		    			        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.SubTitle.Enable")) {
+		    			        		TitleUtils.sendSubtitle(p, ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.SubTitle.Message"));
+		    			        	}
+		            			}
+		            		}
+		        		} else {
+		        			if (ConfigGTitle.getConfig().getBoolean("Title.First-Join.Title.Enable")) {
+				        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.First-Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.First-Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.First-Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.First-Join.Title.Message"));
+				        	}
+				        	if (ConfigGTitle.getConfig().getBoolean("Title.First-Join.SubTitle.Enable")) {
+				        		TitleUtils.sendSubtitle(p, ConfigGTitle.getConfig().getInt("Title.First-Join.SubTitle.FadeIn"), ConfigGTitle.getConfig().getInt("Title.First-Join.SubTitle.Stay"), ConfigGTitle.getConfig().getInt("Title.First-Join.SubTitle.FadeOut"), ConfigGTitle.getConfig().getString("Title.First-Join.SubTitle.Message"));
+				        	}
+		        		}
+        			}
         		} else {
-        			if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.First-Join.Title.Enable")) {
-		        		TitleUtils.sendTitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.Title.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.Title.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.Title.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.First-Join.Title.Message"));
-		        	}
-		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.First-Join.SubTitle.Enable")) {
-		        		TitleUtils.sendSubtitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.SubTitle.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.SubTitle.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.First-Join.SubTitle.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.First-Join.SubTitle.Message"));
-		        	}
+        			if (p.hasPlayedBefore()) {
+	            		if (ConfigGTitle.getConfig().getBoolean("Title.Join.Enable")) {
+	            			if (!ConfigGTitle.getConfig().getBoolean("Title.Join.World.All_World")) {
+	            				if (MainClass.getWJoinTitle().contains(p.getWorld().getName())) {
+	    				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
+	    				        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
+	    				        	}
+	    				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.SubTitle.Enable")) {
+	    				        		TitleUtils.sendSubtitle(p, ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.SubTitle.Message"));
+	    				        	}
+	            				}
+	            			} else {
+	            				if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
+	    			        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
+	    			        	}
+	    			        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.SubTitle.Enable")) {
+	    			        		TitleUtils.sendSubtitle(p, ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.SubTitle.Message"));
+	    			        	}
+	            			}
+	            		}
+	        		} else {
+	        			if (ConfigGTitle.getConfig().getBoolean("Title.First-Join.Title.Enable")) {
+			        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.First-Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.First-Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.First-Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.First-Join.Title.Message"));
+			        	}
+			        	if (ConfigGTitle.getConfig().getBoolean("Title.First-Join.SubTitle.Enable")) {
+			        		TitleUtils.sendSubtitle(p, ConfigGTitle.getConfig().getInt("Title.First-Join.SubTitle.FadeIn"), ConfigGTitle.getConfig().getInt("Title.First-Join.SubTitle.Stay"), ConfigGTitle.getConfig().getInt("Title.First-Join.SubTitle.FadeOut"), ConfigGTitle.getConfig().getString("Title.First-Join.SubTitle.Message"));
+			        	}
+	        		}
         		}
-	        	
         	} else {
-        		if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.Enable")) {
-		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.Title.Enable")) {
-		        		TitleUtils.sendTitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.Title.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Join.Title.Message"));
-		        	}
-		        	if (ConfigGlobal.getConfig().getBoolean("On-Join.Spawn.Title.Join.SubTitle.Enable")) {
-		        		TitleUtils.sendSubtitle(p, ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.FadeIn"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.Stay"), ConfigGlobal.getConfig().getInt("On-Join.Spawn.Title.Join.SubTitle.FadeOut"), ConfigGlobal.getConfig().getString("On-Join.Spawn.Title.Join.SubTitle.Message"));
-		        	}
+        		if (ConfigGTitle.getConfig().getBoolean("Title.Join.Enable")) {
+        			if (!ConfigGTitle.getConfig().getBoolean("Title.Join.World.All_World")) {
+        				if (MainClass.getWJoinTitle().contains(p.getWorld().getName())) {
+				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
+				        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
+				        	}
+				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.SubTitle.Enable")) {
+				        		TitleUtils.sendSubtitle(p, ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.SubTitle.Message"));
+				        	}
+        				}
+        			} else {
+        				if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
+			        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
+			        	}
+			        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.SubTitle.Enable")) {
+			        		TitleUtils.sendSubtitle(p, ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.SubTitle.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.SubTitle.Message"));
+			        	}
+        			}
         		}
         	}
-        	
         }
     }
-
 }
