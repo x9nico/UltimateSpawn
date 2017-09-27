@@ -57,12 +57,35 @@ public class ConfigGPlayerItems {
             
             Config.set("Server.Items.Drop.Disable", Boolean.valueOf(true));
             Config.set("Server.Items.Drop.Bypass", Boolean.valueOf(true));
+            Config.set("Server.Items.Drop.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Items.Drop.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            
             Config.set("Server.Items.PickUp.Disable", Boolean.valueOf(true));
             Config.set("Server.Items.PickUp.Bypass", Boolean.valueOf(true));
+            Config.set("Server.Items.PickUp.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Items.PickUp.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            
             Config.set("Server.Items.Damage-Item.Disable", Boolean.valueOf(true));
             Config.set("Server.Items.Damage-Item.Bypass", Boolean.valueOf(true));
+            Config.set("Server.Items.Damage-Item.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Items.Damage-Item.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            
             Config.set("Server.Items.Clear-Drops-On-Death.Enable", Boolean.valueOf(true));
             Config.set("Server.Items.Clear-Drops-On-Death.Bypass", Boolean.valueOf(true));
+            Config.set("Server.Items.Clear-Drops-On-Death.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Items.Clear-Drops-On-Death.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
             
             saveConfigFile();
 
