@@ -17,7 +17,7 @@ public class ConfigGMessageQ {
     public static void loadConfig(Plugin plugin) {
         pl = plugin;
 
-        file = new File(pl.getDataFolder(), "Config/Global/OnQuit/Message-OnJoin.yml");
+        file = new File(pl.getDataFolder(), "Config/Global/OnQuit/Message-OnQuit.yml");
         Config = YamlConfiguration.loadConfiguration(file);
 
         if (!pl.getDataFolder().exists()) {
