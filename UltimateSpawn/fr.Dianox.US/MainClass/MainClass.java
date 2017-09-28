@@ -30,6 +30,7 @@ import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
+import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
@@ -44,6 +45,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 import fr.Dianox.US.MainClass.event.BasicFeatures;
+import fr.Dianox.US.MainClass.event.FunFeatures;
 import fr.Dianox.US.MainClass.event.OnChat;
 import fr.Dianox.US.MainClass.event.OnJoin;
 import fr.Dianox.US.MainClass.event.OnQuit;
@@ -84,9 +86,11 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static List<String> worlds_item_damageitem = new ArrayList<String>();
 	public static List<String> worlds_item_clearondrop = new ArrayList<String>();
 	public static List<String> worlds_item_move = new ArrayList<String>();
+	public static List<String> worlds_jumppads = new ArrayList<String>();
 	
 	short config_number = 13;
 	short config_number_commands = 1;
+	short config_number_fun = 1;
 	
 	public MainClass() {}
 	
@@ -94,7 +98,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4-Alpha");
+		System.out.println("| >>> Version 0.4.1-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -127,6 +131,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|                13/"+config_number+" loaded");
 		ConfigCGlobal.loadConfig((Plugin) this);
 		System.out.println("| (Commands) Config 1/"+config_number_commands+" loaded");
+		ConfigFJumpad.loadConfig((Plugin) this);
+		System.out.println("| (Fun)      Config 1/"+config_number_fun+" loaded");
 		ConfigGlobal.loadConfig((Plugin) this);
 		System.out.println("| Main config loaded");
 		ConfigMessage.loadConfig((Plugin) this);
@@ -157,6 +163,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		pm.registerEvents(new OnJoin(), this);
 		pm.registerEvents(new OnQuit(), this);
 		pm.registerEvents(new OnChat(), this);
+		pm.registerEvents(new FunFeatures(), this);
 		System.out.println("| Events loaded");
 		
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
@@ -580,6 +587,20 @@ public class MainClass extends JavaPlugin implements Listener {
 	        }
         }
         
+        // FUN //
+        // Jump Pads
+        if (ConfigFJumpad.getConfig().getBoolean("JumpPads.Enable")) {
+	        if (!ConfigFJumpad.getConfig().getBoolean("JumpPads.World.All_World")) {
+	            for (String world : ConfigFJumpad.getConfig().getStringList("JumpPads.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in JumpPads.yml, JumpPads.World: "+world);
+	            	} else {
+	            		worlds_jumppads.add(world);
+	            	}
+	            }
+	        }
+        }
+        
 		System.out.println("| And many things.... I think... x'D");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn loaded!");
@@ -721,6 +742,10 @@ public class MainClass extends JavaPlugin implements Listener {
 	
 	public static List<String> getWMoveItem() {
 		return worlds_item_move;
+	}
+	
+	public static List<String> getWJumpPads() {
+		return worlds_jumppads;
 	}
 	
 	@EventHandler
