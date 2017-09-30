@@ -49,10 +49,11 @@ public class MainCommand implements CommandExecutor {
                     sender.sendMessage(" §8>> §7/spawn - §cGo to spawn (You can't)");
                     sender.sendMessage(" §8>> §7/us reload - §eReload the plugin");
                     sender.sendMessage(" §8>> §7/cc - §bHelp of clearchat");
-                    sender.sendMessage(" §8>> §7/bc - §eBroadcast ");
-                    sender.sendMessage(" §8>> §7/ping - §ePing ");
-                    sender.sendMessage(" §8>> §7/gmute - §eMute chat ");
-                    sender.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat ");
+                    sender.sendMessage(" §8>> §7/bc - §eBroadcast");
+                    sender.sendMessage(" §8>> §7/ping - §ePing");
+                    sender.sendMessage(" §8>> §7/gmute - §eMute chat");
+                    sender.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat");
+                    sender.sendMessage(" §8>> §7/fly [player] - §eEnable or disable the fly §6for a player");
                     sender.sendMessage("");
                     sender.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
                 } else if (args[0].equalsIgnoreCase("reload")) {
@@ -94,10 +95,11 @@ public class MainCommand implements CommandExecutor {
                 p.sendMessage(" §8>> §7/spawn - §eGo to spawn");
                 p.sendMessage(" §8>> §7/us reload - §eReload the plugin");
                 p.sendMessage(" §8>> §7/cc - §bHelp of clearchat");
-                p.sendMessage(" §8>> §7/bc - §eBroadcast ");
-                p.sendMessage(" §8>> §7/ping - §ePing ");
-                p.sendMessage(" §8>> §7/gmute - §eMute chat ");
-                p.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat ");
+                p.sendMessage(" §8>> §7/bc - §eBroadcast");
+                p.sendMessage(" §8>> §7/ping - §ePing");
+                p.sendMessage(" §8>> §7/gmute - §eMute chat");
+                p.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat");
+                p.sendMessage(" §8>> §7/fly [player] - §eEnable or disable the fly");
                 p.sendMessage("");
                 p.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
             } else if (args[0].equalsIgnoreCase("reload")) {
