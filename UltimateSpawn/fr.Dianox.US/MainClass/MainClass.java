@@ -4,14 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,7 +16,7 @@ import fr.Dianox.US.MainClass.Commands.SpawnCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.ClearChatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.MuteChatCommand;
-import fr.Dianox.US.MainClass.Utils.OtherUtils;
+import fr.Dianox.US.MainClass.Commands.Other.FlyCommand;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
@@ -154,6 +147,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCommand("bc").setExecutor(new AnnounceCommand());
 		getCommand("GlobalMute").setExecutor(new MuteChatCommand());
 		getCommand("DelayChat").setExecutor(new DelaychatCommand());
+		getCommand("fly").setExecutor(new FlyCommand());
 		System.out.println("| Commands loaded");
 		
 		System.out.println("|");
@@ -748,78 +742,4 @@ public class MainClass extends JavaPlugin implements Listener {
 		return worlds_jumppads;
 	}
 	
-	@EventHandler
-	public void OnJoinFirework(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
-		
-        if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Enable")) {
-        	if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.World.All_World")) {
-        		if (MainClass.getWFirework().contains(p.getWorld().getName())) {
-		        	for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
-		        		ArrayList<Color> colors = new ArrayList<Color>();
-		        		ArrayList<Color> fade = new ArrayList<Color>();
-		        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
-		        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
-		        		for (String l1 : lore) {
-		        			colors.add(OtherUtils.getColor(l1));
-		        	    }
-		        		for (String l2 : lore2) {
-		        			fade.add(OtherUtils.getColor(l2));
-		        		}
-		                final Firework f = (Firework)e.getPlayer().getWorld().spawn(e.getPlayer().getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
-		                
-		                FireworkMeta fm = f.getFireworkMeta();
-		                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
-		                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
-		                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
-		                		.build());
-		                
-		                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
-		                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
-		                }
-		                f.setFireworkMeta(fm);
-		                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
-		                	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
-		                      public void run() {
-		                        f.detonate();
-		                      }
-		                    }, 5L);
-		                }
-		        	}
-        		}
-        	} else {
-        		for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
-	        		ArrayList<Color> colors = new ArrayList<Color>();
-	        		ArrayList<Color> fade = new ArrayList<Color>();
-	        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
-	        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
-	        		for (String l1 : lore) {
-	        			colors.add(OtherUtils.getColor(l1));
-	        	    }
-	        		for (String l2 : lore2) {
-	        			fade.add(OtherUtils.getColor(l2));
-	        		}
-	                final Firework f = (Firework)e.getPlayer().getWorld().spawn(e.getPlayer().getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
-	                
-	                FireworkMeta fm = f.getFireworkMeta();
-	                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
-	                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
-	                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
-	                		.build());
-	                
-	                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
-	                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
-	                }
-	                f.setFireworkMeta(fm);
-	                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
-	                	Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
-	                      public void run() {
-	                        f.detonate();
-	                      }
-	                    }, 5L);
-	                }
-	        	}
-        	}
-        }
-	}
 }
