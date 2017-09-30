@@ -97,6 +97,10 @@ public class ConfigCGlobal {
             Config.set("Command.DelayChat.Delay.Delay_By_Default", Integer.valueOf(3));
             Config.set("Command.DelayChat.Delay.Bypass", Boolean.valueOf(true));
             Config.set("Command.DelayChat.Disable-Message", Boolean.valueOf(true));
+            Config.set("Command.Fly.Self.Enable", Boolean.valueOf(true));
+            Config.set("Command.Fly.Self.Disable-Message", Boolean.valueOf(true));
+            Config.set("Command.Fly.Other.Enable", Boolean.valueOf(true));
+            Config.set("Command.Fly.Other.Disable-Message", Boolean.valueOf(true));
             
             saveConfigFile();
 
