@@ -91,7 +91,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4.1-Alpha");
+		System.out.println("| >>> Version 0.4.2-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
