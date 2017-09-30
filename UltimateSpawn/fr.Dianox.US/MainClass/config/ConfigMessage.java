@@ -78,6 +78,11 @@ public class ConfigMessage {
             Config.set("Admin.DelayChat.Set", "&cDelay set to &e%DELAY%. &7&oDon't forget to edit this value in the config. Yes this command is only valid if the server does not shut down");
             Config.set("Admin.MuteChat.Off", "&cGlobal mute has been disabled by %player%!");
             
+            Config.set("Others.Fly.Self.Enable", "&aYour fly has been enabled");
+            Config.set("Others.Fly.Self.Disable", "&cYour fly has been disabled");
+            Config.set("Others.Fly.Other.Enable", "&a%target%'s fly has been enabled");
+            Config.set("Others.Fly.Other.Disable", "&c%target%'s fly has been disabled");
+            
             Config.set("Error.Only-Player", "&cSorry, only players can use this command !");
             Config.set("Error.No-permission", "&cSorry, you don't have the permission !");
             Config.set("Error.Spawn-not-set", "&cSorry, the spawn isn't set");
