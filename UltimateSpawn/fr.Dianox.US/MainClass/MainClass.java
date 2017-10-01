@@ -23,6 +23,7 @@ import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
+import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
@@ -40,6 +41,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 import fr.Dianox.US.MainClass.event.BasicFeatures;
 import fr.Dianox.US.MainClass.event.FunFeatures;
+import fr.Dianox.US.MainClass.event.LittlesEvent;
 import fr.Dianox.US.MainClass.event.OnChat;
 import fr.Dianox.US.MainClass.event.OnJoin;
 import fr.Dianox.US.MainClass.event.OnQuit;
@@ -82,11 +84,14 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static List<String> worlds_item_move = new ArrayList<String>();
 	public static List<String> worlds_jumppads = new ArrayList<String>();
 	public static List<String> worlds_voidTP = new ArrayList<String>();
+	public static List<String> worlds_ColorSign = new ArrayList<String>();
+	public static List<String> worlds_LeaveDecay = new ArrayList<String>();
+	public static List<String> worlds_LightningStrike = new ArrayList<String>();
 	
 	short config_number = 13;
 	short config_number_commands = 1;
 	short config_number_fun = 1;
-	short config_number_event = 1;
+	short config_number_event = 2;
 	
 	public MainClass() {}
 	
@@ -94,7 +99,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4.3-Alpha");
+		System.out.println("| >>> Version 0.4.4-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -131,6 +136,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("| (Fun)      Config 1/"+config_number_fun+" loaded");
 		ConfigEVoidTP.loadConfig((Plugin) this);
 		System.out.println("| (Event)    Config 1/"+config_number_event+" loaded");
+		ConfigEColorSign.loadConfig((Plugin) this);
+		System.out.println("|            Config 2/"+config_number_event+" loaded");
 		ConfigGlobal.loadConfig((Plugin) this);
 		System.out.println("| Main config loaded");
 		ConfigMessage.loadConfig((Plugin) this);
@@ -163,6 +170,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		pm.registerEvents(new OnQuit(), this);
 		pm.registerEvents(new OnChat(), this);
 		pm.registerEvents(new FunFeatures(), this);
+		pm.registerEvents(new LittlesEvent(), this);
 		System.out.println("| Events loaded");
 		
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
@@ -256,6 +264,30 @@ public class MainClass extends JavaPlugin implements Listener {
 	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Spawning-Monster-Animals.World: "+worldSMA);
 	            	} else {
 	            		worlds_spawning_mob_animals.add(worldSMA);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Leave-Decay.Disable")) {
+	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Leave-Decay.World.All_World")) {
+	            for (String worldSMA : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Leave-Decay.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldSMA) == null) {
+	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Leave-Decay.World: "+worldSMA);
+	            	} else {
+	            		worlds_LeaveDecay.add(worldSMA);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.LightningStrike.Disable")) {
+	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.LightningStrike.World.All_World")) {
+	            for (String worldSMA : ConfigGServerEvent.getConfig().getStringList("Server.Disable.LightningStrike.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldSMA) == null) {
+	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.LightningStrike.World: "+worldSMA);
+	            	} else {
+	            		worlds_LightningStrike.add(worldSMA);
 	            	}
 	            }
 	        }
@@ -603,12 +635,25 @@ public class MainClass extends JavaPlugin implements Listener {
         // EVENT //
         // VoidTP
         if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Enable")) {
-	        if (!ConfigFJumpad.getConfig().getBoolean("VoidTP.World.All_World")) {
+	        if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.World.All_World")) {
 	            for (String world : ConfigEVoidTP.getConfig().getStringList("VoidTP.World.Worlds")) {
 	            	if (Bukkit.getWorld(world) == null) {
 	            		System.out.println("| Invalid world in VoidTP.yml, VoidTP.World: "+world);
 	            	} else {
 	            		worlds_voidTP.add(world);
+	            	}
+	            }
+	        }
+        }
+        
+        // ColorSign
+        if (ConfigEColorSign.getConfig().getBoolean("ColorSign.Enable")) {
+	        if (!ConfigEColorSign.getConfig().getBoolean("ColorSign.World.All_World")) {
+	            for (String world : ConfigEColorSign.getConfig().getStringList("ColorSign.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in ColorSign.yml, ColorSign.World: "+world);
+	            	} else {
+	            		worlds_ColorSign.add(world);
 	            	}
 	            }
 	        }
@@ -765,4 +810,15 @@ public class MainClass extends JavaPlugin implements Listener {
 		return worlds_voidTP;
 	}
 	
+	public static List<String> getWColorSign() {
+		return worlds_ColorSign;
+	}
+	
+	public static List<String> getWLD() {
+		return worlds_LeaveDecay;
+	}
+	
+	public static List<String> getWLS() {
+		return worlds_LightningStrike;
+	}
 }
