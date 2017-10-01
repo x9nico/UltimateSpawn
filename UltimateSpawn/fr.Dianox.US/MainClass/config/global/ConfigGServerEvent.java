@@ -98,6 +98,18 @@ public class ConfigGServerEvent {
                     "world",
                     "world_nether"
                 }));
+            Config.set("Server.Disable.Leave-Decay.Disable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Leave-Decay.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Leave-Decay.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.LightningStrike.Disable", Boolean.valueOf(true));
+            Config.set("Server.Disable.LightningStrike.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.LightningStrike.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
             
             saveConfigFile();
 
