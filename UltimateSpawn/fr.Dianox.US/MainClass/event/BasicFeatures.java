@@ -1,5 +1,6 @@
 package fr.Dianox.US.MainClass.event;
 
+import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,13 +17,16 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
+import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
 import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
@@ -379,6 +383,46 @@ public class BasicFeatures implements Listener {
         		}
         	} else {
         		e.setCancelled(true);
+        	}
+        }
+    }
+    
+    // VoidTP
+    @EventHandler
+    public void onVoidTP(PlayerMoveEvent e) {
+    	Player p = e.getPlayer();
+    	Location loc = p.getLocation();
+    	Integer getYConfig = Integer.valueOf(ConfigEVoidTP.getConfig().getInt("VoidTP.Options.TP-y"));
+    	
+        if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Enable")) {
+        	if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.World.All_World")) {
+        		if (MainClass.getWVoidTP().contains(p.getWorld().getName())) {
+        			if(loc.getY() <= getYConfig) {
+        				SpawnUtils.teleportToVoidTP(p);
+        				if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Custom")) {
+        					if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Disable")) {
+        						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.VoidTP"), p);
+        					}
+        				} else {
+        					if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Disable")) {
+        						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn"), p);
+        					}
+        				}
+        			}
+        		}
+        	} else {
+        		if(loc.getY() <= getYConfig) {
+    				SpawnUtils.teleportToVoidTP(p);
+    				if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Custom")) {
+    					if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Disable")) {
+    						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.VoidTP"), p);
+    					}
+    				} else {
+    					if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Disable")) {
+    						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn"), p);
+    					}
+    				}
+    			}
         	}
         }
     }
