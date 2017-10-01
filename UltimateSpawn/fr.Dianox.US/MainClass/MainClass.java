@@ -23,6 +23,7 @@ import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
+import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
@@ -80,10 +81,12 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static List<String> worlds_item_clearondrop = new ArrayList<String>();
 	public static List<String> worlds_item_move = new ArrayList<String>();
 	public static List<String> worlds_jumppads = new ArrayList<String>();
+	public static List<String> worlds_voidTP = new ArrayList<String>();
 	
 	short config_number = 13;
 	short config_number_commands = 1;
 	short config_number_fun = 1;
+	short config_number_event = 1;
 	
 	public MainClass() {}
 	
@@ -91,7 +94,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4.2-Alpha");
+		System.out.println("| >>> Version 0.4.3-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -126,6 +129,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("| (Commands) Config 1/"+config_number_commands+" loaded");
 		ConfigFJumpad.loadConfig((Plugin) this);
 		System.out.println("| (Fun)      Config 1/"+config_number_fun+" loaded");
+		ConfigEVoidTP.loadConfig((Plugin) this);
+		System.out.println("| (Event)    Config 1/"+config_number_event+" loaded");
 		ConfigGlobal.loadConfig((Plugin) this);
 		System.out.println("| Main config loaded");
 		ConfigMessage.loadConfig((Plugin) this);
@@ -595,6 +600,20 @@ public class MainClass extends JavaPlugin implements Listener {
 	        }
         }
         
+        // EVENT //
+        // VoidTP
+        if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Enable")) {
+	        if (!ConfigFJumpad.getConfig().getBoolean("VoidTP.World.All_World")) {
+	            for (String world : ConfigEVoidTP.getConfig().getStringList("VoidTP.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in VoidTP.yml, VoidTP.World: "+world);
+	            	} else {
+	            		worlds_voidTP.add(world);
+	            	}
+	            }
+	        }
+        }
+        
 		System.out.println("| And many things.... I think... x'D");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn loaded!");
@@ -740,6 +759,10 @@ public class MainClass extends JavaPlugin implements Listener {
 	
 	public static List<String> getWJumpPads() {
 		return worlds_jumppads;
+	}
+	
+	public static List<String> getWVoidTP() {
+		return worlds_voidTP;
 	}
 	
 }
