@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -19,6 +20,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.weather.LightningStrikeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 import fr.Dianox.US.MainClass.MainClass;
@@ -379,6 +381,34 @@ public class BasicFeatures implements Listener {
         if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals.Enable")) {
         	if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals.World.All_World")) {
         		if (MainClass.getWSMA().contains(e.getEntity().getWorld().getName())) {
+        			e.setCancelled(true);
+        		}
+        	} else {
+        		e.setCancelled(true);
+        	}
+        }
+    }
+    
+    // Anti leave decay
+    @EventHandler
+    public void onLeaveDecay(LeavesDecayEvent e) {
+        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Leave-Decay.Disable")) {
+        	if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Leave-Decay.World.All_World")) {
+        		if (MainClass.getWLD().contains(e.getBlock().getWorld().getName())) {
+        			e.setCancelled(true);
+        		}
+        	} else {
+        		e.setCancelled(true);
+        	}
+        }
+    }
+    
+    // Anti lightning
+    @EventHandler
+    public void onLightNing(LightningStrikeEvent e) {
+        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.LightningStrike.Disable")) {
+        	if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.LightningStrike.World.All_World")) {
+        		if (MainClass.getWLS().contains(e.getLightning().getWorld().getName())) {
         			e.setCancelled(true);
         		}
         	} else {
