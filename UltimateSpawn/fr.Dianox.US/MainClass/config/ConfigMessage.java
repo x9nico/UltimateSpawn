@@ -62,6 +62,7 @@ public class ConfigMessage {
             Config.set("Player.Ping.Other", "&c%target% &7>> &e%ping%");
             Config.set("Player.Chat.Can_t_speak", "&cThe chat is disable");
             Config.set("Player.Chat.Delay", "&cChat is currently dealyed of %DELAY% seconds");
+            Config.set("Player.VoidTP", "&eNooooooooooooooooooooo.........");
             
             Config.set("Protection.Construct-Message.Place", "&cSorry, you can't place block here !");
             Config.set("Protection.Construct-Message.Break", "&cSorry, you can't break block here !");
