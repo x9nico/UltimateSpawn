@@ -73,6 +73,18 @@ public class ConfigGProtection {
                     "world",
                     "world_nether"
                 }));
+            Config.set("Protection.HagingBreakByEntity.Enable", Boolean.valueOf(true));
+            Config.set("Protection.HagingBreakByEntity.World.All_World", Boolean.valueOf(false));
+            Config.set("Protection.HagingBreakByEntity.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Protection.PlayerInteractEntity-ItemFrame.Enable", Boolean.valueOf(true));
+            Config.set("Protection.PlayerInteractEntity-ItemFrame.World.All_World", Boolean.valueOf(false));
+            Config.set("Protection.PlayerInteractEntity-ItemFrame.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
             
             saveConfigFile();
 
