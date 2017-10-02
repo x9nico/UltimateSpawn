@@ -53,7 +53,9 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static List<String> worlds_damage = new ArrayList<String>();
 	public static List<String> worlds_hunger = new ArrayList<String>();
 	public static List<String> worlds_weather = new ArrayList<String>();
+	public static List<String> worlds_ThunderChange = new ArrayList<String>();
 	public static List<String> worlds_burn_block = new ArrayList<String>();
+	public static List<String> worlds_firespread = new ArrayList<String>();
 	public static List<String> worlds_explosions = new ArrayList<String>();
 	public static List<String> worlds_death_message = new ArrayList<String>();
 	public static List<String> worlds_spawning_mob_animals = new ArrayList<String>();
@@ -87,6 +89,9 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static List<String> worlds_ColorSign = new ArrayList<String>();
 	public static List<String> worlds_LeaveDecay = new ArrayList<String>();
 	public static List<String> worlds_LightningStrike = new ArrayList<String>();
+	public static List<String> worlds_BlockFade = new ArrayList<String>();
+	public static List<String> worlds_HagingBreakByEntity = new ArrayList<String>();
+	public static List<String> worlds_PlayerInteractEntity_ItemFrame = new ArrayList<String>();
 	
 	short config_number = 13;
 	short config_number_commands = 1;
@@ -99,7 +104,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4.5-Alpha");
+		System.out.println("| >>> Version 0.4.6-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -221,6 +226,18 @@ public class MainClass extends JavaPlugin implements Listener {
 	        }
         }
         
+        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.ThunderChange.Enable")) {
+	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.ThunderChange.World.All_World")) {
+	            for (String worldWeather : ConfigGServerEvent.getConfig().getStringList("Server.Disable.ThunderChange.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldWeather) == null) {
+	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.ThunderChange.World: "+worldWeather);
+	            	} else {
+	            		worlds_ThunderChange.add(worldWeather);
+	            	}
+	            }
+	        }
+        }
+        
         if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Burn-block.Enable")) {
 	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Burn-block.World.All_World")) {
 	            for (String worldBurnblock : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Burn-block.World.Worlds")) {
@@ -228,6 +245,18 @@ public class MainClass extends JavaPlugin implements Listener {
 	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Burn-block.World: "+worldBurnblock);
 	            	} else {
 	            		worlds_burn_block.add(worldBurnblock);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.BlockIgnite-FireSpread.Enable")) {
+	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.BlockIgnite-FireSpread.World.All_World")) {
+	            for (String worldBurnblock : ConfigGServerEvent.getConfig().getStringList("Server.Disable.BlockIgnite-FireSpread.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldBurnblock) == null) {
+	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.BlockIgnite-FireSpread.World: "+worldBurnblock);
+	            	} else {
+	            		worlds_firespread.add(worldBurnblock);
 	            	}
 	            }
 	        }
@@ -293,6 +322,18 @@ public class MainClass extends JavaPlugin implements Listener {
 	        }
         }
         
+        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Block-Fade.Disable")) {
+	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Block-Fade.World.All_World")) {
+	            for (String worldSMA : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Block-Fade.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldSMA) == null) {
+	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Block-Fade.World: "+worldSMA);
+	            	} else {
+	            		worlds_BlockFade.add(worldSMA);
+	            	}
+	            }
+	        }
+        }
+        
         if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Enable")) {
 	        if (!ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.World.All_World")) {
 	            for (String world : ConfigGProtection.getConfig().getStringList("Protection.Construct.Place.World.Worlds")) {
@@ -312,6 +353,30 @@ public class MainClass extends JavaPlugin implements Listener {
 	            		System.out.println("| Invalid world in Server-Protection.yml, Protection.Construct.Break.World: "+world);
 	            	} else {
 	            		worlds_c_break.add(world);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGProtection.getConfig().getBoolean("Protection.HagingBreakByEntity.Enable")) {
+	        if (!ConfigGProtection.getConfig().getBoolean("Protection.HagingBreakByEntity.World.All_World")) {
+	            for (String world : ConfigGProtection.getConfig().getStringList("Protection.HagingBreakByEntity.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in Server-Protection.yml, Protection.HagingBreakByEntity.World: "+world);
+	            	} else {
+	            		worlds_HagingBreakByEntity.add(world);
+	            	}
+	            }
+	        }
+        }
+        
+        if (ConfigGProtection.getConfig().getBoolean("Protection.PlayerInteractEntity-ItemFrame.Enable")) {
+	        if (!ConfigGProtection.getConfig().getBoolean("Protection.PlayerInteractEntity-ItemFrame.World.All_World")) {
+	            for (String world : ConfigGProtection.getConfig().getStringList("Protection.PlayerInteractEntity-ItemFrame.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in Server-Protection.yml, Protection.PlayerInteractEntity-ItemFrame.World: "+world);
+	            	} else {
+	            		worlds_PlayerInteractEntity_ItemFrame.add(world);
 	            	}
 	            }
 	        }
@@ -822,5 +887,25 @@ public class MainClass extends JavaPlugin implements Listener {
 	
 	public static List<String> getWLS() {
 		return worlds_LightningStrike;
+	}
+	
+	public static List<String> getWBF() {
+		return worlds_BlockFade;
+	}
+	
+	public static List<String> getWHBBE() {
+		return worlds_HagingBreakByEntity;
+	}
+	
+	public static List<String> getWPIEIF() {
+		return worlds_PlayerInteractEntity_ItemFrame;
+	}
+	
+	public static List<String> getWTC() {
+		return worlds_ThunderChange;
+	}
+	
+	public static List<String> getWFS() {
+		return worlds_firespread;
 	}
 }
