@@ -74,8 +74,295 @@ public class BasicFeatures implements Listener {
 		    		if (ConfigGlobal.getConfig().getBoolean("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING")) {
 		    			e.setCancelled(true);
 		    		} else {
-		    			if (e.getEntity() instanceof Player) {
-		    				e.setCancelled(true);
+		    			if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Enable")) {
+		    				if (!(e.getEntity() instanceof Player)) {
+		    					if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.All")) {
+					    			e.setCancelled(true);
+		    					} else {
+			    					if (e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.BLOCK_EXPLOSION")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.CONTACT) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.CONTACT")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.CUSTOM) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.CUSTOM")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.DROWNING")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.ENTITY_ATTACK")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.ENTITY_EXPLOSION")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.FALL")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.FALLING_BLOCK")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.FIRE) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.FIRE")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.LAVA) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.LAVA")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.LIGHTNING")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.MAGIC) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.MAGIC")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.MELTING) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.MELTING")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.POISON) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.POISON")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.PROJECTILE")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.STARVATION")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.SUFFOCATION")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.SUICIDE) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.SUICIDE")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.THORNS")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.VOID")) {
+											e.setCancelled(true);
+										}
+									} else if (e.getCause() == EntityDamageEvent.DamageCause.WITHER) {
+										if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.WITHER")) {
+											e.setCancelled(true);
+										}
+									} else {
+										e.setCancelled(true);
+									}
+		    					}
+			    			}
+		    				if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Enable")) {
+		    					if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.All")) {
+			    					if (e.getEntity() instanceof Player) {
+					    				e.setCancelled(true);
+					    			}
+		    					} else {
+		    						if (e.getEntity() instanceof Player) {
+		    							if (e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.BLOCK_EXPLOSION")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.CONTACT) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.CONTACT")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.CUSTOM) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.CUSTOM")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.DROWNING")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.ENTITY_ATTACK")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.ENTITY_EXPLOSION")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FALL")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FALLING_BLOCK")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FIRE) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FIRE")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.LAVA) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.LAVA")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.LIGHTNING")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.MAGIC) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.MAGIC")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.MELTING) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.MELTING")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.POISON) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.POISON")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.PROJECTILE")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.STARVATION")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.SUFFOCATION")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.SUICIDE) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.SUICIDE")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.THORNS")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.VOID")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.WITHER) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.WITHER")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else {
+		    								e.setCancelled(true);
+		    							}
+		    						}
+		    					}
+		    				}
+		    			} else {
+		    				if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Enable")) {
+		    					if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.All")) {
+			    					if (e.getEntity() instanceof Player) {
+					    				e.setCancelled(true);
+					    			}
+		    					} else {
+		    						if (e.getEntity() instanceof Player) {
+		    							if (e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.BLOCK_EXPLOSION")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.CONTACT) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.CONTACT")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.CUSTOM) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.CUSTOM")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.DROWNING")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.ENTITY_ATTACK")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.ENTITY_EXPLOSION")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FALL")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FALLING_BLOCK")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FIRE) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FIRE")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.LAVA) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.LAVA")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.LIGHTNING")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.MAGIC) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.MAGIC")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.MELTING) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.MELTING")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.POISON) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.POISON")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.PROJECTILE")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.STARVATION")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.SUFFOCATION")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.SUICIDE) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.SUICIDE")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.THORNS")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.VOID")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else if (e.getCause() == EntityDamageEvent.DamageCause.WITHER) {
+		    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.WITHER")) {
+		    									e.setCancelled(true);
+		    								}
+		    							} else {
+		    								e.setCancelled(true);
+		    							}
+		    						}
+		    					}
+		    				}
 		    			}
 		    		}
 		    	}
@@ -83,8 +370,297 @@ public class BasicFeatures implements Listener {
 	    		if (ConfigGlobal.getConfig().getBoolean("Debug-in-case-of-problem.Disable.Damage-TO-EVERYTHING")) {
 	    			e.setCancelled(true);
 	    		} else {
-	    			if (e.getEntity() instanceof Player) {
-	    				e.setCancelled(true);
+	    			if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Enable")) {
+	    				if (!(e.getEntity() instanceof Player)) {
+	    					if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.All")) {
+		    					if (!(e.getEntity() instanceof Player)) {
+				    				e.setCancelled(true);
+				    			}
+	    					} else {
+		    					if (e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.BLOCK_EXPLOSION")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.CONTACT) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.CONTACT")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.CUSTOM) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.CUSTOM")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.DROWNING")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.ENTITY_ATTACK")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.ENTITY_EXPLOSION")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.FALL")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.FALLING_BLOCK")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.FIRE) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.FIRE")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.LAVA) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.LAVA")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.LIGHTNING")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.MAGIC) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.MAGIC")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.MELTING) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.MELTING")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.POISON) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.POISON")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.PROJECTILE")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.STARVATION")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.SUFFOCATION")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.SUICIDE) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.SUICIDE")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.THORNS")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.VOID")) {
+										e.setCancelled(true);
+									}
+								} else if (e.getCause() == EntityDamageEvent.DamageCause.WITHER) {
+									if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Options.WITHER")) {
+										e.setCancelled(true);
+									}
+								} else {
+									e.setCancelled(true);
+								}
+	    					}
+		    			}
+	    				if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Enable")) {
+	    					if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.All")) {
+		    					if (e.getEntity() instanceof Player) {
+				    				e.setCancelled(true);
+				    			}
+	    					} else {
+	    						if (e.getEntity() instanceof Player) {
+	    							if (e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.BLOCK_EXPLOSION")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.CONTACT) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.CONTACT")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.CUSTOM) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.CUSTOM")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.DROWNING")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.ENTITY_ATTACK")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.ENTITY_EXPLOSION")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FALL")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FALLING_BLOCK")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FIRE) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FIRE")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.LAVA) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.LAVA")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.LIGHTNING")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.MAGIC) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.MAGIC")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.MELTING) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.MELTING")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.POISON) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.POISON")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.PROJECTILE")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.STARVATION")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.SUFFOCATION")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.SUICIDE) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.SUICIDE")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.THORNS")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.VOID")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.WITHER) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.WITHER")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else {
+	    								e.setCancelled(true);
+	    							}
+	    						}
+	    					}
+	    				}
+	    			} else {
+	    				if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Enable")) {
+	    					if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.All")) {
+		    					if (e.getEntity() instanceof Player) {
+				    				e.setCancelled(true);
+				    			}
+	    					} else {
+	    						if (e.getEntity() instanceof Player) {
+	    							if (e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.BLOCK_EXPLOSION")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.CONTACT) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.CONTACT")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.CUSTOM) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.CUSTOM")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.DROWNING")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.ENTITY_ATTACK")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.ENTITY_EXPLOSION")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FALL")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FALLING_BLOCK")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.FIRE) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.FIRE")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.LAVA) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.LAVA")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.LIGHTNING")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.MAGIC) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.MAGIC")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.MELTING) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.MELTING")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.POISON) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.POISON")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.PROJECTILE")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.STARVATION")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.SUFFOCATION")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.SUICIDE) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.SUICIDE")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.THORNS")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.VOID")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else if (e.getCause() == EntityDamageEvent.DamageCause.WITHER) {
+	    								if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Player.Options.WITHER")) {
+	    									e.setCancelled(true);
+	    								}
+	    							} else {
+	    								e.setCancelled(true);
+	    							}
+	    						}
+	    					}
+	    				}
 	    			}
 	    		}
     		}
