@@ -67,7 +67,7 @@ public class ConfigMessage {
             Config.set("Protection.Construct-Message.Place", "&cSorry, you can't place block here !");
             Config.set("Protection.Construct-Message.Break", "&cSorry, you can't break block here !");
             
-            Config.set("Admin.Plugin-Reload", "&6US &7| &eConfig reloaded &7&oThis command has just reload config.yml, messages.yml and spawn.yml... This command is not fully supported by the plugin");
+            Config.set("Admin.Plugin-Reload", "&6US &7| &eConfig reloaded &7&oThis command is not fully supported by the plugin");
             Config.set("Admin.Spawn.Set", "&6US &7| &eSpawn &cset &e!");
             Config.set("Admin.ClearChat.Anonymously", "&cChat clear");
             Config.set("Admin.ClearChat.Own", "&cChat clear");
