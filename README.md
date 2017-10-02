@@ -1,9 +1,9 @@
 # UltimateSpawn
 A MineCraft plugin for lobby server
 
-Version: 1.8x-(1.9.x-1.10.x-1.11.x-1.12.x  not work very fine)
+Version: 1.8x-(1.9.x-1.10.x-1.11.x-1.12.x  not work very fine if you not config your config)
 
-# Version - 0.4.5-Alpha
+# Version - 0.4.6-Alpha
 
 # Terms and condition
 
@@ -30,6 +30,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 # These people share my plugin
 
-I didn't know my Japanese plugin could do that: p
-Thanks kanming for your help
+I didn't know my Japanese plugin could do that :p\
+Thanks kanming for your help\
 http://www.mcbbs.net/thread-728350-1-2.html
