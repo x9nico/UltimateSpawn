@@ -99,7 +99,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4.4-Alpha");
+		System.out.println("| >>> Version 0.4.5-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -664,6 +664,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("| Ultimate Spawn loaded!");
 		System.out.println("|");
 		System.out.println("|=============================");
+		System.out.println("|");
+		System.out.println("| If you see a lot of warning in loading the plugin... it's normal... Everything works without problems... Don't worry ^^");
 	}
 
 	public void onDisable() {
