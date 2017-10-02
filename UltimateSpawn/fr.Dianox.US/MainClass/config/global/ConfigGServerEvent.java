@@ -64,6 +64,7 @@ public class ConfigGServerEvent {
                 }));
             Config.set("Server.Disable.Damage.Enable", Boolean.valueOf(true));
             Config.set("Server.Disable.Damage.Options.Entity.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Damage.Options.Entity.EntityDamageByEntity", Boolean.valueOf(true));
             Config.set("Server.Disable.Damage.Options.Entity.All", Boolean.valueOf(true));
             Config.set("Server.Disable.Damage.Options.Entity.Options.BLOCK_EXPLOSION", Boolean.valueOf(true));
             Config.set("Server.Disable.Damage.Options.Entity.Options.CONTACT", Boolean.valueOf(true));
@@ -124,9 +125,21 @@ public class ConfigGServerEvent {
                     "world",
                     "world_nether"
                 }));
+            Config.set("Server.Disable.ThunderChange.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.ThunderChange.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.ThunderChange.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
             Config.set("Server.Disable.Burn-block.Enable", Boolean.valueOf(true));
             Config.set("Server.Disable.Burn-block.World.All_World", Boolean.valueOf(false));
             Config.set("Server.Disable.Burn-block.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.BlockIgnite-FireSpread.Enable", Boolean.valueOf(true));
+            Config.set("Server.Disable.BlockIgnite-FireSpread.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.BlockIgnite-FireSpread.World.Worlds", java.util.Arrays.asList(new String[] {
                     "world",
                     "world_nether"
                 }));
@@ -157,6 +170,12 @@ public class ConfigGServerEvent {
             Config.set("Server.Disable.LightningStrike.Disable", Boolean.valueOf(true));
             Config.set("Server.Disable.LightningStrike.World.All_World", Boolean.valueOf(false));
             Config.set("Server.Disable.LightningStrike.World.Worlds", java.util.Arrays.asList(new String[] {
+                    "world",
+                    "world_nether"
+                }));
+            Config.set("Server.Disable.Block-Fade.Disable", Boolean.valueOf(true));
+            Config.set("Server.Disable.Block-Fade.World.All_World", Boolean.valueOf(false));
+            Config.set("Server.Disable.Block-Fade.World.Worlds", java.util.Arrays.asList(new String[] {
                     "world",
                     "world_nether"
                 }));
