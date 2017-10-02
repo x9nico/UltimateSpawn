@@ -2,25 +2,33 @@ package fr.Dianox.US.MainClass.event;
 
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
+import org.bukkit.event.block.BlockFadeEvent;
+import org.bukkit.event.block.BlockIgniteEvent;
+import org.bukkit.event.block.BlockIgniteEvent.IgniteCause;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.weather.LightningStrikeEvent;
+import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 import fr.Dianox.US.MainClass.MainClass;
@@ -680,6 +688,20 @@ public class BasicFeatures implements Listener {
     		}
         }
     }
+    
+    //Disable Thunder
+    @EventHandler
+    public void Thunder(ThunderChangeEvent e) {
+    	if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.ThunderChange.Enable")) {
+    		if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.ThunderChange.World.All_World")) {
+    			if (MainClass.getWTC().contains(e.getWorld().getName())) {
+    				e.setCancelled(true);
+    			}
+    		} else {
+    			e.setCancelled(true);
+    		}
+        }
+    }
 
     // Disable construct
     @EventHandler
@@ -759,6 +781,37 @@ public class BasicFeatures implements Listener {
         	}
         }
     }
+    
+    @EventHandler
+    public void onHanging(HangingBreakByEntityEvent e) {
+    	if (ConfigGProtection.getConfig().getBoolean("Protection.HagingBreakByEntity.Enable")) {
+    		if (!ConfigGProtection.getConfig().getBoolean("Protection.HagingBreakByEntity.World.All_World")) {
+    			if (MainClass.getWHBBE().contains(e.getEntity().getWorld().getName())) {
+    				e.setCancelled(true);
+    			}
+    		} else {
+    			e.setCancelled(true);
+    		}
+        }
+    }
+    
+    @EventHandler
+    public void onplayerinteract(PlayerInteractEntityEvent e) {
+    	Player p = e.getPlayer();
+    	if (ConfigGProtection.getConfig().getBoolean("Protection.PlayerInteractEntity-ItemFrame.Enable")) {
+    		if (!ConfigGProtection.getConfig().getBoolean("Protection.PlayerInteractEntity-ItemFrame.World.All_World")) {
+    			if (MainClass.getWPIEIF().contains(p.getWorld().getName())) {
+    				if ((e.getRightClicked() instanceof ItemFrame)) {
+    			        e.setCancelled(true);
+    				}
+    			}
+    		} else {
+    			if ((e.getRightClicked() instanceof ItemFrame)) {
+    		        e.setCancelled(true);
+    			}
+    		}
+        }
+    }
 
     // Block Burn
     @EventHandler
@@ -770,6 +823,23 @@ public class BasicFeatures implements Listener {
     			}
     		} else {
     			e.setCancelled(true);
+    		}
+        }
+    }
+
+    @EventHandler
+    public void FireSpread(BlockIgniteEvent e) {
+    	if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.BlockIgnite-FireSpread.Enable")) {
+    		if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.BlockIgnite-FireSpread.World.All_World")) {
+    			if (MainClass.getWFS().contains(e.getBlock().getWorld().getName())) {
+    				if (e.getCause() == IgniteCause.SPREAD) {
+    					e.setCancelled(true);
+    				}
+    			}
+    		} else {
+    			if (e.getCause() == IgniteCause.SPREAD) {
+					e.setCancelled(true);
+				}
     		}
         }
     }
@@ -991,6 +1061,44 @@ public class BasicFeatures implements Listener {
         		e.setCancelled(true);
         	}
         }
+    }
+    
+    // BLock Fade
+    @EventHandler
+    public void onBlockFade(BlockFadeEvent e) {
+        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Block-Fade.Disable")) {
+        	if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Block-Fade.World.All_World")) {
+        		if (MainClass.getWBF().contains(e.getBlock().getWorld().getName())) {
+        			e.setCancelled(true);
+        		}
+        	} else {
+        		e.setCancelled(true);
+        	}
+        }
+    }
+    
+    // BLock Fade
+    @EventHandler
+    public void onEntityDamage(EntityDamageByEntityEvent e) {
+    	if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Enable")) {
+    		if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.Enable")) {
+		        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Options.Entity.EntityDamageByEntity")) {
+		        	if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.World.All_World")) {
+		        		if (MainClass.getWD().contains(e.getEntity().getWorld().getName())) {
+		        			e.setCancelled(true);
+		        			if (e.getEntity() instanceof ItemFrame) {
+		        			      e.setCancelled(true);
+		        			}
+		        		}
+		        	} else {
+		        		e.setCancelled(true);
+		        		if (e.getEntity() instanceof ItemFrame) {
+	        			      e.setCancelled(true);
+	        			}
+		        	}
+		        }
+    		}
+    	}
     }
     
     // VoidTP
