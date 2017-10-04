@@ -58,6 +58,7 @@ public class ConfigGSpawn {
             Config.set("Spawn.Teleport.Enable", Boolean.valueOf(true));
             Config.set("Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location", Boolean.valueOf(false));
             Config.set("Spawn.Teleport.On-First-Join", Boolean.valueOf(true));
+            Config.set("Spawn.Teleport.On-First-Join-Custom-Spawn", Boolean.valueOf(true));
             
             saveConfigFile();
 
