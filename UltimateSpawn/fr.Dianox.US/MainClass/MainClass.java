@@ -104,7 +104,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4.6-Alpha");
+		System.out.println("| >>> Version 0.4.7-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -180,7 +180,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             Bukkit.getPluginManager().registerEvents(this, this);
-        	System.out.println("|");
+            System.out.println("|");
         	System.out.println("| PlaceHolderApi detected");
         	System.out.println("|");
         } else {
@@ -189,7 +189,7 @@ public class MainClass extends JavaPlugin implements Listener {
         	System.out.println("| USE PLACEHOLDERAPI IS VERY VERY HIGHLY RECOMMENDED");
         	System.out.println("|");
         }
-		
+        
         if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Hunger.Enable")) {
 	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Hunger.World.All_World")) {
 	            for (String worldHunger : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Hunger.World.Worlds")) {
@@ -733,10 +733,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("| If you see a lot of warning in loading the plugin... it's normal... Everything works without problems... Don't worry ^^");
 	}
 
-	public void onDisable() {
-		
-	}
-		
+	public void onDisable() {}
+	
 	public static MainClass getInstance() {
 		return instance;
 	}
