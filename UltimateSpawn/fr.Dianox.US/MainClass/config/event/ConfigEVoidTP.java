@@ -60,12 +60,6 @@ public class ConfigEVoidTP {
             Config.set("VoidTP.Options.Message.Custom", Boolean.valueOf(true));
             Config.set("VoidTP.Options.Message.Disable", Boolean.valueOf(false));
             Config.set("VoidTP.Options.Custom-Spawn", Boolean.valueOf(false));
-            Config.set("VoidTP.Options.Spawn.world", null);
-            Config.set("VoidTP.Options.Spawn.x", null);
-            Config.set("VoidTP.Options.Spawn.y", null);
-            Config.set("VoidTP.Options.Spawn.z", null);
-            Config.set("VoidTP.Options.Spawn.yaw", null);
-            Config.set("VoidTP.Options.Spawn.pitch", null);
             Config.set("VoidTP.World.All_World", Boolean.valueOf(false));
             Config.set("VoidTP.World.Worlds", java.util.Arrays.asList(new String[] {
                     "world",
