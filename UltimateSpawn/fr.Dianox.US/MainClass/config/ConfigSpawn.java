@@ -62,6 +62,18 @@ public class ConfigSpawn {
             Config.set("spawn.z", null);
             Config.set("spawn.yaw", null);
             Config.set("spawn.pitch", null);
+            Config.set("FirstSpawn.Spawn.world", null);
+            Config.set("FirstSpawn.Spawn.x", null);
+            Config.set("FirstSpawn.Spawn.y", null);
+            Config.set("FirstSpawn.Spawn.z", null);
+            Config.set("FirstSpawn.Spawn.yaw", null);
+            Config.set("FirstSpawn.Spawn.pitch", null);
+            Config.set("VoidTP.Spawn.world", null);
+            Config.set("VoidTP.Spawn.x", null);
+            Config.set("VoidTP.Spawn.y", null);
+            Config.set("VoidTP.Spawn.z", null);
+            Config.set("VoidTP.Spawn.yaw", null);
+            Config.set("VoidTP.Spawn.pitch", null);
 
             saveConfigFile();
 
