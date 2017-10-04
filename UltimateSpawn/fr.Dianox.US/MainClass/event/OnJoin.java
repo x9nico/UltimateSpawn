@@ -72,6 +72,9 @@ public class OnJoin implements Listener {
 	        if (!ConfigPlayerStats.getConfig().contains(String.valueOf(pU))) {
 	        	ConfigPlayerStats.getConfig().set(pU+".Player", String.valueOf(p));
 	        	ConfigPlayerStats.getConfig().set(pU+".IP", String.valueOf(e.getPlayer().getAddress()));
+	        	if (!p.hasPlayedBefore()) {
+	        		ConfigPlayerStats.getConfig().set(pU+".Date.First_Login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
+	        	}
 	        	ConfigPlayerStats.getConfig().set(pU+".Date.Last_login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
 	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.World", l.getWorld().getName());
 	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.x", Double.valueOf(l.getX()));
@@ -178,7 +181,6 @@ public class OnJoin implements Listener {
         	}
         }
 
-
         // Teleport spawn || broadcast new
         if (p.hasPlayedBefore()) {
             if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.Enable")) {
@@ -192,7 +194,11 @@ public class OnJoin implements Listener {
             }
         } else {
             if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.On-First-Join")) {
-                SpawnUtils.teleportToSpawn(p);
+            	if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.On-First-Join-Custom-Spawn")) {
+        			SpawnUtils.teleportToFirstSpawn(p);
+        		} else {
+        			SpawnUtils.teleportToSpawn(p);
+        		}
             }
             if (ConfigGMessage.getConfig().getBoolean("Broadcast.First-Join.Enable")) {
             	if (!ConfigGMessage.getConfig().getBoolean("Broadcast.First-Join.World.All_World")) {
