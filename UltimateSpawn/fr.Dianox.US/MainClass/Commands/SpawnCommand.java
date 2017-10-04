@@ -13,7 +13,6 @@ import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
-import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 
 public class SpawnCommand implements CommandExecutor {
 
@@ -38,20 +37,20 @@ public class SpawnCommand implements CommandExecutor {
 	                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
 	                    return true;
 	                }
-	
+	                
 	                Location l = p.getLocation();
-	
+	                
 	                ConfigSpawn.getConfig().set("spawn.world", l.getWorld().getName());
 	                ConfigSpawn.getConfig().set("spawn.x", Double.valueOf(l.getX()));
 	                ConfigSpawn.getConfig().set("spawn.y", Double.valueOf(l.getY()));
 	                ConfigSpawn.getConfig().set("spawn.z", Double.valueOf(l.getZ()));
 	                ConfigSpawn.getConfig().set("spawn.yaw", Float.valueOf(l.getYaw()));
 	                ConfigSpawn.getConfig().set("spawn.pitch", Float.valueOf(l.getPitch()));
-	
+	                
 	                ConfigSpawn.saveConfigFile();
-	
+	                
 	                p.getWorld().setSpawnLocation((int) l.getX(), (int) l.getY(), (int) l.getZ());
-	
+	                
 	                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Spawn.Set"), p);
 	            } else {
 	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
@@ -65,14 +64,38 @@ public class SpawnCommand implements CommandExecutor {
 	
 	                Location l = p.getLocation();
 	
-	                ConfigEVoidTP.getConfig().set("VoidTP.Options.Spawn.world", l.getWorld().getName());
-	                ConfigEVoidTP.getConfig().set("VoidTP.Options.Spawn.x", Double.valueOf(l.getX()));
-	                ConfigEVoidTP.getConfig().set("VoidTP.Options.Spawn.y", Double.valueOf(l.getY()));
-	                ConfigEVoidTP.getConfig().set("VoidTP.Options.Spawn.z", Double.valueOf(l.getZ()));
-	                ConfigEVoidTP.getConfig().set("VoidTP.Options.Spawn.yaw", Float.valueOf(l.getYaw()));
-	                ConfigEVoidTP.getConfig().set("VoidTP.Options.Spawn.pitch", Float.valueOf(l.getPitch()));
+	                ConfigSpawn.getConfig().set("VoidTP.Spawn.world", l.getWorld().getName());
+	                ConfigSpawn.getConfig().set("VoidTP.Spawn.x", Double.valueOf(l.getX()));
+	                ConfigSpawn.getConfig().set("VoidTP.Spawn.y", Double.valueOf(l.getY()));
+	                ConfigSpawn.getConfig().set("VoidTP.Spawn.z", Double.valueOf(l.getZ()));
+	                ConfigSpawn.getConfig().set("VoidTP.Spawn.yaw", Float.valueOf(l.getYaw()));
+	                ConfigSpawn.getConfig().set("VoidTP.Spawn.pitch", Float.valueOf(l.getPitch()));
 	
-	                ConfigEVoidTP.saveConfigFile();
+	                ConfigSpawn.saveConfigFile();
+	
+	                p.getWorld().setSpawnLocation((int) l.getX(), (int) l.getY(), (int) l.getZ());
+	
+	                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Spawn.Set"), p);
+	            } else {
+	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+	            }	
+        	} else if (args[0].equalsIgnoreCase("firstspawn")) {
+        		if (p.hasPermission("UltimateSpawn.SetSpawn")) {
+	                if (!(sender instanceof Player)) {
+	                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
+	                    return true;
+	                }
+	
+	                Location l = p.getLocation();
+	
+	                ConfigSpawn.getConfig().set("FirstSpawn.Spawn.world", l.getWorld().getName());
+	                ConfigSpawn.getConfig().set("FirstSpawn.Spawn.x", Double.valueOf(l.getX()));
+	                ConfigSpawn.getConfig().set("FirstSpawn.Spawn.y", Double.valueOf(l.getY()));
+	                ConfigSpawn.getConfig().set("FirstSpawn.Spawn.z", Double.valueOf(l.getZ()));
+	                ConfigSpawn.getConfig().set("FirstSpawn.Spawn.yaw", Float.valueOf(l.getYaw()));
+	                ConfigSpawn.getConfig().set("FirstSpawn.Spawn.pitch", Float.valueOf(l.getPitch()));
+	
+	                ConfigSpawn.saveConfigFile();
 	
 	                p.getWorld().setSpawnLocation((int) l.getX(), (int) l.getY(), (int) l.getZ());
 	
@@ -82,8 +105,8 @@ public class SpawnCommand implements CommandExecutor {
 	            }
         	} else {
         		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
-        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer("&cPlease... /setspawn voidTP", p);
-        	}
+        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer("&cPlease... /setspawn [voidTP|firstspawn]", p);
+        	} 
         } else if (label.equalsIgnoreCase("spawn") || label.equalsIgnoreCase("hub") || label.equalsIgnoreCase("lobby") || label.equalsIgnoreCase("h") || label.equalsIgnoreCase("l")) {
             if (args.length == 0) {
                 if (!(sender instanceof Player)) {
