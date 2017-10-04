@@ -101,11 +101,11 @@ public class SpawnUtils {
     	} else {
     		try {
 	            org.bukkit.World w = org.bukkit.Bukkit.getServer().getWorld(ConfigEVoidTP.getConfig().getString("VoidTP.Options.Spawn.world"));
-	            double x = ConfigEVoidTP.getConfig().getDouble("VoidTP.Options.Spawn.x");
-	            double y = ConfigEVoidTP.getConfig().getDouble("VoidTP.Options.Spawn.y");
-	            double z = ConfigEVoidTP.getConfig().getDouble("VoidTP.Options.Spawn.z");
-	            float yaw = ConfigEVoidTP.getConfig().getInt("VoidTP.Options.Spawn.yaw");
-	            float pitch = ConfigEVoidTP.getConfig().getInt("VoidTP.Options.Spawn.pitch");
+	            double x = ConfigSpawn.getConfig().getDouble("VoidTP.Spawn.x");
+	            double y = ConfigSpawn.getConfig().getDouble("VoidTP.Spawn.y");
+	            double z = ConfigSpawn.getConfig().getDouble("VoidTP.Spawn.z");
+	            float yaw = ConfigSpawn.getConfig().getInt("VoidTP.Spawn.yaw");
+	            float pitch = ConfigSpawn.getConfig().getInt("VoidTP.Spawn.pitch");
 	
 	            player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
 	        } catch (Exception e) {
@@ -114,6 +114,23 @@ public class SpawnUtils {
 	            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Spawn-not-set"), player);
 	        }
     	}
+    }
+    
+    public static void teleportToFirstSpawn(Player player) {
+        try {
+            org.bukkit.World w = org.bukkit.Bukkit.getServer().getWorld(ConfigSpawn.getConfig().getString("FirstSpawn.Spawn.world"));
+            double x = ConfigSpawn.getConfig().getDouble("FirstSpawn.Spawn.x");
+            double y = ConfigSpawn.getConfig().getDouble("FirstSpawn.Spawn.y");
+            double z = ConfigSpawn.getConfig().getDouble("FirstSpawn.Spawn.z");
+            float yaw = ConfigSpawn.getConfig().getInt("FirstSpawn.Spawn.yaw");
+            float pitch = ConfigSpawn.getConfig().getInt("FirstSpawn.Spawn.pitch");
+
+            player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
+        } catch (Exception e) {
+            org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
+
+            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Spawn-not-set"), player);
+        }
     }
 
 }
