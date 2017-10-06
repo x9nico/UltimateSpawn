@@ -1,6 +1,7 @@
 package fr.Dianox.US.MainClass.event;
 
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
@@ -1122,6 +1123,12 @@ public class BasicFeatures implements Listener {
         						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn"), p);
         					}
         				}
+        				if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Sounds.Enable")) {
+    						String sound = ConfigEVoidTP.getConfig().getString("VoidTP.Options.Sounds.Sound");
+    		            	int volume = ConfigEVoidTP.getConfig().getInt("VoidTP.Options.Sounds.Volume");
+    		            	int pitch = ConfigEVoidTP.getConfig().getInt("VoidTP.Options.Sounds.Pitch");
+    		            	p.playSound(p.getLocation(), Sound.valueOf(sound), volume, pitch);
+    					}
         			}
         		}
         	} else {
@@ -1136,6 +1143,12 @@ public class BasicFeatures implements Listener {
     						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn"), p);
     					}
     				}
+    				if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Sounds.Enable")) {
+						String sound = ConfigEVoidTP.getConfig().getString("VoidTP.Options.Sounds.Sound");
+		            	int volume = ConfigEVoidTP.getConfig().getInt("VoidTP.Options.Sounds.Volume");
+		            	int pitch = ConfigEVoidTP.getConfig().getInt("VoidTP.Options.Sounds.Pitch");
+		            	p.playSound(p.getLocation(), Sound.valueOf(sound), volume, pitch);
+					}
     			}
         	}
         }
