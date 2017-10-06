@@ -14,9 +14,12 @@ import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
+import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
+import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
+import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
@@ -80,6 +83,9 @@ public class MainCommand implements CommandExecutor {
                     ConfigPlayerOptions.reloadConfig();
                     ConfigEVoidTP.reloadConfig();
                     ConfigEColorSign.reloadConfig();
+                    ConfigCWEGM.reloadConfig();
+                    ConfigCWEKeepFly.reloadConfig();
+                    ConfigTemp.reloadConfig();
                     
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
                 }
@@ -129,6 +135,9 @@ public class MainCommand implements CommandExecutor {
                     ConfigPlayerOptions.reloadConfig();
                     ConfigEVoidTP.reloadConfig();
                     ConfigEColorSign.reloadConfig();
+                    ConfigCWEGM.reloadConfig();
+                    ConfigCWEKeepFly.reloadConfig();
+                    ConfigTemp.reloadConfig();
                     
                     if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
                     	ConfigGlobal.getConfig().set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
