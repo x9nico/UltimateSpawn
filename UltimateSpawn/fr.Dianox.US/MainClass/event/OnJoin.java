@@ -28,6 +28,7 @@ import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
+import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
@@ -571,6 +572,31 @@ public class OnJoin implements Listener {
         			}
         		}
         	}
+        }
+    
+        // Temporary
+        int GamemodeTemp1 = 0; 
+        if (p.getGameMode() == GameMode.SURVIVAL) {
+        	GamemodeTemp1 = 0;
+        } else if (p.getGameMode() == GameMode.CREATIVE) {
+        	GamemodeTemp1 = 1;
+        } else if (p.getGameMode() == GameMode.ADVENTURE) {
+        	GamemodeTemp1 = 2;
+        } else if (p.getGameMode() == GameMode.SPECTATOR) {
+        	GamemodeTemp1 = 3;
+        }
+        int GamemodeTemp2 = Integer.valueOf(GamemodeTemp1);
+        
+        if (!ConfigTemp.getConfig().contains(String.valueOf(pU))) {
+        	ConfigTemp.getConfig().set(pU+".Player", String.valueOf(p));
+        	ConfigTemp.getConfig().set(pU+".Options.Gamemode", Integer.valueOf(GamemodeTemp2));
+        	
+        	ConfigTemp.saveConfigFile();
+        } else if (ConfigTemp.getConfig().contains(String.valueOf(pU))) {
+        	ConfigTemp.getConfig().set(pU+".Player", String.valueOf(p));
+        	ConfigTemp.getConfig().set(pU+".Options.Gamemode", Integer.valueOf(GamemodeTemp2));
+        	
+        	ConfigTemp.saveConfigFile();
         }
     }
 }
