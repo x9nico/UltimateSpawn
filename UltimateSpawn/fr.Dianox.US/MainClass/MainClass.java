@@ -22,9 +22,12 @@ import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
+import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
+import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
+import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
@@ -40,6 +43,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 import fr.Dianox.US.MainClass.event.BasicFeatures;
+import fr.Dianox.US.MainClass.event.ChangeWorldEvent;
 import fr.Dianox.US.MainClass.event.FunFeatures;
 import fr.Dianox.US.MainClass.event.LittlesEvent;
 import fr.Dianox.US.MainClass.event.OnChat;
@@ -64,7 +68,9 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static List<String> worlds_XP_Exp = new ArrayList<String>();
 	public static List<String> worlds_XP_Lvl = new ArrayList<String>();
 	public static List<String> worlds_Fly = new ArrayList<String>();
+	public static List<String> worlds_Fly_KeepOnChangeWorld = new ArrayList<String>();
 	public static List<String> worlds_GM = new ArrayList<String>();
+	public static List<String> worlds_GM_OnChangeWorld = new ArrayList<String>();
 	public static List<String> worlds_Food = new ArrayList<String>();
 	public static List<String> worlds_Health = new ArrayList<String>();
 	public static List<String> worlds_firework = new ArrayList<String>();
@@ -93,10 +99,11 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static List<String> worlds_HagingBreakByEntity = new ArrayList<String>();
 	public static List<String> worlds_PlayerInteractEntity_ItemFrame = new ArrayList<String>();
 	
-	short config_number = 13;
+	short config_number = 15;
 	short config_number_commands = 1;
 	short config_number_fun = 1;
 	short config_number_event = 2;
+	short config_number_other = 1;
 	
 	public MainClass() {}
 	
@@ -104,7 +111,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|=============================");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4.7-Alpha");
+		System.out.println("| >>> Version 0.4.8-Alpha");
 		System.out.println("| ");
 		
 		instance = this;
@@ -135,6 +142,10 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("|                12/"+config_number+" loaded");
 		ConfigGProtection.loadConfig((Plugin) this);
 		System.out.println("|                13/"+config_number+" loaded");
+		ConfigCWEKeepFly.loadConfig((Plugin) this);
+		System.out.println("|                14/"+config_number+" loaded");
+		ConfigCWEGM.loadConfig((Plugin) this);
+		System.out.println("|                15/"+config_number+" loaded");
 		ConfigCGlobal.loadConfig((Plugin) this);
 		System.out.println("| (Commands) Config 1/"+config_number_commands+" loaded");
 		ConfigFJumpad.loadConfig((Plugin) this);
@@ -143,6 +154,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		System.out.println("| (Event)    Config 1/"+config_number_event+" loaded");
 		ConfigEColorSign.loadConfig((Plugin) this);
 		System.out.println("|            Config 2/"+config_number_event+" loaded");
+		ConfigTemp.loadConfig((Plugin) this);
+		System.out.println("| (Others)   Config 1/"+config_number_other+" loaded");
 		ConfigGlobal.loadConfig((Plugin) this);
 		System.out.println("| Main config loaded");
 		ConfigMessage.loadConfig((Plugin) this);
@@ -176,6 +189,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		pm.registerEvents(new OnChat(), this);
 		pm.registerEvents(new FunFeatures(), this);
 		pm.registerEvents(new LittlesEvent(), this);
+		pm.registerEvents(new ChangeWorldEvent(), this);
 		System.out.println("| Events loaded");
 		
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
@@ -724,6 +738,32 @@ public class MainClass extends JavaPlugin implements Listener {
 	        }
         }
         
+        // Keep Fly
+        if (ConfigCWEKeepFly.getConfig().getBoolean("KeepFly.Enable.Enable")) {
+	        if (!ConfigCWEKeepFly.getConfig().getBoolean("KeepFly.World.All_World")) {
+	            for (String world : ConfigCWEKeepFly.getConfig().getStringList("KeepFly.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in KeepFly.yml, KeepFly.World: "+world);
+	            	} else {
+	            		worlds_Fly_KeepOnChangeWorld.add(world);
+	            	}
+	            }
+	        }
+        }
+        
+        // Gamemode Change World
+        if (ConfigCWEGM.getConfig().getBoolean("GM.Enable")) {
+	        if (!ConfigCWEGM.getConfig().getBoolean("GM.World.All_World")) {
+	            for (String world : ConfigCWEGM.getConfig().getStringList("GM.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in GameMode.yml, GM.World: "+world);
+	            	} else {
+	            		worlds_GM_OnChangeWorld.add(world);
+	            	}
+	            }
+	        }
+        }
+        
 		System.out.println("| And many things.... I think... x'D");
 		System.out.println("|");
 		System.out.println("| Ultimate Spawn loaded!");
@@ -905,5 +945,13 @@ public class MainClass extends JavaPlugin implements Listener {
 	
 	public static List<String> getWFS() {
 		return worlds_firespread;
+	}
+	
+	public static List<String> getWFlyKeepOnChangeWorld() {
+		return worlds_Fly_KeepOnChangeWorld;
+	}
+	
+	public static List<String> getWGamemodeOnChangeWorld() {
+		return worlds_GM_OnChangeWorld;
 	}
 }
