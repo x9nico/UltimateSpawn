@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 
-import fr.Dianox.US.MainClass.MainClass;
+import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 
@@ -22,7 +22,7 @@ public class LittlesEvent implements Listener {
 		
 		if (ConfigEColorSign.getConfig().getBoolean("ColorSign.Enable")) {
 			if (!ConfigEColorSign.getConfig().getBoolean("ColorSign.World.All_World")) {
-				if (MainClass.getWColorSign().contains(p.getWorld().getName())) {
+				if (WorldUtils.getWColorSign().contains(p.getWorld().getName())) {
 					if (!p.hasPermission("UltimateSpawn.event.colorsign")) {
 						return;
 					}
