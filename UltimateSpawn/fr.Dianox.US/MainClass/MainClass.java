@@ -1,9 +1,7 @@
 package fr.Dianox.US.MainClass;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -17,6 +15,7 @@ import fr.Dianox.US.MainClass.Commands.Chat.ClearChatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.MuteChatCommand;
 import fr.Dianox.US.MainClass.Commands.Other.FlyCommand;
+import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
@@ -29,11 +28,13 @@ import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
+import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
 import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
+import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
@@ -54,120 +55,83 @@ public class MainClass extends JavaPlugin implements Listener {
 	
 	private static MainClass instance;
 	
-	public static List<String> worlds_damage = new ArrayList<String>();
-	public static List<String> worlds_hunger = new ArrayList<String>();
-	public static List<String> worlds_weather = new ArrayList<String>();
-	public static List<String> worlds_ThunderChange = new ArrayList<String>();
-	public static List<String> worlds_burn_block = new ArrayList<String>();
-	public static List<String> worlds_firespread = new ArrayList<String>();
-	public static List<String> worlds_explosions = new ArrayList<String>();
-	public static List<String> worlds_death_message = new ArrayList<String>();
-	public static List<String> worlds_spawning_mob_animals = new ArrayList<String>();
-	public static List<String> worlds_c_place = new ArrayList<String>();
-	public static List<String> worlds_c_break = new ArrayList<String>();
-	public static List<String> worlds_XP_Exp = new ArrayList<String>();
-	public static List<String> worlds_XP_Lvl = new ArrayList<String>();
-	public static List<String> worlds_Fly = new ArrayList<String>();
-	public static List<String> worlds_Fly_KeepOnChangeWorld = new ArrayList<String>();
-	public static List<String> worlds_GM = new ArrayList<String>();
-	public static List<String> worlds_GM_OnChangeWorld = new ArrayList<String>();
-	public static List<String> worlds_Food = new ArrayList<String>();
-	public static List<String> worlds_Health = new ArrayList<String>();
-	public static List<String> worlds_firework = new ArrayList<String>();
-	public static List<String> worlds_sounds_join = new ArrayList<String>();
-	public static List<String> worlds_force_selected_slot = new ArrayList<String>();
-	public static List<String> worlds_inventory = new ArrayList<String>();
-	public static List<String> worlds_first_join_title = new ArrayList<String>();
-	public static List<String> worlds_join_title = new ArrayList<String>();
-	public static List<String> worlds_message_join = new ArrayList<String>();
-	public static List<String> worlds_broadcast_message_join = new ArrayList<String>();
-	public static List<String> worlds_message_newjoin = new ArrayList<String>();
-	public static List<String> worlds_broadcast_message_newjoin = new ArrayList<String>();
-	public static List<String> worlds_clear_chat = new ArrayList<String>();
-	public static List<String> worlds_broadcast_quit = new ArrayList<String>();
-	public static List<String> worlds_item_drop = new ArrayList<String>();
-	public static List<String> worlds_item_pickup = new ArrayList<String>();
-	public static List<String> worlds_item_damageitem = new ArrayList<String>();
-	public static List<String> worlds_item_clearondrop = new ArrayList<String>();
-	public static List<String> worlds_item_move = new ArrayList<String>();
-	public static List<String> worlds_jumppads = new ArrayList<String>();
-	public static List<String> worlds_voidTP = new ArrayList<String>();
-	public static List<String> worlds_ColorSign = new ArrayList<String>();
-	public static List<String> worlds_LeaveDecay = new ArrayList<String>();
-	public static List<String> worlds_LightningStrike = new ArrayList<String>();
-	public static List<String> worlds_BlockFade = new ArrayList<String>();
-	public static List<String> worlds_HagingBreakByEntity = new ArrayList<String>();
-	public static List<String> worlds_PlayerInteractEntity_ItemFrame = new ArrayList<String>();
-	
-	short config_number = 15;
+	short config_number = 17;
 	short config_number_commands = 1;
 	short config_number_fun = 1;
 	short config_number_event = 2;
 	short config_number_other = 1;
+	short config_number_player = 2;
 	
 	public MainClass() {}
 	
+	@Override
 	public void onEnable() {
-		System.out.println("|=============================");
-		System.out.println("|");
-		System.out.println("| Ultimate Spawn load! Please wait!");
-		System.out.println("| >>> Version 0.4.8-Alpha");
-		System.out.println("| ");
+		getCSC("|=============================");
+		getCSC("|");
+		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5-Alpha");
+		getCSC("|");
+		
+		super.onEnable();
 		
 		instance = this;
 		
 		ConfigGXP.loadConfig((Plugin) this);
-		System.out.println("| (Global) Config 1/"+config_number+" loaded");
+		getCSC("| ("+ChatColor.GREEN+"Global"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGFly.loadConfig((Plugin) this);
-		System.out.println("|                 2/"+config_number+" loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGGM.loadConfig((Plugin) this);
-		System.out.println("|                 3/"+config_number+" loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 3"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGHF.loadConfig((Plugin) this);
-		System.out.println("|                 4/"+config_number+" loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 4"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGCos.loadConfig((Plugin) this);
-		System.out.println("|                 5/"+config_number+" loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 5"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGInventory.loadConfig((Plugin) this);
-		System.out.println("|                 6/"+config_number+" loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 6"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGTitle.loadConfig((Plugin) this);
-		System.out.println("|                 7/"+config_number+" loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 7"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGMessage.loadConfig((Plugin) this);
-		System.out.println("|                 8/"+config_number+" loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 8"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGSpawn.loadConfig((Plugin) this);
-		System.out.println("|                 9/"+config_number+" loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 9"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGMessageQ.loadConfig((Plugin) this);
-		System.out.println("|                10/"+config_number+" loaded");
+		getCSC("|         "+ChatColor.YELLOW+"Config 10"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGServerEvent.loadConfig((Plugin) this);
-		System.out.println("|                11/"+config_number+" loaded");
+		getCSC("|         "+ChatColor.YELLOW+"Config 11"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGPlayerItems.loadConfig((Plugin) this);
-		System.out.println("|                12/"+config_number+" loaded");
+		getCSC("|         "+ChatColor.YELLOW+"Config 12"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGProtection.loadConfig((Plugin) this);
-		System.out.println("|                13/"+config_number+" loaded");
+		getCSC("|         "+ChatColor.YELLOW+"Config 13"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCWEKeepFly.loadConfig((Plugin) this);
-		System.out.println("|                14/"+config_number+" loaded");
+		getCSC("|         "+ChatColor.YELLOW+"Config 14"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCWEGM.loadConfig((Plugin) this);
-		System.out.println("|                15/"+config_number+" loaded");
+		getCSC("|         "+ChatColor.YELLOW+"Config 15"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
+		ConfigGActionBar.loadConfig((Plugin) this);
+		getCSC("|         "+ChatColor.YELLOW+"Config 16"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
+		ConfigGJoinCommand.loadConfig((Plugin) this);
+		getCSC("|         "+ChatColor.YELLOW+"Config 17"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCGlobal.loadConfig((Plugin) this);
-		System.out.println("| (Commands) Config 1/"+config_number_commands+" loaded");
+		getCSC("| ("+ChatColor.GREEN+"Commands"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigFJumpad.loadConfig((Plugin) this);
-		System.out.println("| (Fun)      Config 1/"+config_number_fun+" loaded");
+		getCSC("| ("+ChatColor.GREEN+"Fun"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_fun+""+ChatColor.YELLOW+" loaded");
 		ConfigEVoidTP.loadConfig((Plugin) this);
-		System.out.println("| (Event)    Config 1/"+config_number_event+" loaded");
+		getCSC("| ("+ChatColor.GREEN+"Event"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_event+""+ChatColor.YELLOW+" loaded");
 		ConfigEColorSign.loadConfig((Plugin) this);
-		System.out.println("|            Config 2/"+config_number_event+" loaded");
+		getCSC("|         "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_event+""+ChatColor.YELLOW+" loaded");
 		ConfigTemp.loadConfig((Plugin) this);
-		System.out.println("| (Others)   Config 1/"+config_number_other+" loaded");
+		getCSC("| ("+ChatColor.GREEN+"Others"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_other+""+ChatColor.YELLOW+" loaded");
 		ConfigGlobal.loadConfig((Plugin) this);
-		System.out.println("| Main config loaded");
+		getCSC("| "+ChatColor.GOLD+"Main config loaded");
 		ConfigMessage.loadConfig((Plugin) this);
-		System.out.println("| Message config loaded");
+		getCSC("| "+ChatColor.GOLD+"Message config loaded");
 		ConfigSpawn.loadConfig((Plugin) this);
-		System.out.println("| Spawn config loaded");
+		getCSC("| "+ChatColor.GOLD+"Spawn config loaded");
 		ConfigPlayerOptions.loadConfig((Plugin) this);
-		System.out.println("| Player config 1/2 loaded");
+		getCSC("| ("+ChatColor.GREEN+"Player"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_player+""+ChatColor.YELLOW+" loaded");
 		ConfigPlayerStats.loadConfig((Plugin) this);
-		System.out.println("|               2/2 loaded");
+		getCSC("|          "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_player+""+ChatColor.YELLOW+" loaded");
 		
-		System.out.println("|");
+		getCSC("|");
 		
 		getCommand("ultimatespawn").setExecutor(new MainCommand());
 		getCommand("spawn").setExecutor(new SpawnCommand());
@@ -178,9 +142,9 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCommand("GlobalMute").setExecutor(new MuteChatCommand());
 		getCommand("DelayChat").setExecutor(new DelaychatCommand());
 		getCommand("fly").setExecutor(new FlyCommand());
-		System.out.println("| Commands loaded");
+		getCSC("| "+ChatColor.YELLOW+"Commands loaded");
 		
-		System.out.println("|");
+		getCSC("|");
 		
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new BasicFeatures(), this);
@@ -190,768 +154,122 @@ public class MainClass extends JavaPlugin implements Listener {
 		pm.registerEvents(new FunFeatures(), this);
 		pm.registerEvents(new LittlesEvent(), this);
 		pm.registerEvents(new ChangeWorldEvent(), this);
-		System.out.println("| Events loaded");
+		getCSC("| "+ChatColor.YELLOW+"Events loaded");
 		
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             Bukkit.getPluginManager().registerEvents(this, this);
-            System.out.println("|");
-        	System.out.println("| PlaceHolderApi detected");
-        	System.out.println("|");
+            getCSC("|");
+            getCSC("| "+ChatColor.YELLOW+"PlaceHolderApi detected");
+        	getCSC("|");
         } else {
         	ConfigGlobal.getConfig().set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
-        	System.out.println("|");
-        	System.out.println("| USE PLACEHOLDERAPI IS VERY VERY HIGHLY RECOMMENDED");
-        	System.out.println("|");
+        	getCSC("|");
+        	getCSC("| "+ChatColor.RED+"USE PLACEHOLDERAPI IS VERY VERY HIGHLY RECOMMENDED");
+        	getCSC("|");
         }
+
+        GetSetWorld();
         
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Hunger.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Hunger.World.All_World")) {
-	            for (String worldHunger : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Hunger.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldHunger) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Hunger.World: "+worldHunger);
-	            	} else {
-	            		worlds_hunger.add(worldHunger);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Damage.World.All_World")) {
-	            for (String worldDamage : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Damage.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldDamage) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Damage.World: "+worldDamage);
-	            	} else {
-	            		worlds_damage.add(worldDamage);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Weather.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Weather.World.All_World")) {
-	            for (String worldWeather : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Weather.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldWeather) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Weather.World: "+worldWeather);
-	            	} else {
-	            		worlds_weather.add(worldWeather);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.ThunderChange.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.ThunderChange.World.All_World")) {
-	            for (String worldWeather : ConfigGServerEvent.getConfig().getStringList("Server.Disable.ThunderChange.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldWeather) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.ThunderChange.World: "+worldWeather);
-	            	} else {
-	            		worlds_ThunderChange.add(worldWeather);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Burn-block.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Burn-block.World.All_World")) {
-	            for (String worldBurnblock : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Burn-block.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldBurnblock) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Burn-block.World: "+worldBurnblock);
-	            	} else {
-	            		worlds_burn_block.add(worldBurnblock);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.BlockIgnite-FireSpread.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.BlockIgnite-FireSpread.World.All_World")) {
-	            for (String worldBurnblock : ConfigGServerEvent.getConfig().getStringList("Server.Disable.BlockIgnite-FireSpread.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldBurnblock) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.BlockIgnite-FireSpread.World: "+worldBurnblock);
-	            	} else {
-	            		worlds_firespread.add(worldBurnblock);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Explosion.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Explosion.World.All_World")) {
-	            for (String worldExplosion : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Explosion.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldExplosion) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Explosion.World: "+worldExplosion);
-	            	} else {
-	            		worlds_explosions.add(worldExplosion);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Death-Message.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Death-Message.World.All_World")) {
-	            for (String worldDM : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Death-Message.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldDM) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Death-Message.World: "+worldDM);
-	            	} else {
-	            		worlds_death_message.add(worldDM);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals.Enable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Spawning-Monster-Animals.World.All_World")) {
-	            for (String worldSMA : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Spawning-Monster-Animals.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldSMA) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Spawning-Monster-Animals.World: "+worldSMA);
-	            	} else {
-	            		worlds_spawning_mob_animals.add(worldSMA);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Leave-Decay.Disable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Leave-Decay.World.All_World")) {
-	            for (String worldSMA : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Leave-Decay.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldSMA) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Leave-Decay.World: "+worldSMA);
-	            	} else {
-	            		worlds_LeaveDecay.add(worldSMA);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.LightningStrike.Disable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.LightningStrike.World.All_World")) {
-	            for (String worldSMA : ConfigGServerEvent.getConfig().getStringList("Server.Disable.LightningStrike.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldSMA) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.LightningStrike.World: "+worldSMA);
-	            	} else {
-	            		worlds_LightningStrike.add(worldSMA);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Block-Fade.Disable")) {
-	        if (!ConfigGServerEvent.getConfig().getBoolean("Server.Disable.Block-Fade.World.All_World")) {
-	            for (String worldSMA : ConfigGServerEvent.getConfig().getStringList("Server.Disable.Block-Fade.World.Worlds")) {
-	            	if (Bukkit.getWorld(worldSMA) == null) {
-	            		System.out.println("| Invalid world in Server-Event.yml, Server.Disable.Block-Fade.World: "+worldSMA);
-	            	} else {
-	            		worlds_BlockFade.add(worldSMA);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Enable")) {
-	        if (!ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.World.All_World")) {
-	            for (String world : ConfigGProtection.getConfig().getStringList("Protection.Construct.Place.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-Protection.yml, Protection.Construct.Place.World: "+world);
-	            	} else {
-	            		worlds_c_place.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Enable")) {
-	        if (!ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.World.All_World")) {
-	            for (String world : ConfigGProtection.getConfig().getStringList("Protection.Construct.Break.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-Protection.yml, Protection.Construct.Break.World: "+world);
-	            	} else {
-	            		worlds_c_break.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGProtection.getConfig().getBoolean("Protection.HagingBreakByEntity.Enable")) {
-	        if (!ConfigGProtection.getConfig().getBoolean("Protection.HagingBreakByEntity.World.All_World")) {
-	            for (String world : ConfigGProtection.getConfig().getStringList("Protection.HagingBreakByEntity.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-Protection.yml, Protection.HagingBreakByEntity.World: "+world);
-	            	} else {
-	            		worlds_HagingBreakByEntity.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGProtection.getConfig().getBoolean("Protection.PlayerInteractEntity-ItemFrame.Enable")) {
-	        if (!ConfigGProtection.getConfig().getBoolean("Protection.PlayerInteractEntity-ItemFrame.World.All_World")) {
-	            for (String world : ConfigGProtection.getConfig().getStringList("Protection.PlayerInteractEntity-ItemFrame.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-Protection.yml, Protection.PlayerInteractEntity-ItemFrame.World: "+world);
-	            	} else {
-	            		worlds_PlayerInteractEntity_ItemFrame.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Reset XP
-        if (ConfigGXP.getConfig().getBoolean("XP.Options.Exp.Enable")) {
-	        if (!ConfigGXP.getConfig().getBoolean("XP.Options.Exp.World.All_World")) {
-	            for (String world : ConfigGXP.getConfig().getStringList("XP.Options.Exp.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Experience-OnJoin-config.yml, XP.Options.Exp.World: "+world);
-	            	} else {
-	            		worlds_XP_Exp.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGXP.getConfig().getBoolean("XP.Options.Level.Enable")) {
-	        if (!ConfigGXP.getConfig().getBoolean("XP.Options.Level.World.All_World")) {
-	            for (String world : ConfigGXP.getConfig().getStringList("XP.Options.Level.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Experience-OnJoin.yml, XP.Options.Level.World: "+world);
-	            	} else {
-	            		worlds_XP_Lvl.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Fly
-        if (ConfigGFly.getConfig().getBoolean("Fly.Enable")) {
-	        if (!ConfigGFly.getConfig().getBoolean("Fly.World.All_World")) {
-	            for (String world : ConfigGFly.getConfig().getStringList("Fly.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Fly-OnJoin.yml, Fly.World: "+world);
-	            	} else {
-	            		worlds_Fly.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Gamemode
-        if (ConfigGGM.getConfig().getBoolean("Gamemode.Enable")) {
-	        if (!ConfigGGM.getConfig().getBoolean("Gamemode.World.All_World")) {
-	            for (String world : ConfigGGM.getConfig().getStringList("Gamemode.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Gamemode-OnJoin.yml, Gamemode.World: "+world);
-	            	} else {
-	            		worlds_GM.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // REstore Food and Health
-        if (ConfigGHF.getConfig().getBoolean("Restore.Food.Enable")) {
-	        if (!ConfigGHF.getConfig().getBoolean("Restore.Food.World.All_World")) {
-	            for (String world : ConfigGHF.getConfig().getStringList("Restore.Food.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Health-Food-OnJoin.yml, Restore.Food.World: "+world);
-	            	} else {
-	            		worlds_Food.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        if (ConfigGHF.getConfig().getBoolean("Restore.Health.Enable")) {
-	        if (!ConfigGHF.getConfig().getBoolean("Restore.Health.World.All_World")) {
-	            for (String world : ConfigGHF.getConfig().getStringList("Restore.Health.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Health-Food-OnJoin.yml, Restore.Health.World: "+world);
-	            	} else {
-	            		worlds_Health.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Firework
-        if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Enable")) {
-	        if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.World.All_World")) {
-	            for (String world : ConfigGCos.getConfig().getStringList("Cosmetics.Firework.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Cosmetics-OnJoin.yml, Cosmetics.Firework.World: "+world);
-	            	} else {
-	            		worlds_firework.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Sounds
-        if (ConfigGCos.getConfig().getBoolean("Cosmetics.Sounds.Enable")) {
-	        if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Sounds.World.All_World")) {
-	            for (String world : ConfigGCos.getConfig().getStringList("Cosmetics.Sounds.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Cosmetics-OnJoin.yml, Cosmetics.Sounds.World: "+world);
-	            	} else {
-	            		worlds_sounds_join.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Inventory //
-        // Force selected slot
-        if (ConfigGInventory.getConfig().getBoolean("Inventory.Force-Selected-Slot.Enable")) {
-	        if (!ConfigGInventory.getConfig().getBoolean("Inventory.Force-Selected-Slot.World.All_World")) {
-	            for (String world : ConfigGInventory.getConfig().getStringList("Inventory.Force-Selected-Slot.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Inventory-OnJoin.yml, Inventory.Force-Selected-Slot.World: "+world);
-	            	} else {
-	            		worlds_force_selected_slot.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // inventory
-        if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Enable")) {
-	        if (!ConfigGInventory.getConfig().getBoolean("Inventory.Clear.World.All_World")) {
-	            for (String world : ConfigGInventory.getConfig().getStringList("Inventory.Clear.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Inventory-OnJoin.yml, Inventory.Clear.World: "+world);
-	            	} else {
-	            		worlds_inventory.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Title //
-        // First Join
-        if (ConfigGTitle.getConfig().getBoolean("Title.First-Join.Enable")) {
-	        if (!ConfigGTitle.getConfig().getBoolean("Title.First-Join.World.All_World")) {
-	            for (String world : ConfigGTitle.getConfig().getStringList("Title.First-Join.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Title-OnJoin.yml, Title.First-Join.World: "+world);
-	            	} else {
-	            		worlds_first_join_title.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Join
-        if (ConfigGTitle.getConfig().getBoolean("Title.Join.Enable")) {
-	        if (!ConfigGTitle.getConfig().getBoolean("Title.Join.World.All_World")) {
-	            for (String world : ConfigGTitle.getConfig().getStringList("Title.Join.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Title-OnJoin.yml, Title.Join.World: "+world);
-	            	} else {
-	            		worlds_join_title.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Messages //
-        // Join
-        if (ConfigGMessage.getConfig().getBoolean("Message.Join.Enable")) {
-	        if (!ConfigGMessage.getConfig().getBoolean("Message.Join.World.All_World")) {
-	            for (String world : ConfigGMessage.getConfig().getStringList("Message.Join.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Messages-Chat-OnJoin.yml, Message.Join.World: "+world);
-	            	} else {
-	            		worlds_message_join.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Broadcast Join
-        if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Enable")) {
-	        if (!ConfigGMessage.getConfig().getBoolean("Broadcast.Join.World.All_World")) {
-	            for (String world : ConfigGMessage.getConfig().getStringList("Broadcast.Join.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Messages-Chat-OnJoin.yml, Broadcast.Join.World: "+world);
-	            	} else {
-	            		worlds_broadcast_message_join.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Join New
-        if (ConfigGMessage.getConfig().getBoolean("Message.First-Join.Enable")) {
-	        if (!ConfigGMessage.getConfig().getBoolean("Message.First-Join.World.All_World")) {
-	            for (String world : ConfigGMessage.getConfig().getStringList("Message.First-Join.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Messages-Chat-OnJoin.yml, Message.First-Join.World: "+world);
-	            	} else {
-	            		worlds_message_newjoin.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Broadcast Join New
-        if (ConfigGMessage.getConfig().getBoolean("Broadcast.First-Join.Enable")) {
-	        if (!ConfigGMessage.getConfig().getBoolean("Broadcast.First-Join.World.All_World")) {
-	            for (String world : ConfigGMessage.getConfig().getStringList("Broadcast.First-Join.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Messages-Chat-OnJoin.yml, Broadcast.First-Join.World: "+world);
-	            	} else {
-	            		worlds_broadcast_message_newjoin.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Clear chat
-        if (ConfigGMessage.getConfig().getBoolean("Chat.Clear.Enable")) {
-	        if (!ConfigGMessage.getConfig().getBoolean("Chat.Clear.World.All_World")) {
-	            for (String world : ConfigGMessage.getConfig().getStringList("Chat.Clear.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Messages-Chat-OnJoin.yml, Chat.Clear.World: "+world);
-	            	} else {
-	            		worlds_clear_chat.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Broadcast Quit
-        if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Enable")) {
-	        if (!ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.World.All_World")) {
-	            for (String world : ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Messages-OnQuit.yml, Broadcast.Quit.World: "+world);
-	            	} else {
-	            		worlds_broadcast_quit.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // SERVER PLAYER ITEM //
-        // Drop
-        if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Drop.Disable")) {
-	        if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Drop.World.All_World")) {
-	            for (String world : ConfigGPlayerItems.getConfig().getStringList("Server.Items.Drop.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-PlayersItems.yml, Server.Items.Drop.World: "+world);
-	            	} else {
-	            		worlds_item_drop.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // PickUp
-        if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.PickUp.Disable")) {
-	        if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.PickUp.World.All_World")) {
-	            for (String world : ConfigGPlayerItems.getConfig().getStringList("Server.Items.PickUp.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-PlayersItems.yml, Server.Items.PickUp.World: "+world);
-	            	} else {
-	            		worlds_item_pickup.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Damage item
-        if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Damage-Item.Disable")) {
-	        if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Damage-Item.World.All_World")) {
-	            for (String world : ConfigGPlayerItems.getConfig().getStringList("Server.Items.Damage-Item.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-PlayersItems.yml, Server.Items.Damage-Item.World: "+world);
-	            	} else {
-	            		worlds_item_damageitem.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Clear Drops
-        if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Clear-Drops-On-Death.Enable")) {
-	        if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Clear-Drops-On-Death.World.All_World")) {
-	            for (String world : ConfigGPlayerItems.getConfig().getStringList("Server.Items.Clear-Drops-On-Death.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-PlayersItems.yml, Server.Items.Clear-Drops-On-Death.World: "+world);
-	            	} else {
-	            		worlds_item_clearondrop.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Move Item
-        if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Move.Disable")) {
-	        if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Move.World.All_World")) {
-	            for (String world : ConfigGPlayerItems.getConfig().getStringList("Server.Items.Move.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Server-PlayersItems.yml, Server.Items.Move.World: "+world);
-	            	} else {
-	            		worlds_item_move.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // FUN //
-        // Jump Pads
-        if (ConfigFJumpad.getConfig().getBoolean("JumpPads.Enable")) {
-	        if (!ConfigFJumpad.getConfig().getBoolean("JumpPads.World.All_World")) {
-	            for (String world : ConfigFJumpad.getConfig().getStringList("JumpPads.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in JumpPads.yml, JumpPads.World: "+world);
-	            	} else {
-	            		worlds_jumppads.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // EVENT //
-        // VoidTP
-        if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Enable")) {
-	        if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.World.All_World")) {
-	            for (String world : ConfigEVoidTP.getConfig().getStringList("VoidTP.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in VoidTP.yml, VoidTP.World: "+world);
-	            	} else {
-	            		worlds_voidTP.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // ColorSign
-        if (ConfigEColorSign.getConfig().getBoolean("ColorSign.Enable")) {
-	        if (!ConfigEColorSign.getConfig().getBoolean("ColorSign.World.All_World")) {
-	            for (String world : ConfigEColorSign.getConfig().getStringList("ColorSign.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in ColorSign.yml, ColorSign.World: "+world);
-	            	} else {
-	            		worlds_ColorSign.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Keep Fly
-        if (ConfigCWEKeepFly.getConfig().getBoolean("KeepFly.Enable.Enable")) {
-	        if (!ConfigCWEKeepFly.getConfig().getBoolean("KeepFly.World.All_World")) {
-	            for (String world : ConfigCWEKeepFly.getConfig().getStringList("KeepFly.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in KeepFly.yml, KeepFly.World: "+world);
-	            	} else {
-	            		worlds_Fly_KeepOnChangeWorld.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-        // Gamemode Change World
-        if (ConfigCWEGM.getConfig().getBoolean("GM.Enable")) {
-	        if (!ConfigCWEGM.getConfig().getBoolean("GM.World.All_World")) {
-	            for (String world : ConfigCWEGM.getConfig().getStringList("GM.World.Worlds")) {
-	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in GameMode.yml, GM.World: "+world);
-	            	} else {
-	            		worlds_GM_OnChangeWorld.add(world);
-	            	}
-	            }
-	        }
-        }
-        
-		System.out.println("| And many things.... I think... x'D");
-		System.out.println("|");
-		System.out.println("| Ultimate Spawn loaded!");
-		System.out.println("|");
-		System.out.println("|=============================");
-		System.out.println("|");
-		System.out.println("| If you see a lot of warning in loading the plugin... it's normal... Everything works without problems... Don't worry ^^");
+        getCSC("| "+ChatColor.YELLOW+"And many things.... I think... x'D");
+		getCSC("|");
+		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn loaded!");
+		getCSC("|");
+		getCSC("|=============================");
+		getCSC("|");
+		getCSC("| "+ChatColor.AQUA+"If you see a lot of warning in loading the plugin... it's normal... Everything works without problems... Don't worry ^^");
 	}
 
-	public void onDisable() {}
+	@Override
+	public void onDisable() {
+		super.onDisable();
+	}
+	
+	public static void getCSC(String str) {
+		Bukkit.getConsoleSender().sendMessage(str);
+	}
 	
 	public static MainClass getInstance() {
 		return instance;
 	}
 	
-	public static List<String> getWD() {
-		return worlds_damage;
+	public void GetSetWorld() {
+		// ////////
+        // World //
+        // ////////
+        // >> Disable-Event
+        WorldUtils.setWGetWorldServerDisableHunger();
+        WorldUtils.setWGetWorldServerDisableDamage();
+        WorldUtils.setWGetWorldServerDisableWeather();
+        WorldUtils.setWGetWorldServerDisableBurnBlock();
+        WorldUtils.setWGetWorldServerDisableExplosion();
+        WorldUtils.setWGetWorldServerDisableDeathMessage();
+        WorldUtils.setWGetWorldServerDisableSpawningMobAnimals();
+        WorldUtils.setWGetWorldServerDisableLeaveDecay();
+        WorldUtils.setWGetWorldServerDisableLightningStrike();
+        WorldUtils.setWGetWorldServerDisableblockFade();
+        WorldUtils.setWGetWorldServerDisableThunderChange();
+        WorldUtils.setWGetWorldServerDisableFireSpread();
+        
+        // >> Protection
+        WorldUtils.setWGetWorldProtectionPlace();
+        WorldUtils.setWGetWorldProtectionBreak();
+        WorldUtils.setWGetWorldProtectionHagingBreakByEntity();
+        WorldUtils.setWGetWorldProtectionPlayerInteractEntityItemFrame();
+        
+        // > Reset XP
+        WorldUtils.setWGetWorldResetExperience();
+        WorldUtils.setWGetWorldResetLevel();
+        // > Fly
+        WorldUtils.setWGetWorldFly();
+        // > Gamemode
+        WorldUtils.setWGetWorldGamemode();
+        // > Restore Health and Food
+        WorldUtils.setWGetWorldFood();
+        WorldUtils.setWGetWorldHealth();
+        // > Firework
+        WorldUtils.setWGetWorldFirework();
+        // > SoundJoin
+        WorldUtils.setWGetWorldSoundJoin();
+        // > Force Selected Slot
+        WorldUtils.setWGetWorldForceSelectedJoin();
+        // > Inventory
+        WorldUtils.setWGetWorldInventory();
+        // > Title
+        WorldUtils.setWGetWorldFirstJoinTitle();
+        WorldUtils.setWGetWorldJoinTitle();
+        // > Message
+        WorldUtils.setWGetWorldMessageOnJoin();
+        WorldUtils.setWGetWorldFirstJoinMessageOnJoin();
+        // > Broadcast
+        WorldUtils.setWGetWorldBroadcastJoin();
+        WorldUtils.setWGetWorldBroadcastNewJoin();
+        WorldUtils.setWGetWorldBroadcastQuit();
+        // > Chat
+        WorldUtils.setWGetWorldClearChat();
+        // > ActionBar
+        WorldUtils.setWGetWorldActionBarJoin();
+        // > JoinCommand
+        WorldUtils.setWGetWorldJoinCommandPlayerNew();
+        WorldUtils.setWGetWorldJoinCommandPlayerNoNew();
+        WorldUtils.setWGetWorldJoinCommandConsoleNew();
+        WorldUtils.setWGetWorldJoinCommandConsoleNoNew();
+        
+        // >> Server Player Item
+        WorldUtils.setWGetWorldItemDrop();
+        WorldUtils.setWGetWorldItemPickUP();
+        WorldUtils.setWGetWorldItemDamage();
+        WorldUtils.setWGetWorldClearDropOnDeath();
+        WorldUtils.setWGetWorldMoveItem();
+        
+        // >> Fun
+        WorldUtils.setWGetWorldJumpPads();
+        
+        // >> Event
+        WorldUtils.setWGetWorldEventVoidTP();
+        WorldUtils.setWGetWorldEventColorSign();
+        // > ChangeWorld
+        WorldUtils.setWGetWorldKeepFlyChangeWorld();
+        WorldUtils.setWGetWorldGamemodeChangeWorld();
 	}
 	
-	public static List<String> getWH() {
-		return worlds_hunger;
-	}
-	
-	public static List<String> getWW() {
-		return worlds_weather;
-	}
-	
-	public static List<String> getWBB() {
-		return worlds_burn_block;
-	}
-	
-	public static List<String> getWE() {
-		return worlds_explosions;
-	}
-	
-	public static List<String> getWDM() {
-		return worlds_death_message;
-	}
-	
-	public static List<String> getWSMA() {
-		return worlds_spawning_mob_animals;
-	}
-	
-	public static List<String> getWPCP() {
-		return worlds_c_place;
-	}
-	
-	public static List<String> getWPCB() {
-		return worlds_c_break;
-	}
-	
-	public static List<String> getWXPEXP() {
-		return worlds_XP_Exp;
-	}
-	
-	public static List<String> getWXPLVL() {
-		return worlds_XP_Lvl;
-	}
-	
-	public static List<String> getWFly() {
-		return worlds_Fly;
-	}
-	
-	public static List<String> getWGM() {
-		return worlds_GM;
-	}
-	
-	public static List<String> getWFood() {
-		return worlds_Food;
-	}
-	
-	public static List<String> getWHealth() {
-		return worlds_Health;
-	}
-	
-	public static List<String> getWFirework() {
-		return worlds_firework;
-	}
-	
-	public static List<String> getWSoundsJoin() {
-		return worlds_sounds_join;
-	}
-	
-	public static List<String> getWOForceSelectedSlot() {
-		return worlds_force_selected_slot;
-	}
-	
-	public static List<String> getWInventory() {
-		return worlds_inventory;
-	}
-	
-	public static List<String> getWFirstJoinTitle() {
-		return worlds_first_join_title;
-	}
-	
-	public static List<String> getWJoinTitle() {
-		return worlds_join_title;
-	}
-	
-	public static List<String> getWMsgJoin() {
-		return worlds_message_join;
-	}
-	
-	public static List<String> getWBroadcastMsgJoin() {
-		return worlds_broadcast_message_join;
-	}
-	
-	public static List<String> getWNewMsgJoin() {
-		return worlds_message_newjoin;
-	}
-	
-	public static List<String> getWNewBroadcastMsgJoin() {
-		return worlds_broadcast_message_newjoin;
-	}
-	
-	public static List<String> getWClearChat() {
-		return worlds_clear_chat;
-	}
-	
-	public static List<String> getWBroadcastQuit() {
-		return worlds_broadcast_quit;
-	}
-	
-	public static List<String> getWItemDrop() {
-		return worlds_item_drop;
-	}
-	
-	public static List<String> getWItemPickUp() {
-		return worlds_item_pickup;
-	}
-	
-	public static List<String> getWItemDamage() {
-		return worlds_item_damageitem;
-	}
-	
-	public static List<String> getWClearOnDropsOnDeath() {
-		return worlds_item_clearondrop;
-	}
-	
-	public static List<String> getWMoveItem() {
-		return worlds_item_move;
-	}
-	
-	public static List<String> getWJumpPads() {
-		return worlds_jumppads;
-	}
-	
-	public static List<String> getWVoidTP() {
-		return worlds_voidTP;
-	}
-	
-	public static List<String> getWColorSign() {
-		return worlds_ColorSign;
-	}
-	
-	public static List<String> getWLD() {
-		return worlds_LeaveDecay;
-	}
-	
-	public static List<String> getWLS() {
-		return worlds_LightningStrike;
-	}
-	
-	public static List<String> getWBF() {
-		return worlds_BlockFade;
-	}
-	
-	public static List<String> getWHBBE() {
-		return worlds_HagingBreakByEntity;
-	}
-	
-	public static List<String> getWPIEIF() {
-		return worlds_PlayerInteractEntity_ItemFrame;
-	}
-	
-	public static List<String> getWTC() {
-		return worlds_ThunderChange;
-	}
-	
-	public static List<String> getWFS() {
-		return worlds_firespread;
-	}
-	
-	public static List<String> getWFlyKeepOnChangeWorld() {
-		return worlds_Fly_KeepOnChangeWorld;
-	}
-	
-	public static List<String> getWGamemodeOnChangeWorld() {
-		return worlds_GM_OnChangeWorld;
-	}
 }
