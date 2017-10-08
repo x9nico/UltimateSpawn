@@ -8,9 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
+import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
@@ -32,7 +32,7 @@ public class OnQuit implements Listener {
 
         if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Enable")) {
         	if (!ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.World.All_World")) {
-        		if (MainClass.getWBroadcastQuit().contains(p.getWorld().getName())) {
+        		if (WorldUtils.getWBroadcastQuit().contains(p.getWorld().getName())) {
 		            if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
 		                e.setQuitMessage(null);
 		            } else {
