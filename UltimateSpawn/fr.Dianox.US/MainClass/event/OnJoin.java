@@ -20,20 +20,24 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 import fr.Dianox.US.MainClass.MainClass;
+import fr.Dianox.US.MainClass.Utils.ActionBar;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.Utils.TitleUtils;
+import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
+import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
 import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
+import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
@@ -100,7 +104,7 @@ public class OnJoin implements Listener {
         // Force selected slot
         if (ConfigGInventory.getConfig().getBoolean("Inventory.Force-Selected-Slot.Enable")) {
         	if (!ConfigGInventory.getConfig().getBoolean("Inventory.Force-Selected-Slot.World.All_World")) {
-        		if (MainClass.getWOForceSelectedSlot().contains(p.getWorld().getName())) {
+        		if (WorldUtils.getWOForceSelectedSlot().contains(p.getWorld().getName())) {
         			inv.setHeldItemSlot(ConfigGInventory.getConfig().getInt("Inventory.Force-Selected-Slot.Slot") - 1);
         		}
         	} else {
@@ -111,7 +115,7 @@ public class OnJoin implements Listener {
         // Inventory
         if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Enable")) {
         	if (!ConfigGInventory.getConfig().getBoolean("Inventory.Clear.World.All_World")) {
-        		if (MainClass.getWInventory().contains(p.getWorld().getName())) {
+        		if (WorldUtils.getWInventory().contains(p.getWorld().getName())) {
         	        if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Bypass")) {
         	            if (!p.hasPermission("UltimateSpawn.bypass.ClearInvOnJoin")) {
         	            	if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Inventory")) {
@@ -154,7 +158,7 @@ public class OnJoin implements Listener {
         // Chat
         if (ConfigGMessage.getConfig().getBoolean("Chat.Clear.Enable")) {
         	if (!ConfigGMessage.getConfig().getBoolean("Chat.Clear.World.All_World")) {
-        		if (MainClass.getWClearChat().contains(p.getWorld().getName())) {
+        		if (WorldUtils.getWClearChat().contains(p.getWorld().getName())) {
 		            if (ConfigGMessage.getConfig().getBoolean("Chat.Clear.Bypass")) {
 		                if (!p.hasPermission("UltimateSpawn.bypass.ClearChatOnJoin")) {
 		                    for (int i = 0; i < lines; i++) {
@@ -203,7 +207,7 @@ public class OnJoin implements Listener {
             }
             if (ConfigGMessage.getConfig().getBoolean("Broadcast.First-Join.Enable")) {
             	if (!ConfigGMessage.getConfig().getBoolean("Broadcast.First-Join.World.All_World")) {
-            		if (MainClass.getWNewBroadcastMsgJoin().contains(p.getWorld().getName())) {
+            		if (WorldUtils.getWNewBroadcastMsgJoin().contains(p.getWorld().getName())) {
 		                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.First-Join.Message")) {
 		                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
 		                }
@@ -216,7 +220,7 @@ public class OnJoin implements Listener {
             }
             if (ConfigGMessage.getConfig().getBoolean("Message.First-Join.Enable")) {
             	if (!ConfigGMessage.getConfig().getBoolean("Message.First-Join.World.All_World")) {
-            		if (MainClass.getWNewMsgJoin().contains(p.getWorld().getName())) {
+            		if (WorldUtils.getWNewMsgJoin().contains(p.getWorld().getName())) {
     		            for (String message: ConfigGMessage.getConfig().getStringList("Message.First-Join.Message")) {
     		            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
     		            }
@@ -234,7 +238,7 @@ public class OnJoin implements Listener {
         
         if (ConfigGGM.getConfig().getBoolean("Gamemode.Value")) {
         	if (!ConfigGGM.getConfig().getBoolean("Gamemode.World.All_World")) {
-        		if (MainClass.getWGM().contains(p.getWorld().getName())) {
+        		if (WorldUtils.getWGM().contains(p.getWorld().getName())) {
 		            if (gm == 0) {
 		                p.setGameMode(GameMode.SURVIVAL);
 		            } else if (gm == 1) {
@@ -261,7 +265,7 @@ public class OnJoin implements Listener {
         // Fly
         if ((ConfigGFly.getConfig().getBoolean("Fly.Enable")) && (gm != 3)) {
         	if (!ConfigGFly.getConfig().getBoolean("Fly.World.All_World")) {
-	       		if (MainClass.getWFly().contains(p.getWorld().getName())) {
+	       		if (WorldUtils.getWFly().contains(p.getWorld().getName())) {
 	       			if (ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
 		       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
 		       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
@@ -290,7 +294,7 @@ public class OnJoin implements Listener {
         if (ConfigGXP.getConfig().getBoolean("XP.Enable")) {
         	if (ConfigGXP.getConfig().getBoolean("XP.Options.Exp.Enable")) {
         		if (!ConfigGXP.getConfig().getBoolean("XP.Options.Exp.World.All_World")) {
-	        		if (MainClass.getWXPEXP().contains(p.getWorld().getName())) {
+	        		if (WorldUtils.getWXPEXP().contains(p.getWorld().getName())) {
 	        			p.setExp(Float.valueOf(XPValueEXP));
 	        		}
         		} else {
@@ -299,7 +303,7 @@ public class OnJoin implements Listener {
         	}
         	if (ConfigGXP.getConfig().getBoolean("XP.Options.Level.Enable")) {
         		if (!ConfigGXP.getConfig().getBoolean("XP.Options.Level.World.All_World")) {
-	        		if (MainClass.getWXPLVL().contains(p.getWorld().getName())) {
+	        		if (WorldUtils.getWXPLVL().contains(p.getWorld().getName())) {
 	        			p.setLevel(Integer.valueOf(XPValueLvl));
 	        		}
         		} else {
@@ -314,7 +318,7 @@ public class OnJoin implements Listener {
         
         if (ConfigGHF.getConfig().getBoolean("Restore.Food.Enable")) {
         	if (!ConfigGHF.getConfig().getBoolean("Restore.Food.World.All_World")) {
-	       		if (MainClass.getWFood().contains(p.getWorld().getName())) {
+	       		if (WorldUtils.getWFood().contains(p.getWorld().getName())) {
 	       			p.setFoodLevel(Integer.valueOf(FoodValue));
 	       		}
         	} else {
@@ -324,7 +328,7 @@ public class OnJoin implements Listener {
         
         if (ConfigGHF.getConfig().getBoolean("Restore.Health.Enable")) {
         	if (!ConfigGHF.getConfig().getBoolean("Restore.Health.World.All_World")) {
-	       		if (MainClass.getWHealth().contains(p.getWorld().getName())) {
+	       		if (WorldUtils.getWHealth().contains(p.getWorld().getName())) {
 	       			p.setHealth(Double.valueOf(HealthValue));
 	       		}
         	} else {
@@ -334,80 +338,12 @@ public class OnJoin implements Listener {
 
         // Cosmetics
         
-        if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Enable")) {
-        	if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.World.All_World")) {
-        		if (MainClass.getWFirework().contains(p.getWorld().getName())) {
-		        	for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
-		        		ArrayList<Color> colors = new ArrayList<Color>();
-		        		ArrayList<Color> fade = new ArrayList<Color>();
-		        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
-		        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
-		        		for (String l1 : lore) {
-		        			colors.add(OtherUtils.getColor(l1));
-		        	    }
-		        		for (String l2 : lore2) {
-		        			fade.add(OtherUtils.getColor(l2));
-		        		}
-		                final Firework f = (Firework)e.getPlayer().getWorld().spawn(e.getPlayer().getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
-		                
-		                FireworkMeta fm = f.getFireworkMeta();
-		                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
-		                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
-		                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
-		                		.build());
-		                
-		                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
-		                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
-		                }
-		                f.setFireworkMeta(fm);
-		                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
-		                	Bukkit.getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable(){
-		                      public void run() {
-		                        f.detonate();
-		                      }
-		                    }, 5L);
-		                }
-		        	}
-        		}
-        	} else {
-        		for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
-	        		ArrayList<Color> colors = new ArrayList<Color>();
-	        		ArrayList<Color> fade = new ArrayList<Color>();
-	        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
-	        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
-	        		for (String l1 : lore) {
-	        			colors.add(OtherUtils.getColor(l1));
-	        	    }
-	        		for (String l2 : lore2) {
-	        			fade.add(OtherUtils.getColor(l2));
-	        		}
-	                final Firework f = (Firework)e.getPlayer().getWorld().spawn(e.getPlayer().getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
-	                
-	                FireworkMeta fm = f.getFireworkMeta();
-	                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
-	                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
-	                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
-	                		.build());
-	                
-	                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
-	                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
-	                }
-	                f.setFireworkMeta(fm);
-	                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
-	                	Bukkit.getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable(){
-	                      public void run() {
-	                        f.detonate();
-	                      }
-	                    }, 5L);
-	                }
-	        	}
-        	}
-        }
+        Firework(p);
         
         // Sounds
         if (ConfigGCos.getConfig().getBoolean("Cosmetics.Sounds.Enable")) {
         	if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Sounds.World.All_World")) {
-        		if (MainClass.getWSoundsJoin().contains(p.getWorld().getName())) {
+        		if (WorldUtils.getWSoundsJoin().contains(p.getWorld().getName())) {
 		            String sound = ConfigGCos.getConfig().getString("Cosmetics.Sounds.Sound");
 		            int volume = ConfigGCos.getConfig().getInt("Cosmetics.Sounds.Volume");
 		            int pitch = ConfigGCos.getConfig().getInt("Cosmetics.Sounds.Pitch");
@@ -424,7 +360,7 @@ public class OnJoin implements Listener {
         // Broadcast Join Player
         if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Enable")) {
         	if (!ConfigGMessage.getConfig().getBoolean("Broadcast.Join.World.All_World")) {
-        		if (MainClass.getWBroadcastMsgJoin().contains(p.getWorld().getName())) {
+        		if (WorldUtils.getWBroadcastMsgJoin().contains(p.getWorld().getName())) {
 		        	if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
 		        		if (p.hasPlayedBefore()) {
 				            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
@@ -475,7 +411,7 @@ public class OnJoin implements Listener {
         // Message join
         if (ConfigGMessage.getConfig().getBoolean("Message.Join.Enable")) {
         	if (!ConfigGMessage.getConfig().getBoolean("Message.Join.World.All_World")) {
-        		if (MainClass.getWMsgJoin().contains(p.getWorld().getName())) {
+        		if (WorldUtils.getWMsgJoin().contains(p.getWorld().getName())) {
 		            for (String message: ConfigGMessage.getConfig().getStringList("Message.Join.Message")) {
 		            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
 		            }
@@ -491,11 +427,11 @@ public class OnJoin implements Listener {
         if (ConfigGTitle.getConfig().getBoolean("Title.Enable")) {
         	if (ConfigGTitle.getConfig().getBoolean("Title.First-Join.Enable")) {
         		if (!ConfigGTitle.getConfig().getBoolean("Title.First-Join.World.All_World")) {
-        			if (MainClass.getWFirstJoinTitle().contains(p.getWorld().getName())) {
+        			if (WorldUtils.getWFirstJoinTitle().contains(p.getWorld().getName())) {
 		        		if (p.hasPlayedBefore()) {
 		            		if (ConfigGTitle.getConfig().getBoolean("Title.Join.Enable")) {
 		            			if (!ConfigGTitle.getConfig().getBoolean("Title.Join.World.All_World")) {
-		            				if (MainClass.getWJoinTitle().contains(p.getWorld().getName())) {
+		            				if (WorldUtils.getWJoinTitle().contains(p.getWorld().getName())) {
 		    				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
 		    				        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
 		    				        	}
@@ -525,7 +461,7 @@ public class OnJoin implements Listener {
         			if (p.hasPlayedBefore()) {
 	            		if (ConfigGTitle.getConfig().getBoolean("Title.Join.Enable")) {
 	            			if (!ConfigGTitle.getConfig().getBoolean("Title.Join.World.All_World")) {
-	            				if (MainClass.getWJoinTitle().contains(p.getWorld().getName())) {
+	            				if (WorldUtils.getWJoinTitle().contains(p.getWorld().getName())) {
 	    				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
 	    				        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
 	    				        	}
@@ -554,7 +490,7 @@ public class OnJoin implements Listener {
         	} else {
         		if (ConfigGTitle.getConfig().getBoolean("Title.Join.Enable")) {
         			if (!ConfigGTitle.getConfig().getBoolean("Title.Join.World.All_World")) {
-        				if (MainClass.getWJoinTitle().contains(p.getWorld().getName())) {
+        				if (WorldUtils.getWJoinTitle().contains(p.getWorld().getName())) {
 				        	if (ConfigGTitle.getConfig().getBoolean("Title.Join.Title.Enable")) {
 				        		TitleUtils.sendTitle(p, ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeIn"), ConfigGTitle.getConfig().getInt("Title.Join.Title.Stay"), ConfigGTitle.getConfig().getInt("Title.Join.Title.FadeOut"), ConfigGTitle.getConfig().getString("Title.Join.Title.Message"));
 				        	}
@@ -574,6 +510,128 @@ public class OnJoin implements Listener {
         	}
         }
     
+        // Action Bar
+        if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Enable")) {
+        	if (!ConfigGActionBar.getConfig().getBoolean("ActionBar.World.All_World")) {
+        		if (WorldUtils.getWABOJ().contains(p.getWorld().getName())) {
+	        		if (p.hasPlayedBefore()) {
+	        			if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.No-New.Enable")) {
+	        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"));
+	        			}
+	        		} else {
+	        			if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.New.Enable")) {
+	        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.New.Message"));
+	        			} else {
+	        				if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.No-New.Enable")) {
+	        					ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"));
+	        				}
+	        			}
+	        		}
+        		}
+        	} else {
+        		if (p.hasPlayedBefore()) {
+        			if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.No-New.Enable")) {
+        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"));
+        			}
+        		} else {
+        			if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.New.Enable")) {
+        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.New.Message"));
+        			} else {
+        				if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.No-New.Enable")) {
+        					ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"));
+        				}
+        			}
+        		}
+        	}
+        }
+        
+        // Join Command
+        if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Enable")) {
+        	if (p.hasPlayedBefore()) {
+        		 if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.No-New.JoinCommand-Player.Enable")) {
+        			 if (!ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.No-New.JoinCommand-Player.World.All_World")) {
+        				 if(WorldUtils.getWPlayerJoinCommandNoNew().contains(p.getWorld().getName())) {
+		        			 for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.No-New.JoinCommand-Player.Commands")) {
+		        				 p.performCommand(commands);
+		        			 }
+        				 }
+        			 } else {
+        				 for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.No-New.JoinCommand-Player.Commands")) {
+	        				 p.performCommand(commands);
+	        			 }
+        			 }
+        		 }
+        		 if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.No-New.JoinCommand-Console.Enable")) {
+        			 if (!ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.No-New.JoinCommand-Console.World.All_World")) {
+        				 if(WorldUtils.getWConsoleJoinCommandNoNew().contains(p.getWorld().getName())) {
+		        			 for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.No-New.JoinCommand-Console.Commands")) {
+		        				 Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), commands.replaceAll("%player%", p.getName()));
+		        			 }
+        				 }
+        			 } else {
+        				 for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.No-New.JoinCommand-Console.Commands")) {
+        					 Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), commands.replaceAll("%player%", p.getName()));
+	        			 }
+        			 }
+        		 }
+        	} else {
+        		if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.New.JoinCommand-Player.Enable")) {
+        			if (!ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.New.JoinCommand-Player.World.All_World")) {
+        				if(WorldUtils.getWPlayerJoinCommandNew().contains(p.getWorld().getName())) {
+        					for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.New.JoinCommand-Player.Commands")) {
+        						p.performCommand(commands);
+        					}
+        				}
+        			} else {
+        				for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.New.JoinCommand-Player.Commands")) {
+        					p.performCommand(commands);
+        				}
+        			}
+        		} else {
+        			if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.No-New.JoinCommand-Player.Enable")) {
+        				if (!ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.No-New.JoinCommand-Player.World.All_World")) {
+        					if(WorldUtils.getWPlayerJoinCommandNoNew().contains(p.getWorld().getName())) {
+        						for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.No-New.JoinCommand-Player.Commands")) {
+        							p.performCommand(commands);
+        						}
+        					}
+        				} else {
+        					for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.No-New.JoinCommand-Player.Commands")) {
+        						p.performCommand(commands);
+        					}
+        				}
+        			}
+        		}
+        		if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.New.JoinCommand-Console.Enable")) {
+        			if (!ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.New.JoinCommand-Console.World.All_World")) {
+        				if(WorldUtils.getWConsoleJoinCommandNew().contains(p.getWorld().getName())) {
+        					for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.New.JoinCommand-Console.Commands")) {
+        						Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), commands.replaceAll("%player%", p.getName()));
+        					}
+        				}
+        			} else {
+        				for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.New.JoinCommand-Console.Commands")) {
+        					Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), commands.replaceAll("%player%", p.getName()));
+        				}
+        			}
+        		} else {
+        			if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.No-New.JoinCommand-Console.Enable")) {
+            			if (!ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.No-New.JoinCommand-Console.World.All_World")) {
+            				if(WorldUtils.getWConsoleJoinCommandNoNew().contains(p.getWorld().getName())) {
+            					for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.No-New.JoinCommand-Console.Commands")) {
+            						Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), commands.replaceAll("%player%", p.getName()));
+            					}
+            				}
+            			} else {
+            				for (String commands: ConfigGJoinCommand.getConfig().getStringList("JoinCommand.Options.No-New.JoinCommand-Console.Commands")) {
+            					Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), commands.replaceAll("%player%", p.getName()));
+            				}
+            			}
+            		}
+        		}
+        	}
+        }
+        
         // Temporary
         int GamemodeTemp1 = 0; 
         if (p.getGameMode() == GameMode.SURVIVAL) {
@@ -597,6 +655,78 @@ public class OnJoin implements Listener {
         	ConfigTemp.getConfig().set(pU+".Options.Gamemode", Integer.valueOf(GamemodeTemp2));
         	
         	ConfigTemp.saveConfigFile();
+        }
+    }
+    
+    public void Firework(Player p) {
+    	if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Enable")) {
+        	if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.World.All_World")) {
+        		if (WorldUtils.getWFirework().contains(p.getWorld().getName())) {
+		        	for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
+		        		ArrayList<Color> colors = new ArrayList<Color>();
+		        		ArrayList<Color> fade = new ArrayList<Color>();
+		        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
+		        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
+		        		for (String l1 : lore) {
+		        			colors.add(OtherUtils.getColor(l1));
+		        	    }
+		        		for (String l2 : lore2) {
+		        			fade.add(OtherUtils.getColor(l2));
+		        		}
+		                final Firework f = p.getWorld().spawn(p.getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
+		                
+		                FireworkMeta fm = f.getFireworkMeta();
+		                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
+		                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
+		                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
+		                		.build());
+		                
+		                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
+		                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
+		                }
+		                f.setFireworkMeta(fm);
+		                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
+		                	Bukkit.getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable(){
+		                      public void run() {
+		                        f.detonate();
+		                      }
+		                    }, 5L);
+		                }
+		        	}
+        		}
+        	} else {
+        		for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
+	        		ArrayList<Color> colors = new ArrayList<Color>();
+	        		ArrayList<Color> fade = new ArrayList<Color>();
+	        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
+	        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
+	        		for (String l1 : lore) {
+	        			colors.add(OtherUtils.getColor(l1));
+	        	    }
+	        		for (String l2 : lore2) {
+	        			fade.add(OtherUtils.getColor(l2));
+	        		}
+	                final Firework f = p.getWorld().spawn(p.getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
+	                
+	                FireworkMeta fm = f.getFireworkMeta();
+	                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
+	                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
+	                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
+	                		.build());
+	                
+	                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
+	                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
+	                }
+	                f.setFireworkMeta(fm);
+	                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
+	                	Bukkit.getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable(){
+	                      public void run() {
+	                        f.detonate();
+	                      }
+	                    }, 5L);
+	                }
+	        	}
+        	}
         }
     }
 }
