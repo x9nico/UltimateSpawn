@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
-import fr.Dianox.US.MainClass.MainClass;
+import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 
 public class FunFeatures implements Listener {
@@ -21,7 +21,7 @@ public class FunFeatures implements Listener {
 		
 		if (ConfigFJumpad.getConfig().getBoolean("JumpPads.Enable")) {
 			if (!ConfigFJumpad.getConfig().getBoolean("JumpPads.World.All_World")) {
-				if (MainClass.getWJumpPads().contains(p.getWorld().getName())) {
+				if (WorldUtils.getWJumpPads().contains(p.getWorld().getName())) {
 					int block = ConfigFJumpad.getConfig().getInt("JumpPads.Options.Block-ID");
 					int plate = ConfigFJumpad.getConfig().getInt("JumpPads.Options.Plate-ID");
 					if ((p.getLocation().getBlock().getType().getId() == plate) && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType().getId() == block)) {
