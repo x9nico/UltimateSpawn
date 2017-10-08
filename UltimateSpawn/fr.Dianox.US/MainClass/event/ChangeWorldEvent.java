@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 
-import fr.Dianox.US.MainClass.MainClass;
+import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
@@ -24,7 +24,7 @@ public class ChangeWorldEvent implements Listener {
 		// Fly
 		if (ConfigCWEKeepFly.getConfig().getBoolean("KeepFly.Enable.Enable")) {
 			if (!ConfigCWEKeepFly.getConfig().getBoolean("KeepFly.World.All_World")) {
-				if (MainClass.getWFlyKeepOnChangeWorld().contains(p.getWorld().getName())) {
+				if (WorldUtils.getWFlyKeepOnChangeWorld().contains(p.getWorld().getName())) {
 					if (ConfigCWEKeepFly.getConfig().getBoolean("KeepFly.Enable.SetFlyOnChangeWorld")) {
 						if (p.getGameMode() != GameMode.SPECTATOR) {
 							if (!ConfigPlayerOptions.getConfig().contains(String.valueOf(pU))) {
@@ -89,7 +89,7 @@ public class ChangeWorldEvent implements Listener {
 		// Gamemode
 		if (ConfigCWEGM.getConfig().getBoolean("GM.Enable")) {
 			if (!ConfigCWEGM.getConfig().getBoolean("GM.World.All_World")) {
-				if (MainClass.getWGamemodeOnChangeWorld().contains(p.getWorld().getName())) {
+				if (WorldUtils.getWGamemodeOnChangeWorld().contains(p.getWorld().getName())) {
 					if (ConfigCWEGM.getConfig().getBoolean("GM.CustomMode.Enable")) {
 						if (p.getGameMode() == GameMode.SURVIVAL) {
 							if (ConfigCWEGM.getConfig().getBoolean("GM.CustomMode.If-player-have.Survival")) {
