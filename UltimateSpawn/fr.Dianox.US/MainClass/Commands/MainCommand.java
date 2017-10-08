@@ -20,11 +20,13 @@ import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
 import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
+import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
@@ -86,6 +88,10 @@ public class MainCommand implements CommandExecutor {
                     ConfigCWEGM.reloadConfig();
                     ConfigCWEKeepFly.reloadConfig();
                     ConfigTemp.reloadConfig();
+                    ConfigGActionBar.reloadConfig();
+                    ConfigGJoinCommand.reloadConfig();
+                    
+                    MainClass.getInstance().GetSetWorld();
                     
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
                 }
@@ -101,7 +107,7 @@ public class MainCommand implements CommandExecutor {
                 p.sendMessage("");
                 p.sendMessage("     §l>> §e§o§lGlobal Help");
                 p.sendMessage("");
-                p.sendMessage(" §8>> §7/setspawn - §eSet the spawn");
+                p.sendMessage(" §8>> §7/setspawn [voidtp|firstjoin] - §eSet the spawn");
                 p.sendMessage(" §8>> §7/spawn - §eGo to spawn");
                 p.sendMessage(" §8>> §7/us reload - §eReload the plugin");
                 p.sendMessage(" §8>> §7/cc - §bHelp of clearchat");
@@ -138,6 +144,10 @@ public class MainCommand implements CommandExecutor {
                     ConfigCWEGM.reloadConfig();
                     ConfigCWEKeepFly.reloadConfig();
                     ConfigTemp.reloadConfig();
+                    ConfigGActionBar.reloadConfig();
+                    ConfigGJoinCommand.reloadConfig();
+                    
+                    MainClass.getInstance().GetSetWorld();
                     
                     if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
                     	ConfigGlobal.getConfig().set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
