@@ -6,7 +6,34 @@ import java.util.GregorianCalendar;
 
 import org.bukkit.Color;
 
+import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
+import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
+import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
+import fr.Dianox.US.MainClass.config.ConfigSpawn;
+import fr.Dianox.US.MainClass.config.ConfigTemp;
+import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
+import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
+import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
+import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
+import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
+import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
+import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
+import fr.Dianox.US.MainClass.config.global.ConfigGCos;
+import fr.Dianox.US.MainClass.config.global.ConfigGFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGGM;
+import fr.Dianox.US.MainClass.config.global.ConfigGHF;
+import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
+import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
+import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
+import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
+import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
+import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
+import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
+import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
+import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
+import fr.Dianox.US.MainClass.config.global.ConfigGXP;;
 
 public class OtherUtils {
 	
@@ -94,6 +121,61 @@ public class OtherUtils {
 	    }
 	    
 	    return null;
+	  }
+	  
+	  public static void reloadconfig() {
+		  ConfigGlobal.reloadConfig();
+          ConfigMessage.reloadConfig();
+          ConfigSpawn.reloadConfig();
+          ConfigCGlobal.reloadConfig();
+          ConfigGMessageQ.reloadConfig();
+          ConfigGPlayerItems.reloadConfig();
+          ConfigGProtection.reloadConfig();
+          ConfigGServerEvent.reloadConfig();
+          ConfigGCos.reloadConfig();
+          ConfigGMessage.reloadConfig();
+          ConfigGSpawn.reloadConfig();
+          ConfigGTitle.reloadConfig();
+          ConfigGGM.reloadConfig();
+          ConfigGHF.reloadConfig();
+          ConfigGFly.reloadConfig();
+          ConfigGXP.reloadConfig();
+          ConfigPlayerStats.reloadConfig();
+          ConfigGInventory.reloadConfig();
+          ConfigPlayerOptions.reloadConfig();
+          ConfigEVoidTP.reloadConfig();
+          ConfigEColorSign.reloadConfig();
+          ConfigCWEGM.reloadConfig();
+          ConfigCWEKeepFly.reloadConfig();
+          ConfigTemp.reloadConfig();
+          ConfigGActionBar.reloadConfig();
+          ConfigGJoinCommand.reloadConfig();
+          ConfigFJumpad.reloadConfig();
+	  }
+	  
+	  public static void fixConfig() {
+		  if (!MainClass.getInstance().getServerVersion().contains("1.8")) {
+			  if (ConfigGCos.getConfig().getString("Cosmetics.Sounds.Sound") == String.valueOf("NOTE_PIANO")) {
+				  ConfigGCos.getConfig().set("Cosmetics.Sounds.Sound", "NOTE_BLOCK_HARP");
+			  }
+			  if (ConfigCGlobal.getConfig().getString("Command.Broadcast.Sounds-Console.Sound") == "NOTE_PIANO") {
+				  ConfigCGlobal.getConfig().set("Command.Broadcast.Sounds-Console.Sound", "NOTE_BLOCK_HARP");
+			  }
+			  if (ConfigCGlobal.getConfig().getString("Command.Broadcast.Sounds.Sound") == "NOTE_PIANO") {
+				  ConfigCGlobal.getConfig().set("Command.Broadcast.Sounds.Sound", "NOTE_BLOCK_HARP");
+			  }
+			  if (ConfigEVoidTP.getConfig().getString("VoidTP.Options.Sounds.Sound") == "NOTE_PIANO") {
+				  ConfigEVoidTP.getConfig().set("VoidTP.Options.Sounds.Sound", "NOTE_BLOCK_HARP");
+			  }
+			  if (ConfigFJumpad.getConfig().getString("JumpPads.Sounds.Sound") == "NOTE_PIANO") {
+				  ConfigFJumpad.getConfig().set("JumpPads.Sounds.Sound", "NOTE_BLOCK_HARP");
+			  }
+			  
+			  ConfigGCos.saveConfigFile();
+			  ConfigCGlobal.saveConfigFile();
+			  ConfigEVoidTP.saveConfigFile();
+			  ConfigFJumpad.saveConfigFile();
+		  }
 	  }
 
 }
