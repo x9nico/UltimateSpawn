@@ -8,33 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.MainClass;
+import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
-import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
-import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
-import fr.Dianox.US.MainClass.config.ConfigSpawn;
-import fr.Dianox.US.MainClass.config.ConfigTemp;
-import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
-import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
-import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
-import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
-import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
-import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
-import fr.Dianox.US.MainClass.config.global.ConfigGCos;
-import fr.Dianox.US.MainClass.config.global.ConfigGFly;
-import fr.Dianox.US.MainClass.config.global.ConfigGGM;
-import fr.Dianox.US.MainClass.config.global.ConfigGHF;
-import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
-import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
-import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
-import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
-import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
-import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
-import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
-import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
-import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
-import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 
 public class MainCommand implements CommandExecutor {
 
@@ -64,32 +41,7 @@ public class MainCommand implements CommandExecutor {
                     sender.sendMessage("");
                     sender.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
                 } else if (args[0].equalsIgnoreCase("reload")) {
-                    ConfigGlobal.reloadConfig();
-                    ConfigMessage.reloadConfig();
-                    ConfigSpawn.reloadConfig();
-                    ConfigCGlobal.reloadConfig();
-                    ConfigGMessageQ.reloadConfig();
-                    ConfigGPlayerItems.reloadConfig();
-                    ConfigGProtection.reloadConfig();
-                    ConfigGServerEvent.reloadConfig();
-                    ConfigGCos.reloadConfig();
-                    ConfigGMessage.reloadConfig();
-                    ConfigGSpawn.reloadConfig();
-                    ConfigGTitle.reloadConfig();
-                    ConfigGGM.reloadConfig();
-                    ConfigGHF.reloadConfig();
-                    ConfigGFly.reloadConfig();
-                    ConfigGXP.reloadConfig();
-                    ConfigPlayerStats.reloadConfig();
-                    ConfigGInventory.reloadConfig();
-                    ConfigPlayerOptions.reloadConfig();
-                    ConfigEVoidTP.reloadConfig();
-                    ConfigEColorSign.reloadConfig();
-                    ConfigCWEGM.reloadConfig();
-                    ConfigCWEKeepFly.reloadConfig();
-                    ConfigTemp.reloadConfig();
-                    ConfigGActionBar.reloadConfig();
-                    ConfigGJoinCommand.reloadConfig();
+                	OtherUtils.reloadconfig();
                     
                     MainClass.getInstance().GetSetWorld();
                     
@@ -120,32 +72,7 @@ public class MainCommand implements CommandExecutor {
                 p.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
             } else if (args[0].equalsIgnoreCase("reload")) {
                 if (p.hasPermission("UltimateSpawn.reload")) {
-                    ConfigGlobal.reloadConfig();
-                    ConfigMessage.reloadConfig();
-                    ConfigSpawn.reloadConfig();
-                    ConfigCGlobal.reloadConfig();
-                    ConfigGMessageQ.reloadConfig();
-                    ConfigGPlayerItems.reloadConfig();
-                    ConfigGProtection.reloadConfig();
-                    ConfigGServerEvent.reloadConfig();
-                    ConfigGCos.reloadConfig();
-                    ConfigGMessage.reloadConfig();
-                    ConfigGSpawn.reloadConfig();
-                    ConfigGTitle.reloadConfig();
-                    ConfigGGM.reloadConfig();
-                    ConfigGHF.reloadConfig();
-                    ConfigGFly.reloadConfig();
-                    ConfigGXP.reloadConfig();
-                    ConfigPlayerStats.reloadConfig();
-                    ConfigGInventory.reloadConfig();
-                    ConfigPlayerOptions.reloadConfig();
-                    ConfigEVoidTP.reloadConfig();
-                    ConfigEColorSign.reloadConfig();
-                    ConfigCWEGM.reloadConfig();
-                    ConfigCWEKeepFly.reloadConfig();
-                    ConfigTemp.reloadConfig();
-                    ConfigGActionBar.reloadConfig();
-                    ConfigGJoinCommand.reloadConfig();
+                	OtherUtils.reloadconfig();
                     
                     MainClass.getInstance().GetSetWorld();
                     
