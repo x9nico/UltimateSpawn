@@ -361,7 +361,85 @@ public class OnJoin implements Listener {
         if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Enable")) {
         	if (!ConfigGMessage.getConfig().getBoolean("Broadcast.Join.World.All_World")) {
         		if (WorldUtils.getWBroadcastMsgJoin().contains(p.getWorld().getName())) {
-		        	if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
+        			if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Silent_Staff_Join")) {
+            			if (!p.hasPermission("UltimateSpawn.SilentStaffJoin")) {
+    		        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
+    			        		if (p.hasPlayedBefore()) {
+    					            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+    					                e.setJoinMessage(null);
+    					            } else {
+    					                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+    					                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    					                }
+    					                e.setJoinMessage(null);
+    					            }
+    			        		}
+    			        	} else {
+    			        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+    				                e.setJoinMessage(null);
+    				            } else {
+    				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+    				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    				                }
+    				                e.setJoinMessage(null);
+    				            }
+    			        	}
+            			} else {
+            				e.setJoinMessage(null);
+            			}
+            		} else {
+            			if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
+    		        		if (p.hasPlayedBefore()) {
+    				            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+    				                e.setJoinMessage(null);
+    				            } else {
+    				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+    				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    				                }
+    				                e.setJoinMessage(null);
+    				            }
+    		        		}
+    		        	} else {
+    		        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+    			                e.setJoinMessage(null);
+    			            } else {
+    			                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+    			                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    			                }
+    			                e.setJoinMessage(null);
+    			            }
+    		        	}
+            		}
+        		}
+        	} else {
+        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Silent_Staff_Join")) {
+        			if (!p.hasPermission("UltimateSpawn.SilentStaffJoin")) {
+		        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
+			        		if (p.hasPlayedBefore()) {
+					            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+					                e.setJoinMessage(null);
+					            } else {
+					                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+					                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+					                }
+					                e.setJoinMessage(null);
+					            }
+			        		}
+			        	} else {
+			        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
+				                e.setJoinMessage(null);
+				            } else {
+				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
+				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+				                }
+				                e.setJoinMessage(null);
+				            }
+			        	}
+        			} else {
+        				e.setJoinMessage(null);
+        			}
+        		} else {
+        			if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
 		        		if (p.hasPlayedBefore()) {
 				            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
 				                e.setJoinMessage(null);
@@ -383,28 +461,6 @@ public class OnJoin implements Listener {
 			            }
 		        	}
         		}
-        	} else {
-        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
-	        		if (p.hasPlayedBefore()) {
-			            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
-			                e.setJoinMessage(null);
-			            } else {
-			                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-			                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
-			                }
-			                e.setJoinMessage(null);
-			            }
-	        		}
-	        	} else {
-	        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
-		                e.setJoinMessage(null);
-		            } else {
-		                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-		                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
-		                }
-		                e.setJoinMessage(null);
-		            }
-	        	}
         	}
         }
 
@@ -516,14 +572,14 @@ public class OnJoin implements Listener {
         		if (WorldUtils.getWABOJ().contains(p.getWorld().getName())) {
 	        		if (p.hasPlayedBefore()) {
 	        			if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.No-New.Enable")) {
-	        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"));
+	        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"), ConfigGActionBar.getConfig().getInt("ActionBar.Options.No-New.Duration"));
 	        			}
 	        		} else {
 	        			if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.New.Enable")) {
-	        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.New.Message"));
+	        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.New.Message"), ConfigGActionBar.getConfig().getInt("ActionBar.Options.New.Duration"));
 	        			} else {
 	        				if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.No-New.Enable")) {
-	        					ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"));
+	        					ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"), ConfigGActionBar.getConfig().getInt("ActionBar.Options.No-New.Duration"));
 	        				}
 	        			}
 	        		}
@@ -531,14 +587,14 @@ public class OnJoin implements Listener {
         	} else {
         		if (p.hasPlayedBefore()) {
         			if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.No-New.Enable")) {
-        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"));
+        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"), ConfigGActionBar.getConfig().getInt("ActionBar.Options.No-New.Duration"));
         			}
         		} else {
         			if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.New.Enable")) {
-        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.New.Message"));
+        				ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.New.Message"), ConfigGActionBar.getConfig().getInt("ActionBar.Options.New.Duration"));
         			} else {
         				if (ConfigGActionBar.getConfig().getBoolean("ActionBar.Options.No-New.Enable")) {
-        					ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"));
+        					ActionBar.sendActionBar(p, ConfigGActionBar.getConfig().getString("ActionBar.Options.No-New.Message"), ConfigGActionBar.getConfig().getInt("ActionBar.Options.No-New.Duration"));
         				}
         			}
         		}
@@ -662,8 +718,6 @@ public class OnJoin implements Listener {
         	
         	ConfigTemp.saveConfigFile();
         }
-    	
-    	ConfigTemp.saveConfigFile();
     }
     
     public void Firework(Player p) {
