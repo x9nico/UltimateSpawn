@@ -56,6 +56,8 @@ public class MainClass extends JavaPlugin implements Listener {
 	
 	private static MainClass instance;
 	String version;
+	public static String nmsver;
+	public boolean useOldMethods = false;
 	
 	short config_number = 17;
 	short config_number_commands = 1;
@@ -63,6 +65,7 @@ public class MainClass extends JavaPlugin implements Listener {
 	short config_number_event = 2;
 	short config_number_other = 1;
 	short config_number_player = 2;
+	public Object val$player;
 	
 	public MainClass() {}
 	
@@ -73,7 +76,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.1-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.2-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -176,6 +179,12 @@ public class MainClass extends JavaPlugin implements Listener {
 
         GetSetWorld();
         OtherUtils.fixConfig();
+        
+        nmsver = Bukkit.getServer().getClass().getPackage().getName();
+        nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
+        if ((nmsver.equalsIgnoreCase("v1_8_R1")) || (nmsver.startsWith("v1_7_"))) {
+        	useOldMethods = true;
+        }
         
         getCSC("| "+ChatColor.YELLOW+"And many things.... I think... x'D");
 		getCSC("|");
