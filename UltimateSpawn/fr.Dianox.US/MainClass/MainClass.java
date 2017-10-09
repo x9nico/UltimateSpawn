@@ -15,6 +15,7 @@ import fr.Dianox.US.MainClass.Commands.Chat.ClearChatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.MuteChatCommand;
 import fr.Dianox.US.MainClass.Commands.Other.FlyCommand;
+import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
@@ -54,6 +55,7 @@ import fr.Dianox.US.MainClass.event.OnQuit;
 public class MainClass extends JavaPlugin implements Listener {
 	
 	private static MainClass instance;
+	String version;
 	
 	short config_number = 17;
 	short config_number_commands = 1;
@@ -68,8 +70,12 @@ public class MainClass extends JavaPlugin implements Listener {
 	public void onEnable() {
 		getCSC("|=============================");
 		getCSC("|");
+		String version1 = Bukkit.getServer().getBukkitVersion();
+		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.1-Alpha");
+		getCSC("|");
+		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
 		
 		super.onEnable();
@@ -169,6 +175,7 @@ public class MainClass extends JavaPlugin implements Listener {
         }
 
         GetSetWorld();
+        OtherUtils.fixConfig();
         
         getCSC("| "+ChatColor.YELLOW+"And many things.... I think... x'D");
 		getCSC("|");
@@ -270,6 +277,10 @@ public class MainClass extends JavaPlugin implements Listener {
         // > ChangeWorld
         WorldUtils.setWGetWorldKeepFlyChangeWorld();
         WorldUtils.setWGetWorldGamemodeChangeWorld();
+	}
+	
+	public String getServerVersion() {
+		return version;
 	}
 	
 }
