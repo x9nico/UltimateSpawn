@@ -65,7 +65,6 @@ public class MainClass extends JavaPlugin implements Listener {
 	short config_number_event = 2;
 	short config_number_other = 1;
 	short config_number_player = 2;
-	public Object val$player;
 	
 	public MainClass() {}
 	
