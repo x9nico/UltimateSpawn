@@ -1,5 +1,5 @@
 name: UltimateSpawn
-version: 0.5-Alpha
+version: 0.5.1-Alpha
 author: Dianox
 main: fr.Dianox.US.MainClass.MainClass
 LOAD: POSTWORLD
