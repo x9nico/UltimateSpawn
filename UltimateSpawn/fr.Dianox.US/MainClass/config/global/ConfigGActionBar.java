@@ -59,8 +59,10 @@ public class ConfigGActionBar {
             Config.set("ActionBar.Enable", Boolean.valueOf(true));
             Config.set("ActionBar.Options.New.Enable", Boolean.valueOf(true));
             Config.set("ActionBar.Options.New.Message", "&6Welcome on our &eserver");
+            Config.set("ActionBar.Options.New.Duration", "5L");
             Config.set("ActionBar.Options.No-New.Enable", Boolean.valueOf(true));
             Config.set("ActionBar.Options.No-New.Message", "&6Hello on our &eserver");
+            Config.set("ActionBar.Options.No-New.Duration", "5L");
             Config.set("ActionBar.World.All_World", Boolean.valueOf(false));
             Config.set("ActionBar.World.Worlds", java.util.Arrays.asList(new String[] {
                     "world",
