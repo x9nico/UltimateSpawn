@@ -77,6 +77,8 @@ public class ConfigGMessage {
             
             Config.set("Broadcast.Join.Enable", Boolean.valueOf(true));
             Config.set("Broadcast.Join.Hide", Boolean.valueOf(false));
+            Config.set("Broadcast.Join.Hide_New_Players", Boolean.valueOf(false));
+            Config.set("Broadcast.Join.Silent_Staff_Join", Boolean.valueOf(false));
             Config.set("Broadcast.Join.Message", java.util.Arrays.asList(new String[] {
                 "&8[&a+&8] [&a+&8] [&a+&8] ",
                 "&eHey, %player%"
