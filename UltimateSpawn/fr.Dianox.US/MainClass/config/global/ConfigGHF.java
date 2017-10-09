@@ -58,8 +58,8 @@ public class ConfigGHF {
 
             Config.set("Restore.Food.Enable", Boolean.valueOf(true));
             Config.set("Restore.Food.Value", Integer.valueOf(20));
-            Config.set("Restore.Food..World.All_World", Boolean.valueOf(false));
-            Config.set("Restore.Food..World.Worlds", java.util.Arrays.asList(new String[] {
+            Config.set("Restore.Food.World.All_World", Boolean.valueOf(false));
+            Config.set("Restore.Food.World.Worlds", java.util.Arrays.asList(new String[] {
                     "world",
                     "world_nether"
                 }));
