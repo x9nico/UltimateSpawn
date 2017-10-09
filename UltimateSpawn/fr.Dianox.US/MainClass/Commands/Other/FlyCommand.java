@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
-import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
+import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
 
 public class FlyCommand implements CommandExecutor {
@@ -32,16 +32,16 @@ public class FlyCommand implements CommandExecutor {
         			
         			UUID pT = target.getUniqueId();
         			
-        			if (ConfigPlayerOptions.getConfig().getBoolean(pT+".Options.Fly.Enable")) {
+        			if (ConfigTemp.getConfig().getBoolean(pT+".Options.Fly.Enable")) {
                     	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), target);
                     	
                     	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Others.Fly.Other.Disable").replaceAll("%target%", String.valueOf(target))));
                     	
-	       				ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Enable", Boolean.valueOf(false));
-	       	        	ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Options.SetFlying", Boolean.valueOf(false));
-	       	        	ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Options.SetAllowFlight", Boolean.valueOf(false));
+                    	ConfigTemp.getConfig().set(pT+".Options.Fly.Enable", Boolean.valueOf(false));
+	       	        	ConfigTemp.getConfig().set(pT+".Options.Fly.SetFlying", Boolean.valueOf(false));
+	       	        	ConfigTemp.getConfig().set(pT+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
 	       				
-	       	        	ConfigPlayerOptions.saveConfigFile();
+	       	        	ConfigTemp.saveConfigFile();
 	       	        	
 	       	        	target.setAllowFlight(false);
 	       	        	target.setFlying(false);
@@ -50,11 +50,11 @@ public class FlyCommand implements CommandExecutor {
                     	
 	       				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Others.Fly.Other.Enable").replaceAll("%target%", String.valueOf(target))));
 	       				
-	       				ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Enable", Boolean.valueOf(true));
-	       	        	ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Options.SetFlying", Boolean.valueOf(true));
-	       	        	ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Options.SetAllowFlight", Boolean.valueOf(true));
+	       				ConfigTemp.getConfig().set(pT+".Options.Fly.Enable", Boolean.valueOf(true));
+	       				ConfigTemp.getConfig().set(pT+".Options.Fly.SetFlying", Boolean.valueOf(true));
+	       	        	ConfigTemp.getConfig().set(pT+".Options.Fly.SetAllowFlight", Boolean.valueOf(true));
 	       				
-	       	        	ConfigPlayerOptions.saveConfigFile();
+	       	        	ConfigTemp.saveConfigFile();
 	       	        	
 		       			target.setAllowFlight(true);
 		       			target.setFlying(true);
@@ -72,25 +72,25 @@ public class FlyCommand implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("fly") && p.hasPermission("UltimateSpawn.fly")) {
             if ((args.length == 0)) {
                 if (ConfigCGlobal.getConfig().getBoolean("Command.Fly.Self.Enable")) {
-                    if (ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+                    if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
                     	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), p);
                     	
-	       				ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
-	       	        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetFlying", Boolean.valueOf(false));
-	       	        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetAllowFlight", Boolean.valueOf(false));
+                    	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+	       				ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
+	       	        	ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
 	       				
-	       	        	ConfigPlayerOptions.saveConfigFile();
+	       	        	ConfigTemp.saveConfigFile();
 	       	        	
 		       			p.setAllowFlight(false);
 		       			p.setFlying(false);
 	       			} else {
 	       				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Enable"), p);
                     	
-	       				ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(true));
-	       	        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetFlying", Boolean.valueOf(true));
-	       	        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetAllowFlight", Boolean.valueOf(true));
+	       				ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(true));
+	       				ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(true));
+	       				ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(true));
 	       				
-	       	        	ConfigPlayerOptions.saveConfigFile();
+	       				ConfigTemp.saveConfigFile();
 	       	        	
 		       			p.setAllowFlight(true);
 		       			p.setFlying(true);
@@ -110,16 +110,16 @@ public class FlyCommand implements CommandExecutor {
 	    			
 	    			UUID pT = target.getUniqueId();
 	    			
-	    			if (ConfigPlayerOptions.getConfig().getBoolean(pT+".Options.Fly.Enable")) {
+	    			if (ConfigTemp.getConfig().getBoolean(pT+".Options.Fly.Enable")) {
 	                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), target);
 	                	
 	                	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Others.Fly.Other.Disable").replaceAll("%target%", String.valueOf(target))));
 	                	
-	       				ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Enable", Boolean.valueOf(false));
-	       	        	ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Options.SetFlying", Boolean.valueOf(false));
-	       	        	ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Options.SetAllowFlight", Boolean.valueOf(false));
+	                	ConfigTemp.getConfig().set(pT+".Options.Fly.Enable", Boolean.valueOf(false));
+	                	ConfigTemp.getConfig().set(pT+".Options.Fly.SetFlying", Boolean.valueOf(false));
+	       	        	ConfigTemp.getConfig().set(pT+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
 	       				
-	       	        	ConfigPlayerOptions.saveConfigFile();
+	       	        	ConfigTemp.saveConfigFile();
 	       	        	
 	       	        	target.setAllowFlight(false);
 	       	        	target.setFlying(false);
@@ -128,11 +128,11 @@ public class FlyCommand implements CommandExecutor {
 	                	
 	       				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Others.Fly.Other.Enable").replaceAll("%target%", String.valueOf(target))));
 	       				
-	       				ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Enable", Boolean.valueOf(true));
-	       	        	ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Options.SetFlying", Boolean.valueOf(true));
-	       	        	ConfigPlayerOptions.getConfig().set(pT+".Options.Fly.Options.SetAllowFlight", Boolean.valueOf(true));
+	       				ConfigTemp.getConfig().set(pT+".Options.Fly.Enable", Boolean.valueOf(true));
+	       				ConfigTemp.getConfig().set(pT+".Options.Fly.SetFlying", Boolean.valueOf(true));
+	       				ConfigTemp.getConfig().set(pT+".Options.Fly.SetAllowFlight", Boolean.valueOf(true));
 	       				
-	       	        	ConfigPlayerOptions.saveConfigFile();
+	       				ConfigTemp.saveConfigFile();
 	       	        	
 		       			target.setAllowFlight(true);
 		       			target.setFlying(true);
@@ -140,7 +140,7 @@ public class FlyCommand implements CommandExecutor {
 	            } else {
 	            	if (ConfigCGlobal.getConfig().getBoolean("Command.Fly.Other.Disable-Message")) {
                     	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
-                    }
+	            	}
 	            }
             } else {
             	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
