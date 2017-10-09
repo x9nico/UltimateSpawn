@@ -633,7 +633,7 @@ public class OnJoin implements Listener {
         }
         
         // Temporary
-        int GamemodeTemp1 = 0; 
+        int GamemodeTemp1 = 0;
         if (p.getGameMode() == GameMode.SURVIVAL) {
         	GamemodeTemp1 = 0;
         } else if (p.getGameMode() == GameMode.CREATIVE) {
@@ -648,14 +648,22 @@ public class OnJoin implements Listener {
         if (!ConfigTemp.getConfig().contains(String.valueOf(pU))) {
         	ConfigTemp.getConfig().set(pU+".Player", String.valueOf(p));
         	ConfigTemp.getConfig().set(pU+".Options.Gamemode", Integer.valueOf(GamemodeTemp2));
+        	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable"));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetFlying"));
         	
         	ConfigTemp.saveConfigFile();
         } else if (ConfigTemp.getConfig().contains(String.valueOf(pU))) {
         	ConfigTemp.getConfig().set(pU+".Player", String.valueOf(p));
         	ConfigTemp.getConfig().set(pU+".Options.Gamemode", Integer.valueOf(GamemodeTemp2));
+        	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable"));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetFlying"));
         	
         	ConfigTemp.saveConfigFile();
         }
+    	
+    	ConfigTemp.saveConfigFile();
     }
     
     public void Firework(Player p) {
