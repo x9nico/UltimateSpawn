@@ -156,19 +156,19 @@ public class OtherUtils {
 	  public static void fixConfig() {
 		  if (!MainClass.getInstance().getServerVersion().contains("1.8")) {
 			  if (ConfigGCos.getConfig().getString("Cosmetics.Sounds.Sound") == String.valueOf("NOTE_PIANO")) {
-				  ConfigGCos.getConfig().set("Cosmetics.Sounds.Sound", "NOTE_BLOCK_HARP");
+				  ConfigGCos.getConfig().set("Cosmetics.Sounds.Sound", "BLOCK_NOTE_HARP");
 			  }
 			  if (ConfigCGlobal.getConfig().getString("Command.Broadcast.Sounds-Console.Sound") == "NOTE_PIANO") {
-				  ConfigCGlobal.getConfig().set("Command.Broadcast.Sounds-Console.Sound", "NOTE_BLOCK_HARP");
+				  ConfigCGlobal.getConfig().set("Command.Broadcast.Sounds-Console.Sound", "BLOCK_NOTE_HARP");
 			  }
 			  if (ConfigCGlobal.getConfig().getString("Command.Broadcast.Sounds.Sound") == "NOTE_PIANO") {
-				  ConfigCGlobal.getConfig().set("Command.Broadcast.Sounds.Sound", "NOTE_BLOCK_HARP");
+				  ConfigCGlobal.getConfig().set("Command.Broadcast.Sounds.Sound", "BLOCK_NOTE_HARP");
 			  }
 			  if (ConfigEVoidTP.getConfig().getString("VoidTP.Options.Sounds.Sound") == "NOTE_PIANO") {
-				  ConfigEVoidTP.getConfig().set("VoidTP.Options.Sounds.Sound", "NOTE_BLOCK_HARP");
+				  ConfigEVoidTP.getConfig().set("VoidTP.Options.Sounds.Sound", "BLOCK_NOTE_HARP");
 			  }
 			  if (ConfigFJumpad.getConfig().getString("JumpPads.Sounds.Sound") == "NOTE_PIANO") {
-				  ConfigFJumpad.getConfig().set("JumpPads.Sounds.Sound", "NOTE_BLOCK_HARP");
+				  ConfigFJumpad.getConfig().set("JumpPads.Sounds.Sound", "BLOCK_NOTE_HARP");
 			  }
 			  
 			  ConfigGCos.saveConfigFile();
@@ -177,5 +177,4 @@ public class OtherUtils {
 			  ConfigFJumpad.saveConfigFile();
 		  }
 	  }
-
 }
