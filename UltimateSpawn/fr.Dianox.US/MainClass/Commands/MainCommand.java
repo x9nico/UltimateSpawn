@@ -23,7 +23,7 @@ public class MainCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
 
         if (!(sender instanceof Player)) {
-            if (cmd.getName().equalsIgnoreCase("UltimateSpawn") || cmd.getName().equalsIgnoreCase("Us")) {
+            if (cmd.getName().equalsIgnoreCase("ultimatespawn") || cmd.getName().equalsIgnoreCase("us")) {
                 if ((args.length == 0) || (args[0].equalsIgnoreCase("help"))) {
                     sender.sendMessage("§8//§7§m---------------§r§8\\\\ §3[§bUltimateSpawn§3] §8//§7§m---------------§r§8\\\\");
                     sender.sendMessage("");
@@ -36,7 +36,7 @@ public class MainCommand implements CommandExecutor {
                     sender.sendMessage(" §8>> §7/bc - §eBroadcast");
                     sender.sendMessage(" §8>> §7/ping - §ePing");
                     sender.sendMessage(" §8>> §7/gmute - §eMute chat");
-                    sender.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat");
+                    sender.sendMessage(" §8>> §7/dchat <delay> - §eDelayChat");
                     sender.sendMessage(" §8>> §7/fly [player] - §eEnable or disable the fly §6for a player");
                     sender.sendMessage("");
                     sender.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
@@ -53,45 +53,41 @@ public class MainCommand implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        if ((cmd.getName().equalsIgnoreCase("UltimateSpawn") || cmd.getName().equalsIgnoreCase("Us")) && p.hasPermission("UltimateSpawn.help")) {
+        if ((cmd.getName().equalsIgnoreCase("ultimatespawn") || cmd.getName().equalsIgnoreCase("us")) && p.hasPermission("UltimateSpawn.help")) {
             if ((args.length == 0) || (args[0].equalsIgnoreCase("help") && p.hasPermission("UltimateSpawn.help"))) {
             	p.sendMessage("§8//§7§m---------------§r§8\\\\ §3[§bUltimateSpawn§3] §8//§7§m---------------§r§8\\\\");
                 p.sendMessage("");
                 p.sendMessage("     §l>> §e§o§lGlobal Help");
                 p.sendMessage("");
-                p.sendMessage(" §8>> §7/setspawn [voidtp|firstjoin] - §eSet the spawn");
+                p.sendMessage(" §8>> §7/setspawn [§evoidtp§7|§efirstjoin§7] - §eSet the spawn");
                 p.sendMessage(" §8>> §7/spawn - §eGo to spawn");
                 p.sendMessage(" §8>> §7/us reload - §eReload the plugin");
                 p.sendMessage(" §8>> §7/cc - §bHelp of clearchat");
                 p.sendMessage(" §8>> §7/bc - §eBroadcast");
                 p.sendMessage(" §8>> §7/ping - §ePing");
                 p.sendMessage(" §8>> §7/gmute - §eMute chat");
-                p.sendMessage(" §8>> §7/dchat [delay] - §eDelayChat");
+                p.sendMessage(" §8>> §7/dchat <delay> - §eDelayChat");
                 p.sendMessage(" §8>> §7/fly [player] - §eEnable or disable the fly");
                 p.sendMessage("");
                 p.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
-            } else if (args[0].equalsIgnoreCase("reload")) {
-                if (p.hasPermission("UltimateSpawn.reload")) {
-                	OtherUtils.reloadconfig();
+            } else if (args[0].equalsIgnoreCase("reload") && p.hasPermission("UltimateSpawn.reload")) {
+                OtherUtils.reloadconfig();
                     
-                    MainClass.getInstance().GetSetWorld();
+                MainClass.getInstance().GetSetWorld();
                     
-                    if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-                    	ConfigGlobal.getConfig().set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
-                    }
-                    
-                    if ((sender instanceof Player)) {
-                        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
-                    }
-                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Plugin-Reload"), p);
-
-                } else {
-                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+                if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+                	ConfigGlobal.getConfig().set("Plugin.Use.PlaceholderAPI", Boolean.valueOf(false));
                 }
-
+                    
+                if ((sender instanceof Player)) {
+                	Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
+                }
+                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Plugin-Reload"), p);
+            } else {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
             }
         } else {
-        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
         }
         return true;
 
