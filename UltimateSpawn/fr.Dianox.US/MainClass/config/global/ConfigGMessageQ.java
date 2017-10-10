@@ -58,6 +58,7 @@ public class ConfigGMessageQ {
 
             Config.set("Broadcast.Quit.Enable", Boolean.valueOf(true));
             Config.set("Broadcast.Quit.Hide", Boolean.valueOf(false));
+            Config.set("Broadcast.Quit.Silent_Staff_Quit", Boolean.valueOf(false));
             Config.set("Broadcast.Quit.Message", java.util.Arrays.asList(new String[] {
                 "&8[&c-&8] [&c-&8] [&c-&8] ",
                 "&cHey, %player% :'("
