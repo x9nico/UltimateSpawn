@@ -21,6 +21,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
 import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
+import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
@@ -76,6 +77,7 @@ public class WorldUtils {
 	public static List<String> worlds_JoinCommands_Player_No_New = new ArrayList<String>();
 	public static List<String> worlds_JoinCommands_Console_New = new ArrayList<String>();
 	public static List<String> worlds_JoinCommands_Console_No_New = new ArrayList<String>();
+	public static List<String> worlds_QuitCommands_Console = new ArrayList<String>();
 	
 	public static void setWGetWorldJoinCommandPlayerNew() {
 		if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.New.JoinCommand-Player.Enable")) {
@@ -85,6 +87,20 @@ public class WorldUtils {
 	            		System.out.println("| Invalid world in JoinCommand.yml, JoinCommand.Options.New.JoinCommand-Player.World: "+worldHunger);
 	            	} else {
 	            		worlds_JoinCommands_Player_New.add(worldHunger);
+	            	}
+	            }
+	        }
+        }
+	}
+	
+	public static void setWGetWorldQuitCommandConsole() {
+		if (ConfigGQuitCommand.getConfig().getBoolean("QuitCommand.Enable")) {
+	        if (!ConfigGQuitCommand.getConfig().getBoolean("QuitCommand.QuitCommand-Console.World.All_World")) {
+	            for (String worldHunger : ConfigGQuitCommand.getConfig().getStringList("QuitCommand.QuitCommand-Console.World.Worlds")) {
+	            	if (Bukkit.getWorld(worldHunger) == null) {
+	            		System.out.println("| Invalid world in QuitCommand.yml, QuitCommand.QuitCommand-Console.World: "+worldHunger);
+	            	} else {
+	            		worlds_QuitCommands_Console.add(worldHunger);
 	            	}
 	            }
 	        }
@@ -951,6 +967,10 @@ public class WorldUtils {
 	
 	public static List<String> getWPlayerJoinCommandNoNew() {
 		return worlds_JoinCommands_Player_No_New;
+	}
+	
+	public static List<String> getWConsoleQuitCommand() {
+		return worlds_QuitCommands_Console;
 	}
 
 }
