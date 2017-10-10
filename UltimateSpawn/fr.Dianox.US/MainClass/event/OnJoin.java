@@ -369,7 +369,7 @@ public class OnJoin implements Listener {
     					                e.setJoinMessage(null);
     					            } else {
     					                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-    					                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    					                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
     					                }
     					                e.setJoinMessage(null);
     					            }
@@ -379,7 +379,7 @@ public class OnJoin implements Listener {
     				                e.setJoinMessage(null);
     				            } else {
     				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-    				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
     				                }
     				                e.setJoinMessage(null);
     				            }
@@ -394,7 +394,7 @@ public class OnJoin implements Listener {
     				                e.setJoinMessage(null);
     				            } else {
     				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-    				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
     				                }
     				                e.setJoinMessage(null);
     				            }
@@ -404,7 +404,7 @@ public class OnJoin implements Listener {
     			                e.setJoinMessage(null);
     			            } else {
     			                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-    			                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+    			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
     			                }
     			                e.setJoinMessage(null);
     			            }
@@ -420,7 +420,7 @@ public class OnJoin implements Listener {
 					                e.setJoinMessage(null);
 					            } else {
 					                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-					                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+					                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
 					                }
 					                e.setJoinMessage(null);
 					            }
@@ -430,7 +430,7 @@ public class OnJoin implements Listener {
 				                e.setJoinMessage(null);
 				            } else {
 				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
 				                }
 				                e.setJoinMessage(null);
 				            }
@@ -445,7 +445,7 @@ public class OnJoin implements Listener {
 				                e.setJoinMessage(null);
 				            } else {
 				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
 				                }
 				                e.setJoinMessage(null);
 				            }
@@ -455,7 +455,7 @@ public class OnJoin implements Listener {
 			                e.setJoinMessage(null);
 			            } else {
 			                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-			                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
 			                }
 			                e.setJoinMessage(null);
 			            }
