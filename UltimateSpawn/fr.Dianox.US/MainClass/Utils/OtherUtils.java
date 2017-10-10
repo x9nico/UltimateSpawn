@@ -30,6 +30,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
 import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
+import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
@@ -151,6 +152,7 @@ public class OtherUtils {
           ConfigGActionBar.reloadConfig();
           ConfigGJoinCommand.reloadConfig();
           ConfigFJumpad.reloadConfig();
+          ConfigGQuitCommand.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
