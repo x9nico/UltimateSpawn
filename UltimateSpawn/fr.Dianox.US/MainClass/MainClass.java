@@ -40,6 +40,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
 import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
+import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
@@ -59,7 +60,7 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
-	short config_number = 17;
+	short config_number = 18;
 	short config_number_commands = 1;
 	short config_number_fun = 1;
 	short config_number_event = 2;
@@ -75,7 +76,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.2-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.3-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -118,6 +119,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCSC("|         "+ChatColor.YELLOW+"Config 16"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGJoinCommand.loadConfig((Plugin) this);
 		getCSC("|         "+ChatColor.YELLOW+"Config 17"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
+		ConfigGQuitCommand.loadConfig((Plugin) this);
+		getCSC("|         "+ChatColor.YELLOW+"Config 18"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCGlobal.loadConfig((Plugin) this);
 		getCSC("| ("+ChatColor.GREEN+"Commands"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigFJumpad.loadConfig((Plugin) this);
@@ -231,6 +234,7 @@ public class MainClass extends JavaPlugin implements Listener {
         WorldUtils.setWGetWorldProtectionHagingBreakByEntity();
         WorldUtils.setWGetWorldProtectionPlayerInteractEntityItemFrame();
         
+        // >> OnJoin
         // > Reset XP
         WorldUtils.setWGetWorldResetExperience();
         WorldUtils.setWGetWorldResetLevel();
@@ -258,7 +262,6 @@ public class MainClass extends JavaPlugin implements Listener {
         // > Broadcast
         WorldUtils.setWGetWorldBroadcastJoin();
         WorldUtils.setWGetWorldBroadcastNewJoin();
-        WorldUtils.setWGetWorldBroadcastQuit();
         // > Chat
         WorldUtils.setWGetWorldClearChat();
         // > ActionBar
@@ -268,6 +271,12 @@ public class MainClass extends JavaPlugin implements Listener {
         WorldUtils.setWGetWorldJoinCommandPlayerNoNew();
         WorldUtils.setWGetWorldJoinCommandConsoleNew();
         WorldUtils.setWGetWorldJoinCommandConsoleNoNew();
+        
+        // >> OnQuit
+        // > BroadCast Quit
+        WorldUtils.setWGetWorldBroadcastQuit();
+        // > QuitCommand
+        WorldUtils.setWGetWorldQuitCommandConsole();
         
         // >> Server Player Item
         WorldUtils.setWGetWorldItemDrop();
