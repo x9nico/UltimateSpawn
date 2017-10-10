@@ -2,6 +2,7 @@ package fr.Dianox.US.MainClass.event;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,7 @@ import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
+import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 
 public class OnQuit implements Listener {
 
@@ -30,27 +32,73 @@ public class OnQuit implements Listener {
             p.setFlying(false);
         }
 
+        // Broadcast quit
         if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Enable")) {
         	if (!ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.World.All_World")) {
         		if (WorldUtils.getWBroadcastQuit().contains(p.getWorld().getName())) {
-		            if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
+        			if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Silent_Staff_Quit")) {
+            			if (!p.hasPermission("UltimateSpawn.SilentStaffQuit")) {
+    		        		if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
+    			                e.setQuitMessage(null);
+    			            } else {
+    			                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
+    			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+    			                }
+    			                e.setQuitMessage(null);
+    			            }
+            			} else {
+            				e.setQuitMessage(null);
+            			}
+            		} else {
+            			if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
+    		                e.setQuitMessage(null);
+    		            } else {
+    		                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
+    		                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+    		                }
+    		                e.setQuitMessage(null);
+    		            }
+            		}
+        		}
+        	} else {
+        		if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Silent_Staff_Quit")) {
+        			if (!p.hasPermission("UltimateSpawn.SilentStaffQuit")) {
+		        		if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
+			                e.setQuitMessage(null);
+			            } else {
+			                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
+			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+			                }
+			                e.setQuitMessage(null);
+			            }
+        			} else {
+        				e.setQuitMessage(null);
+        			}
+        		} else {
+        			if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
 		                e.setQuitMessage(null);
 		            } else {
 		                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
-		                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
+		                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
 		                }
 		                e.setQuitMessage(null);
 		            }
         		}
+        	}
+        }
+        
+        // QuitCommand
+        if (ConfigGQuitCommand.getConfig().getBoolean("QuitCommand.Enable")) {
+        	if (!ConfigGQuitCommand.getConfig().getBoolean("QuitCommand.QuitCommand-Console.World.All_World")) {
+        		if (WorldUtils.getWConsoleQuitCommand().contains(p.getWorld().getName())) {
+		        	for (String commands: ConfigGQuitCommand.getConfig().getStringList("QuitCommand.QuitCommand-Console.Commands")) {
+						Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), commands.replaceAll("%player%", p.getName()));
+					}
+        		}
         	} else {
-        		if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
-	                e.setQuitMessage(null);
-	            } else {
-	                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
-	                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(message, p);
-	                }
-	                e.setQuitMessage(null);
-	            }
+        		for (String commands: ConfigGQuitCommand.getConfig().getStringList("QuitCommand.QuitCommand-Console.Commands")) {
+    				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), commands.replaceAll("%player%", p.getName()));
+    			}
         	}
         }
         
