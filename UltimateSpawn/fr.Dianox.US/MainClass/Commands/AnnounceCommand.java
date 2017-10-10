@@ -46,10 +46,10 @@ public class AnnounceCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         if (ConfigCGlobal.getConfig().getBoolean("Command.Broadcast.Enable")) {
-            if (cmd.getName().equalsIgnoreCase("bc") || cmd.getName().equalsIgnoreCase("broadcast") && p.hasPermission("UltimateSpawn.Broadcast")) {
+            if ((cmd.getName().equalsIgnoreCase("bc") || cmd.getName().equalsIgnoreCase("broadcast")) && p.hasPermission("UltimateSpawn.Broadcast")) {
 
                 if (args.length == 0) {
-                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), Bukkit.getServer());
+                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
                     return true;
                 }
 
