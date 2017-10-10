@@ -30,9 +30,9 @@ public class SpawnCommand implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        if (cmd.getName().equalsIgnoreCase("setspawn") || cmd.getName().equalsIgnoreCase("sethub") || cmd.getName().equalsIgnoreCase("setlobby")) {
+        if ((cmd.getName().equalsIgnoreCase("setspawn") || cmd.getName().equalsIgnoreCase("sethub") || cmd.getName().equalsIgnoreCase("setlobby")) && (p.hasPermission("ultimatespawn.command.setspawn.setspawn") || p.hasPermission("ultimatespawn.command.setspawn.voidtp") || p.hasPermission("ultimatespawn.command.setspawn.firstspawn"))) {
         	if (args.length == 0) {
-	        	if (p.hasPermission("UltimateSpawn.SetSpawn")) {
+	        	if (p.hasPermission("ultimatespawn.command.setspawn.setspawn")) {
 	                if (!(sender instanceof Player)) {
 	                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
 	                    return true;
@@ -56,7 +56,7 @@ public class SpawnCommand implements CommandExecutor {
 	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
 	            }
         	} else if (args[0].equalsIgnoreCase("voidtp")) {
-        		if (p.hasPermission("UltimateSpawn.SetSpawn")) {
+        		if (p.hasPermission("ultimatespawn.command.setspawn.voidtp")) {
 	                if (!(sender instanceof Player)) {
 	                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
 	                    return true;
@@ -80,7 +80,7 @@ public class SpawnCommand implements CommandExecutor {
 	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
 	            }	
         	} else if (args[0].equalsIgnoreCase("firstspawn")) {
-        		if (p.hasPermission("UltimateSpawn.SetSpawn")) {
+        		if (p.hasPermission("ultimatespawn.command.setspawn.firstspawn")) {
 	                if (!(sender instanceof Player)) {
 	                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
 	                    return true;
@@ -104,34 +104,33 @@ public class SpawnCommand implements CommandExecutor {
 	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
 	            }
         	} else {
-        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
         		PlaceHolderMessageUtils.ReplaceCharMessagePlayer("&cPlease... /setspawn [voidTP|firstspawn]", p);
-        	} 
-        } else if (label.equalsIgnoreCase("spawn") || label.equalsIgnoreCase("hub") || label.equalsIgnoreCase("lobby") || label.equalsIgnoreCase("h") || label.equalsIgnoreCase("l")) {
+            }
+        } else {
+        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+        }
+        
+        if (label.equalsIgnoreCase("spawn") || label.equalsIgnoreCase("hub") || label.equalsIgnoreCase("lobby") || label.equalsIgnoreCase("h") || label.equalsIgnoreCase("l")) {
             if (args.length == 0) {
                 if (!(sender instanceof Player)) {
                 	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
                     return true;
                 }
                 SpawnUtils.teleportToSpawn(p, true);
-            } else if (args.length == 1) {
-                if (p.hasPermission("UltimateSpawn.TeleportOthers")) {
-                    Player target = Bukkit.getServer().getPlayer(args[0]);
+            } else if (args.length == 1 && p.hasPermission("UltimateSpawn.TeleportOthers")) {
+            	Player target = Bukkit.getServer().getPlayer(args[0]);
 
-                    if (target == null) {
-                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player-not-found"), p);
-                        return true;
-                    }
+            	if (target == null) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player-not-found"), p);
+            		return true;
+            	}
 
-                    SpawnUtils.teleportToSpawn(target, sender);
-                } else {
-                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
-                }
+            	SpawnUtils.teleportToSpawn(target, sender);
+            } else {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
             }
-        } else {
-            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
         }
         return true;
     }
-
 }
