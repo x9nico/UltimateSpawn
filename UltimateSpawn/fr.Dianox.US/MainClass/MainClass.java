@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import fr.Dianox.US.MainClass.Commands.AnnounceCommand;
 import fr.Dianox.US.MainClass.Commands.MainCommand;
 import fr.Dianox.US.MainClass.Commands.PingCommand;
+import fr.Dianox.US.MainClass.Commands.SetSpawnCommand;
 import fr.Dianox.US.MainClass.Commands.SpawnCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.ClearChatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
@@ -24,6 +25,7 @@ import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
+import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
@@ -61,7 +63,7 @@ public class MainClass extends JavaPlugin implements Listener {
 	public boolean useOldMethods = false;
 	
 	short config_number = 18;
-	short config_number_commands = 1;
+	short config_number_commands = 2;
 	short config_number_fun = 1;
 	short config_number_event = 2;
 	short config_number_other = 1;
@@ -76,7 +78,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.3-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.4-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -123,6 +125,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCSC("|         "+ChatColor.YELLOW+"Config 18"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCGlobal.loadConfig((Plugin) this);
 		getCSC("| ("+ChatColor.GREEN+"Commands"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
+		ConfigCSpawn.loadConfig((Plugin) this);
+		getCSC("|            "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigFJumpad.loadConfig((Plugin) this);
 		getCSC("| ("+ChatColor.GREEN+"Fun"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_fun+""+ChatColor.YELLOW+" loaded");
 		ConfigEVoidTP.loadConfig((Plugin) this);
@@ -146,7 +150,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		
 		getCommand("ultimatespawn").setExecutor(new MainCommand());
 		getCommand("spawn").setExecutor(new SpawnCommand());
-		getCommand("setspawn").setExecutor(new SpawnCommand());
+		getCommand("setspawn").setExecutor(new SetSpawnCommand());
 		getCommand("ping").setExecutor(new PingCommand());
 		getCommand("cc").setExecutor(new ClearChatCommand());
 		getCommand("bc").setExecutor(new AnnounceCommand());
