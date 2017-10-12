@@ -57,6 +57,7 @@ public class ConfigCSpawn {
 
             Config.set("Spawn.Enable", Boolean.valueOf(true));
             Config.set("Spawn.Use_Permission", Boolean.valueOf(false));
+            Config.set("Spawn.Disable-Message", Boolean.valueOf(false));
             
             saveConfigFile();
 
