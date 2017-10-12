@@ -189,17 +189,43 @@ public class OnJoin implements Listener {
         // Teleport spawn || broadcast new
         if (p.hasPlayedBefore()) {
             if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.Enable")) {
-            	if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
-            		SpawnUtils.teleportToSpawnStats(p);
-            	} else {
-            		SpawnUtils.teleportToSpawn(p);
-            	}
-            } else if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.If_stats_is_enable.If_Teleport_on_join_is_disable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
-            	SpawnUtils.teleportToSpawnStats(p);
+            	if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.Use_Permission")) {
+	            	if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
+	            		if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.Use_Permission")) {
+	            			if (p.hasPermission("ultimatespawn.spawn.teleport.lastlocation")) {
+	            				SpawnUtils.teleportToSpawnStats(p);
+	            			} else {
+	            				if (p.hasPermission("ultimatespawn.spawn.teleport.spawn")) {
+	    	            			SpawnUtils.teleportToSpawn(p);
+	    	            		}
+	            			}
+	            		} else {
+	            			SpawnUtils.teleportToSpawnStats(p);
+	            		}
+	            	} else {
+	            		if (p.hasPermission("ultimatespawn.spawn.teleport.spawn")) {
+	            			SpawnUtils.teleportToSpawn(p);
+	            		}
+	            	}
+	            } else {
+	            	if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.To_their_last_location")) {
+	            		if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.If_stats_is_enable.Use_stats_Of_UltimateSpawn.To_teleport_players.Use_Permission")) {
+	            			if (p.hasPermission("ultimatespawn.spawn.teleport.lastlocation")) {
+	            				SpawnUtils.teleportToSpawnStats(p);
+	            			} else {
+	            				SpawnUtils.teleportToSpawn(p);
+	            			}
+	            		} else {
+	            			SpawnUtils.teleportToSpawnStats(p);
+	            		}
+	            	} else {
+	            		SpawnUtils.teleportToSpawn(p);
+	            	}
+	            }
             }
         } else {
-            if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.On-First-Join")) {
-            	if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.On-First-Join-Custom-Spawn")) {
+            if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.On-First-Join.Enable")) {
+            	if (ConfigGSpawn.getConfig().getBoolean("Spawn.Teleport.On-First-Join.Custom-Spawn")) {
         			SpawnUtils.teleportToFirstSpawn(p);
         		} else {
         			SpawnUtils.teleportToSpawn(p);
@@ -791,4 +817,5 @@ public class OnJoin implements Listener {
         	}
         }
     }
+
 }
