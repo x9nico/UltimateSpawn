@@ -14,6 +14,7 @@ import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
+import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
@@ -153,6 +154,7 @@ public class OtherUtils {
           ConfigGJoinCommand.reloadConfig();
           ConfigFJumpad.reloadConfig();
           ConfigGQuitCommand.reloadConfig();
+          ConfigCSpawn.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
