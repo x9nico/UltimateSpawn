@@ -1,5 +1,5 @@
 name: UltimateSpawn
-version: 0.5.4-Alpha
+version: 0.5.5-Alpha
 author: Dianox
 main: fr.Dianox.US.MainClass.MainClass
 LOAD: POSTWORLD
@@ -21,11 +21,11 @@ commands:
     bc:
         description: Broadcast
         aliases: [broadcast]
-    GlobalMute:
-        description: GlobalMute
+    globalmute:
+        description: Mute all the chat
         aliases: [gmute]
-    DelayChat:
-        description: DelayChat
+    delaychat:
+        description: Put a delay for the chat
         aliases: [dchat]
     fly:
         description: Enable or disable the fly of a player
