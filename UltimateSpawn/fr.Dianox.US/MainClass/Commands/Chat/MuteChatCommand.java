@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
-import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
+import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 
 public class MuteChatCommand implements CommandExecutor {
 
@@ -25,41 +25,42 @@ public class MuteChatCommand implements CommandExecutor {
 		
 		Player p = (Player)sender;
 		
-		if (cmd.getName().equalsIgnoreCase("GlobalMute") || cmd.getName().equalsIgnoreCase("gmute") && p.hasPermission("UltimateSpawn.mutechat")) {
-			if (ConfigCGlobal.getConfig().getBoolean("Command.MuteChat.Enable")) {
-				if (ConfigCGlobal.getConfig().getBoolean("Command.MuteChat.Mute.Enable")) {
-					Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.ON")));
-					PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.MuteChat.On"), Bukkit.getServer());
-					ConfigCGlobal.getConfig().set("Command.MuteChat.Mute.Enable", Boolean.valueOf(false));
+		if (cmd.getName().equalsIgnoreCase("globalmute") || cmd.getName().equalsIgnoreCase("gmute")) {
+			if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Enable")) {
+				if (p.hasPermission("ultimatespawn.command.mutechat")) {
+					if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Mute.Enable")) {
+						Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.ON")));
+						PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.MuteChat.On"), Bukkit.getServer());
+						ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(false));
+					} else {
+						Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.OFF")));
+						PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.MuteChat.Off"), Bukkit.getServer());
+						ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(true));
+					}
 				} else {
-					Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.OFF")));
-					PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.MuteChat.Off"), Bukkit.getServer());
-					ConfigCGlobal.getConfig().set("Command.MuteChat.Mute.Enable", Boolean.valueOf(true));
-				}
+					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+		        }
 			} else {
-	            if (ConfigCGlobal.getConfig().getBoolean("Command.MuteChat.Disable-Message")) {
-	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
-	            }
-	        }
-		} else {
-			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
-        }
+				if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Disable-Message")) {
+					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+				}
+			}
+		}
 		
 		return true;
 	}
 	
 	public void consoleMuteChatGLobal() {
-		if (ConfigCGlobal.getConfig().getBoolean("Command.MuteChat.Mute.Enable")) {
+		if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Mute.Enable")) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.ON")));
 			PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerExceptionConsole(ConfigMessage.getConfig().getString("Admin.MuteChat.On"), Bukkit.getServer());
-			ConfigCGlobal.getConfig().set("Command.MuteChat.Mute.Enable", Boolean.valueOf(false));
+			ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(false));
 		} else {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.MuteChat.OFF")));
 			PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerExceptionConsole(ConfigMessage.getConfig().getString("Admin.MuteChat.Off"), Bukkit.getServer());
-			ConfigCGlobal.getConfig().set("Command.MuteChat.Mute.Enable", Boolean.valueOf(true));
+			ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(true));
 		}
 	}
 	
 	
-
 }
