@@ -13,7 +13,12 @@ import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
-import fr.Dianox.US.MainClass.config.command.ConfigCGlobal;
+import fr.Dianox.US.MainClass.config.command.ConfigCAnnounce;
+import fr.Dianox.US.MainClass.config.command.ConfigCClearChat;
+import fr.Dianox.US.MainClass.config.command.ConfigCDelayChat;
+import fr.Dianox.US.MainClass.config.command.ConfigCFly;
+import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
+import fr.Dianox.US.MainClass.config.command.ConfigCPing;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
@@ -129,7 +134,7 @@ public class OtherUtils {
 		  ConfigGlobal.reloadConfig();
           ConfigMessage.reloadConfig();
           ConfigSpawn.reloadConfig();
-          ConfigCGlobal.reloadConfig();
+          ConfigCClearChat.reloadConfig();
           ConfigGMessageQ.reloadConfig();
           ConfigGPlayerItems.reloadConfig();
           ConfigGProtection.reloadConfig();
@@ -155,6 +160,11 @@ public class OtherUtils {
           ConfigFJumpad.reloadConfig();
           ConfigGQuitCommand.reloadConfig();
           ConfigCSpawn.reloadConfig();
+          ConfigCPing.reloadConfig();
+          ConfigCDelayChat.reloadConfig();
+          ConfigCAnnounce.reloadConfig();
+          ConfigCMuteChat.reloadConfig();
+          ConfigCFly.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
@@ -162,23 +172,21 @@ public class OtherUtils {
 			  if (ConfigGCos.getConfig().getString("Cosmetics.Sounds.Sound") == String.valueOf("NOTE_PIANO")) {
 				  ConfigGCos.getConfig().set("Cosmetics.Sounds.Sound", "BLOCK_NOTE_HARP");
 			  }
-			  if (ConfigCGlobal.getConfig().getString("Command.Broadcast.Sounds-Console.Sound") == "NOTE_PIANO") {
-				  ConfigCGlobal.getConfig().set("Command.Broadcast.Sounds-Console.Sound", "BLOCK_NOTE_HARP");
-			  }
-			  if (ConfigCGlobal.getConfig().getString("Command.Broadcast.Sounds.Sound") == "NOTE_PIANO") {
-				  ConfigCGlobal.getConfig().set("Command.Broadcast.Sounds.Sound", "BLOCK_NOTE_HARP");
-			  }
 			  if (ConfigEVoidTP.getConfig().getString("VoidTP.Options.Sounds.Sound") == "NOTE_PIANO") {
 				  ConfigEVoidTP.getConfig().set("VoidTP.Options.Sounds.Sound", "BLOCK_NOTE_HARP");
 			  }
 			  if (ConfigFJumpad.getConfig().getString("JumpPads.Sounds.Sound") == "NOTE_PIANO") {
 				  ConfigFJumpad.getConfig().set("JumpPads.Sounds.Sound", "BLOCK_NOTE_HARP");
 			  }
+			  if (ConfigCAnnounce.getConfig().getString("Announce.Broadcast.Sounds.Sound") == "NOTE_PIANO") {
+				  ConfigCAnnounce.getConfig().set("Announce.Broadcast.Sounds.Sound", "BLOCK_NOTE_HARP");
+				  ConfigCAnnounce.getConfig().set("Announce.Broadcast.Sounds-Console.Sound", "BLOCK_NOTE_HARP");
+			  }
 			  
 			  ConfigGCos.saveConfigFile();
-			  ConfigCGlobal.saveConfigFile();
 			  ConfigEVoidTP.saveConfigFile();
 			  ConfigFJumpad.saveConfigFile();
+			  ConfigCAnnounce.saveConfigFile();
 		  }
 	  }
 }
