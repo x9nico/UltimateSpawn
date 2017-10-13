@@ -12,8 +12,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.command.ConfigCDelayChat;
+import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 
 public class OnChat implements Listener {
 	
@@ -26,9 +27,9 @@ public class OnChat implements Listener {
 		
 		Player p = e.getPlayer();
 		
-		if (ConfigGlobal.getConfig().getBoolean("Command.MuteChat.Mute.Enable")) {
-			if (ConfigGlobal.getConfig().getBoolean("Command.MuteChat.Mute.Bypass")) {
-				if (!p.hasPermission("UltimateSpawn.bypass.MuteChat")) {
+		if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Mute.Enable")) {
+			if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Mute.Bypass")) {
+				if (!p.hasPermission("ultimatespawn.event.chat.bypass.mutechat")) {
 					e.setCancelled(true);
 					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Chat.Can_t_speak"), p);
 				}
@@ -38,9 +39,9 @@ public class OnChat implements Listener {
 			}
 		}
 		
-		if (ConfigGlobal.getConfig().getBoolean("Command.DelayChat.Delay.Enable")) {
-			if (ConfigGlobal.getConfig().getBoolean("Command.DelayChat.Delay.Bypass")) {
-				if (!p.hasPermission("UltimateSpawn.bypass.ChatDelay")) {
+		if (ConfigCDelayChat.getConfig().getBoolean("DelayChat.Delay.Enable")) {
+			if (ConfigCDelayChat.getConfig().getBoolean("DelayChat.Delay.Bypass")) {
+				if (!p.hasPermission("ultimatespawn.event.chat.bypass.chatdelay")) {
 					if (cooling.contains(name)) {
 				    	e.setCancelled(true);
 				        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Chat.Delay"), p);
