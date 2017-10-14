@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import org.bukkit.Color;
 
 import fr.Dianox.US.MainClass.MainClass;
+import fr.Dianox.US.MainClass.config.ConfigBlockCommands;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
@@ -165,6 +166,7 @@ public class OtherUtils {
           ConfigCAnnounce.reloadConfig();
           ConfigCMuteChat.reloadConfig();
           ConfigCFly.reloadConfig();
+          ConfigBlockCommands.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
