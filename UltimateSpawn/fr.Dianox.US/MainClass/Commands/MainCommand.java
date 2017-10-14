@@ -54,7 +54,7 @@ public class MainCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         if ((cmd.getName().equalsIgnoreCase("ultimatespawn") || cmd.getName().equalsIgnoreCase("us")) && p.hasPermission("UltimateSpawn.help")) {
-            if ((args.length == 0) || (args[0].equalsIgnoreCase("help") && p.hasPermission("UltimateSpawn.help"))) {
+            if ((args.length == 0) || (args[0].equalsIgnoreCase("help") && p.hasPermission("ultimatespawn.command.main.help"))) {
             	p.sendMessage("§8//§7§m---------------§r§8\\\\ §3[§bUltimateSpawn§3] §8//§7§m---------------§r§8\\\\");
                 p.sendMessage("");
                 p.sendMessage("     §l>> §e§o§lGlobal Help");
@@ -70,7 +70,7 @@ public class MainCommand implements CommandExecutor {
                 p.sendMessage(" §8>> §7/fly [player] - §eEnable or disable the fly");
                 p.sendMessage("");
                 p.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bUltimateSpawn§3] §8\\\\§7§m---------------§r§8//");
-            } else if (args[0].equalsIgnoreCase("reload") && p.hasPermission("UltimateSpawn.reload")) {
+            } else if (args[0].equalsIgnoreCase("reload") && p.hasPermission("ultimatespawn.command.main.reload")) {
                 OtherUtils.reloadconfig();
                     
                 MainClass.getInstance().GetSetWorld();
