@@ -20,7 +20,7 @@ public class OnCommand implements Listener {
 					if (e.getMessage().equalsIgnoreCase(i)) {
 						e.setCancelled(true);
 						if (ConfigBlockCommands.getConfig().getBoolean("Block-Commands.Message-Enable")) {
-							PlaceHolderMessageUtils.ReplaceCharMessagePlayer("Block-Commands.Message", p);
+							PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigBlockCommands.getConfig().getString("Block-Commands.Message"), p);
 						}
 					}
 				}
