@@ -23,7 +23,7 @@ public class LittlesEvent implements Listener {
 		if (ConfigEColorSign.getConfig().getBoolean("ColorSign.Enable")) {
 			if (!ConfigEColorSign.getConfig().getBoolean("ColorSign.World.All_World")) {
 				if (WorldUtils.getWColorSign().contains(p.getWorld().getName())) {
-					if (!p.hasPermission("UltimateSpawn.event.colorsign")) {
+					if (!p.hasPermission("ultimatespawn.sign.color")) {
 						return;
 					}
 					for (int i = 0; i <= 3; i++) {
@@ -34,7 +34,7 @@ public class LittlesEvent implements Listener {
 					}
 				}
 			} else {
-				if (!p.hasPermission("UltimateSpawn.event.colorsign")) {
+				if (!p.hasPermission("ultimatespawn.sign.color")) {
 					return;
 				}
 				for (int i = 0; i <= 3; i++) {
@@ -78,3 +78,4 @@ public class LittlesEvent implements Listener {
 	}
 
 }
+
