@@ -18,6 +18,7 @@ import fr.Dianox.US.MainClass.Commands.Chat.MuteChatCommand;
 import fr.Dianox.US.MainClass.Commands.Other.FlyCommand;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
+import fr.Dianox.US.MainClass.config.ConfigBlockCommands;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
@@ -57,6 +58,7 @@ import fr.Dianox.US.MainClass.event.ChangeWorldEvent;
 import fr.Dianox.US.MainClass.event.FunFeatures;
 import fr.Dianox.US.MainClass.event.LittlesEvent;
 import fr.Dianox.US.MainClass.event.OnChat;
+import fr.Dianox.US.MainClass.event.OnCommand;
 import fr.Dianox.US.MainClass.event.OnJoin;
 import fr.Dianox.US.MainClass.event.OnQuit;
 
@@ -67,7 +69,7 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
-	short config_number = 18;
+	short config_number = 19;
 	short config_number_commands = 7;
 	short config_number_fun = 1;
 	short config_number_event = 2;
@@ -83,7 +85,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.5-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.6-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -128,6 +130,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCSC("|         "+ChatColor.YELLOW+"Config 17"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGQuitCommand.loadConfig((Plugin) this);
 		getCSC("|         "+ChatColor.YELLOW+"Config 18"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
+		ConfigBlockCommands.loadConfig((Plugin) this);
+		getCSC("|         "+ChatColor.YELLOW+"Config 19"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCClearChat.loadConfig((Plugin) this);
 		getCSC("| ("+ChatColor.GREEN+"Commands"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCSpawn.loadConfig((Plugin) this);
@@ -184,6 +188,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		pm.registerEvents(new FunFeatures(), this);
 		pm.registerEvents(new LittlesEvent(), this);
 		pm.registerEvents(new ChangeWorldEvent(), this);
+		pm.registerEvents(new OnCommand(), this);
 		getCSC("| "+ChatColor.YELLOW+"Events loaded");
 		
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
