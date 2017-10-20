@@ -20,11 +20,13 @@ import fr.Dianox.US.MainClass.config.command.ConfigCDelayChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCFly;
 import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCPing;
+import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
+import fr.Dianox.US.MainClass.config.fun.ConfigFDoubleJump;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
@@ -167,6 +169,9 @@ public class OtherUtils {
           ConfigCMuteChat.reloadConfig();
           ConfigCFly.reloadConfig();
           ConfigBlockCommands.reloadConfig();
+          ConfigFDoubleJump.reloadConfig();
+          ConfigPlayerOptions.reloadConfig();
+          ConfigCPlayerOption.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
@@ -184,7 +189,15 @@ public class OtherUtils {
 				  ConfigCAnnounce.getConfig().set("Announce.Broadcast.Sounds.Sound", "BLOCK_NOTE_HARP");
 				  ConfigCAnnounce.getConfig().set("Announce.Broadcast.Sounds-Console.Sound", "BLOCK_NOTE_HARP");
 			  }
+			  if (ConfigFDoubleJump.getConfig().getString("DoubleJump.Double.Sounds.Sound") == "NOTE_PIANO") {
+				  ConfigFDoubleJump.getConfig().set("DoubleJump.Double.Sounds.Sound", "BLOCK_NOTE_HARP");
+				  ConfigFDoubleJump.getConfig().set("DoubleJump.Triple.Sounds.Sound", "BLOCK_NOTE_HARP");
+				  ConfigFDoubleJump.getConfig().set("DoubleJump.Quadruple.Sounds.Sound", "BLOCK_NOTE_HARP");
+				  ConfigFDoubleJump.getConfig().set("DoubleJump.Fivefold.Sounds.Sound", "BLOCK_NOTE_HARP");
+				  ConfigFDoubleJump.getConfig().set("DoubleJump.Infinite.Sounds.Sound", "BLOCK_NOTE_HARP");
+			  }
 			  
+			  ConfigFDoubleJump.saveConfigFile();
 			  ConfigGCos.saveConfigFile();
 			  ConfigEVoidTP.saveConfigFile();
 			  ConfigFJumpad.saveConfigFile();
