@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import fr.Dianox.US.MainClass.Commands.AnnounceCommand;
 import fr.Dianox.US.MainClass.Commands.MainCommand;
 import fr.Dianox.US.MainClass.Commands.PingCommand;
+import fr.Dianox.US.MainClass.Commands.PlayerOption;
 import fr.Dianox.US.MainClass.Commands.SetSpawnCommand;
 import fr.Dianox.US.MainClass.Commands.SpawnCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.ClearChatCommand;
@@ -31,14 +32,17 @@ import fr.Dianox.US.MainClass.config.command.ConfigCDelayChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCFly;
 import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCPing;
+import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
+import fr.Dianox.US.MainClass.config.fun.ConfigFDoubleJump;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
+import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJump;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
@@ -69,11 +73,11 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
-	short config_number = 19;
-	short config_number_commands = 7;
+	short config_number = 20;
+	short config_number_commands = 8;
 	short config_number_fun = 1;
 	short config_number_event = 2;
-	short config_number_other = 1;
+	short config_number_other = 2;
 	short config_number_player = 2;
 	
 	public MainClass() {}
@@ -85,7 +89,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.5.6-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -132,6 +136,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCSC("|         "+ChatColor.YELLOW+"Config 18"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigBlockCommands.loadConfig((Plugin) this);
 		getCSC("|         "+ChatColor.YELLOW+"Config 19"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
+		ConfigGDoubleJump.loadConfig((Plugin) this);
+		getCSC("|         "+ChatColor.YELLOW+"Config 20"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCClearChat.loadConfig((Plugin) this);
 		getCSC("| ("+ChatColor.GREEN+"Commands"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCSpawn.loadConfig((Plugin) this);
@@ -146,8 +152,12 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCSC("|            "+ChatColor.YELLOW+"Config 6"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCFly.loadConfig((Plugin) this);
 		getCSC("|            "+ChatColor.YELLOW+"Config 7"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
+		ConfigCPlayerOption.loadConfig((Plugin) this);
+		getCSC("|            "+ChatColor.YELLOW+"Config 8"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigFJumpad.loadConfig((Plugin) this);
 		getCSC("| ("+ChatColor.GREEN+"Fun"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_fun+""+ChatColor.YELLOW+" loaded");
+		ConfigFDoubleJump.loadConfig((Plugin) this);
+		getCSC("| ("+ChatColor.GREEN+"Fun"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_fun+""+ChatColor.YELLOW+" loaded");
 		ConfigEVoidTP.loadConfig((Plugin) this);
 		getCSC("| ("+ChatColor.GREEN+"Event"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_event+""+ChatColor.YELLOW+" loaded");
 		ConfigEColorSign.loadConfig((Plugin) this);
@@ -168,14 +178,16 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCSC("|");
 		
 		getCommand("ultimatespawn").setExecutor(new MainCommand());
+		
 		getCommand("spawn").setExecutor(new SpawnCommand());
 		getCommand("setspawn").setExecutor(new SetSpawnCommand());
 		getCommand("ping").setExecutor(new PingCommand());
 		getCommand("cc").setExecutor(new ClearChatCommand());
 		getCommand("bc").setExecutor(new AnnounceCommand());
-		getCommand("GlobalMute").setExecutor(new MuteChatCommand());
-		getCommand("DelayChat").setExecutor(new DelaychatCommand());
+		getCommand("globalmute").setExecutor(new MuteChatCommand());
+		getCommand("delaychat").setExecutor(new DelaychatCommand());
 		getCommand("fly").setExecutor(new FlyCommand());
+		getCommand("playeroption").setExecutor(new PlayerOption());
 		getCSC("| "+ChatColor.YELLOW+"Commands loaded");
 		
 		getCSC("|");
@@ -295,6 +307,22 @@ public class MainClass extends JavaPlugin implements Listener {
         WorldUtils.setWGetWorldJoinCommandPlayerNoNew();
         WorldUtils.setWGetWorldJoinCommandConsoleNew();
         WorldUtils.setWGetWorldJoinCommandConsoleNoNew();
+        // > DoubleJump
+        WorldUtils.setWGetDoubleJumpOnJoin();
+        
+        // >> DoubleJump
+        WorldUtils.setWGetFunDoubleJump();
+        WorldUtils.setWGetFunFivefoldJump();
+        WorldUtils.setWGetFunInfiniteJump();
+        WorldUtils.setWGetFunTripleJump();
+        WorldUtils.setWGetFunQuadrupleJump();
+        
+        // >> DoubleJump
+        WorldUtils.setWGetFunDoubleJump();
+        WorldUtils.setWGetFunTripleJump();
+        WorldUtils.setWGetFunQuadrupleJump();
+        WorldUtils.setWGetFunFivefoldJump();
+        WorldUtils.setWGetFunInfiniteJump();
         
         // >> OnQuit
         // > BroadCast Quit
