@@ -126,7 +126,7 @@ public class PlayerOption implements CommandExecutor {
 					 }
 				 } else if (args[0].equalsIgnoreCase("doublejump") || args[0].equalsIgnoreCase("dj")) {
 					 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.DoubleJump.Use_Permission")) {
-						 if (p.hasPermission("ultimatespawn.command.playeroption.fly")) {
+						 if (p.hasPermission("ultimatespawn.command.playeroption.doublejump")) {
 							 if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
 								 ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
 								 
