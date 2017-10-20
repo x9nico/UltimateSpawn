@@ -9,9 +9,11 @@ import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
+import fr.Dianox.US.MainClass.config.fun.ConfigFDoubleJump;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
+import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJump;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
@@ -78,6 +80,96 @@ public class WorldUtils {
 	public static List<String> worlds_JoinCommands_Console_New = new ArrayList<String>();
 	public static List<String> worlds_JoinCommands_Console_No_New = new ArrayList<String>();
 	public static List<String> worlds_QuitCommands_Console = new ArrayList<String>();
+	public static List<String> worlds_fun_infinitejump = new ArrayList<String>();
+	public static List<String> worlds_fun_fivejump = new ArrayList<String>();
+	public static List<String> worlds_fun_forjump = new ArrayList<String>();
+	public static List<String> worlds_fun_threejump  = new ArrayList<String>();
+	public static List<String> worlds_fun_doublejump  = new ArrayList<String>();
+	public static List<String> worlds_fun_doublejump_onjoin  = new ArrayList<String>();
+	
+	public static void setWGetDoubleJumpOnJoin() {
+		if (ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
+	        if (!ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.World.All_World")) {
+	            for (String world : ConfigGDoubleJump.getConfig().getStringList("DoubleJump.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in DoubleJump-OnJoin.yml, DoubleJump.World: "+world);
+	            	} else {
+	            		worlds_fun_doublejump_onjoin.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
+	
+	public static void setWGetFunInfiniteJump() {
+		if (ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Infinite.Enable")) {
+	        if (!ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Infinite.World.All_World")) {
+	            for (String world : ConfigFDoubleJump.getConfig().getStringList("DoubleJump.Infinite.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in DoubleJump.yml, DoubleJump.Infinite.World: "+world);
+	            	} else {
+	            		worlds_fun_infinitejump.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
+	
+	public static void setWGetFunFivefoldJump() {
+		if (ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Fivefold.Enable")) {
+	        if (!ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Fivefold.World.All_World")) {
+	            for (String world : ConfigFDoubleJump.getConfig().getStringList("DoubleJump.Fivefold.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in DoubleJump.yml, DoubleJump.Fivefold.World: "+world);
+	            	} else {
+	            		worlds_fun_fivejump.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
+	
+	public static void setWGetFunTripleJump() {
+		if (ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Triple.Enable")) {
+	        if (!ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Triple.World.All_World")) {
+	            for (String world : ConfigFDoubleJump.getConfig().getStringList("DoubleJump.Triple.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in DoubleJump.yml, DoubleJump.Triple.World: "+world);
+	            	} else {
+	            		worlds_fun_threejump.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
+	
+	public static void setWGetFunDoubleJump() {
+		if (ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Double.Enable")) {
+	        if (!ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Double.World.All_World")) {
+	            for (String world : ConfigFDoubleJump.getConfig().getStringList("DoubleJump.Double.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in DoubleJump.yml, DoubleJump.Double.World: "+world);
+	            	} else {
+	            		worlds_fun_doublejump.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
+	
+	public static void setWGetFunQuadrupleJump() {
+		if (ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Quadruple.Enable")) {
+	        if (!ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Quadruple.World.All_World")) {
+	            for (String world : ConfigFDoubleJump.getConfig().getStringList("DoubleJump.Quadruple.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in DoubleJump.yml, DoubleJump.Quadruple.World: "+world);
+	            	} else {
+	            		worlds_fun_forjump.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
 	
 	public static void setWGetWorldJoinCommandPlayerNew() {
 		if (ConfigGJoinCommand.getConfig().getBoolean("JoinCommand.Options.New.JoinCommand-Player.Enable")) {
@@ -771,6 +863,30 @@ public class WorldUtils {
 	            }
 	        }
         }
+	}
+	
+	public static List<String> getWOptionDoubleJumpJoin() {
+		return worlds_fun_doublejump_onjoin;
+	}
+	
+	public static List<String> getWFInfiniteJump() {
+		return worlds_fun_infinitejump;
+	}
+	
+	public static List<String> getWFFivefoldJump() {
+		return worlds_fun_fivejump;
+	}
+	
+	public static List<String> getWFQuadrupleJump() {
+		return worlds_fun_forjump;
+	}
+	
+	public static List<String> getWFTripleJump() {
+		return worlds_fun_threejump;
+	}
+	
+	public static List<String> getWFDoubleJump() {
+		return worlds_fun_doublejump;
 	}
 	
 	public static List<String> getWD() {
