@@ -33,6 +33,7 @@ import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
+import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJump;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
@@ -61,6 +62,7 @@ public class OnJoin implements Listener {
         	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Enable", ConfigGFly.getConfig().getBoolean("Fly.Enable"));
         	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetFlying", ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying"));
         	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetAllowFlight", ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight"));
+        	ConfigPlayerOptions.getConfig().set(pU+".Options.DoubleJump", ConfigGFly.getConfig().getBoolean("Fly.Enable"));
         	
         	ConfigPlayerOptions.saveConfigFile();
         } else {
@@ -311,6 +313,19 @@ public class OnJoin implements Listener {
 	       			}
         		}
         	}
+        }
+        
+        // DoubleJump
+        if ((ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) && (gm != 3)) {
+        	if (!ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.World.All_World")) {
+	       		if (WorldUtils.getWOptionDoubleJumpJoin().contains(p.getWorld().getName())) {
+	       			ConfigPlayerOptions.getConfig().get(pU+".Options.DoubleJump", Boolean.valueOf(true));
+	       		}
+        	} else {
+        		ConfigPlayerOptions.getConfig().get(pU+".Options.DoubleJump", Boolean.valueOf(true));
+        	}
+        } else {
+        	ConfigPlayerOptions.getConfig().get(pU+".Options.DoubleJump", Boolean.valueOf(false));
         }
 
         // Reset XP
@@ -733,7 +748,9 @@ public class OnJoin implements Listener {
         	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable"));
        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetFlying"));
-        	
+       		ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(0));
+       		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.DoubleJump"));
+       		
         	ConfigTemp.saveConfigFile();
         } else if (ConfigTemp.getConfig().contains(String.valueOf(pU))) {
         	ConfigTemp.getConfig().set(pU+".Player", String.valueOf(p));
@@ -741,8 +758,24 @@ public class OnJoin implements Listener {
         	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable"));
        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetFlying"));
-        	
+       		ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(0));
+       		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.DoubleJump"));
+       		
         	ConfigTemp.saveConfigFile();
+        }
+        if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
+	        if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+				 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), p);
+	          	
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+	 				
+				 ConfigTemp.saveConfigFile();
+	 	        	
+				 p.setAllowFlight(false);
+				 p.setFlying(false);
+			}
         }
     }
     
