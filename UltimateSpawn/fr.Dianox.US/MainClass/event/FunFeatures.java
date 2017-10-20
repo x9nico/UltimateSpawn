@@ -241,7 +241,7 @@ public class FunFeatures implements Listener {
 						if (p.hasPermission("ultimatespawn.fun.doublejump.fivefold")) {
 							int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 							if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-								number = 5;
+								number = 4;
 								ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 								ConfigTemp.saveConfigFile();
 							} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -281,7 +281,7 @@ public class FunFeatures implements Listener {
 					} else {
 						int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 						if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-							number = 5;
+							number = 4;
 							ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 							ConfigTemp.saveConfigFile();
 						} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -322,7 +322,7 @@ public class FunFeatures implements Listener {
 					if (p.hasPermission("ultimatespawn.fun.doublejump.fivefold")) {
 						int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 						if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-							number = 5;
+							number = 4;
 							ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 							ConfigTemp.saveConfigFile();
 						} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -362,7 +362,7 @@ public class FunFeatures implements Listener {
 				} else {
 					int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 					if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-						number = 5;
+						number = 4;
 						ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 						ConfigTemp.saveConfigFile();
 					} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -411,7 +411,7 @@ public class FunFeatures implements Listener {
 						if (p.hasPermission("ultimatespawn.fun.doublejump.quadruple")) {
 							int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 							if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-								number = 4;
+								number = 3;
 								ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 								ConfigTemp.saveConfigFile();
 							} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -451,7 +451,7 @@ public class FunFeatures implements Listener {
 					} else {
 						int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 						if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-							number = 4;
+							number = 3;
 							ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 							ConfigTemp.saveConfigFile();
 						} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -492,7 +492,7 @@ public class FunFeatures implements Listener {
 					if (p.hasPermission("ultimatespawn.fun.doublejump.quadruple")) {
 						int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 						if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-							number = 4;
+							number = 3;
 							ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 							ConfigTemp.saveConfigFile();
 						} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -532,7 +532,7 @@ public class FunFeatures implements Listener {
 				} else {
 					int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 					if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-						number = 4;
+						number = 3;
 						ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 						ConfigTemp.saveConfigFile();
 					} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -581,7 +581,7 @@ public class FunFeatures implements Listener {
 						if (p.hasPermission("ultimatespawn.fun.doublejump.triple")) {
 							int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 							if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-								number = 3;
+								number = 2;
 								ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 								ConfigTemp.saveConfigFile();
 							} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -621,7 +621,7 @@ public class FunFeatures implements Listener {
 					} else {
 						int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 						if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-							number = 3;
+							number = 2;
 							ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 							ConfigTemp.saveConfigFile();
 						} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -662,7 +662,7 @@ public class FunFeatures implements Listener {
 					if (p.hasPermission("ultimatespawn.fun.doublejump.triple")) {
 						int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 						if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-							number = 3;
+							number = 2;
 							ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 							ConfigTemp.saveConfigFile();
 						} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -702,7 +702,7 @@ public class FunFeatures implements Listener {
 				} else {
 					int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 					if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-						number = 3;
+						number = 2;
 						ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 						ConfigTemp.saveConfigFile();
 					} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -748,10 +748,10 @@ public class FunFeatures implements Listener {
 			if (!ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Double.World.All_World")) {
 				if (WorldUtils.getWFDoubleJump().contains(p.getWorld().getName())) {
 					if (ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Double.Use_Permission")) {
-						if (p.hasPermission("ultimatespawn.fun.doublejump.triple")) {
+						if (p.hasPermission("ultimatespawn.fun.doublejump.double")) {
 							int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 							if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-								number = 2;
+								number = 1;
 								ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 								ConfigTemp.saveConfigFile();
 							} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -789,7 +789,7 @@ public class FunFeatures implements Listener {
 					} else {
 						int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 						if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-							number = 2;
+							number = 1;
 							ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 							ConfigTemp.saveConfigFile();
 						} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -830,7 +830,7 @@ public class FunFeatures implements Listener {
 					if (p.hasPermission("ultimatespawn.fun.doublejump.triple")) {
 						int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 						if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-							number = 2;
+							number = 1;
 							ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 							ConfigTemp.saveConfigFile();
 						} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -868,7 +868,7 @@ public class FunFeatures implements Listener {
 				} else {
 					int number = ConfigTemp.getConfig().getInt(pU+".Options.DoubleJump");
 					if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR)) {
-						number = 2;
+						number = 1;
 						ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(number));
 						ConfigTemp.saveConfigFile();
 					} else if (number == 0 && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.AIR)) {
@@ -905,7 +905,6 @@ public class FunFeatures implements Listener {
 				}
 			}
 		}
-}
+	}
 
-	
 }
