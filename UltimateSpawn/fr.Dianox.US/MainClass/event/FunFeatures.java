@@ -142,17 +142,19 @@ public class FunFeatures implements Listener {
 	public void onInfiniteJump(PlayerToggleFlightEvent e) {
 		Player p = e.getPlayer();
 		UUID pU = e.getPlayer().getUniqueId();
-		if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-			 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), p);
-           	
-			 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
-			 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
-			 ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
-  				
-			 ConfigTemp.saveConfigFile();
-  	        	
-			 p.setAllowFlight(false);
-			 p.setFlying(false);
+		if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
+			if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+				 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), p);
+	           	
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+	  				
+				 ConfigTemp.saveConfigFile();
+	  	        	
+				 p.setAllowFlight(false);
+				 p.setFlying(false);
+			}
 		}
 		if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
 			if (ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
