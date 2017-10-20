@@ -29,3 +29,6 @@ commands:
         aliases: [dchat]
     fly:
         description: Enable or disable the fly of a player
+    playeroption:
+        description: Custom option
+        aliases: [playeroptions, playersoption, playersoptions, poption, poptions, option, options]
