@@ -1,5 +1,5 @@
 name: UltimateSpawn
-version: 0.6-Alpha
+version: 0.6.0.2-Alpha
 author: Dianox
 main: fr.Dianox.US.MainClass.MainClass
 LOAD: POSTWORLD
@@ -32,3 +32,13 @@ commands:
     playeroption:
         description: Custom option
         aliases: [playeroptions, playersoption, playersoptions, poption, poptions, option, options]
+    night:
+        description: Set night in a world
+    day:
+        description: Set day in a world
+    sun:
+        description: Clear weather in a world
+    rain:
+        description: Set rain in a world
+    thunder:
+        description: Set thunder in a world
