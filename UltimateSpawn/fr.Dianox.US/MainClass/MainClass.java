@@ -35,6 +35,7 @@ import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCPing;
 import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
+import fr.Dianox.US.MainClass.config.command.ConfigCWeatherTime;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
@@ -58,6 +59,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
+import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;
 import fr.Dianox.US.MainClass.event.BasicFeatures;
 import fr.Dianox.US.MainClass.event.ChangeWorldEvent;
 import fr.Dianox.US.MainClass.event.FunFeatures;
@@ -74,13 +76,6 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
-	short config_number = 20;
-	short config_number_commands = 8;
-	short config_number_fun = 1;
-	short config_number_event = 2;
-	short config_number_other = 2;
-	short config_number_player = 2;
-	
 	public MainClass() {}
 	
 	@Override
@@ -90,7 +85,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.0.2-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.0.3-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -100,81 +95,48 @@ public class MainClass extends JavaPlugin implements Listener {
 		instance = this;
 		
 		ConfigGXP.loadConfig((Plugin) this);
-		getCSC("| ("+ChatColor.GREEN+"Global"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGFly.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGGM.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 3"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGHF.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 4"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGCos.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 5"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGInventory.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 6"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGTitle.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 7"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGMessage.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 8"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGSpawn.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 9"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGMessageQ.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 10"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGServerEvent.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 11"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGPlayerItems.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 12"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGProtection.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 13"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCWEKeepFly.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 14"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCWEGM.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 15"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGActionBar.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 16"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGJoinCommand.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 17"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGQuitCommand.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 18"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigBlockCommands.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 19"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigGDoubleJump.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 20"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number+""+ChatColor.YELLOW+" loaded");
 		ConfigCClearChat.loadConfig((Plugin) this);
-		getCSC("| ("+ChatColor.GREEN+"Commands"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCSpawn.loadConfig((Plugin) this);
-		getCSC("|            "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCPing.loadConfig((Plugin) this);
-		getCSC("|            "+ChatColor.YELLOW+"Config 3"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCDelayChat.loadConfig((Plugin) this);
-		getCSC("|            "+ChatColor.YELLOW+"Config 4"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCMuteChat.loadConfig((Plugin) this);
-		getCSC("|            "+ChatColor.YELLOW+"Config 5"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCAnnounce.loadConfig((Plugin) this);
-		getCSC("|            "+ChatColor.YELLOW+"Config 6"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCFly.loadConfig((Plugin) this);
-		getCSC("|            "+ChatColor.YELLOW+"Config 7"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigCPlayerOption.loadConfig((Plugin) this);
-		getCSC("|            "+ChatColor.YELLOW+"Config 8"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_commands+""+ChatColor.YELLOW+" loaded");
 		ConfigFJumpad.loadConfig((Plugin) this);
-		getCSC("| ("+ChatColor.GREEN+"Fun"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_fun+""+ChatColor.YELLOW+" loaded");
 		ConfigFDoubleJump.loadConfig((Plugin) this);
-		getCSC("| ("+ChatColor.GREEN+"Fun"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_fun+""+ChatColor.YELLOW+" loaded");
 		ConfigEVoidTP.loadConfig((Plugin) this);
-		getCSC("| ("+ChatColor.GREEN+"Event"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_event+""+ChatColor.YELLOW+" loaded");
 		ConfigEColorSign.loadConfig((Plugin) this);
-		getCSC("|         "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_event+""+ChatColor.YELLOW+" loaded");
 		ConfigTemp.loadConfig((Plugin) this);
-		getCSC("| ("+ChatColor.GREEN+"Others"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_other+""+ChatColor.YELLOW+" loaded");
 		ConfigGlobal.loadConfig((Plugin) this);
-		getCSC("| "+ChatColor.GOLD+"Main config loaded");
 		ConfigMessage.loadConfig((Plugin) this);
-		getCSC("| "+ChatColor.GOLD+"Message config loaded");
 		ConfigSpawn.loadConfig((Plugin) this);
-		getCSC("| "+ChatColor.GOLD+"Spawn config loaded");
 		ConfigPlayerOptions.loadConfig((Plugin) this);
-		getCSC("| ("+ChatColor.GREEN+"Player"+ChatColor.GRAY+") "+ChatColor.YELLOW+"Config 1"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_player+""+ChatColor.YELLOW+" loaded");
 		ConfigPlayerStats.loadConfig((Plugin) this);
-		getCSC("|          "+ChatColor.YELLOW+"Config 2"+ChatColor.GRAY+"/"+ChatColor.GOLD+""+config_number_player+""+ChatColor.YELLOW+" loaded");
+		// Commands
+		ConfigCWeatherTime.loadConfig((Plugin) this);
+		// Messages
+		ConfigMWeatherTime.loadConfig((Plugin) this);
+		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
 		
