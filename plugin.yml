@@ -1,5 +1,5 @@
 name: UltimateSpawn
-version: 0.6.0.2-Alpha
+version: 0.6.0.3-Alpha
 author: Dianox
 main: fr.Dianox.US.MainClass.MainClass
 LOAD: POSTWORLD
@@ -38,6 +38,7 @@ commands:
         description: Set day in a world
     sun:
         description: Clear weather in a world
+        aliases: [clear]
     rain:
         description: Set rain in a world
     thunder:
