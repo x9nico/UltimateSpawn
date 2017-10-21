@@ -22,6 +22,7 @@ import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCPing;
 import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
+import fr.Dianox.US.MainClass.config.command.ConfigCWeatherTime;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
@@ -43,7 +44,8 @@ import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
-import fr.Dianox.US.MainClass.config.global.ConfigGXP;;
+import fr.Dianox.US.MainClass.config.global.ConfigGXP;
+import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;;
 
 public class OtherUtils {
 	
@@ -172,6 +174,10 @@ public class OtherUtils {
           ConfigFDoubleJump.reloadConfig();
           ConfigPlayerOptions.reloadConfig();
           ConfigCPlayerOption.reloadConfig();
+          // Commands
+          ConfigCWeatherTime.reloadConfig();
+          // Messages
+          ConfigMWeatherTime.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
