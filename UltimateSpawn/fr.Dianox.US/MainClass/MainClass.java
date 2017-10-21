@@ -17,6 +17,7 @@ import fr.Dianox.US.MainClass.Commands.Chat.ClearChatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.MuteChatCommand;
 import fr.Dianox.US.MainClass.Commands.Other.FlyCommand;
+import fr.Dianox.US.MainClass.Commands.Other.TimeCommand;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigBlockCommands;
@@ -89,7 +90,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.0.2-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -188,6 +189,11 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCommand("delaychat").setExecutor(new DelaychatCommand());
 		getCommand("fly").setExecutor(new FlyCommand());
 		getCommand("playeroption").setExecutor(new PlayerOption());
+		getCommand("night").setExecutor(new TimeCommand());
+		getCommand("day").setExecutor(new TimeCommand());
+		getCommand("sun").setExecutor(new TimeCommand());
+		getCommand("rain").setExecutor(new TimeCommand());
+		getCommand("thunder").setExecutor(new TimeCommand());
 		getCSC("| "+ChatColor.YELLOW+"Commands loaded");
 		
 		getCSC("|");
