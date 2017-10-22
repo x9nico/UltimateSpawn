@@ -45,6 +45,8 @@ import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
+import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;;
 
 public class OtherUtils {
@@ -176,8 +178,11 @@ public class OtherUtils {
           ConfigCPlayerOption.reloadConfig();
           // Commands
           ConfigCWeatherTime.reloadConfig();
-          // Messages
+          // >> Messages
+          // > Commands
           ConfigMWeatherTime.reloadConfig();
+          ConfigMAnnounce.reloadConfig();
+          ConfigMPing.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
