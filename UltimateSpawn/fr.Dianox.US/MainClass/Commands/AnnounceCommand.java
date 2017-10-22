@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCAnnounce;
+import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
 
 public class AnnounceCommand implements CommandExecutor {
 
@@ -31,8 +32,10 @@ public class AnnounceCommand implements CommandExecutor {
                 }
                 msg = msg + s;
             }
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.Broadcast")+msg));
-            PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.Broadcast") + msg, Bukkit.getServer());
+            for (String msg1: ConfigMAnnounce.getConfig().getStringList("Announce.Broadcast")) {
+            	Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', msg1.replaceAll("%broadcast%", msg)));
+            	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(msg1.replaceAll("%broadcast%", msg), Bukkit.getServer());
+            }
             MusicConsole();
             return true;
         }
@@ -53,8 +56,10 @@ public class AnnounceCommand implements CommandExecutor {
 	                    }
 	                    msg = msg + s;
 	                }
-	                Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Console.Broadcast")+msg));
-	                PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(ConfigMessage.getConfig().getString("Admin.Broadcast") + msg, Bukkit.getServer());
+	                for (String msg1: ConfigMAnnounce.getConfig().getStringList("Announce.Broadcast")) {
+	                	Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', msg1.replaceAll("%broadcast%", msg)));
+	                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(msg1.replaceAll("%broadcast%", msg), Bukkit.getServer());
+	                }
 	                if (ConfigCAnnounce.getConfig().getBoolean("Announce.Broadcast.Sounds.Enabled")) {
 	                    for (Player player: Bukkit.getServer().getOnlinePlayers()) {
 	                        String sound = ConfigCAnnounce.getConfig().getString("Announce.Broadcast.Sounds.Sound");
