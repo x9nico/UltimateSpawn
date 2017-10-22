@@ -17,7 +17,7 @@ public class ConfigMessage {
     public static void loadConfig(Plugin plugin) {
         pl = plugin;
 
-        file = new File(pl.getDataFolder(), "messages.yml");
+        file = new File(pl.getDataFolder(), "Config/messages.yml");
         Config = YamlConfiguration.loadConfiguration(file);
 
         if (!pl.getDataFolder().exists()) {
@@ -55,11 +55,9 @@ public class ConfigMessage {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            
+
             Config.set("Player.Teleport.To-spawn", "&7Teleport...");
             Config.set("Player.Teleport.To-spawn-other", "&7Teleport %target%...");
-            Config.set("Player.Ping.Self", "&c%player% &7>> &e%ping%");
-            Config.set("Player.Ping.Other", "&c%target% &7>> &e%ping%");
             Config.set("Player.Chat.Can_t_speak", "&cThe chat is disable");
             Config.set("Player.Chat.Delay", "&cChat is currently dealyed of %DELAY% seconds");
             Config.set("Player.VoidTP", "&eNooooooooooooooooooooo.........");
@@ -73,7 +71,6 @@ public class ConfigMessage {
             Config.set("Admin.ClearChat.Own", "&cChat clear");
             Config.set("Admin.ClearChat.Normal", "&cChat clear by %player%");
             Config.set("Admin.ClearChat.Other", "&cYour chat has been clear");
-            Config.set("Admin.Broadcast", "&8[&eBroadcast&8]&r ");
             Config.set("Admin.MuteChat.On", "&aGlobal mute has been enabled by %player%!");
             Config.set("Admin.MuteChat.Off", "&cGlobal mute has been disabled by %player%!");
             Config.set("Admin.DelayChat.Set", "&cDelay set to &e%DELAY%. &7&oDon't forget to edit this value in the config. Yes this command is only valid if the server does not shut down");
