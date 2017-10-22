@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.Dianox.US.MainClass.Commands.AnnounceCommand;
@@ -59,15 +58,9 @@ import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
+import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;
-import fr.Dianox.US.MainClass.event.BasicFeatures;
-import fr.Dianox.US.MainClass.event.ChangeWorldEvent;
-import fr.Dianox.US.MainClass.event.FunFeatures;
-import fr.Dianox.US.MainClass.event.LittlesEvent;
-import fr.Dianox.US.MainClass.event.OnChat;
-import fr.Dianox.US.MainClass.event.OnCommand;
-import fr.Dianox.US.MainClass.event.OnJoin;
-import fr.Dianox.US.MainClass.event.OnQuit;
 
 public class MainClass extends JavaPlugin implements Listener {
 	
@@ -85,7 +78,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.0.3-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.0.4-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -134,8 +127,11 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigPlayerStats.loadConfig((Plugin) this);
 		// Commands
 		ConfigCWeatherTime.loadConfig((Plugin) this);
-		// Messages
+		// >> Messages
+		// > Commands
 		ConfigMWeatherTime.loadConfig((Plugin) this);
+		ConfigMAnnounce.loadConfig((Plugin) this);
+		ConfigMPing.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
@@ -160,15 +156,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		
 		getCSC("|");
 		
-		PluginManager pm = Bukkit.getPluginManager();
-		pm.registerEvents(new BasicFeatures(), this);
-		pm.registerEvents(new OnJoin(), this);
-		pm.registerEvents(new OnQuit(), this);
-		pm.registerEvents(new OnChat(), this);
-		pm.registerEvents(new FunFeatures(), this);
-		pm.registerEvents(new LittlesEvent(), this);
-		pm.registerEvents(new ChangeWorldEvent(), this);
-		pm.registerEvents(new OnCommand(), this);
+		new Manager(this).registerEvents();
 		getCSC("| "+ChatColor.YELLOW+"Events loaded");
 		
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
