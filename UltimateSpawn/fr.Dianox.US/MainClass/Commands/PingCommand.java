@@ -15,6 +15,7 @@ import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCPing;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
 import me.clip.placeholderapi.PlaceholderAPI;
 
 public class PingCommand implements CommandExecutor {
@@ -30,7 +31,9 @@ public class PingCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
                 return true;
             } else if ((args.length == 1)) {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Ping.Other")).replaceAll("%ping%", "Error no seriously ? But... Why ? you can only execute this command in game").replaceAll("%target%", args[0]));
+            	for (String msg: ConfigMPing.getConfig().getStringList("Ping.Other")) {
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("%ping%", ConfigMPing.getConfig().getString("Ping.Console-Trool")).replaceAll("%target%", args[0])));
+            	}
             }
 
             return true;
@@ -43,7 +46,9 @@ public class PingCommand implements CommandExecutor {
             	if (ConfigCPing.getConfig().getBoolean("Ping.Self.Use_Permission")) {
             		if (ConfigCPing.getConfig().getBoolean("Ping.Self.Enable")) {
             			if (p.hasPermission("ultimatespawn.command.ping.self")) {
-            				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Ping.Self"), p);
+            				for (String msg: ConfigMPing.getConfig().getStringList("Ping.Self")) {
+            					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+            				}
             			} else {
             				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
             			}
@@ -54,7 +59,9 @@ public class PingCommand implements CommandExecutor {
             		}
             	} else {
             		if (ConfigCPing.getConfig().getBoolean("Ping.Self.Enable")) {
-	                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Ping.Self"), p);
+            			for (String msg: ConfigMPing.getConfig().getStringList("Ping.Self")) {
+        					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+        				}
 	                } else {
 	                    if (ConfigCPing.getConfig().getBoolean("Ping.Self.Disable-Message")) {
 	                    	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
@@ -71,17 +78,21 @@ public class PingCommand implements CommandExecutor {
                 				return true;
                 			}
                 			if (ConfigGlobal.getConfig().getBoolean("Plugin.Use.PlaceholderAPI")) {
-                				p.sendMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(p, ConfigMessage.getConfig().getString("Player.Ping.Other"))
-		            					.replaceAll("%target%", other.getName())
-		            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
-		            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
-		            					));
+                				for (String msg: ConfigMPing.getConfig().getStringList("Ping.Other")) {
+	                				p.sendMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(p, msg)
+			            					.replaceAll("%target%", other.getName())
+			            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
+			            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
+			            					));
+                				}
                 			} else {
-                				p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Ping.Other")
-		            					.replaceAll("%target%", other.getName())
-		            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
-		            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
-		            					));
+                				for (String msg: ConfigMPing.getConfig().getStringList("Ping.Other")) {
+	                				p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg
+			            					.replaceAll("%target%", other.getName())
+			            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
+			            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
+			            					));
+                				}
                 			}
                 		} else {
                 			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
@@ -98,17 +109,21 @@ public class PingCommand implements CommandExecutor {
 	                        return true;
 	                    }
 	            		if (ConfigGlobal.getConfig().getBoolean("Plugin.Use.PlaceholderAPI")) {
-	            			p.sendMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(p, ConfigMessage.getConfig().getString("Player.Ping.Other"))
-	            					.replaceAll("%target%", other.getName())
-	            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
-	            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
-	            					));
+	            			for (String msg: ConfigMPing.getConfig().getStringList("Ping.Other")) {
+		            			p.sendMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(p, msg)
+		            					.replaceAll("%target%", other.getName())
+		            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
+		            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
+		            					));
+	            			}
 	            		} else {
-	            			p.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Player.Ping.Other")
-	            					.replaceAll("%target%", other.getName())
-	            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
-	            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
-	            					));
+	            			for (String msg: ConfigMPing.getConfig().getStringList("Ping.Other")) {
+		            			p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg
+		            					.replaceAll("%target%", other.getName())
+		            					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
+		            					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(other)))
+		            					));
+	            			}
 	            		}
 	                } else {
 	                    if (ConfigCPing.getConfig().getBoolean("Ping.Other.Disable-Message")) {
