@@ -67,10 +67,6 @@ public class ConfigMessage {
             
             Config.set("Admin.Plugin-Reload", "&6US &7| &eConfig reloaded &7&oThis command is not fully supported by the plugin");
             Config.set("Admin.Spawn.Set", "&6US &7| &eSpawn &cset &e!");
-            Config.set("Admin.ClearChat.Anonymously", "&cChat clear");
-            Config.set("Admin.ClearChat.Own", "&cChat clear");
-            Config.set("Admin.ClearChat.Normal", "&cChat clear by %player%");
-            Config.set("Admin.ClearChat.Other", "&cYour chat has been clear");
             Config.set("Admin.MuteChat.On", "&aGlobal mute has been enabled by %player%!");
             Config.set("Admin.MuteChat.Off", "&cGlobal mute has been disabled by %player%!");
             Config.set("Admin.DelayChat.Set", "&cDelay set to &e%DELAY%. &7&oDon't forget to edit this value in the config. Yes this command is only valid if the server does not shut down");
