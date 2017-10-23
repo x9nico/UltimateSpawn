@@ -56,6 +56,7 @@ public class ConfigMClearChat {
                 e.printStackTrace();
             }
             
+            Config.set("ClearChat.No-Reason", "It has been held that");
             Config.set("ClearChat.Anonymously", java.util.Arrays.asList(new String[] {"&cChat clear because %reason%"}));
             Config.set("ClearChat.Normal", java.util.Arrays.asList(new String[] {"&cChat clear by %player% because %reason%"}));
             Config.set("ClearChat.Own", java.util.Arrays.asList(new String[] {"&cYour chat has been clear %player%"}));
