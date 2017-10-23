@@ -59,6 +59,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
+import fr.Dianox.US.MainClass.config.messages.ConfigMClearChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;
 
@@ -78,7 +79,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.0.4-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.0.5-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -132,6 +133,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigMWeatherTime.loadConfig((Plugin) this);
 		ConfigMAnnounce.loadConfig((Plugin) this);
 		ConfigMPing.loadConfig((Plugin) this);
+		ConfigMClearChat.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
