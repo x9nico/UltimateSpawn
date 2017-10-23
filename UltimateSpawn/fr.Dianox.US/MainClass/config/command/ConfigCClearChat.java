@@ -74,8 +74,6 @@ public class ConfigCClearChat {
             Config.set("ClearChat.Other.Message-Clear", Boolean.valueOf(true));
             Config.set("ClearChat.Other.Use_Permission", Boolean.valueOf(false));
             Config.set("ClearChat.Other.Disable-Message", Boolean.valueOf(true));
-            Config.set("ClearChat.Console.Anonymous-Message-Clear", Boolean.valueOf(true));
-            Config.set("ClearChat.Console.Normal-Message-Clear", Boolean.valueOf(true));
             
             saveConfigFile();
 
