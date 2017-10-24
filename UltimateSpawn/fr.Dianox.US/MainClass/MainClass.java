@@ -36,6 +36,7 @@ import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
 import fr.Dianox.US.MainClass.config.command.ConfigCWeatherTime;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
+import fr.Dianox.US.MainClass.config.event.ConfigERespawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
@@ -81,7 +82,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.0.6-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.1-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -138,6 +139,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigMClearChat.loadConfig((Plugin) this);
 		ConfigMMuteChat.loadConfig((Plugin) this);
 		ConfigMDelayChat.loadConfig((Plugin) this);
+		// >> Event
+		ConfigERespawn.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
@@ -305,6 +308,7 @@ public class MainClass extends JavaPlugin implements Listener {
         // >> Event
         WorldUtils.setWGetWorldEventVoidTP();
         WorldUtils.setWGetWorldEventColorSign();
+        WorldUtils.setWRespawnEvent();
         // > ChangeWorld
         WorldUtils.setWGetWorldKeepFlyChangeWorld();
         WorldUtils.setWGetWorldGamemodeChangeWorld();
