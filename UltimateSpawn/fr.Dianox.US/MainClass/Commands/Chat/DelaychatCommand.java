@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCDelayChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
 
 public class DelaychatCommand implements CommandExecutor {
 
@@ -22,7 +23,9 @@ public class DelaychatCommand implements CommandExecutor {
 			if (cmd.getName().equalsIgnoreCase("delaychat") || cmd.getName().equalsIgnoreCase("dchat")) {
 				if (args.length == 1) {
 					delay = Integer.parseInt(args[0]);
-					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.DelayChat.Set").replaceAll("%player%", "CONSOLE").replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))));
+					for (String msg: ConfigMDelayChat.getConfig().getStringList("ChatDelay.Admin.Set")) {
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("%player%", "CONSOLE").replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))));
+					}
 				} else {
 					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Arguments-Missing")));
 				}
@@ -37,7 +40,9 @@ public class DelaychatCommand implements CommandExecutor {
 				if (p.hasPermission("ultimatespawn.command.delaychat")) {
 					if (args.length == 1) {
 						delay = Integer.parseInt(args[0]);
-						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.DelayChat.Set"), p);
+						for (String msg: ConfigMDelayChat.getConfig().getStringList("ChatDelay.Admin.Set")) {
+							PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+						}
 					} else {
 						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
 					}
