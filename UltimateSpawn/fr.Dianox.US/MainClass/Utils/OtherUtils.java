@@ -24,6 +24,7 @@ import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
 import fr.Dianox.US.MainClass.config.command.ConfigCWeatherTime;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
+import fr.Dianox.US.MainClass.config.event.ConfigERespawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
@@ -189,6 +190,8 @@ public class OtherUtils {
           ConfigMClearChat.reloadConfig();
           ConfigMMuteChat.reloadConfig();
           ConfigMDelayChat.reloadConfig();
+          // >> Event
+          ConfigERespawn.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
