@@ -47,6 +47,8 @@ import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
 import fr.Dianox.US.MainClass.config.messages.ConfigMClearChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;;
 
@@ -185,6 +187,8 @@ public class OtherUtils {
           ConfigMAnnounce.reloadConfig();
           ConfigMPing.reloadConfig();
           ConfigMClearChat.reloadConfig();
+          ConfigMMuteChat.reloadConfig();
+          ConfigMDelayChat.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
