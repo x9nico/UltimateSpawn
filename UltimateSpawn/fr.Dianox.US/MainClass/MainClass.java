@@ -60,6 +60,8 @@ import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
 import fr.Dianox.US.MainClass.config.messages.ConfigMClearChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;
 
@@ -134,6 +136,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigMAnnounce.loadConfig((Plugin) this);
 		ConfigMPing.loadConfig((Plugin) this);
 		ConfigMClearChat.loadConfig((Plugin) this);
+		ConfigMMuteChat.loadConfig((Plugin) this);
+		ConfigMDelayChat.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
