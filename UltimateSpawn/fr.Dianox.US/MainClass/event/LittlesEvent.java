@@ -2,17 +2,24 @@ package fr.Dianox.US.MainClass.event;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 
+import fr.Dianox.US.MainClass.MainClass;
+import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
+import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
+import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
+import fr.Dianox.US.MainClass.config.event.ConfigERespawn;
 
 public class LittlesEvent implements Listener {
 	
@@ -76,6 +83,61 @@ public class LittlesEvent implements Listener {
         	ConfigTemp.saveConfigFile();
         }
 	}
+	
+	@EventHandler
+	public void OnEntityRespawn(PlayerDeathEvent e) {
+		Player p = e.getEntity().getPlayer();
+		if (ConfigERespawn.getConfig().getBoolean("Respawn.Enable")) {
+			if (ConfigERespawn.getConfig().getBoolean("Respawn.Use_Permission")) {
+				if (p.hasPermission("ultimatespawn.event.respawn")) {
+					if (!ConfigERespawn.getConfig().getBoolean("Respawn.Player.World.All_World")) {
+						if (WorldUtils.getWEventResapwn().contains(p.getWorld().getName())) {
+							Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
+								public void run() {
+									p.spigot().respawn();
+									if (ConfigERespawn.getConfig().getBoolean("Respawn.Player.Teleport-Spawn")) {
+										SpawnUtils.teleportToSpawn(p);
+									}
+								}
+							}, ConfigERespawn.getConfig().getInt("Respawn.Player.Respawn-After"));
+						}
+					} else {
+						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
+							public void run() {
+								p.spigot().respawn();
+								if (ConfigERespawn.getConfig().getBoolean("Respawn.Player.Teleport-Spawn")) {
+									SpawnUtils.teleportToSpawn(p);
+								}
+							}
+						}, ConfigERespawn.getConfig().getInt("Respawn.Player.Respawn-After"));
+					}
+				} else {
+					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+				}
+			} else {
+				if (!ConfigERespawn.getConfig().getBoolean("Respawn.Player.World.All_World")) {
+					if (WorldUtils.getWEventResapwn().contains(p.getWorld().getName())) {
+						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
+							public void run() {
+								p.spigot().respawn();
+								if (ConfigERespawn.getConfig().getBoolean("Respawn.Player.Teleport-Spawn")) {
+									SpawnUtils.teleportToSpawn(p);
+								}
+							}
+						}, ConfigERespawn.getConfig().getInt("Respawn.Player.Respawn-After"));
+					}
+				} else {
+					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
+						public void run() {
+							p.spigot().respawn();
+							if (ConfigERespawn.getConfig().getBoolean("Respawn.Player.Teleport-Spawn")) {
+								SpawnUtils.teleportToSpawn(p);
+							}
+						}
+					}, ConfigERespawn.getConfig().getInt("Respawn.Player.Respawn-After"));
+				}
+			}
+		}
+	}
 
 }
-
