@@ -12,9 +12,10 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCDelayChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 
 public class OnChat implements Listener {
 	
@@ -31,11 +32,15 @@ public class OnChat implements Listener {
 			if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Mute.Bypass")) {
 				if (!p.hasPermission("ultimatespawn.event.chat.bypass.mutechat")) {
 					e.setCancelled(true);
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Chat.Can_t_speak"), p);
+					for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Can-t-Speak")) {
+						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+					}
 				}
 			} else {
 				e.setCancelled(true);
-				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Chat.Can_t_speak"), p);
+				for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Can-t-Speak")) {
+					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+				}
 			}
 		}
 		
@@ -44,7 +49,9 @@ public class OnChat implements Listener {
 				if (!p.hasPermission("ultimatespawn.event.chat.bypass.chatdelay")) {
 					if (cooling.contains(name)) {
 				    	e.setCancelled(true);
-				        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Chat.Delay"), p);
+				    	for (String msg: ConfigMDelayChat.getConfig().getStringList("ChatDelay.Delay")) {
+				    		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+				    	}
 					} else {
 				        cooling.add(name);
 				        
@@ -58,7 +65,9 @@ public class OnChat implements Listener {
 			} else {
 				if (cooling.contains(name)) {
 			    	e.setCancelled(true);
-			    	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Chat.Delay"), p);
+			    	for (String msg: ConfigMDelayChat.getConfig().getStringList("ChatDelay.Delay")) {
+			    		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+			    	}
 			      } else {
 			        cooling.add(name);
 			        
