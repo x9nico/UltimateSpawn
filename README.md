@@ -4,7 +4,9 @@ A MineCraft plugin for lobby server
 Version: 1.8x-1.9.x-1.10.x-1.11.x-1.12.x\
 (not work very fine if you not config your config)
 
-# Version - 0.6.0.5-Alpha
+# Version - 0.6.0.6-Alpha
+
+In case of a problem with the plugin, you can visit the spigot page or send a ticket here.
 
 # Terms and condition
 
