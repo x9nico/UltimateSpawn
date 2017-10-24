@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
+import fr.Dianox.US.MainClass.config.event.ConfigERespawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEGM;
 import fr.Dianox.US.MainClass.config.event.CWE.ConfigCWEKeepFly;
@@ -86,6 +87,21 @@ public class WorldUtils {
 	public static List<String> worlds_fun_threejump  = new ArrayList<String>();
 	public static List<String> worlds_fun_doublejump  = new ArrayList<String>();
 	public static List<String> worlds_fun_doublejump_onjoin  = new ArrayList<String>();
+	public static List<String> worlds_respawn  = new ArrayList<String>();
+	
+	public static void setWRespawnEvent() {
+		if (ConfigERespawn.getConfig().getBoolean("Respawn.Enable")) {
+	        if (!ConfigERespawn.getConfig().getBoolean("Respawn.Player.World.All_World")) {
+	            for (String world : ConfigERespawn.getConfig().getStringList("Respawn.Player.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in Respawn.yml, Respawn.Player.World: "+world);
+	            	} else {
+	            		worlds_respawn.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
 	
 	public static void setWGetDoubleJumpOnJoin() {
 		if (ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
@@ -863,6 +879,10 @@ public class WorldUtils {
 	            }
 	        }
         }
+	}
+	
+	public static List<String> getWEventResapwn() {
+		return worlds_respawn;
 	}
 	
 	public static List<String> getWOptionDoubleJumpJoin() {
