@@ -9,9 +9,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
+import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class PlayerOption implements CommandExecutor {
 
@@ -19,7 +20,9 @@ public class PlayerOption implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
 		
 		if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Only-Player")));
+			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+			}
             return true;
         }
 
@@ -40,7 +43,9 @@ public class PlayerOption implements CommandExecutor {
 			                 sender.sendMessage("");
 			                 sender.sendMessage("§8\\\\§7§m---------------§r§8// §3[§bPlayerOption§3] §8\\\\§7§m---------------§r§8//");
 						 } else {
-							 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+							 for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+							 }
 						 }
 					 } else {
 						 sender.sendMessage("§8//§7§m---------------§r§8\\\\ §3[§bPlayerOption§3] §8//§7§m---------------§r§8\\\\");
@@ -57,7 +62,9 @@ public class PlayerOption implements CommandExecutor {
 						 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.Fly.Use_Permission")) {
 							 if (p.hasPermission("ultimatespawn.command.playeroption.fly")) {
 								 if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), p);
+									 for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
+										 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+									 }
 				                    	
 									 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
 									 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
@@ -68,7 +75,9 @@ public class PlayerOption implements CommandExecutor {
 									 p.setAllowFlight(false);
 									 p.setFlying(false);
 								 } else {
-									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Enable"), p);
+									 for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Enable")) {
+										 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+									 }
 					       				
 									 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(true));
 									 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(true));
@@ -86,11 +95,15 @@ public class PlayerOption implements CommandExecutor {
 									 }
 								 }
 							 } else {
-								 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+								 for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+				                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+								 }
 							 }
 						 } else {
 							 if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-								 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), p);
+								 for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
+									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+								 }
 			                    	
 								 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
 								 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
@@ -107,7 +120,9 @@ public class PlayerOption implements CommandExecutor {
 									 ConfigTemp.saveConfigFile();
 								 }
 							 } else {
-								 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Enable"), p);
+								 for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Enable")) {
+									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+								 }
 				       				
 								 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(true));
 								 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(true));
@@ -121,7 +136,9 @@ public class PlayerOption implements CommandExecutor {
 						 }
 					 } else {
 						 if (ConfigCPlayerOption.getConfig().getBoolean("Announce.Broadcast.Disable-Message")) {
-							 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+							 for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+								 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+							 }
 						 }
 					 }
 				 } else if (args[0].equalsIgnoreCase("doublejump") || args[0].equalsIgnoreCase("dj")) {
@@ -137,7 +154,9 @@ public class PlayerOption implements CommandExecutor {
 								 ConfigTemp.saveConfigFile();
 							 }
 						 } else {
-							 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+							 for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+							 }
 						 }
 					 } else {
 						 if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
@@ -153,14 +172,14 @@ public class PlayerOption implements CommandExecutor {
 				 }
 			 } else {
 				 if (ConfigCPlayerOption.getConfig().getBoolean("Announce.Broadcast.Disable-Message")) {
-					 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+					 for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+						 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+					 }
 				 }
 			 }
 		 }
 		
 		return true;
 	}
-	
-	
 
 }
