@@ -13,9 +13,9 @@ import org.bukkit.entity.Player;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCPing;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 import me.clip.placeholderapi.PlaceholderAPI;
 
 public class PingCommand implements CommandExecutor {
@@ -28,7 +28,9 @@ public class PingCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
 
             if ((args.length == 0)) {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
+            	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Not-found")) {
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+            	}
                 return true;
             } else if ((args.length == 1)) {
             	for (String msg: ConfigMPing.getConfig().getStringList("Ping.Other")) {
@@ -50,11 +52,15 @@ public class PingCommand implements CommandExecutor {
             					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
             				}
             			} else {
-            				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+            				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+                        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                        	}
             			}
             		} else {
             			if (ConfigCPing.getConfig().getBoolean("Ping.Self.Disable-Message")) {
-            				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+            				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+                        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                        	}
             			}
             		}
             	} else {
@@ -64,7 +70,9 @@ public class PingCommand implements CommandExecutor {
         				}
 	                } else {
 	                    if (ConfigCPing.getConfig().getBoolean("Ping.Self.Disable-Message")) {
-	                    	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+	                    	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	                    		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                    	}
 	                    }
 	                }
             	}
@@ -74,7 +82,9 @@ public class PingCommand implements CommandExecutor {
                 	if (ConfigCPing.getConfig().getBoolean("Ping.Other.Enable")) {
                 		if (p.hasPermission("ultimatespawn.command.ping.other")) {
                 			if (other == null) {
-                				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Not-found"), p);
+                				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Not-found")) {
+                					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                				}
                 				return true;
                 			}
                 			if (ConfigGlobal.getConfig().getBoolean("Plugin.Use.PlaceholderAPI")) {
@@ -95,17 +105,23 @@ public class PingCommand implements CommandExecutor {
                 				}
                 			}
                 		} else {
-                			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+                			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+                        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                        	}
                 		}
                 	} else {
                 		if (ConfigCPing.getConfig().getBoolean("Ping.Other.Disable-Message")) {
-            				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+                			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+                        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                        	}
             			}
                 	}
                 } else {
                 	if (ConfigCPing.getConfig().getBoolean("Ping.Other.Enable")) {
 	                    if (other == null) {
-	                        PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Not-found"), p);
+	                    	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Not-found")) {
+            					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+            				}
 	                        return true;
 	                    }
 	            		if (ConfigGlobal.getConfig().getBoolean("Plugin.Use.PlaceholderAPI")) {
@@ -127,13 +143,17 @@ public class PingCommand implements CommandExecutor {
 	            		}
 	                } else {
 	                    if (ConfigCPing.getConfig().getBoolean("Ping.Other.Disable-Message")) {
-	                    	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+	                    	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	                    		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                    	}
 	                    }
 	                }
                 }
             }
         } else {
-        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+        	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+        	}
         }
 
         return true;
