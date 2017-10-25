@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCWeatherTime;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;
 
 public class TimeCommand implements CommandExecutor {
@@ -19,7 +19,9 @@ public class TimeCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
 		
 		if (!(sender instanceof Player)) {
-			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Only-Player")));
+			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+			}
             return true;
 		}
 		
@@ -37,7 +39,9 @@ public class TimeCommand implements CommandExecutor {
 				}
 			} else {
 				if (ConfigCWeatherTime.getConfig().getBoolean("Time.Set.Night.Disable-Message")) {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	            	}
 				}
 			}
 		}
@@ -54,7 +58,9 @@ public class TimeCommand implements CommandExecutor {
 				}
 			} else {
 				if (ConfigCWeatherTime.getConfig().getBoolean("Time.Set.Day.Disable-Message")) {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	            	}
 				}
 			}
 		}
@@ -72,7 +78,9 @@ public class TimeCommand implements CommandExecutor {
 				}
 			} else {
 				if (ConfigCWeatherTime.getConfig().getBoolean("Weather.Set.Sun.Disable-Message")) {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	            	}
 				}
 			}
 		}
@@ -90,7 +98,9 @@ public class TimeCommand implements CommandExecutor {
 				}
 			} else {
 				if (ConfigCWeatherTime.getConfig().getBoolean("Weather.Set.Rain.Disable-Message")) {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	            	}
 				}
 			}
 		}
@@ -108,7 +118,9 @@ public class TimeCommand implements CommandExecutor {
 				}
 			} else {
 				if (ConfigCWeatherTime.getConfig().getBoolean("Weather.Set.Thunder.Disable-Message")) {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	            	}
 				}
 			}
 		}
