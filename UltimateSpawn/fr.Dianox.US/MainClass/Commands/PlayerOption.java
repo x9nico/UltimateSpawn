@@ -12,6 +12,7 @@ import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlayerOption;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class PlayerOption implements CommandExecutor {
@@ -61,6 +62,12 @@ public class PlayerOption implements CommandExecutor {
 					 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.Fly.Enable")) {
 						 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.Fly.Use_Permission")) {
 							 if (p.hasPermission("ultimatespawn.command.playeroption.fly")) {
+								 if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
+									 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.Fly")) {
+										 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+									 }
+									 return true;
+								 }
 								 if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
 									 for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
 										 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
@@ -100,6 +107,12 @@ public class PlayerOption implements CommandExecutor {
 								 }
 							 }
 						 } else {
+							 if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
+								 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.Fly")) {
+									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+								 }
+								 return true;
+							 }
 							 if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
 								 for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
 									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
@@ -144,14 +157,31 @@ public class PlayerOption implements CommandExecutor {
 				 } else if (args[0].equalsIgnoreCase("doublejump") || args[0].equalsIgnoreCase("dj")) {
 					 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.DoubleJump.Use_Permission")) {
 						 if (p.hasPermission("ultimatespawn.command.playeroption.doublejump")) {
+							 if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+								 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.DoubleJump")) {
+									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+								 }
+								 return true;
+							 }
 							 if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
 								 ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
 								 
 								 ConfigTemp.saveConfigFile();
+								 
+								 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.DoubleJump.Disable")) {
+									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+								 }
+								 p.setFlying(false);
+								 p.setAllowFlight(false);
 							 } else {
+								 p.setFlying(false);
 								 ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(true));
 								 
 								 ConfigTemp.saveConfigFile();
+								 
+								 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.DoubleJump.Enable")) {
+									 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+								 }
 							 }
 						 } else {
 							 for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
@@ -159,14 +189,31 @@ public class PlayerOption implements CommandExecutor {
 							 }
 						 }
 					 } else {
+						 if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+							 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.DoubleJump")) {
+								 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+							 }
+							 return true;
+						 }
 						 if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
 							 ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
 							 
 							 ConfigTemp.saveConfigFile();
+							 
+							 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.DoubleJump.Disable")) {
+								 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+							 }
+							 p.setFlying(false);
+							 p.setAllowFlight(false);
 						 } else {
+							 p.setFlying(false);
 							 ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(true));
 							 
 							 ConfigTemp.saveConfigFile();
+							 
+							 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.DoubleJump.Enable")) {
+								 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+							 }
 						 }
 					 }
 				 }
