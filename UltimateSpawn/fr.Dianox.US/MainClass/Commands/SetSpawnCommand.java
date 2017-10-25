@@ -9,8 +9,9 @@ import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
+import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
 
 public class SetSpawnCommand implements CommandExecutor {
 
@@ -22,7 +23,9 @@ public class SetSpawnCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Only-Player")));
+        	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+			}
             return true;
         }
 
@@ -33,7 +36,9 @@ public class SetSpawnCommand implements CommandExecutor {
 	        	if (args.length == 0) {
 		        	if (p.hasPermission("ultimatespawn.command.setspawn.setspawn")) {
 		                if (!(sender instanceof Player)) {
-		                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
+		                	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+		                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		        			}
 		                    return true;
 		                }
 		                
@@ -50,14 +55,20 @@ public class SetSpawnCommand implements CommandExecutor {
 		                
 		                p.getWorld().setSpawnLocation((int) l.getX(), (int) l.getY(), (int) l.getZ());
 		                
-		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Spawn.Set"), p);
+		                for (String msg: ConfigMSpawn.getConfig().getStringList("Admin.Spawn-set")) {
+	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                	}
 		            } else {
-		            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+		            	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                	}
 		            }
 	        	} else if (args[0].equalsIgnoreCase("voidtp")) {
 	        		if (p.hasPermission("ultimatespawn.command.setspawn.voidtp")) {
 		                if (!(sender instanceof Player)) {
-		                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
+		                	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+		                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		        			}
 		                    return true;
 		                }
 		
@@ -74,14 +85,20 @@ public class SetSpawnCommand implements CommandExecutor {
 		
 		                p.getWorld().setSpawnLocation((int) l.getX(), (int) l.getY(), (int) l.getZ());
 		
-		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Spawn.Set"), p);
+		                for (String msg: ConfigMSpawn.getConfig().getStringList("Admin.Spawn-set")) {
+	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                	}
 		            } else {
-		            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+		            	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                	}
 		            }	
 	        	} else if (args[0].equalsIgnoreCase("firstspawn")) {
 	        		if (p.hasPermission("ultimatespawn.command.setspawn.firstspawn")) {
 		                if (!(sender instanceof Player)) {
-		                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
+		                	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+		                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		        			}
 		                    return true;
 		                }
 		
@@ -98,16 +115,24 @@ public class SetSpawnCommand implements CommandExecutor {
 		
 		                p.getWorld().setSpawnLocation((int) l.getX(), (int) l.getY(), (int) l.getZ());
 		
-		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Spawn.Set"), p);
+		                for (String msg: ConfigMSpawn.getConfig().getStringList("Admin.Spawn-set")) {
+	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                	}
 		            } else {
-		            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+		            	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                	}
 		            }
 	        	} else {
-	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
-	        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer("&cPlease... /setspawn [voidTP|firstspawn]", p);
+	        		for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Arguments-Missing")) {
+                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                	}
+	        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer("&c/setspawn [voidTP|firstspawn]", p);
 	            }
 	        } else {
-	        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+	        	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+            	}
 	        }
         }
         return true;
