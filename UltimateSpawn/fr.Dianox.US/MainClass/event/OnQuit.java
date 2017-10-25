@@ -42,7 +42,7 @@ public class OnQuit implements Listener {
     			                e.setQuitMessage(null);
     			            } else {
     			                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
-    			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+    			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
     			                }
     			                e.setQuitMessage(null);
     			            }
@@ -54,7 +54,7 @@ public class OnQuit implements Listener {
     		                e.setQuitMessage(null);
     		            } else {
     		                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
-    		                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+    		                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
     		                }
     		                e.setQuitMessage(null);
     		            }
@@ -67,7 +67,7 @@ public class OnQuit implements Listener {
 			                e.setQuitMessage(null);
 			            } else {
 			                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
-			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
 			                }
 			                e.setQuitMessage(null);
 			            }
@@ -79,7 +79,7 @@ public class OnQuit implements Listener {
 		                e.setQuitMessage(null);
 		            } else {
 		                for (String message: ConfigGMessageQ.getConfig().getStringList("Broadcast.Quit.Message")) {
-		                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+		                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
 		                }
 		                e.setQuitMessage(null);
 		            }
