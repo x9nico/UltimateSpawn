@@ -20,6 +20,7 @@ import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.fun.ConfigFDoubleJump;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlayerOption;
 
 public class FunFeatures implements Listener {
 	
@@ -133,31 +134,80 @@ public class FunFeatures implements Listener {
 	public void onMoveDoubleJump(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
 		UUID pU = e.getPlayer().getUniqueId();
+		if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+        	if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
+        		for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.DoubleJump-Fly")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    			}
+	          	
+        		ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
+        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+        		
+        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
+        			 				
+        		ConfigTemp.saveConfigFile();
+        		
+        		for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    			}
+        		
+        		p.setFlying(false);
+        		p.setAllowFlight(false);
+        	}
+        }
 		if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
-			p.setAllowFlight(true);
-		}
+	        if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+	        	for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    			}
+	        	for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.DoubleJump-Fly")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    			}
+	          	
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
+				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+				 
+				 ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
+	 				
+				 ConfigTemp.saveConfigFile();
+	 	        	
+				 p.setFlying(false);
+				 p.setAllowFlight(false);
+			} else {
+				p.setAllowFlight(true);
+				p.setFlying(false);
+			}
+        }
 	}
 	
 	@EventHandler
 	public void onInfiniteJump(PlayerToggleFlightEvent e) {
 		Player p = e.getPlayer();
 		UUID pU = e.getPlayer().getUniqueId();
-		if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
-			if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-				for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
-				}
-
-				ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
-				ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
-				ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
-	  				
-				ConfigTemp.saveConfigFile();
-	  	        	
-				p.setAllowFlight(false);
-				p.setFlying(false);
-			}
-		}
+		if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+        	if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
+        		for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.DoubleJump-Fly")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    			}
+	          	
+        		ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
+        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+        		
+        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
+        			 				
+        		ConfigTemp.saveConfigFile();
+        		
+        		for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    			}
+        		
+        		p.setFlying(false);
+        		p.setAllowFlight(false);
+        	}
+        }
 		if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
 			if (ConfigFDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
 				if (p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) {
