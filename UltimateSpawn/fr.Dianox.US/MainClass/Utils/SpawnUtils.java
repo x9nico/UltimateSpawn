@@ -2,10 +2,11 @@ package fr.Dianox.US.MainClass.Utils;
 
 import org.bukkit.entity.Player;
 
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
+import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
 
 public class SpawnUtils {
 
@@ -21,8 +22,10 @@ public class SpawnUtils {
             player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
         } catch (Exception e) {
             org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
-
-            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Spawn-not-set"), player);
+            
+            for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Spawn-not-set")) {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+            }
         }
     }
     
@@ -53,12 +56,16 @@ public class SpawnUtils {
             player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
 
             if (message) {
-                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn"), player);
+            	for (String msg: ConfigMSpawn.getConfig().getStringList("Teleport.Spawn")) {
+                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+                }
             }
         } catch (Exception e) {
             org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
 
-            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Spawn-not-set"), player);
+            for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Spawn-not-set")) {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+            }
         }
     }
 
@@ -73,12 +80,18 @@ public class SpawnUtils {
 
             player.teleport(new org.bukkit.Location(w, x, y, z, yaw, pitch));
 
-            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn"), player);
-            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn-other"), (Player) sender);
+            for (String msg: ConfigMSpawn.getConfig().getStringList("Teleport.Spawn")) {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+            }
+            for (String msg: ConfigMSpawn.getConfig().getStringList("Teleport.Spawn-Other")) {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+            }
         } catch (Exception e) {
             org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
 
-            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Spawn-not-set"), player);
+            for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Spawn-not-set")) {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+            }
         }
     }
     
@@ -96,7 +109,9 @@ public class SpawnUtils {
 	        } catch (Exception e) {
 	            org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
 	
-	            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Spawn-not-set"), player);
+	            for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Spawn-not-set")) {
+	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+	            }
 	        }
     	} else {
     		try {
@@ -111,7 +126,9 @@ public class SpawnUtils {
 	        } catch (Exception e) {
 	            org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
 	
-	            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Spawn-not-set"), player);
+	            for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Spawn-not-set")) {
+	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+	            }
 	        }
     	}
     }
@@ -129,7 +146,9 @@ public class SpawnUtils {
         } catch (Exception e) {
             org.bukkit.Bukkit.getLogger().warning("UltimateSpawn : Spawn is not set");
 
-            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Spawn-not-set"), player);
+            for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Spawn-not-set")) {
+            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, player);
+            }
         }
     }
 
