@@ -10,9 +10,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCClearChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMClearChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class ClearChatCommand implements CommandExecutor {
 
@@ -98,13 +98,17 @@ public class ClearChatCommand implements CommandExecutor {
                 	String msg = ConfigMClearChat.getConfig().getString("ClearChat.No-Reason");
                 	
                     if (args.length == 1) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Enter-Player-Name")));
+                    	for (String msg1: ConfigMPlugin.getConfig().getStringList("Error.Player.Enter-Player-Name")) {
+                    		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg1));
+	                	}
                         sender.sendMessage(ChatColor.RED + "/cc other <player> [reason]");
                         return true;
                     } 
                     Player target = Bukkit.getServer().getPlayer(args[1]);
                     if (target == null) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Player.Not-found")));
+                        for (String msg1: ConfigMPlugin.getConfig().getStringList("Error.Player.Not-found")) {
+                    		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg1));
+	                	}
                         return true;
                     }
                     for (int i = 0; i < lines; i++) {
@@ -179,7 +183,9 @@ public class ClearChatCommand implements CommandExecutor {
 		                        	}
 		                        }
                     		} else {
-                    			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+                    			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+        	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+        	                	}
                     		}
                     	} else {
                     		for (int i = 0; i < lines; i++) {
@@ -208,7 +214,9 @@ public class ClearChatCommand implements CommandExecutor {
                     	}
                     } else {
                     	if (ConfigCClearChat.getConfig().getBoolean("ClearChat.Anonymous.Disable-Message")) {
-                        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+                    		for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+                        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                        	}
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("c")) {
@@ -239,7 +247,9 @@ public class ClearChatCommand implements CommandExecutor {
 		                        	}
 		                        }
                     		} else {
-                    			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+                    			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+			                	}
                     		}
                     	} else {
                     		for (int i = 0; i < lines; i++) {
@@ -268,7 +278,9 @@ public class ClearChatCommand implements CommandExecutor {
                     	}
                     } else {
                         if (ConfigCClearChat.getConfig().getBoolean("ClearChat.Normal.Disable-Message")) {
-                        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+                        	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+                        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                        	}
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("o") || args[0].equalsIgnoreCase("own")) {
@@ -284,7 +296,9 @@ public class ClearChatCommand implements CommandExecutor {
 		                        	}
 		                        }
                     		} else {
-                    			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+                    			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+			                	}
                     		}
                     	} else {
                     		for (int i = 0; i < lines; i++) {
@@ -298,7 +312,9 @@ public class ClearChatCommand implements CommandExecutor {
                     	}
                     } else {
                         if (ConfigCClearChat.getConfig().getBoolean("ClearChat.Own.Disable-Message")) {
-                        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+                        	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+                        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                        	}
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("other")) {
@@ -306,13 +322,17 @@ public class ClearChatCommand implements CommandExecutor {
                     	if (ConfigCClearChat.getConfig().getBoolean("ClearChat.Other.Use_Permission")) {
                     		if (p.hasPermission("ultimatespawn.command.clearchat.other")) {
                     			if (args.length != 2) {
-    	                            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Enter-Player-Name"), (Player) sender);
+                    				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Enter-Player-Name")) {
+    			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, (Player) sender);
+    			                	}
     	                            sender.sendMessage(ChatColor.RED + "/cc other [player]");
     	                            return true;
     	                        }
     	                        Player target = Bukkit.getServer().getPlayer(args[1]);
     	                        if (target == null) {
-    	                            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Not-found"), (Player) sender);
+    	                        	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Not-found")) {
+    			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, (Player) sender);
+    			                	}
     	                            return true;
     	                        }
     	                        for (int i = 0; i < lines; i++) {
@@ -339,17 +359,23 @@ public class ClearChatCommand implements CommandExecutor {
     	                        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ms2.replaceAll("%reason%", msg), target);
     	                        }
                     		} else {
-                    			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+                    			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+			                	}
                     		}
                     	} else {
                     		if (args.length != 2) {
-	                            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Enter-Player-Name"), (Player) sender);
+                    			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Enter-Player-Name")) {
+			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, (Player) sender);
+			                	}
 	                            sender.sendMessage(ChatColor.RED + "/cc other [player]");
 	                            return true;
 	                        }
 	                        Player target = Bukkit.getServer().getPlayer(args[1]);
 	                        if (target == null) {
-	                            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player.Not-found"), (Player) sender);
+	                        	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, (Player) sender);
+			                	}
 	                            return true;
 	                        }
 	                        for (int i = 0; i < lines; i++) {
@@ -378,7 +404,9 @@ public class ClearChatCommand implements CommandExecutor {
                     	}
                     } else {
                     	if (ConfigCClearChat.getConfig().getBoolean("ClearChat.Own.Disable-Message")) {
-                        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+                    		for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+                        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                        	}
                         }
                     }
                 }
