@@ -36,11 +36,13 @@ import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.event.ConfigEVoidTP;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
 import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
+import fr.Dianox.US.MainClass.config.messages.ConfigMConstruct;
+import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
+import fr.Dianox.US.MainClass.config.messages.ConfigMVoidTP;
 
 public class BasicFeatures implements Listener {
 
@@ -716,13 +718,17 @@ public class BasicFeatures implements Listener {
         		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructPlace")) {
         		            e.setCancelled(true);
         		            if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Message")) {
-        		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Place"), p);
+        		            	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Place")) {
+        		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+        		            	}
         		            }
         		        }
         		    } else {
         		        e.setCancelled(true);
         		        if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Message")) {
-        		            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Place"), p);
+        		        	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Place")) {
+    		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    		            	}
         		        }
         		    }
         		}
@@ -731,13 +737,17 @@ public class BasicFeatures implements Listener {
         	        if (!p.hasPermission("UltimateSpawn.bypass.ConstructPlace")) {
         	            e.setCancelled(true);
         	            if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Message")) {
-        	                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Place"), p);
+        	            	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Place")) {
+    		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    		            	}
         	            }
         	        }
         	    } else {
         	        e.setCancelled(true);
         	        if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Message")) {
-        	            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Place"), p);
+        	        	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Place")) {
+		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		            	}
         	        }
         	    }
         	}
@@ -755,13 +765,17 @@ public class BasicFeatures implements Listener {
         		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructBreak")) {
         		            e.setCancelled(true);
         		            if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Message")) {
-        		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Break"), p);
+        		            	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Break")) {
+        		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+        		            	}
         		            }
         		        }
         		    } else {
         		        e.setCancelled(true);
         		        if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Message")) {
-        		            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Break"), p);
+        		        	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Break")) {
+    		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    		            	}
         		        }
         		    }
         		}
@@ -770,13 +784,17 @@ public class BasicFeatures implements Listener {
     		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructBreak")) {
     		            e.setCancelled(true);
     		            if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Message")) {
-    		                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Break"), p);
+    		            	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Break")) {
+    		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    		            	}
     		            }
     		        }
     		    } else {
     		        e.setCancelled(true);
     		        if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Message")) {
-    		            PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Protection.Construct-Message.Break"), p);
+    		        	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Break")) {
+		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		            	}
     		        }
     		    }
         	}
@@ -1116,11 +1134,15 @@ public class BasicFeatures implements Listener {
         				SpawnUtils.teleportToVoidTP(p);
         				if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Custom")) {
         					if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Disable")) {
-        						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.VoidTP"), p);
+        						for (String msg: ConfigMVoidTP.getConfig().getStringList("Teleport.VoidTP")) {
+        		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+        		            	}
         					}
         				} else {
         					if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Disable")) {
-        						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn"), p);
+        						for (String msg: ConfigMSpawn.getConfig().getStringList("Teleport.Spawn")) {
+        		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+        		            	}
         					}
         				}
         				if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Sounds.Enable")) {
@@ -1136,11 +1158,15 @@ public class BasicFeatures implements Listener {
     				SpawnUtils.teleportToVoidTP(p);
     				if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Custom")) {
     					if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Disable")) {
-    						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.VoidTP"), p);
+    						for (String msg: ConfigMVoidTP.getConfig().getStringList("Teleport.VoidTP")) {
+		            			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		            		}
     					}
     				} else {
     					if (!ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Message.Disable")) {
-    						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Player.Teleport.To-spawn"), p);
+    						for (String msg: ConfigMSpawn.getConfig().getStringList("Teleport.Spawn")) {
+    		            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    		            	}
     					}
     				}
     				if (ConfigEVoidTP.getConfig().getBoolean("VoidTP.Options.Sounds.Enable")) {
