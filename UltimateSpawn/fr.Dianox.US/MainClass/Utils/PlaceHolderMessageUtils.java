@@ -54,6 +54,22 @@ public class PlaceHolderMessageUtils {
 		}
 	}
 	
+	public static void ReplaceCharBroadcastPlayerMoreGeneral(String str, Server server, Player player) {
+		if (ConfigGlobal.getConfig().getBoolean("Plugin.Use.PlaceholderAPI")) {
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, str)
+					.replaceAll("%player%", player.getName())
+					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
+					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(player)))
+					));
+		} else {
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', str)
+					.replaceAll("%player%", player.getName())
+					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
+					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(player)))
+					);
+		}
+	}
+	
 	public static void ReplaceCharBroadcastPlayerExceptionConsole(String str, Server server) {
 		if (ConfigGlobal.getConfig().getBoolean("Plugin.Use.PlaceholderAPI")) {
 			for (Player p: Bukkit.getServer().getOnlinePlayers()) {
