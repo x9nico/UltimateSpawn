@@ -7,9 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCDelayChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class DelaychatCommand implements CommandExecutor {
 
@@ -27,7 +27,9 @@ public class DelaychatCommand implements CommandExecutor {
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("%player%", "CONSOLE").replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))));
 					}
 				} else {
-					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Arguments-Missing")));
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Arguments-Missing")) {
+	            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+	            	}
 				}
 			}
 			return true;
@@ -44,14 +46,20 @@ public class DelaychatCommand implements CommandExecutor {
 							PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 						}
 					} else {
-						PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
+						for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Arguments-Missing")) {
+							PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		            	}
 					}
 				} else {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                	}
 				}
 			} else {
 	            if (ConfigCDelayChat.getConfig().getBoolean("DelayChat.Disable-Message")) {
-	            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+	            	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	            	}
 	            }
 	        }
 		}
