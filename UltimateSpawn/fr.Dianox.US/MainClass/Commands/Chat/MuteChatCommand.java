@@ -11,6 +11,7 @@ import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class MuteChatCommand implements CommandExecutor {
 
@@ -47,11 +48,15 @@ public class MuteChatCommand implements CommandExecutor {
 						ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(true));
 					}
 				} else {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                	}
 		        }
 			} else {
 				if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Disable-Message")) {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+					for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+	            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	            	}
 				}
 			}
 		}
