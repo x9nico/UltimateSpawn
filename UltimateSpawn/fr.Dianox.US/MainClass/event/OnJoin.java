@@ -27,7 +27,6 @@ import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.Utils.TitleUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
@@ -43,6 +42,8 @@ import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
+import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class OnJoin implements Listener {
 	
@@ -80,9 +81,9 @@ public class OnJoin implements Listener {
 	        	ConfigPlayerStats.getConfig().set(pU+".Player", String.valueOf(p));
 	        	ConfigPlayerStats.getConfig().set(pU+".IP", String.valueOf(e.getPlayer().getAddress()));
 	        	if (!p.hasPlayedBefore()) {
-	        		ConfigPlayerStats.getConfig().set(pU+".Date.First_Login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
+	        		ConfigPlayerStats.getConfig().set(pU+".Date.First_Login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMPlugin.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMPlugin.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMPlugin.getConfig().getString("Others.Seconds")));
 	        	}
-	        	ConfigPlayerStats.getConfig().set(pU+".Date.Last_login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
+	        	ConfigPlayerStats.getConfig().set(pU+".Date.Last_login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMPlugin.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMPlugin.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMPlugin.getConfig().getString("Others.Seconds")));
 	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.World", l.getWorld().getName());
 	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.x", Double.valueOf(l.getX()));
 	        	ConfigPlayerStats.getConfig().set(pU+".Position.Last_login.y", Double.valueOf(l.getY()));
@@ -96,7 +97,7 @@ public class OnJoin implements Listener {
 	        	if (ConfigPlayerStats.getConfig().getString(pU+".Player") != String.valueOf(p)) {
 	        		ConfigPlayerStats.getConfig().set(pU+".Player", String.valueOf(p));
 	        		ConfigPlayerStats.getConfig().set(pU+".IP", String.valueOf(e.getPlayer().getAddress()));
-	        		ConfigPlayerStats.getConfig().set(pU+".Date.Last_login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
+	        		ConfigPlayerStats.getConfig().set(pU+".Date.Last_login", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMPlugin.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMPlugin.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMPlugin.getConfig().getString("Others.Seconds")));
 	        		
 	        		ConfigPlayerStats.saveConfigFile();
 	        	}
@@ -765,7 +766,9 @@ public class OnJoin implements Listener {
         }
         if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
 	        if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-				 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), p);
+	        	for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+    			}
 	          	
 				 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
 				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
