@@ -13,11 +13,11 @@ import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.global.ConfigGFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class OnQuit implements Listener {
 
@@ -104,7 +104,7 @@ public class OnQuit implements Listener {
         
         // Stats
         if (ConfigGlobal.getConfig().getBoolean("Plugin.Create.Stats")) {
-        	ConfigPlayerStats.getConfig().set(pU+".Date.Last_logout", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMessage.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMessage.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMessage.getConfig().getString("Others.Seconds")));
+        	ConfigPlayerStats.getConfig().set(pU+".Date.Last_logout", String.valueOf(OtherUtils.getDate()+" || "+OtherUtils.getHours()+" "+ConfigMPlugin.getConfig().getString("Others.Hours")+", "+OtherUtils.getMinutes()+" "+ConfigMPlugin.getConfig().getString("Others.Minutes")+", "+OtherUtils.getSeconds()+" "+ConfigMPlugin.getConfig().getString("Others.Seconds")));
 	        ConfigPlayerStats.getConfig().set(pU+".Position.Last_logout.World", l.getWorld().getName());
 	        ConfigPlayerStats.getConfig().set(pU+".Position.Last_logout.x", Double.valueOf(l.getX()));
 	        ConfigPlayerStats.getConfig().set(pU+".Position.Last_logout.y", Double.valueOf(l.getY()));
