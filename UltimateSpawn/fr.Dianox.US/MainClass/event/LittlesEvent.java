@@ -13,10 +13,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 
 import fr.Dianox.US.MainClass.MainClass;
-import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigERespawn;
@@ -111,8 +109,6 @@ public class LittlesEvent implements Listener {
 							}
 						}, ConfigERespawn.getConfig().getInt("Respawn.Player.Respawn-After"));
 					}
-				} else {
-					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
 				}
 			} else {
 				if (!ConfigERespawn.getConfig().getBoolean("Respawn.Player.World.All_World")) {
