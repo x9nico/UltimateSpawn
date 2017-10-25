@@ -21,7 +21,6 @@ import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigBlockCommands;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
@@ -61,9 +60,14 @@ import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
 import fr.Dianox.US.MainClass.config.messages.ConfigMClearChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMConstruct;
 import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
 import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
+import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
+import fr.Dianox.US.MainClass.config.messages.ConfigMVoidTP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;
 
 public class MainClass extends JavaPlugin implements Listener {
@@ -82,7 +86,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.1-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.2-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -125,12 +129,13 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigEColorSign.loadConfig((Plugin) this);
 		ConfigTemp.loadConfig((Plugin) this);
 		ConfigGlobal.loadConfig((Plugin) this);
-		ConfigMessage.loadConfig((Plugin) this);
 		ConfigSpawn.loadConfig((Plugin) this);
 		ConfigPlayerOptions.loadConfig((Plugin) this);
 		ConfigPlayerStats.loadConfig((Plugin) this);
+		
 		// Commands
 		ConfigCWeatherTime.loadConfig((Plugin) this);
+		
 		// >> Messages
 		// > Commands
 		ConfigMWeatherTime.loadConfig((Plugin) this);
@@ -139,6 +144,14 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigMClearChat.loadConfig((Plugin) this);
 		ConfigMMuteChat.loadConfig((Plugin) this);
 		ConfigMDelayChat.loadConfig((Plugin) this);
+		ConfigMSpawn.loadConfig((Plugin) this);
+		// > Event
+		ConfigMVoidTP.loadConfig((Plugin) this);
+		// > Main
+		ConfigMFly.loadConfig((Plugin) this);
+		ConfigMConstruct.loadConfig((Plugin) this);
+		ConfigMPlugin.loadConfig((Plugin) this);
+		
 		// >> Event
 		ConfigERespawn.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
