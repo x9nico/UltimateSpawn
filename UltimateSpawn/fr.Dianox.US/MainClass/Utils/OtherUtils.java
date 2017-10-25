@@ -52,6 +52,7 @@ import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
 import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlayerOption;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
 import fr.Dianox.US.MainClass.config.messages.ConfigMVoidTP;
@@ -196,6 +197,7 @@ public class OtherUtils {
           ConfigMMuteChat.reloadConfig();
           ConfigMDelayChat.reloadConfig();
           ConfigMSpawn.reloadConfig();
+          ConfigMPlayerOption.reloadConfig();
           // > Event
           ConfigMVoidTP.reloadConfig();
           // > Main
