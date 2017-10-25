@@ -42,7 +42,6 @@ import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
-import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class OnJoin implements Listener {
@@ -411,7 +410,7 @@ public class OnJoin implements Listener {
     					                e.setJoinMessage(null);
     					            } else {
     					                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-    					                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+    					                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
     					                }
     					                e.setJoinMessage(null);
     					            }
@@ -421,7 +420,7 @@ public class OnJoin implements Listener {
     				                e.setJoinMessage(null);
     				            } else {
     				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-    				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+    				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
     				                }
     				                e.setJoinMessage(null);
     				            }
@@ -436,7 +435,7 @@ public class OnJoin implements Listener {
     				                e.setJoinMessage(null);
     				            } else {
     				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-    				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+    				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
     				                }
     				                e.setJoinMessage(null);
     				            }
@@ -446,7 +445,7 @@ public class OnJoin implements Listener {
     			                e.setJoinMessage(null);
     			            } else {
     			                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-    			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+    			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
     			                }
     			                e.setJoinMessage(null);
     			            }
@@ -462,7 +461,7 @@ public class OnJoin implements Listener {
 					                e.setJoinMessage(null);
 					            } else {
 					                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-					                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+					                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
 					                }
 					                e.setJoinMessage(null);
 					            }
@@ -472,7 +471,7 @@ public class OnJoin implements Listener {
 				                e.setJoinMessage(null);
 				            } else {
 				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
 				                }
 				                e.setJoinMessage(null);
 				            }
@@ -487,7 +486,7 @@ public class OnJoin implements Listener {
 				                e.setJoinMessage(null);
 				            } else {
 				                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+				                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
 				                }
 				                e.setJoinMessage(null);
 				            }
@@ -497,7 +496,7 @@ public class OnJoin implements Listener {
 			                e.setJoinMessage(null);
 			            } else {
 			                for (String message: ConfigGMessage.getConfig().getStringList("Broadcast.Join.Message")) {
-			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(message, Bukkit.getServer());
+			                	PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(message, Bukkit.getServer(), p);
 			                }
 			                e.setJoinMessage(null);
 			            }
@@ -764,21 +763,35 @@ public class OnJoin implements Listener {
        		
         	ConfigTemp.saveConfigFile();
         }
-        if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
-	        if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-	        	for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
-            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
-    			}
-	          	
-				 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
-				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
-				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
-	 				
-				 ConfigTemp.saveConfigFile();
-	 	        	
-				 p.setAllowFlight(false);
-				 p.setFlying(false);
-			}
+        if (ConfigGFly.getConfig().getBoolean("Fly.Enable")) {
+        	if (ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
+        		Bukkit.getConsoleSender().sendMessage("You have the fly and doublejump enabled in the plugin configuration files... Only 1 must be activated to avoid problems!");
+        		p.sendMessage("You have the fly and doublejump enabled in the plugin configuration files... Only 1 must be activated to avoid problems!");
+	        }
+        }
+        
+        if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+        	if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
+        		if (ConfigGFly.getConfig().getBoolean("Fly.Enable")) {
+	        		ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(true));
+	        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(true));
+	        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(true));
+	        		
+	        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
+	        		
+	        		p.setFlying(true);
+	        		p.setAllowFlight(true);
+        		} else if (ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
+        			ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+	        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
+	        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+	        		
+	        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(true));
+	        		
+	        		p.setFlying(false);
+	        		p.setAllowFlight(false);
+        		}
+        	}
         }
     }
     
