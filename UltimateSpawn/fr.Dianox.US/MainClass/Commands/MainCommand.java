@@ -11,7 +11,7 @@ import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class MainCommand implements CommandExecutor {
 
@@ -45,7 +45,9 @@ public class MainCommand implements CommandExecutor {
                     
                     MainClass.getInstance().GetSetWorld();
                     
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
+                    for (String msg: ConfigMPlugin.getConfig().getStringList("Admin.Reload")) {
+                    	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+                    }
                 }
             }
             return true;
@@ -80,14 +82,22 @@ public class MainCommand implements CommandExecutor {
                 }
                     
                 if ((sender instanceof Player)) {
-                	Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Admin.Plugin-Reload")));
+                	for (String msg: ConfigMPlugin.getConfig().getStringList("Admin.Reload")) {
+                		Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+                	}
                 }
-                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Admin.Plugin-Reload"), p);
+                for (String msg: ConfigMPlugin.getConfig().getStringList("Admin.Reload")) {
+                	 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                }
             } else {
-            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+            	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+            	}
             }
         } else {
-        	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+        	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+        		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+        	}
         }
         return true;
 
