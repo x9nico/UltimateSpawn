@@ -11,9 +11,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCAnnounce;
 import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class AnnounceCommand implements CommandExecutor {
 
@@ -22,7 +22,9 @@ public class AnnounceCommand implements CommandExecutor {
 
         if (!(sender instanceof Player)) {
             if (args.length == 0) {
-            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Arguments-Missing")));
+            	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Arguments-Missing")) {
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+            	}
                 return true;
             }
             String msg = "";
@@ -46,7 +48,9 @@ public class AnnounceCommand implements CommandExecutor {
             if (cmd.getName().equalsIgnoreCase("bc") || cmd.getName().equalsIgnoreCase("broadcast")) {
             	if (p.hasPermission("ultimatespawn.command.broadcast")) {
 	                if (args.length == 0) {
-	                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Arguments-Missing"), p);
+	                	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Arguments-Missing")) {
+	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                	}
 	                    return true;
 	                }
 	                String msg = "";
@@ -69,12 +73,16 @@ public class AnnounceCommand implements CommandExecutor {
 	                    }
 	                }
             	} else {
-                    PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+            		for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+                	}
                 }
             }
         } else {
             if (ConfigCAnnounce.getConfig().getBoolean("Announce.Broadcast.Disable-Message")) {
-                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+                for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+            	}
             }
         }
         return true;
