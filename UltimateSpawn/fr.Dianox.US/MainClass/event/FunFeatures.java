@@ -16,10 +16,10 @@ import org.bukkit.util.Vector;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.fun.ConfigFDoubleJump;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
+import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
 
 public class FunFeatures implements Listener {
 	
@@ -144,16 +144,18 @@ public class FunFeatures implements Listener {
 		UUID pU = e.getPlayer().getUniqueId();
 		if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
 			if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-				 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Others.Fly.Self.Disable"), p);
-	           	
-				 ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
-				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
-				 ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+				for (String msg: ConfigMFly.getConfig().getStringList("Fly.Self.Disable")) {
+					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+				}
+
+				ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+				ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
+				ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
 	  				
-				 ConfigTemp.saveConfigFile();
+				ConfigTemp.saveConfigFile();
 	  	        	
-				 p.setAllowFlight(false);
-				 p.setFlying(false);
+				p.setAllowFlight(false);
+				p.setFlying(false);
 			}
 		}
 		if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
