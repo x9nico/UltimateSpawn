@@ -9,8 +9,8 @@ import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.SpawnUtils;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class SpawnCommand implements CommandExecutor {
 	
@@ -18,7 +18,9 @@ public class SpawnCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 	    
 		if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigMessage.getConfig().getString("Error.Only-Player")));
+			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+			}
             return true;
         }
 
@@ -31,7 +33,9 @@ public class SpawnCommand implements CommandExecutor {
 				        if (label.equalsIgnoreCase("spawn") || label.equalsIgnoreCase("hub") || label.equalsIgnoreCase("lobby") || label.equalsIgnoreCase("h") || label.equalsIgnoreCase("l")) {
 				            if (args.length == 0) {
 				                if (!(sender instanceof Player)) {
-				                	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
+				                	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+				                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+				        			}
 				                    return true;
 				                }
 				                SpawnUtils.teleportToSpawn(p, true);
@@ -39,22 +43,30 @@ public class SpawnCommand implements CommandExecutor {
 				            	Player target = Bukkit.getServer().getPlayer(args[0]);
 				
 				            	if (target == null) {
-				            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player-not-found"), p);
+				            		for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Not-found")) {
+	                					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                				}
 				            		return true;
 				            	}
 				
 				            	SpawnUtils.teleportToSpawn(target, sender);
 				            } else {
-				            	PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+				            	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+			                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+			                	}
 				            }
 				        }
 	        		} else {
-	        			PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.No-permission"), p);
+	        			for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
+	                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+	                	}
 	        		}
 	        	} else {
 	        		if (args.length == 0) {
 	        			if (!(sender instanceof Player)) {
-	        				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Only-Player"), p);
+	        				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Only-Player")) {
+		                		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		        			}
 	        				return true;
 	        			}
 	        			SpawnUtils.teleportToSpawn(p, true);
@@ -62,7 +74,9 @@ public class SpawnCommand implements CommandExecutor {
 	        			Player target = Bukkit.getServer().getPlayer(args[0]);
 			
 	        			if (target == null) {
-	        				PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Player-not-found"), p);
+	        				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Player.Not-found")) {
+            					PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+            				}
 	        				return true;
 	        			}
 			
@@ -72,7 +86,9 @@ public class SpawnCommand implements CommandExecutor {
 	    	}
 	    } else {
 	    	if (ConfigCSpawn.getConfig().getBoolean("Spawn.Disable-Message")) {
-                PlaceHolderMessageUtils.ReplaceCharMessagePlayer(ConfigMessage.getConfig().getString("Error.Command-disable"), p);
+	    		for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Command-disable")) {
+            		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+            	}
             }
 	    }
 		return true;
