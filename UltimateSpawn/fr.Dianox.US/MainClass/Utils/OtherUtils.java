@@ -9,7 +9,6 @@ import org.bukkit.Color;
 import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.config.ConfigBlockCommands;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
-import fr.Dianox.US.MainClass.config.ConfigMessage;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
@@ -48,9 +47,14 @@ import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
 import fr.Dianox.US.MainClass.config.messages.ConfigMClearChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMConstruct;
 import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
+import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
 import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
+import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
+import fr.Dianox.US.MainClass.config.messages.ConfigMVoidTP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;;
 
 public class OtherUtils {
@@ -143,7 +147,6 @@ public class OtherUtils {
 	  
 	  public static void reloadconfig() {
 		  ConfigGlobal.reloadConfig();
-          ConfigMessage.reloadConfig();
           ConfigSpawn.reloadConfig();
           ConfigCClearChat.reloadConfig();
           ConfigGMessageQ.reloadConfig();
@@ -180,8 +183,10 @@ public class OtherUtils {
           ConfigFDoubleJump.reloadConfig();
           ConfigPlayerOptions.reloadConfig();
           ConfigCPlayerOption.reloadConfig();
+          
           // Commands
           ConfigCWeatherTime.reloadConfig();
+          
           // >> Messages
           // > Commands
           ConfigMWeatherTime.reloadConfig();
@@ -190,6 +195,14 @@ public class OtherUtils {
           ConfigMClearChat.reloadConfig();
           ConfigMMuteChat.reloadConfig();
           ConfigMDelayChat.reloadConfig();
+          ConfigMSpawn.reloadConfig();
+          // > Event
+          ConfigMVoidTP.reloadConfig();
+          // > Main
+          ConfigMFly.reloadConfig();
+          ConfigMConstruct.reloadConfig();
+          ConfigMPlugin.reloadConfig();
+          
           // >> Event
           ConfigERespawn.reloadConfig();
 	  }
