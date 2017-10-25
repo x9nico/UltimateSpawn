@@ -65,6 +65,7 @@ import fr.Dianox.US.MainClass.config.messages.ConfigMDelayChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMFly;
 import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlayerOption;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
 import fr.Dianox.US.MainClass.config.messages.ConfigMVoidTP;
@@ -86,7 +87,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.2-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.2.1-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -151,6 +152,9 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigMFly.loadConfig((Plugin) this);
 		ConfigMConstruct.loadConfig((Plugin) this);
 		ConfigMPlugin.loadConfig((Plugin) this);
+		
+		// >> PlayerOption
+		ConfigMPlayerOption.loadConfig((Plugin) this);
 		
 		// >> Event
 		ConfigERespawn.loadConfig((Plugin) this);
