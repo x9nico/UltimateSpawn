@@ -37,7 +37,7 @@ public class OnQuit implements Listener {
         	if (!ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.World.All_World")) {
         		if (WorldUtils.getWBroadcastQuit().contains(p.getWorld().getName())) {
         			if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Silent_Staff_Quit")) {
-            			if (!p.hasPermission("UltimateSpawn.SilentStaffQuit")) {
+            			if (!p.hasPermission("ultimatespawn.event.onquit.silenstaff")) {
     		        		if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
     			                e.setQuitMessage(null);
     			            } else {
@@ -62,7 +62,7 @@ public class OnQuit implements Listener {
         		}
         	} else {
         		if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Silent_Staff_Quit")) {
-        			if (!p.hasPermission("UltimateSpawn.SilentStaffQuit")) {
+        			if (!p.hasPermission("ultimatespawn.event.onquit.silenstaff")) {
 		        		if (ConfigGMessageQ.getConfig().getBoolean("Broadcast.Quit.Hide")) {
 			                e.setQuitMessage(null);
 			            } else {
