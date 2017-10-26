@@ -715,7 +715,7 @@ public class BasicFeatures implements Listener {
         	if (!ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.World.All_World")) {
         		if (WorldUtils.getWPCP().contains(p.getWorld().getName())) {
         			if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Bypass")) {
-        		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructPlace")) {
+        		        if (!p.hasPermission("ultimatespawn.event.construct.bypass.place")) {
         		            e.setCancelled(true);
         		            if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Message")) {
         		            	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Place")) {
@@ -734,7 +734,7 @@ public class BasicFeatures implements Listener {
         		}
         	} else {
         		if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Bypass")) {
-        	        if (!p.hasPermission("UltimateSpawn.bypass.ConstructPlace")) {
+        	        if (!p.hasPermission("ultimatespawn.event.construct.bypass.place")) {
         	            e.setCancelled(true);
         	            if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Place.Message")) {
         	            	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Place")) {
@@ -762,7 +762,7 @@ public class BasicFeatures implements Listener {
         	if (!ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.World.All_World")) {
         		if (WorldUtils.getWPCB().contains(p.getWorld().getName())) {
         			if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Bypass")) {
-        		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructBreak")) {
+        		        if (!p.hasPermission("ultimatespawn.event.construct.bypass.break")) {
         		            e.setCancelled(true);
         		            if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Message")) {
         		            	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Break")) {
@@ -781,7 +781,7 @@ public class BasicFeatures implements Listener {
         		}
         	} else {
         		if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Bypass")) {
-    		        if (!p.hasPermission("UltimateSpawn.bypass.ConstructBreak")) {
+    		        if (!p.hasPermission("ultimatespawn.event.construct.bypass.break")) {
     		            e.setCancelled(true);
     		            if (ConfigGProtection.getConfig().getBoolean("Protection.Construct.Break.Message")) {
     		            	for (String msg: ConfigMConstruct.getConfig().getStringList("Protection.Break")) {
@@ -872,7 +872,7 @@ public class BasicFeatures implements Listener {
     		if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Drop.World.All_World")) {
     			if (WorldUtils.getWItemDrop().contains(p.getWorld().getName())) {
 	    			if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Drop.Bypass")) {
-	                    if (!p.hasPermission("UltimateSpawn.bypass.DropItem")) {
+	                    if (!p.hasPermission("ultimatespawn.event.playeritem.bypass.drop")) {
 	                        e.setCancelled(true);
 	                    }
 	                } else {
@@ -881,7 +881,7 @@ public class BasicFeatures implements Listener {
     			}
     		} else {
     			if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Drop.Bypass")) {
-                    if (!p.hasPermission("UltimateSpawn.bypass.DropItem")) {
+                    if (!p.hasPermission("ultimatespawn.event.playeritem.bypass.drop")) {
                         e.setCancelled(true);
                     }
                 } else {
@@ -899,7 +899,7 @@ public class BasicFeatures implements Listener {
     		if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.PickUp.World.All_World")) {
     			if (WorldUtils.getWItemPickUp().contains(p.getWorld().getName())) {
 	    			if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.PickUp.Bypass")) {
-	                    if (!p.hasPermission("UltimateSpawn.bypass.PickUpItem")) {
+	                    if (!p.hasPermission("ultimatespawn.event.playeritem.bypass.pickup")) {
 	                        e.setCancelled(true);
 	                    }
 	                } else {
@@ -908,7 +908,7 @@ public class BasicFeatures implements Listener {
     			}
     		} else {
     			if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.PickUp.Bypass")) {
-                    if (!p.hasPermission("UltimateSpawn.bypass.PickUpItem")) {
+                    if (!p.hasPermission("ultimatespawn.event.playeritem.bypass.pickup")) {
                         e.setCancelled(true);
                     }
                 } else {
@@ -926,7 +926,7 @@ public class BasicFeatures implements Listener {
     		if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Move.World.All_World")) {
     			if (WorldUtils.getWMoveItem().contains(p.getWorld().getName())) {
 	    			if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Move.Bypass")) {
-	                    if (!p.hasPermission("UltimateSpawn.bypass.MoveItem")) {
+	                    if (!p.hasPermission("ultimatespawn.event.playeritem.bypass.moveitem")) {
 	                        e.setCancelled(true);
 	                    }
 	                } else {
@@ -935,7 +935,7 @@ public class BasicFeatures implements Listener {
     			}
     		} else {
     			if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Move.Bypass")) {
-                    if (!p.hasPermission("UltimateSpawn.bypass.MoveItem")) {
+                    if (!p.hasPermission("ultimatespawn.event.playeritem.bypass.moveitem")) {
                         e.setCancelled(true);
                     }
                 } else {
@@ -953,7 +953,7 @@ public class BasicFeatures implements Listener {
     		if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Damage-Item.World.All_World")) {
     			if (WorldUtils.getWItemDamage().contains(p.getWorld().getName())) {
 	    			if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Damage-Item.Bypass")) {
-	                    if (!p.hasPermission("UltimateSpawn.bypass.DamageItem")) {
+	                    if (!p.hasPermission("ultimatespawn.event.playeritem.bypass.damageitem")) {
 	                        e.setCancelled(true);
 	                    }
 	                } else {
@@ -962,7 +962,7 @@ public class BasicFeatures implements Listener {
     			}
     		} else {
     			if (ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Damage-Item.Bypass")) {
-                    if (!p.hasPermission("UltimateSpawn.bypass.DamageItem")) {
+                    if (!p.hasPermission("ultimatespawn.event.playeritem.bypass.damageitem")) {
                         e.setCancelled(true);
                     }
                 } else {
@@ -1005,7 +1005,7 @@ public class BasicFeatures implements Listener {
         	if (!ConfigGPlayerItems.getConfig().getBoolean("Server.Items.Clear-Drops-On-Death.World.All_World")) {
         		if (WorldUtils.getWClearOnDropsOnDeath().contains(e.getEntity().getWorld().getName())) {
         			if (ConfigGlobal.getConfig().getBoolean("Server.Items.Clear-Drops-On-Death.Bypass")) {
-                        if (!p.hasPermission("UltimateSpawn.bypass.ClearDropOnDeath")) {
+                        if (!p.hasPermission("ultimatespawn.event.death.bypass.cleardrop")) {
                             if ((e.getEntity() instanceof Player)) {
                                 e.getDrops().clear();
                                 forceDelete(e);
@@ -1020,7 +1020,7 @@ public class BasicFeatures implements Listener {
         		}
         	} else {
         		if (ConfigGlobal.getConfig().getBoolean("Server.Items.Clear-Drops-On-Death.Bypass")) {
-                    if (!p.hasPermission("UltimateSpawn.bypass.ClearDropOnDeath")) {
+                    if (!p.hasPermission("ultimatespawn.event.death.bypass.cleardrop")) {
                         if ((e.getEntity() instanceof Player)) {
                             e.getDrops().clear();
                             forceDelete(e);
