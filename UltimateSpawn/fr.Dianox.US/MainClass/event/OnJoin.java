@@ -119,7 +119,7 @@ public class OnJoin implements Listener {
         	if (!ConfigGInventory.getConfig().getBoolean("Inventory.Clear.World.All_World")) {
         		if (WorldUtils.getWInventory().contains(p.getWorld().getName())) {
         	        if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Bypass")) {
-        	            if (!p.hasPermission("UltimateSpawn.bypass.ClearInvOnJoin")) {
+        	            if (!p.hasPermission("ultimatespawn.event.onjoin.bypass.clearinv")) {
         	            	if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Inventory")) {
         	            		inv.clear();
         	            	}
@@ -138,7 +138,7 @@ public class OnJoin implements Listener {
         		}
         	} else {
                 if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Bypass")) {
-                    if (!p.hasPermission("UltimateSpawn.bypass.ClearInvOnJoin")) {
+                    if (!p.hasPermission("ultimatespawn.event.onjoin.bypass.clearinv")) {
                     	if (ConfigGInventory.getConfig().getBoolean("Inventory.Clear.Options.Inventory")) {
                     		inv.clear();
                     	}
@@ -162,7 +162,7 @@ public class OnJoin implements Listener {
         	if (!ConfigGMessage.getConfig().getBoolean("Chat.Clear.World.All_World")) {
         		if (WorldUtils.getWClearChat().contains(p.getWorld().getName())) {
 		            if (ConfigGMessage.getConfig().getBoolean("Chat.Clear.Bypass")) {
-		                if (!p.hasPermission("UltimateSpawn.bypass.ClearChatOnJoin")) {
+		                if (!p.hasPermission("ultimatespawn.event.onjoin.bypass.clearchat")) {
 		                    for (int i = 0; i < lines; i++) {
 		                        p.sendMessage("");
 		                    }
@@ -175,7 +175,7 @@ public class OnJoin implements Listener {
 	        	}
         	} else {
         		if (ConfigGMessage.getConfig().getBoolean("Chat.Clear.Bypass")) {
-	                if (!p.hasPermission("UltimateSpawn.bypass.ClearChatOnJoin")) {
+	                if (!p.hasPermission("ultimatespawn.event.onjoin.bypass.clearchat")) {
 	                    for (int i = 0; i < lines; i++) {
 	                        p.sendMessage("");
 	                    }
@@ -403,7 +403,7 @@ public class OnJoin implements Listener {
         	if (!ConfigGMessage.getConfig().getBoolean("Broadcast.Join.World.All_World")) {
         		if (WorldUtils.getWBroadcastMsgJoin().contains(p.getWorld().getName())) {
         			if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Silent_Staff_Join")) {
-            			if (!p.hasPermission("UltimateSpawn.SilentStaffJoin")) {
+            			if (!p.hasPermission("ultimatespawn.event.onjoin.silenstaff")) {
     		        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
     			        		if (p.hasPlayedBefore()) {
     					            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
@@ -454,7 +454,7 @@ public class OnJoin implements Listener {
         		}
         	} else {
         		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Silent_Staff_Join")) {
-        			if (!p.hasPermission("UltimateSpawn.SilentStaffJoin")) {
+        			if (!p.hasPermission("ultimatespawn.event.onjoin.silenstaff")) {
 		        		if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide_New_Players")) {
 			        		if (p.hasPlayedBefore()) {
 					            if (ConfigGMessage.getConfig().getBoolean("Broadcast.Join.Hide")) {
