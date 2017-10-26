@@ -87,7 +87,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.2.1-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.2.2-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
