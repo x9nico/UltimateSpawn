@@ -77,7 +77,7 @@ public class MainCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("ultimatespawn") || cmd.getName().equalsIgnoreCase("us")) {
-        	if (p.hasPermission("ultimatespawn.command.main.help")) {
+        	if (p.hasPermission("ultimatespawn.command.main")) {
          		if ((args.length == 0) || args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
          			if (args.length == 2) {
          				if (args[1].equalsIgnoreCase("2")) {
