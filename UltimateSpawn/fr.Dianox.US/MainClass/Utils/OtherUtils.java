@@ -11,6 +11,7 @@ import fr.Dianox.US.MainClass.config.ConfigBlockCommands;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
+import fr.Dianox.US.MainClass.config.ConfigServer;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCAnnounce;
@@ -21,6 +22,7 @@ import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCPing;
 import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
+import fr.Dianox.US.MainClass.config.command.ConfigCTps;
 import fr.Dianox.US.MainClass.config.command.ConfigCWeatherTime;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigERespawn;
@@ -54,6 +56,7 @@ import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlayerOption;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
+import fr.Dianox.US.MainClass.config.messages.ConfigMServer;
 import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
 import fr.Dianox.US.MainClass.config.messages.ConfigMVoidTP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;;
@@ -187,6 +190,7 @@ public class OtherUtils {
           
           // Commands
           ConfigCWeatherTime.reloadConfig();
+          ConfigCTps.reloadConfig();
           
           // >> Messages
           // > Commands
@@ -204,9 +208,12 @@ public class OtherUtils {
           ConfigMFly.reloadConfig();
           ConfigMConstruct.reloadConfig();
           ConfigMPlugin.reloadConfig();
+          // > tps
+          ConfigMServer.reloadConfig();
           
           // >> Event
           ConfigERespawn.reloadConfig();
+          ConfigServer.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
