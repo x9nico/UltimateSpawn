@@ -17,12 +17,16 @@ import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.MuteChatCommand;
 import fr.Dianox.US.MainClass.Commands.Other.FlyCommand;
 import fr.Dianox.US.MainClass.Commands.Other.TimeCommand;
+import fr.Dianox.US.MainClass.Commands.Server.CommandTps;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
+import fr.Dianox.US.MainClass.Utils.Server.Tps;
+import fr.Dianox.US.MainClass.Utils.Server.Warn;
 import fr.Dianox.US.MainClass.config.ConfigBlockCommands;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigPlayerOptions;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
+import fr.Dianox.US.MainClass.config.ConfigServer;
 import fr.Dianox.US.MainClass.config.ConfigSpawn;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.command.ConfigCAnnounce;
@@ -33,6 +37,7 @@ import fr.Dianox.US.MainClass.config.command.ConfigCMuteChat;
 import fr.Dianox.US.MainClass.config.command.ConfigCPing;
 import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.command.ConfigCSpawn;
+import fr.Dianox.US.MainClass.config.command.ConfigCTps;
 import fr.Dianox.US.MainClass.config.command.ConfigCWeatherTime;
 import fr.Dianox.US.MainClass.config.event.ConfigEColorSign;
 import fr.Dianox.US.MainClass.config.event.ConfigERespawn;
@@ -67,6 +72,7 @@ import fr.Dianox.US.MainClass.config.messages.ConfigMMuteChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPing;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlayerOption;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
+import fr.Dianox.US.MainClass.config.messages.ConfigMServer;
 import fr.Dianox.US.MainClass.config.messages.ConfigMSpawn;
 import fr.Dianox.US.MainClass.config.messages.ConfigMVoidTP;
 import fr.Dianox.US.MainClass.config.messages.ConfigMWeatherTime;
@@ -87,7 +93,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.2.2-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.3-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -136,6 +142,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		
 		// Commands
 		ConfigCWeatherTime.loadConfig((Plugin) this);
+		ConfigCTps.loadConfig((Plugin) this);
 		
 		// >> Messages
 		// > Commands
@@ -152,12 +159,15 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigMFly.loadConfig((Plugin) this);
 		ConfigMConstruct.loadConfig((Plugin) this);
 		ConfigMPlugin.loadConfig((Plugin) this);
+		// > TPS
+		ConfigMServer.loadConfig((Plugin) this);
 		
 		// >> PlayerOption
 		ConfigMPlayerOption.loadConfig((Plugin) this);
 		
 		// >> Event
 		ConfigERespawn.loadConfig((Plugin) this);
+		ConfigServer.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
@@ -178,6 +188,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCommand("sun").setExecutor(new TimeCommand());
 		getCommand("rain").setExecutor(new TimeCommand());
 		getCommand("thunder").setExecutor(new TimeCommand());
+		getCommand("tps").setExecutor(new CommandTps());
 		getCSC("| "+ChatColor.YELLOW+"Commands loaded");
 		
 		getCSC("|");
@@ -204,6 +215,12 @@ public class MainClass extends JavaPlugin implements Listener {
         nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
         if ((nmsver.equalsIgnoreCase("v1_8_R1")) || (nmsver.startsWith("v1_7_"))) {
         	useOldMethods = true;
+        }
+        
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Tps(), 100L, 1L);
+        
+        if (ConfigServer.getConfig().getBoolean("Tps.Warn-system")) {
+        	Warn.runWarnSystemTask(this);
         }
         
         getCSC("| "+ChatColor.YELLOW+"And many things.... I think... x'D");
