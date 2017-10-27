@@ -56,7 +56,7 @@ public class ConfigMPlugin {
                 e.printStackTrace();
             }
 
-            Config.set("Admin.Reload", java.util.Arrays.asList(new String[] {"&6US &7| &eConfig reloaded &7&oThis command is not fully supported by the plugin"}));
+            Config.set("Admin.Reload", java.util.Arrays.asList(new String[] {"&8[&bUS&8] &bConfig reloaded &7&oThis command is not fully supported by the plugin"}));
             Config.set("Others.Hours", "hour(s)");
             Config.set("Others.Minutes", "minute(s)");
             Config.set("Others.Seconds", "second(s)");
