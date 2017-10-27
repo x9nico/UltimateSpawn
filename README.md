@@ -1,8 +1,15 @@
 # UltimateSpawn
-A MineCraft plugin for lobby server
+A MineCraft plugin for a lobby server
 
 Version: 1.8x-1.9.x-1.10.x-1.11.x-1.12.x\
 (not work very fine if you not config your config)
+
+The goal is to make this plugin, a plugin that every server with as lobby must have. Bet almost impossible but yet I noted. A plugin that everyone will need
+
+This plugin is in alpha.
+Don't download this plugin, If you need bigger !
+
+Don't use this plugin with an other spawn plugin ! (ex: SpawnTP, Essentials Spawn...)
 
 # Version - 0.6.3-Alpha
 
