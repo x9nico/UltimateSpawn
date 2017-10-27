@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import fr.Dianox.US.MainClass.Commands.PingCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
+import fr.Dianox.US.MainClass.Utils.Server.Tps;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import me.clip.placeholderapi.PlaceholderAPI;
 
@@ -23,6 +24,7 @@ public class PlaceHolderMessageUtils {
 					.replaceAll("%target%", p.getName())
 					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
+					.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
 					));
 		} else {
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', str
@@ -30,6 +32,7 @@ public class PlaceHolderMessageUtils {
 					.replaceAll("%target%", p.getName())
 					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
+					.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
 					));
 		}
 	}
@@ -41,6 +44,7 @@ public class PlaceHolderMessageUtils {
 						.replaceAll("%player%", p.getName())
 						.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 						.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
+						.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
 						));
 			}
 		} else {
@@ -49,6 +53,7 @@ public class PlaceHolderMessageUtils {
 						.replaceAll("%player%", p.getName())
 						.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 						.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
+						.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
 						);
 			}
 		}
@@ -60,12 +65,14 @@ public class PlaceHolderMessageUtils {
 					.replaceAll("%player%", player.getName())
 					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(player)))
+					.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
 					));
 		} else {
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', str)
 					.replaceAll("%player%", player.getName())
 					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(player)))
+					.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
 					);
 		}
 	}
@@ -77,6 +84,7 @@ public class PlaceHolderMessageUtils {
 						.replaceAll("%player%", "CONSOLE")
 						.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 						.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
+						.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
 						));
 			}
 		} else {
@@ -85,6 +93,7 @@ public class PlaceHolderMessageUtils {
 						.replaceAll("%player%", "CONSOLE")
 						.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 						.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
+						.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
 						);
 			}
 		}
