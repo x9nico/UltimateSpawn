@@ -84,7 +84,7 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
-	public MainClass() {}
+	private MainClass() {}
 	
 	@Override
 	public void onEnable() {
