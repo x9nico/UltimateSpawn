@@ -56,8 +56,23 @@ public class ConfigMPlayerOption {
                 e.printStackTrace();
             }
 
+            Config.set("PlayerOption.Help", java.util.Arrays.asList(new String[] {
+            		"&8//&7&m---------------&r&8\\\\ &3[&bPlayerOption&3] &8//&7&m---------------&r&8\\\\",
+            		"",
+            		"     &l>> &e&o&lPlayer option Help",
+            		"",
+            		" &8>> &7/option fly - &eSet the fly",
+            		" &8>> &7/option doublejump - &eEnable or disable the doublejump",
+            		" &8>> &7/option speed - &eEnable or disable the speed",
+            		" &8>> &7/option jumpboost - &eEnable or disable the jumpboost",
+            		"",
+            		"&8\\\\&7&m---------------&r&8// &3[&bPlayerOption&3] &8\\\\&7&m---------------&r&8//"}));
             Config.set("PlayerOption.DoubleJump.Enable", java.util.Arrays.asList(new String[] {"&aYour doublejump has been activated"}));
             Config.set("PlayerOption.DoubleJump.Disable", java.util.Arrays.asList(new String[] {"&cYour doublejump has been disabled"}));
+            Config.set("PlayerOption.Speed.Enable", java.util.Arrays.asList(new String[] {"&aYour speed has been activated"}));
+            Config.set("PlayerOption.Speed.Disable", java.util.Arrays.asList(new String[] {"&cYour speed has been disabled"}));
+            Config.set("PlayerOption.JumpBoost.Enable", java.util.Arrays.asList(new String[] {"&aYour jumpboost has been activated"}));
+            Config.set("PlayerOption.JumpBoost.Disable", java.util.Arrays.asList(new String[] {"&cYour jumpboost has been disabled"}));
             Config.set("PlayerOption.Error.DoubleJump-Fly", java.util.Arrays.asList(new String[] {"&c&lYou&7 have the fly and doublejump activated, please deactivate one or the other."}));
             Config.set("PlayerOption.Error.DoubleJump", java.util.Arrays.asList(new String[] {"&c&lYou&7 cannot activate your doublejump because the fly is active!"}));
             Config.set("PlayerOption.Error.Fly", java.util.Arrays.asList(new String[] {"&c&lYou&7 cannot activate your fly because the doublejump is active!"}));
