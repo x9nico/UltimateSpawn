@@ -23,6 +23,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
+import fr.Dianox.US.MainClass.config.global.ConfigGPlayerOption;
 import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
 import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
@@ -84,10 +85,25 @@ public class WorldUtils {
 	public static List<String> worlds_fun_infinitejump = new ArrayList<String>();
 	public static List<String> worlds_fun_fivejump = new ArrayList<String>();
 	public static List<String> worlds_fun_forjump = new ArrayList<String>();
-	public static List<String> worlds_fun_threejump  = new ArrayList<String>();
-	public static List<String> worlds_fun_doublejump  = new ArrayList<String>();
-	public static List<String> worlds_fun_doublejump_onjoin  = new ArrayList<String>();
-	public static List<String> worlds_respawn  = new ArrayList<String>();
+	public static List<String> worlds_fun_threejump = new ArrayList<String>();
+	public static List<String> worlds_fun_doublejump = new ArrayList<String>();
+	public static List<String> worlds_fun_doublejump_onjoin = new ArrayList<String>();
+	public static List<String> worlds_respawn = new ArrayList<String>();
+	public static List<String> worlds_playeroption_join = new ArrayList<String>();
+	
+	public static void setPlayerOptionJoin() {
+		if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Enable")) {
+	        if (!ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.World.All_World")) {
+	            for (String world : ConfigGPlayerOption.getConfig().getStringList("PlayerOption.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in PlayerOption-Other-OnJoin.yml, PlayerOption.World: "+world);
+	            	} else {
+	            		worlds_playeroption_join.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
 	
 	public static void setWRespawnEvent() {
 		if (ConfigERespawn.getConfig().getBoolean("Respawn.Enable")) {
@@ -879,6 +895,10 @@ public class WorldUtils {
 	            }
 	        }
         }
+	}
+	
+	public static List<String> getWJoinPlayerOption() {
+		return worlds_playeroption_join;
 	}
 	
 	public static List<String> getWEventResapwn() {
