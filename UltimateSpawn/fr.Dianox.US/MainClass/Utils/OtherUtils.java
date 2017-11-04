@@ -41,6 +41,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
+import fr.Dianox.US.MainClass.config.global.ConfigGPlayerOption;
 import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
 import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
@@ -214,6 +215,9 @@ public class OtherUtils {
           // >> Event
           ConfigERespawn.reloadConfig();
           ConfigServer.reloadConfig();
+          
+          // >> On Join
+          ConfigGPlayerOption.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
