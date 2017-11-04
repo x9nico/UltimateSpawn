@@ -18,6 +18,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.ActionBar;
@@ -39,6 +41,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGHF;
 import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
 import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
+import fr.Dianox.US.MainClass.config.global.ConfigGPlayerOption;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
@@ -59,10 +62,17 @@ public class OnJoin implements Listener {
         // Options
         if (!ConfigPlayerOptions.getConfig().contains(String.valueOf(pU))) {
         	ConfigPlayerOptions.getConfig().set(pU+".Player", String.valueOf(p));
-        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Enable", ConfigGFly.getConfig().getBoolean("Fly.Enable"));
-        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetFlying", ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying"));
-        	ConfigPlayerOptions.getConfig().set(pU+".Options.Fly.Options.SetAllowFlight", ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight"));
-        	ConfigPlayerOptions.getConfig().set(pU+".Options.DoubleJump", ConfigGFly.getConfig().getBoolean("Fly.Enable"));
+        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Enable", ConfigGFly.getConfig().getBoolean("Fly.Enable"));
+        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Options.SetFlying", ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying"));
+        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Options.SetAllowFlight", ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight"));
+        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.DoubleJump", ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable"));
+        	if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Enable")) {
+        		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Speed", ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Enable"));
+        		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.JumpBoost", ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Enable"));
+        	} else {
+        		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Speed", Boolean.valueOf(false));
+        		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.JumpBoost", Boolean.valueOf(false));
+        	}
         	
         	ConfigPlayerOptions.saveConfigFile();
         } else {
@@ -294,22 +304,22 @@ public class OnJoin implements Listener {
         if ((ConfigGFly.getConfig().getBoolean("Fly.Enable")) && (gm != 3)) {
         	if (!ConfigGFly.getConfig().getBoolean("Fly.World.All_World")) {
 	       		if (WorldUtils.getWFly().contains(p.getWorld().getName())) {
-	       			if (ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+	       			if (ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Enable")) {
 		       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
-		       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
+		       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight"));
 		       			}
 		       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
-		       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.setFlying"));
+		       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.setFlying"));
 		       			}
 	       			}
 	       		}
         	} else {
         		if (ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
 	        		if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
-	        			p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
+	        			p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight"));
 	       			}
 	       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
-	       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.setFlying"));
+	       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.setFlying"));
 	       			}
         		}
         	}
@@ -319,13 +329,13 @@ public class OnJoin implements Listener {
         if ((ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) && (gm != 3)) {
         	if (!ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.World.All_World")) {
 	       		if (WorldUtils.getWOptionDoubleJumpJoin().contains(p.getWorld().getName())) {
-	       			ConfigPlayerOptions.getConfig().get(pU+".Options.DoubleJump", Boolean.valueOf(true));
+	       			ConfigPlayerOptions.getConfig().get(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(true));
 	       		}
         	} else {
-        		ConfigPlayerOptions.getConfig().get(pU+".Options.DoubleJump", Boolean.valueOf(true));
+        		ConfigPlayerOptions.getConfig().get(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(true));
         	}
         } else {
-        	ConfigPlayerOptions.getConfig().get(pU+".Options.DoubleJump", Boolean.valueOf(false));
+        	ConfigPlayerOptions.getConfig().get(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(false));
         }
 
         // Reset XP
@@ -729,6 +739,8 @@ public class OnJoin implements Listener {
         	}
         }
         
+        PlayerOption(p, pU);
+        
         // Temporary
         int GamemodeTemp1 = 0;
         if (p.getGameMode() == GameMode.SURVIVAL) {
@@ -745,21 +757,169 @@ public class OnJoin implements Listener {
         if (!ConfigTemp.getConfig().contains(String.valueOf(pU))) {
         	ConfigTemp.getConfig().set(pU+".Player", String.valueOf(p));
         	ConfigTemp.getConfig().set(pU+".Options.Gamemode", Integer.valueOf(GamemodeTemp2));
-        	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable"));
-       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
-       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetFlying"));
+        	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Enable"));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight"));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetFlying"));
        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(0));
-       		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.DoubleJump"));
+       		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.DoubleJump"));
+
+       		if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Enable")) {
+       			if (!ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.World.All_World")) {
+       				if (WorldUtils.getWJoinPlayerOption().contains(p.getWorld().getName())) {
+       					// //////////////////
+       					// SPEED
+       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Enable")) {
+	       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Use_Permission")) {
+	       						if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.speed")) {
+	       							ConfigTemp.getConfig().set(pU+".Options.Speed", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Speed"));
+	       						} else {
+	       							ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+	       						}
+	       					} else {
+	       						ConfigTemp.getConfig().set(pU+".Options.Speed", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Speed"));
+	       					}
+       					} else {
+       						ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+       					}
+       					// JUMP
+       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Enable")) {
+	       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Use_Permission")) {
+	       						if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.jumpboost")) {
+	       							ConfigTemp.getConfig().set(pU+".Options.JumpBoost", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.JumpBoost"));
+	       						} else {
+	       							ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+	       						}
+	       					} else {
+	       						ConfigTemp.getConfig().set(pU+".Options.JumpBoost", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.JumpBoost"));
+	       					}
+       					} else {
+       						ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+       					}
+       					// //////////////////
+       				} else {
+       					ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+       		       		ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+       				}
+       			} else {
+       				// //////////////////
+   					// SPEED
+   					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Enable")) {
+       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Use_Permission")) {
+       						if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.speed")) {
+       							ConfigTemp.getConfig().set(pU+".Options.Speed", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Speed"));
+       						} else {
+       							ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+       						}
+       					} else {
+       						ConfigTemp.getConfig().set(pU+".Options.Speed", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Speed"));
+       					}
+   					} else {
+   						ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+   					}
+   					// JUMP
+   					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Enable")) {
+       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Use_Permission")) {
+       						if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.jumpboost")) {
+       							ConfigTemp.getConfig().set(pU+".Options.JumpBoost", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.JumpBoost"));
+       						} else {
+       							ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+       						}
+       					} else {
+       						ConfigTemp.getConfig().set(pU+".Options.JumpBoost", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.JumpBoost"));
+       					}
+   					} else {
+   						ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+   					}
+   					// //////////////////
+       			}
+       		} else {
+       			ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+	       		ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+       		}
        		
         	ConfigTemp.saveConfigFile();
         } else if (ConfigTemp.getConfig().contains(String.valueOf(pU))) {
         	ConfigTemp.getConfig().set(pU+".Player", String.valueOf(p));
         	ConfigTemp.getConfig().set(pU+".Options.Gamemode", Integer.valueOf(GamemodeTemp2));
-        	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable"));
-       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetAllowFlight"));
-       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Options.SetFlying"));
+        	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Enable"));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight"));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetFlying"));
        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump", Integer.valueOf(0));
-       		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.DoubleJump"));
+       		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.DoubleJump"));
+       		
+       		if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Enable")) {
+       			if (!ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.World.All_World")) {
+       				if (WorldUtils.getWJoinPlayerOption().contains(p.getWorld().getName())) {
+       					// //////////////////
+       					// SPEED
+       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Enable")) {
+	       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Use_Permission")) {
+	       						if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.speed")) {
+	       							ConfigTemp.getConfig().set(pU+".Options.Speed", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Speed"));
+	       						} else {
+	       							ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+	       						}
+	       					} else {
+	       						ConfigTemp.getConfig().set(pU+".Options.Speed", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Speed"));
+	       					}
+       					} else {
+       						ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+       					}
+       					// JUMP
+       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Enable")) {
+	       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Use_Permission")) {
+	       						if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.jumpboost")) {
+	       							ConfigTemp.getConfig().set(pU+".Options.JumpBoost", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.JumpBoost"));
+	       						} else {
+	       							ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+	       						}
+	       					} else {
+	       						ConfigTemp.getConfig().set(pU+".Options.JumpBoost", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.JumpBoost"));
+	       					}
+       					} else {
+       						ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+       					}
+       					// //////////////////
+       				} else {
+       					ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+       		       		ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+       				}
+       			} else {
+       				// //////////////////
+   					// SPEED
+   					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Enable")) {
+       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Use_Permission")) {
+       						if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.speed")) {
+       							ConfigTemp.getConfig().set(pU+".Options.Speed", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Speed"));
+       						} else {
+       							ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+       						}
+       					} else {
+       						ConfigTemp.getConfig().set(pU+".Options.Speed", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Speed"));
+       					}
+   					} else {
+   						ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+   					}
+   					// JUMP
+   					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Enable")) {
+       					if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Use_Permission")) {
+       						if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.jumpboost")) {
+       							ConfigTemp.getConfig().set(pU+".Options.JumpBoost", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.JumpBoost"));
+       						} else {
+       							ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+       						}
+       					} else {
+       						ConfigTemp.getConfig().set(pU+".Options.JumpBoost", ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.JumpBoost"));
+       					}
+   					} else {
+   						ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+   					}
+   					// //////////////////
+       			}
+       		} else {
+       			ConfigTemp.getConfig().set(pU+".Options.Speed", Boolean.valueOf(false));
+	       		ConfigTemp.getConfig().set(pU+".Options.JumpBoost", Boolean.valueOf(false));
+       		}
        		
         	ConfigTemp.saveConfigFile();
         }
@@ -799,7 +959,111 @@ public class OnJoin implements Listener {
     	if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Enable")) {
         	if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.World.All_World")) {
         		if (WorldUtils.getWFirework().contains(p.getWorld().getName())) {
-		        	for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
+        			if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Bypass")) {
+        				if (!p.hasPermission("ultimatespawn.event.onjoin.bypass.firework")) {
+				        	for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
+				        		ArrayList<Color> colors = new ArrayList<Color>();
+				        		ArrayList<Color> fade = new ArrayList<Color>();
+				        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
+				        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
+				        		for (String l1 : lore) {
+				        			colors.add(OtherUtils.getColor(l1));
+				        	    }
+				        		for (String l2 : lore2) {
+				        			fade.add(OtherUtils.getColor(l2));
+				        		}
+				                final Firework f = p.getWorld().spawn(p.getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
+				                
+				                FireworkMeta fm = f.getFireworkMeta();
+				                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
+				                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
+				                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
+				                		.build());
+				                
+				                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
+				                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
+				                }
+				                f.setFireworkMeta(fm);
+				                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
+				                	Bukkit.getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable(){
+				                      public void run() {
+				                        f.detonate();
+				                      }
+				                    }, 5L);
+				                }
+				        	}
+        				}
+        			} else {
+        				for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
+			        		ArrayList<Color> colors = new ArrayList<Color>();
+			        		ArrayList<Color> fade = new ArrayList<Color>();
+			        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
+			        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
+			        		for (String l1 : lore) {
+			        			colors.add(OtherUtils.getColor(l1));
+			        	    }
+			        		for (String l2 : lore2) {
+			        			fade.add(OtherUtils.getColor(l2));
+			        		}
+			                final Firework f = p.getWorld().spawn(p.getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
+			                
+			                FireworkMeta fm = f.getFireworkMeta();
+			                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
+			                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
+			                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
+			                		.build());
+			                
+			                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
+			                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
+			                }
+			                f.setFireworkMeta(fm);
+			                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
+			                	Bukkit.getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable(){
+			                      public void run() {
+			                        f.detonate();
+			                      }
+			                    }, 5L);
+			                }
+			        	}
+        			}
+        		}
+        	} else {
+        		if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Bypass")) {
+    				if (!p.hasPermission("ultimatespawn.event.onjoin.bypass.firework")) {
+			        	for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
+			        		ArrayList<Color> colors = new ArrayList<Color>();
+			        		ArrayList<Color> fade = new ArrayList<Color>();
+			        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
+			        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
+			        		for (String l1 : lore) {
+			        			colors.add(OtherUtils.getColor(l1));
+			        	    }
+			        		for (String l2 : lore2) {
+			        			fade.add(OtherUtils.getColor(l2));
+			        		}
+			                final Firework f = p.getWorld().spawn(p.getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
+			                
+			                FireworkMeta fm = f.getFireworkMeta();
+			                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
+			                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
+			                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
+			                		.build());
+			                
+			                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
+			                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
+			                }
+			                f.setFireworkMeta(fm);
+			                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
+			                	Bukkit.getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable(){
+			                      public void run() {
+			                        f.detonate();
+			                      }
+			                    }, 5L);
+			                }
+			        	}
+    				}
+    			} else {
+    				for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
 		        		ArrayList<Color> colors = new ArrayList<Color>();
 		        		ArrayList<Color> fade = new ArrayList<Color>();
 		        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
@@ -830,41 +1094,76 @@ public class OnJoin implements Listener {
 		                    }, 5L);
 		                }
 		        	}
-        		}
-        	} else {
-        		for (int i = 1; i < ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Amount"); i++) {
-	        		ArrayList<Color> colors = new ArrayList<Color>();
-	        		ArrayList<Color> fade = new ArrayList<Color>();
-	        		List<String> lore = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Colors");
-	        		List<String> lore2 = ConfigGCos.getConfig().getStringList("Cosmetics.Firework.Options.Fade");
-	        		for (String l1 : lore) {
-	        			colors.add(OtherUtils.getColor(l1));
-	        	    }
-	        		for (String l2 : lore2) {
-	        			fade.add(OtherUtils.getColor(l2));
-	        		}
-	                final Firework f = p.getWorld().spawn(p.getLocation().add(0.5D, ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Height"), 0.5D), Firework.class);
-	                
-	                FireworkMeta fm = f.getFireworkMeta();
-	                fm.addEffect(FireworkEffect.builder().flicker(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Flicker"))
-	                		.trail(ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Trail"))
-	                		.with(FireworkEffect.Type.valueOf(ConfigGCos.getConfig().getString("Cosmetics.Firework.Options.Type"))).withColor(colors).withFade(fade)
-	                		.build());
-	                
-	                if (!ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) {
-	                	fm.setPower(ConfigGCos.getConfig().getInt("Cosmetics.Firework.Options.Power"));
-	                }
-	                f.setFireworkMeta(fm);
-	                if (ConfigGCos.getConfig().getBoolean("Cosmetics.Firework.Options.Instant-explode")) { 
-	                	Bukkit.getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable(){
-	                      public void run() {
-	                        f.detonate();
-	                      }
-	                    }, 5L);
-	                }
-	        	}
+    			}
         	}
         }
     }
 
+    public void PlayerOption(Player p, UUID pU) {
+    	if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Enable")) {
+    		if (!ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.World.All_World")) {
+    			if (WorldUtils.getWJoinPlayerOption().contains(p.getWorld().getName())) {
+		    		// Speed
+    				if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Enable")) {
+			    		if (ConfigTemp.getConfig().getBoolean(pU+".Options.Speed")) {
+			    			if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Use_Permission")) {
+			    				if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.speed")) {
+			    					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999999, ConfigGPlayerOption.getConfig().getInt("PlayerOption.Option.Speed.Option.Amplifier"), false, false));
+			    				}
+			    			} else {
+			    				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999999, ConfigGPlayerOption.getConfig().getInt("PlayerOption.Option.Speed.Option.Amplifier"), false, false));
+			    			}
+			    		}
+    				}
+		    		// JumpBoost
+    				if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Enable")) {
+			    		if (ConfigTemp.getConfig().getBoolean(pU+".Options.JumpBoost")) {
+			    			if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Use_Permission")) {
+			    				if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.jumpboost")) {
+			    					p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999999, ConfigGPlayerOption.getConfig().getInt("PlayerOption.Option.JumpBoost.Option.Amplifier"), false, false));
+			    				}
+			    			} else {
+			    				p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999999, ConfigGPlayerOption.getConfig().getInt("PlayerOption.Option.JumpBoost.Option.Amplifier"), false, false));
+			    			}
+			    		}
+    				}
+    			} else {
+    				if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Force-Clear-Effects")) {
+    	    			p.removePotionEffect(PotionEffectType.JUMP);
+    	    			p.removePotionEffect(PotionEffectType.SPEED);
+    	    		}
+    			}
+    		} else {
+    			// Speed
+    			if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Enable")) {
+	    			if (ConfigTemp.getConfig().getBoolean(pU+".Options.Speed")) {
+		    			if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Use_Permission")) {
+		    				if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.speed")) {
+		    					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999999, ConfigGPlayerOption.getConfig().getInt("PlayerOption.Option.Speed.Option.Amplifier"), false, false));
+		    				}
+		    			} else {
+		    				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999999, ConfigGPlayerOption.getConfig().getInt("PlayerOption.Option.Speed.Option.Amplifier"), false, false));
+		    			}
+		    		}
+    			}
+	    		// JumpBoost
+    			if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Enable")) {
+	    			if (ConfigTemp.getConfig().getBoolean(pU+".Options.JumpBoost")) {
+		    			if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Use_Permission")) {
+		    				if (p.hasPermission("ultimatespawn.event.onjoin.playeroption.jumpboost")) {
+		    					p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999999, ConfigGPlayerOption.getConfig().getInt("PlayerOption.Option.JumpBoost.Option.Amplifier"), false, false));
+		    				}
+		    			} else {
+		    				p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999999, ConfigGPlayerOption.getConfig().getInt("PlayerOption.Option.JumpBoost.Option.Amplifier"), false, false));
+		    			}
+		    		}
+    			}
+    		}
+    	} else {
+    		if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Force-Clear-Effects")) {
+    			p.removePotionEffect(PotionEffectType.JUMP);
+    			p.removePotionEffect(PotionEffectType.SPEED);
+    		}
+    	}
+    }
 }
