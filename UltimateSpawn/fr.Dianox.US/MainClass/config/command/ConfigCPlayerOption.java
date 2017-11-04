@@ -61,6 +61,12 @@ public class ConfigCPlayerOption {
             Config.set("PlayerOption.DoubleJump.Use_Permission", Boolean.valueOf(false));
             Config.set("PlayerOption.Fly.Enable", Boolean.valueOf(true));
             Config.set("PlayerOption.Fly.Use_Permission", Boolean.valueOf(false));
+            Config.set("PlayerOption.Speed.Enable", Boolean.valueOf(true));
+            Config.set("PlayerOption.Speed.Amplifier", Integer.valueOf(1));
+            Config.set("PlayerOption.Speed.Use_Permission", Boolean.valueOf(false));
+            Config.set("PlayerOption.JumpBoost.Enable", Boolean.valueOf(true));
+            Config.set("PlayerOption.JumpBoost.Amplifier", Integer.valueOf(1));
+            Config.set("PlayerOption.JumpBoost.Use_Permission", Boolean.valueOf(false));
             Config.set("PlayerOption.Disable-Message", Boolean.valueOf(false));
             
             saveConfigFile();
