@@ -11,7 +11,7 @@ Don't download this plugin, If you need bigger !
 
 Don't use this plugin with an other spawn plugin ! (ex: SpawnTP, Essentials Spawn...)
 
-# Version - 0.6.3-Alpha
+# Version - 0.6.5-Alpha
 
 In case of a problem with the plugin, you can visit the spigot page or send a ticket here.
 
