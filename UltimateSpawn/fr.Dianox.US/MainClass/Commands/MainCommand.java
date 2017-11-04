@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import fr.Dianox.US.MainClass.MainClass;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
+import fr.Dianox.US.MainClass.Utils.Server.Tps;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 import fr.Dianox.US.MainClass.config.messages.ConfigMServer;
@@ -67,7 +68,7 @@ public class MainCommand implements CommandExecutor {
                     }
                 } else if (args[0].equalsIgnoreCase("tps")) {
                 	for (String msg: ConfigMServer.getConfig().getStringList("TPS.Normal")) {
-                		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+                		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg).replaceAll("%tps%", String.valueOf(Tps.getTPS())));
                 	}
                 }
             }
