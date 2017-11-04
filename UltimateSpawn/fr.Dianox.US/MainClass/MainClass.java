@@ -57,6 +57,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGJoinCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessage;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGPlayerItems;
+import fr.Dianox.US.MainClass.config.global.ConfigGPlayerOption;
 import fr.Dianox.US.MainClass.config.global.ConfigGProtection;
 import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
@@ -84,8 +85,6 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
-	private MainClass() {}
-	
 	@Override
 	public void onEnable() {
 		getCSC("|=============================");
@@ -93,7 +92,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.3-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.5-Alpha");
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -168,6 +167,9 @@ public class MainClass extends JavaPlugin implements Listener {
 		// >> Event
 		ConfigERespawn.loadConfig((Plugin) this);
 		ConfigServer.loadConfig((Plugin) this);
+		
+		// >> On Join
+		ConfigGPlayerOption.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
@@ -308,6 +310,8 @@ public class MainClass extends JavaPlugin implements Listener {
         WorldUtils.setWGetWorldJoinCommandConsoleNoNew();
         // > DoubleJump
         WorldUtils.setWGetDoubleJumpOnJoin();
+        // > PlayerOption
+        WorldUtils.setPlayerOptionJoin();
         
         // >> DoubleJump
         WorldUtils.setWGetFunDoubleJump();
