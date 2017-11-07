@@ -34,8 +34,7 @@ import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.ConfigTemp;
 import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
-import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJump;
-import fr.Dianox.US.MainClass.config.global.ConfigGFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJumpORFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
 import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
@@ -62,10 +61,10 @@ public class OnJoin implements Listener {
         // Options
         if (!ConfigPlayerOptions.getConfig().contains(String.valueOf(pU))) {
         	ConfigPlayerOptions.getConfig().set(pU+".Player", String.valueOf(p));
-        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Enable", ConfigGFly.getConfig().getBoolean("Fly.Enable"));
-        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Options.SetFlying", ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying"));
-        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Options.SetAllowFlight", ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight"));
-        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.DoubleJump", ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable"));
+        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Enable", ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Enable"));
+        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Options.SetFlying", ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Option.SetFlying"));
+        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Options.SetAllowFlight", ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Option.SetAllowFlight"));
+        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.DoubleJump", ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.DoubleJump.Enable"));
         	if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Enable")) {
         		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Speed", ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.Speed.Enable"));
         		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.JumpBoost", ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Option.JumpBoost.Enable"));
@@ -300,42 +299,70 @@ public class OnJoin implements Listener {
         	}
         }
 
+        String check = ConfigGDoubleJumpORFly.getConfig().getString("FD.FLY_OR_DOUBLEJUMP");
+        
+        if (check.contains("FLY")) {
+        	ConfigGDoubleJumpORFly.getConfig().set("FD.FLY_OR_DOUBLEJUMP", String.valueOf("FLY"));
+        } else if (check.contains("DOUBLEJUMP")) {
+        	ConfigGDoubleJumpORFly.getConfig().set("FD.FLY_OR_DOUBLEJUMP", String.valueOf("DOUBLEJUMP"));
+        } else {
+        	ConfigGDoubleJumpORFly.getConfig().set("FD.FLY_OR_DOUBLEJUMP", String.valueOf("FLY"));
+        	ConfigGDoubleJumpORFly.saveConfigFile();
+        	
+        	Bukkit.getConsoleSender().sendMessage("§cError, in the \"DoubleJump-Fly-OnJoin. yml\"configuration, in the \"FLY_OR_DOUBLEJUMP\" part, it was neither \"FLY\" nor \"DOUBLEJUMP\". By default, the flyer has been set and saved in the config");
+        }
+        
         // Fly
-        if ((ConfigGFly.getConfig().getBoolean("Fly.Enable")) && (gm != 3)) {
-        	if (!ConfigGFly.getConfig().getBoolean("Fly.World.All_World")) {
-	       		if (WorldUtils.getWFly().contains(p.getWorld().getName())) {
-	       			if (ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Enable")) {
-		       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
-		       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight"));
-		       			}
-		       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
-		       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.setFlying"));
-		       			}
-	       			}
-	       		}
+        if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Enable")) {
+        	if (check.contains("FLY")) {
+		        if ((ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Enable")) && (gm != 3)) {
+		        	if (!ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.World.All_World")) {
+			       		if (WorldUtils.getWFly().contains(p.getWorld().getName())) {
+			       			if (ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Enable")) {
+				       			if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Option.SetAllowFlight")) {
+				       				p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight"));
+				       			}
+				       			if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Option.SetFlying")) {
+				       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.setFlying"));
+				       			}
+			       			}
+			       		}
+		        	} else {
+		        		if (ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
+			        		if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Option.SetAllowFlight")) {
+			        			p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight"));
+			       			}
+			       			if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Option.SetFlying")) {
+			       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.setFlying"));
+			       			}
+		        		}
+		        	}
+		        }
         	} else {
-        		if (ConfigPlayerOptions.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-	        		if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetAllowFlight")) {
-	        			p.setAllowFlight(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight"));
-	       			}
-	       			if (ConfigGFly.getConfig().getBoolean("Fly.Option.SetFlying")) {
-	       				p.setFlying(ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.setFlying"));
-	       			}
-        		}
+        		p.setAllowFlight(false);
+        		p.setFlying(false);
+        		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Options.SetAllowFlight", Boolean.valueOf(false));
+	       		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.Fly.Options.setFlying", Boolean.valueOf(false));
         	}
         }
         
         // DoubleJump
-        if ((ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) && (gm != 3)) {
-        	if (!ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.World.All_World")) {
-	       		if (WorldUtils.getWOptionDoubleJumpJoin().contains(p.getWorld().getName())) {
-	       			ConfigPlayerOptions.getConfig().get(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(true));
-	       		}
+        if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Enable")) {
+        	if (check.contains("DOUBLEJUMP")) {
+		        if ((ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.DoubleJump.Enable")) && (gm != 3)) {
+		        	if (!ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.DoubleJump.World.All_World")) {
+			       		if (WorldUtils.getWOptionDoubleJumpJoin().contains(p.getWorld().getName())) {
+			       			ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(true));
+			       		}
+		        	} else {
+		        		ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(true));
+		        	}
+		        } else {
+		        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(false));
+		        }
         	} else {
-        		ConfigPlayerOptions.getConfig().get(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(true));
-        	}
-        } else {
-        	ConfigPlayerOptions.getConfig().get(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(false));
+	        	ConfigPlayerOptions.getConfig().set(pU+".OnJoin.Options.DoubleJump", Boolean.valueOf(false));
+	        }
         }
 
         // Reset XP
@@ -923,35 +950,30 @@ public class OnJoin implements Listener {
        		
         	ConfigTemp.saveConfigFile();
         }
-        if (ConfigGFly.getConfig().getBoolean("Fly.Enable")) {
-        	if (ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
-        		Bukkit.getConsoleSender().sendMessage("You have the fly and doublejump enabled in the plugin configuration files... Only 1 must be activated to avoid problems!");
-        		p.sendMessage("You have the fly and doublejump enabled in the plugin configuration files... Only 1 must be activated to avoid problems!");
-	        }
-        }
         
-        if (ConfigTemp.getConfig().getBoolean(pU+".Options.Fly.Enable")) {
-        	if (ConfigTemp.getConfig().getBoolean(pU+".Options.DoubleJump-Enable")) {
-        		if (ConfigGFly.getConfig().getBoolean("Fly.Enable")) {
-	        		ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(true));
-	        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(true));
-	        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(true));
-	        		
-	        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
-	        		
-	        		p.setFlying(true);
-	        		p.setAllowFlight(true);
-        		} else if (ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
-        			ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
-	        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetFlying", Boolean.valueOf(false));
-	        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
-	        		
-	        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(true));
-	        		
-	        		p.setFlying(false);
-	        		p.setAllowFlight(false);
-        		}
+        if (check.contains("FLY")) {
+        	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(true));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(true));
+        	ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
+        	
+        	if (!ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Enable")) {
+        		ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
         	}
+        	if (!ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.Fly.Options.SetAllowFlight")) {
+        		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+        	}
+        	
+        	ConfigTemp.saveConfigFile();
+        } else if (check.contains("DOUBLEJUMP")) {
+        	ConfigTemp.getConfig().set(pU+".Options.Fly.Enable", Boolean.valueOf(false));
+       		ConfigTemp.getConfig().set(pU+".Options.Fly.SetAllowFlight", Boolean.valueOf(false));
+        	ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(true));
+        	
+        	if (!ConfigPlayerOptions.getConfig().getBoolean(pU+".OnJoin.Options.DoubleJump")) {
+        		ConfigTemp.getConfig().set(pU+".Options.DoubleJump-Enable", Boolean.valueOf(false));
+        	}
+        	
+        	ConfigTemp.saveConfigFile();
         }
     }
     
