@@ -48,8 +48,7 @@ import fr.Dianox.US.MainClass.config.fun.ConfigFDoubleJump;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
-import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJump;
-import fr.Dianox.US.MainClass.config.global.ConfigGFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJumpORFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
 import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
@@ -85,6 +84,8 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
+	String versions = "0.6.6-Alpha";
+	
 	@Override
 	public void onEnable() {
 		getCSC("|=============================");
@@ -92,7 +93,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		String version1 = Bukkit.getServer().getBukkitVersion();
 		this.version = version1;
 		getCSC("| "+ChatColor.AQUA+"Ultimate Spawn load!"+ChatColor.RED+" Please wait!");
-		getCSC("| "+ChatColor.YELLOW+">>> Version 0.6.5-Alpha");
+		getCSC("| "+ChatColor.YELLOW+">>> Version "+versions);
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
@@ -102,7 +103,6 @@ public class MainClass extends JavaPlugin implements Listener {
 		instance = this;
 		
 		ConfigGXP.loadConfig((Plugin) this);
-		ConfigGFly.loadConfig((Plugin) this);
 		ConfigGGM.loadConfig((Plugin) this);
 		ConfigGHF.loadConfig((Plugin) this);
 		ConfigGCos.loadConfig((Plugin) this);
@@ -120,7 +120,6 @@ public class MainClass extends JavaPlugin implements Listener {
 		ConfigGJoinCommand.loadConfig((Plugin) this);
 		ConfigGQuitCommand.loadConfig((Plugin) this);
 		ConfigBlockCommands.loadConfig((Plugin) this);
-		ConfigGDoubleJump.loadConfig((Plugin) this);
 		ConfigCClearChat.loadConfig((Plugin) this);
 		ConfigCSpawn.loadConfig((Plugin) this);
 		ConfigCPing.loadConfig((Plugin) this);
@@ -170,6 +169,7 @@ public class MainClass extends JavaPlugin implements Listener {
 		
 		// >> On Join
 		ConfigGPlayerOption.loadConfig((Plugin) this);
+		ConfigGDoubleJumpORFly.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
@@ -354,6 +354,10 @@ public class MainClass extends JavaPlugin implements Listener {
 	
 	public String getServerVersion() {
 		return version;
+	}
+	
+	public String getPluginVersion() {
+		return versions;
 	}
 	
 }
