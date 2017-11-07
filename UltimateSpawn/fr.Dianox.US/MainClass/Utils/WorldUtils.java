@@ -14,8 +14,7 @@ import fr.Dianox.US.MainClass.config.fun.ConfigFDoubleJump;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
-import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJump;
-import fr.Dianox.US.MainClass.config.global.ConfigGFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJumpORFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
 import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
@@ -120,11 +119,11 @@ public class WorldUtils {
 	}
 	
 	public static void setWGetDoubleJumpOnJoin() {
-		if (ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.Enable")) {
-	        if (!ConfigGDoubleJump.getConfig().getBoolean("DoubleJump.World.All_World")) {
-	            for (String world : ConfigGDoubleJump.getConfig().getStringList("DoubleJump.World.Worlds")) {
+		if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.DoubleJump.Enable")) {
+	        if (!ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.DoubleJump.World.All_World")) {
+	            for (String world : ConfigGDoubleJumpORFly.getConfig().getStringList("FD.DoubleJump.World.Worlds")) {
 	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in DoubleJump-OnJoin.yml, DoubleJump.World: "+world);
+	            		System.out.println("| Invalid world in DoubleJump-Fly-OnJoin.yml, FD.DoubleJump.World: "+world);
 	            	} else {
 	            		worlds_fun_doublejump_onjoin.add(world);
 	            	}
@@ -424,11 +423,11 @@ public class WorldUtils {
 	}
 	
 	public static void setWGetWorldFly() {
-		if (ConfigGFly.getConfig().getBoolean("Fly.Enable")) {
-	        if (!ConfigGFly.getConfig().getBoolean("Fly.World.All_World")) {
-	            for (String world : ConfigGFly.getConfig().getStringList("Fly.World.Worlds")) {
+		if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Enable")) {
+	        if (!ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.World.All_World")) {
+	            for (String world : ConfigGDoubleJumpORFly.getConfig().getStringList("FD.Fly.World.Worlds")) {
 	            	if (Bukkit.getWorld(world) == null) {
-	            		System.out.println("| Invalid world in Fly-OnJoin.yml, Fly.World: "+world);
+	            		System.out.println("| Invalid world in DoubleJump-Fly-OnJoin.yml, FD.Fly.World: "+world);
 	            	} else {
 	            		worlds_Fly.add(world);
 	            	}
