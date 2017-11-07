@@ -33,7 +33,7 @@ import fr.Dianox.US.MainClass.config.fun.ConfigFDoubleJump;
 import fr.Dianox.US.MainClass.config.fun.ConfigFJumpad;
 import fr.Dianox.US.MainClass.config.global.ConfigGActionBar;
 import fr.Dianox.US.MainClass.config.global.ConfigGCos;
-import fr.Dianox.US.MainClass.config.global.ConfigGFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJumpORFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGGM;
 import fr.Dianox.US.MainClass.config.global.ConfigGHF;
 import fr.Dianox.US.MainClass.config.global.ConfigGInventory;
@@ -164,7 +164,6 @@ public class OtherUtils {
           ConfigGTitle.reloadConfig();
           ConfigGGM.reloadConfig();
           ConfigGHF.reloadConfig();
-          ConfigGFly.reloadConfig();
           ConfigGXP.reloadConfig();
           ConfigPlayerStats.reloadConfig();
           ConfigGInventory.reloadConfig();
@@ -218,6 +217,7 @@ public class OtherUtils {
           
           // >> On Join
           ConfigGPlayerOption.reloadConfig();
+          ConfigGDoubleJumpORFly.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
