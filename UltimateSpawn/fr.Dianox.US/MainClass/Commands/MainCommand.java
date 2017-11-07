@@ -34,6 +34,7 @@ public class MainCommand implements CommandExecutor {
          					sender.sendMessage("     §l>> §e§o§lGlobal Help §c(Page 2)");
          					sender.sendMessage("");
          					sender.sendMessage(" §8>> §7/us tps or /tps - §eCheck TPS");
+         					sender.sendMessage(" §8>> §7/us v - §eSee the version of the plugin");
          					sender.sendMessage("");
          					sender.sendMessage(" §l> §c§l/us help ???? x'D");
          					sender.sendMessage("");
@@ -70,6 +71,8 @@ public class MainCommand implements CommandExecutor {
                 	for (String msg: ConfigMServer.getConfig().getStringList("TPS.Normal")) {
                 		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg).replaceAll("%tps%", String.valueOf(Tps.getTPS())));
                 	}
+                } else if (args[0].equalsIgnoreCase("v") || args[0].equalsIgnoreCase("version") || args[0].equalsIgnoreCase("ver")) {
+                	sender.sendMessage("§b"+MainClass.getInstance().getPluginVersion());
                 }
             }
             return true;
@@ -86,7 +89,8 @@ public class MainCommand implements CommandExecutor {
 	    	                p.sendMessage("");
 	    	                p.sendMessage("     §l>> §e§o§lGlobal Help §c(Page 2)");
 	    	                p.sendMessage("");
-	    	                p.sendMessage(" §8>> §7/us tps or /tps - §eCheck TPS");
+	    	                p.sendMessage(" §8>> §7/us tps - §eCheck TPS");
+	    	                p.sendMessage(" §8>> §7/us v - §eSee the version of the plugin");
 	    	                p.sendMessage("");
 	    	                p.sendMessage(" §l> §c§l/us help ???? x'D");
 	    	                p.sendMessage("");
@@ -132,7 +136,9 @@ public class MainCommand implements CommandExecutor {
 	            	for (String msg: ConfigMServer.getConfig().getStringList("TPS.Normal")) {
 	                	 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 	                }
-	            }
+	            } else if (args[0].equalsIgnoreCase("v") || args[0].equalsIgnoreCase("version") || args[0].equalsIgnoreCase("ver")) {
+                	p.sendMessage("§b"+MainClass.getInstance().getPluginVersion());
+                }
         	} else {
             	for (String msg: ConfigMPlugin.getConfig().getStringList("Error.No-Permission")) {
             		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
