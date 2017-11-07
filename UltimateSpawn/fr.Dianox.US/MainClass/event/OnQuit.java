@@ -14,7 +14,7 @@ import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
-import fr.Dianox.US.MainClass.config.global.ConfigGFly;
+import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJumpORFly;
 import fr.Dianox.US.MainClass.config.global.ConfigGMessageQ;
 import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
@@ -27,7 +27,7 @@ public class OnQuit implements Listener {
         Location l = p.getLocation();
         UUID pU = e.getPlayer().getUniqueId();
 
-        if (ConfigGFly.getConfig().getBoolean("Fly.Enable")) {
+        if (ConfigGDoubleJumpORFly.getConfig().getBoolean("FD.Fly.Enable")) {
             p.setAllowFlight(false);
             p.setFlying(false);
         }
