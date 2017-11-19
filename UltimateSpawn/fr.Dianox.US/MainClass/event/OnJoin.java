@@ -13,6 +13,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -49,7 +50,7 @@ import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 public class OnJoin implements Listener {
 	
     @SuppressWarnings("deprecation")
-	@EventHandler
+	@EventHandler(priority=EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         UUID pU = e.getPlayer().getUniqueId();
