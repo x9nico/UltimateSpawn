@@ -48,6 +48,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
+import fr.Dianox.US.MainClass.config.global.cji.ConfigGPlayerVisibility;
 import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
 import fr.Dianox.US.MainClass.config.messages.ConfigMClearChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMConstruct;
@@ -218,6 +219,8 @@ public class OtherUtils {
           // >> On Join
           ConfigGPlayerOption.reloadConfig();
           ConfigGDoubleJumpORFly.reloadConfig();
+          // > Items
+          ConfigGPlayerVisibility.reloadConfig();
 	  }
 	  
 	  public static void fixConfig() {
@@ -242,12 +245,17 @@ public class OtherUtils {
 				  ConfigFDoubleJump.getConfig().set("DoubleJump.Fivefold.Sounds.Sound", "BLOCK_NOTE_HARP");
 				  ConfigFDoubleJump.getConfig().set("DoubleJump.Infinite.Sounds.Sound", "BLOCK_NOTE_HARP");
 			  }
+			  if (ConfigGPlayerVisibility.getConfig().getString("PV.Option.Inventory-Click.Sounds.Sound") == "NOTE_PIANO") {
+				  ConfigGPlayerVisibility.getConfig().set("PV.Option.Inventory-Click.Sounds.Sound", "BLOCK_NOTE_HARP");
+				  ConfigGPlayerVisibility.getConfig().set("PV.Option.Interact-With-Item.Sounds.Sound", "BLOCK_NOTE_HARP");
+			  }
 			  
 			  ConfigFDoubleJump.saveConfigFile();
 			  ConfigGCos.saveConfigFile();
 			  ConfigEVoidTP.saveConfigFile();
 			  ConfigFJumpad.saveConfigFile();
 			  ConfigCAnnounce.saveConfigFile();
+			  ConfigGPlayerVisibility.saveConfigFile();
 		  }
 	  }
 }
