@@ -65,7 +65,7 @@ public class TimeCommand implements CommandExecutor {
 			}
 		}
 		
-		if (cmd.getName().equalsIgnoreCase("sun") || cmd.getName().equalsIgnoreCase("clear")) {
+		if (cmd.getName().equalsIgnoreCase("sun") || cmd.getName().equalsIgnoreCase("clearw")) {
 			if (ConfigCWeatherTime.getConfig().getBoolean("Weather.Set.Sun.Enable")) {
 				if (p.hasPermission("ultimatespawn.command.weather.sun")) {
 					p.getWorld().setThundering(false);
