@@ -28,6 +28,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGQuitCommand;
 import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
+import fr.Dianox.US.MainClass.config.global.cji.ConfigGPlayerVisibility;
 
 public class WorldUtils {
 	
@@ -89,6 +90,21 @@ public class WorldUtils {
 	public static List<String> worlds_fun_doublejump_onjoin = new ArrayList<String>();
 	public static List<String> worlds_respawn = new ArrayList<String>();
 	public static List<String> worlds_playeroption_join = new ArrayList<String>();
+	public static List<String> worlds_po_playervisibility_item = new ArrayList<String>();
+	
+	public static void setItemPlayerVisibility() {
+		if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+	        if (!ConfigGPlayerVisibility.getConfig().getBoolean("PV.World.All_World")) {
+	            for (String world : ConfigGPlayerVisibility.getConfig().getStringList("PV.World.Worlds")) {
+	            	if (Bukkit.getWorld(world) == null) {
+	            		System.out.println("| Invalid world in Player-Visibility-Items-OnJoin.yml, PV.World: "+world);
+	            	} else {
+	            		worlds_po_playervisibility_item.add(world);
+	            	}
+	            }
+	        }
+        }
+	}
 	
 	public static void setPlayerOptionJoin() {
 		if (ConfigGPlayerOption.getConfig().getBoolean("PlayerOption.Enable")) {
@@ -894,6 +910,10 @@ public class WorldUtils {
 	            }
 	        }
         }
+	}
+	
+	public static List<String> getWItemPVOnJoin() {
+		return worlds_po_playervisibility_item;
 	}
 	
 	public static List<String> getWJoinPlayerOption() {
