@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginManager;
 
 import fr.Dianox.US.MainClass.event.BasicFeatures;
 import fr.Dianox.US.MainClass.event.ChangeWorldEvent;
+import fr.Dianox.US.MainClass.event.CustomJoinItem;
 import fr.Dianox.US.MainClass.event.FunFeatures;
 import fr.Dianox.US.MainClass.event.LittlesEvent;
 import fr.Dianox.US.MainClass.event.OnChat;
@@ -30,5 +31,6 @@ public class Manager {
 		pm.registerEvents(new LittlesEvent(), pl);
 		pm.registerEvents(new ChangeWorldEvent(), pl);
 		pm.registerEvents(new OnCommand(), pl);
+		pm.registerEvents(new CustomJoinItem(), pl);
 	}
 }
