@@ -65,6 +65,7 @@ public class ConfigMPlayerOption {
             		" &8>> &7/option doublejump - &eEnable or disable the doublejump",
             		" &8>> &7/option speed - &eEnable or disable the speed",
             		" &8>> &7/option jumpboost - &eEnable or disable the jumpboost",
+            		" &8>> &7/option pv - &eEnable or disable player visibility",
             		"",
             		"&8\\\\&7&m---------------&r&8// &3[&bPlayerOption&3] &8\\\\&7&m---------------&r&8//"}));
             Config.set("PlayerOption.DoubleJump.Enable", java.util.Arrays.asList(new String[] {"&aYour doublejump has been activated"}));
@@ -73,9 +74,14 @@ public class ConfigMPlayerOption {
             Config.set("PlayerOption.Speed.Disable", java.util.Arrays.asList(new String[] {"&cYour speed has been disabled"}));
             Config.set("PlayerOption.JumpBoost.Enable", java.util.Arrays.asList(new String[] {"&aYour jumpboost has been activated"}));
             Config.set("PlayerOption.JumpBoost.Disable", java.util.Arrays.asList(new String[] {"&cYour jumpboost has been disabled"}));
+            Config.set("PlayerOption.PlayerVisibility.ON", java.util.Arrays.asList(new String[] {"&aOh boy, are the players gone ?"}));
+            Config.set("PlayerOption.PlayerVisibility.OFF", java.util.Arrays.asList(new String[] {"&ePlayers are visible again"}));
             Config.set("PlayerOption.Error.DoubleJump-Fly", java.util.Arrays.asList(new String[] {"&c&lYou&7 have the fly and doublejump activated, please deactivate one or the other."}));
             Config.set("PlayerOption.Error.DoubleJump", java.util.Arrays.asList(new String[] {"&c&lYou&7 cannot activate your doublejump because the fly is active!"}));
             Config.set("PlayerOption.Error.Fly", java.util.Arrays.asList(new String[] {"&c&lYou&7 cannot activate your fly because the doublejump is active!"}));
+            Config.set("PlayerOption.Error.Player-Visibility.Time", java.util.Arrays.asList(new String[] {"&c&lPlease wait &4%timedelaypvcji% &c&lseconds!"}));
+            Config.set("PlayerOption.Error.Player-Visibility.Time-Command", java.util.Arrays.asList(new String[] {"&c&lPlease wait &4%timedelaypvcommands% &c&lseconds!"}));
+            Config.set("PlayerOption.Config_version_NEVER_TOUCH_HERE", Integer.valueOf(1));
             
             saveConfigFile();
 
