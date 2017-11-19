@@ -9,6 +9,8 @@ import fr.Dianox.US.MainClass.Commands.PingCommand;
 import fr.Dianox.US.MainClass.Commands.Chat.DelaychatCommand;
 import fr.Dianox.US.MainClass.Utils.Server.Tps;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
+import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
+import fr.Dianox.US.MainClass.config.global.cji.ConfigGPlayerVisibility;
 import me.clip.placeholderapi.PlaceholderAPI;
 
 public class PlaceHolderMessageUtils {
@@ -25,6 +27,8 @@ public class PlaceHolderMessageUtils {
 					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
 					.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
+					.replaceAll("%timedelaypvcji%", String.valueOf(ConfigGPlayerVisibility.getConfig().getInt("PV.Option.Item-Delay.Delay")))
+					.replaceAll("%timedelaypvcommands%", String.valueOf(ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")))
 					));
 		} else {
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', str
@@ -33,6 +37,8 @@ public class PlaceHolderMessageUtils {
 					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
 					.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
+					.replaceAll("%timedelaypvcji%", String.valueOf(ConfigGPlayerVisibility.getConfig().getInt("PV.Option.Item-Delay.Delay")))
+					.replaceAll("%timedelaypvcommands%", String.valueOf(ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")))
 					));
 		}
 	}
@@ -45,6 +51,8 @@ public class PlaceHolderMessageUtils {
 						.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 						.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
 						.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
+						.replaceAll("%timedelaypvcji%", String.valueOf(ConfigGPlayerVisibility.getConfig().getInt("PV.Option.Item-Delay.Delay")))
+						.replaceAll("%timedelaypvcommands%", String.valueOf(ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")))
 						));
 			}
 		} else {
@@ -54,6 +62,8 @@ public class PlaceHolderMessageUtils {
 						.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 						.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
 						.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
+						.replaceAll("%timedelaypvcji%", String.valueOf(ConfigGPlayerVisibility.getConfig().getInt("PV.Option.Item-Delay.Delay")))
+						.replaceAll("%timedelaypvcommands%", String.valueOf(ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")))
 						);
 			}
 		}
@@ -66,6 +76,8 @@ public class PlaceHolderMessageUtils {
 					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(player)))
 					.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
+					.replaceAll("%timedelaypvcji%", String.valueOf(ConfigGPlayerVisibility.getConfig().getInt("PV.Option.Item-Delay.Delay")))
+					.replaceAll("%timedelaypvcommands%", String.valueOf(ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")))
 					));
 		} else {
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', str)
@@ -73,6 +85,8 @@ public class PlaceHolderMessageUtils {
 					.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 					.replaceAll("%ping%", String.valueOf(PingCommand.getPing(player)))
 					.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
+					.replaceAll("%timedelaypvcji%", String.valueOf(ConfigGPlayerVisibility.getConfig().getInt("PV.Option.Item-Delay.Delay")))
+					.replaceAll("%timedelaypvcommands%", String.valueOf(ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")))
 					);
 		}
 	}
@@ -85,6 +99,8 @@ public class PlaceHolderMessageUtils {
 						.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 						.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
 						.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
+						.replaceAll("%timedelaypvcji%", String.valueOf(ConfigGPlayerVisibility.getConfig().getInt("PV.Option.Item-Delay.Delay")))
+						.replaceAll("%timedelaypvcommands%", String.valueOf(ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")))
 						));
 			}
 		} else {
@@ -94,9 +110,12 @@ public class PlaceHolderMessageUtils {
 						.replaceAll("%DELAY%", String.valueOf(DelaychatCommand.delay))
 						.replaceAll("%ping%", String.valueOf(PingCommand.getPing(p)))
 						.replaceAll("%tps%", String.valueOf(Tps.getTPS()))
+						.replaceAll("%timedelaypvcji%", String.valueOf(ConfigGPlayerVisibility.getConfig().getInt("PV.Option.Item-Delay.Delay")))
+						.replaceAll("%timedelaypvcommands%", String.valueOf(ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")))
 						);
 			}
 		}
 	}
 
 }
+
