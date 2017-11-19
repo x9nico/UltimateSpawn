@@ -63,6 +63,7 @@ import fr.Dianox.US.MainClass.config.global.ConfigGServerEvent;
 import fr.Dianox.US.MainClass.config.global.ConfigGSpawn;
 import fr.Dianox.US.MainClass.config.global.ConfigGTitle;
 import fr.Dianox.US.MainClass.config.global.ConfigGXP;
+import fr.Dianox.US.MainClass.config.global.cji.ConfigGPlayerVisibility;
 import fr.Dianox.US.MainClass.config.messages.ConfigMAnnounce;
 import fr.Dianox.US.MainClass.config.messages.ConfigMClearChat;
 import fr.Dianox.US.MainClass.config.messages.ConfigMConstruct;
@@ -84,7 +85,7 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
-	String versions = "0.6.6-Alpha";
+	String versions = "0.6.7-Alpha";
 	
 	@Override
 	public void onEnable() {
@@ -97,6 +98,9 @@ public class MainClass extends JavaPlugin implements Listener {
 		getCSC("|");
 		getCSC("| "+ChatColor.YELLOW+">> Bukkit version "+version);
 		getCSC("|");
+		
+		@SuppressWarnings("unused")
+		Metrics metrics = new Metrics(this);
 		
 		super.onEnable();
 		
@@ -170,6 +174,8 @@ public class MainClass extends JavaPlugin implements Listener {
 		// >> On Join
 		ConfigGPlayerOption.loadConfig((Plugin) this);
 		ConfigGDoubleJumpORFly.loadConfig((Plugin) this);
+		// > Items
+		ConfigGPlayerVisibility.loadConfig((Plugin) this);
 		getCSC("| "+ChatColor.YELLOW+"All configuration files have been loaded :o");
 		
 		getCSC("|");
@@ -224,6 +230,8 @@ public class MainClass extends JavaPlugin implements Listener {
         if (ConfigServer.getConfig().getBoolean("Tps.Warn-system")) {
         	Warn.runWarnSystemTask(this);
         }
+        
+        
         
         getCSC("| "+ChatColor.YELLOW+"And many things.... I think... x'D");
 		getCSC("|");
@@ -312,6 +320,8 @@ public class MainClass extends JavaPlugin implements Listener {
         WorldUtils.setWGetDoubleJumpOnJoin();
         // > PlayerOption
         WorldUtils.setPlayerOptionJoin();
+        // > Items
+        WorldUtils.setItemPlayerVisibility();
         
         // >> DoubleJump
         WorldUtils.setWGetFunDoubleJump();
