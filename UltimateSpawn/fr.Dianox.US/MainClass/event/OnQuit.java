@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import fr.Dianox.US.MainClass.Utils.OtherUtils;
 import fr.Dianox.US.MainClass.Utils.PlaceHolderMessageUtils;
 import fr.Dianox.US.MainClass.Utils.WorldUtils;
+import fr.Dianox.US.MainClass.Utils.NeedLobby.PlayerVisibility;
 import fr.Dianox.US.MainClass.config.ConfigGlobal;
 import fr.Dianox.US.MainClass.config.ConfigPlayerStats;
 import fr.Dianox.US.MainClass.config.global.ConfigGDoubleJumpORFly;
@@ -101,6 +102,9 @@ public class OnQuit implements Listener {
     			}
         	}
         }
+        
+        PlayerVisibility.Cooling().remove(p.getName());
+        PlayerVisibility.getPlayerVisibility().remove(p);
         
         // Stats
         if (ConfigGlobal.getConfig().getBoolean("Plugin.Create.Stats")) {
