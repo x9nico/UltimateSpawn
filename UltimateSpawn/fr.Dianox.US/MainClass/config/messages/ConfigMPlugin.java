@@ -66,7 +66,9 @@ public class ConfigMPlugin {
             Config.set("Error.No-Permission", java.util.Arrays.asList(new String[] {"&cSorry, but you don't have the permission !"}));
             Config.set("Error.Spawn-not-set", java.util.Arrays.asList(new String[] {"&cSorry, the spawn isn't set"}));
             Config.set("Error.Command-disable", java.util.Arrays.asList(new String[] {"&cSorry, this command is disable"}));
+            Config.set("Error.Unknown-Error", java.util.Arrays.asList(new String[] {"&cAn error has momentarily arisen... Please try again", "&cOtherwise disconnect and reconnect yourself"}));
             Config.set("Error.Arguments-Missing", java.util.Arrays.asList(new String[] {"&cI'm sorry, but there must be one or two arguments missing."}));
+            Config.set("Config_version_NEVER_TOUCH_HERE", Integer.valueOf(1));
             
             saveConfigFile();
 
