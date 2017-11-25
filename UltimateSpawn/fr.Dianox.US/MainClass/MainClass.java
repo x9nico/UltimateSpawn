@@ -85,7 +85,7 @@ public class MainClass extends JavaPlugin implements Listener {
 	public static String nmsver;
 	public boolean useOldMethods = false;
 	
-	String versions = "0.6.7-Alpha";
+	String versions = "0.6.8-Alpha";
 	
 	@Override
 	public void onEnable() {
