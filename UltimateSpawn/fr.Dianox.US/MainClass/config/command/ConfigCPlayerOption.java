@@ -67,11 +67,11 @@ public class ConfigCPlayerOption {
             Config.set("PlayerOption.JumpBoost.Enable", Boolean.valueOf(true));
             Config.set("PlayerOption.JumpBoost.Amplifier", Integer.valueOf(1));
             Config.set("PlayerOption.JumpBoost.Use_Permission", Boolean.valueOf(false));
-            Config.set("PlayerOption.PlayerVisivility.Enable", Boolean.valueOf(true));
-            Config.set("PlayerOption.PlayerVisivility.Messages", Boolean.valueOf(true));
-            Config.set("PlayerOption.PlayerVisivility.Delay.Enable", Boolean.valueOf(true));
-            Config.set("PlayerOption.PlayerVisivility.Delay.Delay", Integer.valueOf(3));
-            Config.set("PlayerOption.PlayerVisivility.Use_Permission", Boolean.valueOf(false));
+            Config.set("PlayerOption.PlayerVisibility.Enable", Boolean.valueOf(true));
+            Config.set("PlayerOption.PlayerVisibility.Messages", Boolean.valueOf(true));
+            Config.set("PlayerOption.PlayerVisibility.Delay.Enable", Boolean.valueOf(true));
+            Config.set("PlayerOption.PlayerVisibility.Delay.Delay", Integer.valueOf(3));
+            Config.set("PlayerOption.PlayerVisibility.Use_Permission", Boolean.valueOf(false));
             Config.set("PlayerOption.Disable-Message", Boolean.valueOf(false));
             Config.set("PlayerOption.Config_version_NEVER_TOUCH_HERE", Integer.valueOf(1));
             
