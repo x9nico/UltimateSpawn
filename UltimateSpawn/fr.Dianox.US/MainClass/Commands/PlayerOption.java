@@ -329,11 +329,11 @@ public class PlayerOption implements CommandExecutor {
 						 }
 					 }
 				 } else if (args[0].equalsIgnoreCase("pv")) {
-					 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Enable")) {
-						 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Use_Permission")) {
+					 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Enable")) {
+						 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Use_Permission")) {
 							 if (p.hasPermission("ultimatespawn.command.playeroption.playervisibility")) {
 								 if (PlayerVisibility.getPlayerVisibility().contains(p)) {
-									 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+									 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 										 if (PlayerVisibility.Cooling().contains(name)) {
 											 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.Player-Visibility.Time-Command")) {
 												 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
@@ -341,7 +341,7 @@ public class PlayerOption implements CommandExecutor {
 										 } else {
 											 PlayerVisibility.Cooling().add(name);
 											 PlayerVisibility.hidePlayer(p);
-											 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Messages")) {
+											 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Messages")) {
 												 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.ON")) {
 													 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 												 }
@@ -353,12 +353,12 @@ public class PlayerOption implements CommandExecutor {
 													 PlayerVisibility.Cooling().remove(name);
 												 }
 													
-											 }, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+											 }, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 											 swithPVItemsOnJoinToON(p);
 										 }
 									 } else {
 										 PlayerVisibility.hidePlayer(p);
-										 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Messages")) {
+										 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Messages")) {
 											 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.ON")) {
 												 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 											 }
@@ -366,7 +366,7 @@ public class PlayerOption implements CommandExecutor {
 										 swithPVItemsOnJoinToON(p);
 									 }
 								 } else {
-									 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+									 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 										 if (PlayerVisibility.Cooling().contains(name)) {
 											 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.Player-Visibility.Time-Command")) {
 												 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
@@ -374,7 +374,7 @@ public class PlayerOption implements CommandExecutor {
 										 } else {
 											 PlayerVisibility.Cooling().add(name);
 											 PlayerVisibility.showPlayer(p);
-											 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Messages")) {
+											 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Messages")) {
 												 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.ON")) {
 													 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 												 }
@@ -386,12 +386,12 @@ public class PlayerOption implements CommandExecutor {
 													 PlayerVisibility.Cooling().remove(name);
 												 }
 													
-											 }, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+											 }, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 											 swithPVItemsOnJoinToOFF(p);
 										 }
 									 } else {
 										 PlayerVisibility.showPlayer(p);
-										 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Messages")) {
+										 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Messages")) {
 											 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.ON")) {
 												 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 											 }
@@ -401,73 +401,71 @@ public class PlayerOption implements CommandExecutor {
 								 }
 							 }
 						 } else {
-							 if (p.hasPermission("ultimatespawn.command.playeroption.playervisibility")) {
-								 if (PlayerVisibility.getPlayerVisibility().contains(p)) {
-									 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
-										 if (PlayerVisibility.Cooling().contains(name)) {
-											 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.Player-Visibility.Time-Command")) {
-												 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
-											 }
-										 } else {
-											 PlayerVisibility.Cooling().add(name);
-											 PlayerVisibility.hidePlayer(p);
-											 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Messages")) {
-												 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.ON")) {
-													 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
-												 }
-											 }
-											 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
-												 
-												 @Override
-												 public void run() {
-													 PlayerVisibility.Cooling().remove(name);
-												 }
-													
-											 }, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
-											 swithPVItemsOnJoinToON(p);
+							 if (PlayerVisibility.getPlayerVisibility().contains(p)) {
+								 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
+									 if (PlayerVisibility.Cooling().contains(name)) {
+										 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.Player-Visibility.Time-Command")) {
+											 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 										 }
 									 } else {
+										 PlayerVisibility.Cooling().add(name);
 										 PlayerVisibility.hidePlayer(p);
-										 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Messages")) {
+										 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Messages")) {
 											 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.ON")) {
 												 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 											 }
 										 }
+										 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
+											 
+											 @Override
+											 public void run() {
+												 PlayerVisibility.Cooling().remove(name);
+											 }
+													
+										 }, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 										 swithPVItemsOnJoinToON(p);
 									 }
 								 } else {
-									 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
-										 if (PlayerVisibility.Cooling().contains(name)) {
-											 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.Player-Visibility.Time-Command")) {
-												 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
-											 }
-										 } else {
-											 PlayerVisibility.Cooling().add(name);
-											 PlayerVisibility.showPlayer(p);
-											 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Messages")) {
-												 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.OFF")) {
-													 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
-												 }
-											 }
-											 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
-												 
-												 @Override
-												 public void run() {
-													 PlayerVisibility.Cooling().remove(name);
-												 }
-													
-											 }, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
-											 swithPVItemsOnJoinToOFF(p);
+									 PlayerVisibility.hidePlayer(p);
+									 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Messages")) {
+										 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.ON")) {
+											 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+										 }
+									 }
+									 swithPVItemsOnJoinToON(p);
+								 }
+							 } else {
+								 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
+									 if (PlayerVisibility.Cooling().contains(name)) {
+										 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.Error.Player-Visibility.Time-Command")) {
+											 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 										 }
 									 } else {
+										 PlayerVisibility.Cooling().add(name);
 										 PlayerVisibility.showPlayer(p);
-										 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Messages")) {
+										 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Messages")) {
 											 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.OFF")) {
 												 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
 											 }
 										 }
+										 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
+											 
+											 @Override
+											 public void run() {
+												 PlayerVisibility.Cooling().remove(name);
+											 }
+													
+										 }, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 										 swithPVItemsOnJoinToOFF(p);
 									 }
+								 } else {
+									 PlayerVisibility.showPlayer(p);
+									 if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Messages")) {
+										 for (String msg: ConfigMPlayerOption.getConfig().getStringList("PlayerOption.PlayerVisibility.OFF")) {
+											 PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+										 }
+									 }
+									 swithPVItemsOnJoinToOFF(p);
 								 }
 							 }
 						 }
@@ -492,29 +490,69 @@ public class PlayerOption implements CommandExecutor {
 	}
 	
 	public static void swithPVItemsOnJoinToON(Player p) {
-		if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
-			for (int i = 0 ; i <= 35; ++i) {
-				if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.Check) {
-					p.getInventory().clear(i);
-					CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
-							(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
-							i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
-					break;
+		try {
+			if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+				for (int i = 0 ; i <= 35; ++i) {
+					if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.Check) {
+						p.getInventory().clear(i);
+						CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
+								(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
+								i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
+						break;
+					}
 				}
+			}
+		} catch (Exception e) {
+			try {
+				if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+					for (int i = 0 ; i <= 35; ++i) {
+						if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.Check) {
+							p.getInventory().clear(i);
+							CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
+									(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
+									i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
+							break;
+						}
+					}
+				}
+			} catch (Exception e1) {
+				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Unknown-Error")) {
+		    		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		    	}
 			}
 		}
 	}
 	
 	public static void swithPVItemsOnJoinToOFF(Player p) {
-		if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
-			for (int i = 0 ; i <= 35; ++i) {
-				if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.CheckTwo) {
-					p.getInventory().clear(i);
-					CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
-							(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
-							i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
-					break;
+		try {
+			if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+				for (int i = 0 ; i <= 35; ++i) {
+					if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.CheckTwo) {
+						p.getInventory().clear(i);
+						CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
+								(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
+								i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
+						break;
+					}
 				}
+			}
+		} catch (Exception e) {
+			try {
+				if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+					for (int i = 0 ; i <= 35; ++i) {
+						if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.CheckTwo) {
+							p.getInventory().clear(i);
+							CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
+									(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
+									i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
+							break;
+						}
+					}
+				}
+			} catch (Exception e1) {
+				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Unknown-Error")) {
+		    		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		    	}
 			}
 		}
 	}
