@@ -30,19 +30,19 @@ public class MuteChatCommand implements CommandExecutor {
 			if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Enable")) {
 				if (p.hasPermission("ultimatespawn.command.mutechat")) {
 					if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Mute.Enable")) {
-						for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.On")) {
+						for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.Off")) {
 							Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
 						}
-						for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.On")) {
-							PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(msg, Bukkit.getServer());
+						for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.Off")) {
+							PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(msg, Bukkit.getServer(), p);
 						}
 						ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(false));
 					} else {
-						for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.Off")) {
+						for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.On")) {
 							Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
 						}
-						for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.Off")) {
-							PlaceHolderMessageUtils.ReplaceCharBroadcastPlayer(msg, Bukkit.getServer());
+						for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.On")) {
+							PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerMoreGeneral(msg, Bukkit.getServer(), p);
 						}
 						ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(true));
 					}
@@ -65,18 +65,18 @@ public class MuteChatCommand implements CommandExecutor {
 	
 	public void consoleMuteChatGLobal() {
 		if (ConfigCMuteChat.getConfig().getBoolean("MuteChat.Mute.Enable")) {
-			for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.On")) {
+			for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.Off")) {
 				Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
 			}
-			for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.On")) {
+			for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.Off")) {
 				PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerExceptionConsole(msg, Bukkit.getServer());
 			}
 			ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(false));
 		} else {
-			for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.Off")) {
+			for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.On")) {
 				Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
 			}
-			for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.Off")) {
+			for (String msg: ConfigMMuteChat.getConfig().getStringList("MuteChat.Admin.On")) {
 				PlaceHolderMessageUtils.ReplaceCharBroadcastPlayerExceptionConsole(msg, Bukkit.getServer());
 			}
 			ConfigCMuteChat.getConfig().set("MuteChat.Mute.Enable", Boolean.valueOf(true));
