@@ -57,8 +57,8 @@ public class ConfigMMuteChat {
             }
             
             Config.set("MuteChat.Can-t-Speak", java.util.Arrays.asList(new String[] {"&cThe chat is disable"}));
-            Config.set("MuteChat.Admin.On", java.util.Arrays.asList(new String[] {"&aGlobal mute has been enabled by %player%!"}));
-            Config.set("MuteChat.Admin.Off", java.util.Arrays.asList(new String[] {"&cGlobal mute has been disabled by %player%!"}));
+            Config.set("MuteChat.Admin.On", java.util.Arrays.asList(new String[] {"&cThe chat has been disabled by %player%!"}));
+            Config.set("MuteChat.Admin.Off", java.util.Arrays.asList(new String[] {"&aThe chat has been enabled by %player%!"}));
             
             saveConfigFile();
 
