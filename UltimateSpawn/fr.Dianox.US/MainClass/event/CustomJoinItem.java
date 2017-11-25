@@ -16,7 +16,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -27,6 +26,7 @@ import fr.Dianox.US.MainClass.Utils.NeedLobby.PlayerVisibility;
 import fr.Dianox.US.MainClass.config.command.ConfigCPlayerOption;
 import fr.Dianox.US.MainClass.config.global.cji.ConfigGPlayerVisibility;
 import fr.Dianox.US.MainClass.config.messages.ConfigMPlayerOption;
+import fr.Dianox.US.MainClass.config.messages.ConfigMPlugin;
 
 public class CustomJoinItem implements Listener {
 
@@ -109,7 +109,7 @@ public class CustomJoinItem implements Listener {
 										messageitemPVON(p);
 									}
 									if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.Item-Delay.Take-Delay-Of-The-Command")) {
-										if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+										if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 											Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 			
 												@Override
@@ -117,7 +117,7 @@ public class CustomJoinItem implements Listener {
 													PlayerVisibility.Cooling().remove(name);
 												}
 												
-											}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+											}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 										} else {
 											Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 												
@@ -164,7 +164,7 @@ public class CustomJoinItem implements Listener {
 										messageitemPVOFF(p);
 									}
 									if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.Item-Delay.Take-Delay-Of-The-Command")) {
-										if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+										if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 											Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 			
 												@Override
@@ -172,7 +172,7 @@ public class CustomJoinItem implements Listener {
 													PlayerVisibility.Cooling().remove(name);
 												}
 												
-											}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+											}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 										} else {
 											Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 												
@@ -222,7 +222,7 @@ public class CustomJoinItem implements Listener {
 									messageitemPVON(p);
 								}
 								if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.Item-Delay.Take-Delay-Of-The-Command")) {
-									if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+									if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 										Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 		
 											@Override
@@ -230,7 +230,7 @@ public class CustomJoinItem implements Listener {
 												PlayerVisibility.Cooling().remove(name);
 											}
 											
-										}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+										}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 									} else {
 										Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 											
@@ -277,7 +277,7 @@ public class CustomJoinItem implements Listener {
 									messageitemPVOFF(p);
 								}
 								if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.Item-Delay.Take-Delay-Of-The-Command")) {
-									if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+									if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 										Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 		
 											@Override
@@ -285,7 +285,7 @@ public class CustomJoinItem implements Listener {
 												PlayerVisibility.Cooling().remove(name);
 											}
 											
-										}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+										}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 									} else {
 										Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 											
@@ -346,7 +346,7 @@ public class CustomJoinItem implements Listener {
 										messageitemPVON(p);
 									}
 									if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.Item-Delay.Take-Delay-Of-The-Command")) {
-										if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+										if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 											Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 			
 												@Override
@@ -354,7 +354,7 @@ public class CustomJoinItem implements Listener {
 													PlayerVisibility.Cooling().remove(name);
 												}
 												
-											}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+											}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 										} else {
 											Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 												
@@ -399,7 +399,7 @@ public class CustomJoinItem implements Listener {
 										messageitemPVOFF(p);
 									}
 									if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.Item-Delay.Take-Delay-Of-The-Command")) {
-										if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+										if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 											Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 			
 												@Override
@@ -407,7 +407,7 @@ public class CustomJoinItem implements Listener {
 													PlayerVisibility.Cooling().remove(name);
 												}
 												
-											}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+											}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 										} else {
 											Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 												
@@ -455,7 +455,7 @@ public class CustomJoinItem implements Listener {
 									messageitemPVON(p);
 								}
 								if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.Item-Delay.Take-Delay-Of-The-Command")) {
-									if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+									if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 										Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 		
 											@Override
@@ -463,7 +463,7 @@ public class CustomJoinItem implements Listener {
 												PlayerVisibility.Cooling().remove(name);
 											}
 											
-										}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+										}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 									} else {
 										Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 											
@@ -508,7 +508,7 @@ public class CustomJoinItem implements Listener {
 									messageitemPVOFF(p);
 								}
 								if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.Item-Delay.Take-Delay-Of-The-Command")) {
-									if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisivility.Delay.Enable")) {
+									if (ConfigCPlayerOption.getConfig().getBoolean("PlayerOption.PlayerVisibility.Delay.Enable")) {
 										Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 		
 											@Override
@@ -516,7 +516,7 @@ public class CustomJoinItem implements Listener {
 												PlayerVisibility.Cooling().remove(name);
 											}
 											
-										}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisivility.Delay.Delay")*20);
+										}, ConfigCPlayerOption.getConfig().getInt("PlayerOption.PlayerVisibility.Delay.Delay")*20);
 									} else {
 										Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MainClass.getInstance(), new Runnable() {
 											
@@ -552,24 +552,23 @@ public class CustomJoinItem implements Listener {
 		}
 	}
 	
-	@EventHandler
-	public void onPlayerJoinEvent(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
-		
+	public static void PlayerGivePlayerVisibilityItemOnJoin(Player p) {		
 		if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
 			if (!ConfigGPlayerVisibility.getConfig().getBoolean("PV.World.All_World")) {
 				if (WorldUtils.getWItemPVOnJoin().contains(p.getWorld().getName())) {
 					if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Use_Permission")) {
-						if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.OnJoin-ShowPlayers")) {
-							CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
-									(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
-									ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Slot"), p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
-							PlayerVisibility.showPlayer(p);
-						} else {
-							CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
-									(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
-									ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Slot"), p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
-							PlayerVisibility.hidePlayer(p);
+						if (p.hasPermission("ultimatespawn.event.onjoin.item.playervisibility")) {
+							if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.OnJoin-ShowPlayers")) {
+								CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
+										(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
+										ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Slot"), p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
+								PlayerVisibility.showPlayer(p);
+							} else {
+								CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
+										(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
+										ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Slot"), p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
+								PlayerVisibility.hidePlayer(p);
+							}
 						}
 					} else {
 						if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.OnJoin-ShowPlayers")) {
@@ -587,16 +586,18 @@ public class CustomJoinItem implements Listener {
 				}
 			} else {
 				if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Use_Permission")) {
-					if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.OnJoin-ShowPlayers")) {
-						CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
-								(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
-								ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Slot"), p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
-						PlayerVisibility.showPlayer(p);
-					} else {
-						CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
-								(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
-								ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Slot"), p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
-						PlayerVisibility.hidePlayer(p);
+					if (p.hasPermission("ultimatespawn.event.onjoin.item.playervisibility")) {
+						if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.OnJoin-ShowPlayers")) {
+							CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
+									(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
+									ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Slot"), p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
+							PlayerVisibility.showPlayer(p);
+						} else {
+							CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
+									(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
+									ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Slot"), p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
+							PlayerVisibility.hidePlayer(p);
+						}
 					}
 				} else {
 					if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Option.OnJoin-ShowPlayers")) {
@@ -616,25 +617,69 @@ public class CustomJoinItem implements Listener {
 	}
 	
 	public static void swithPVItemsOnJoinToON(Player p) {
-		for (int i = 0 ; i <= 35; ++i) {
-			if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.Check) {
-				p.getInventory().clear(i);
-				CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
-						(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
-						i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
-				break;
+		try {
+			if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+				for (int i = 0 ; i <= 35; ++i) {
+					if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.Check) {
+						p.getInventory().clear(i);
+						CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
+								(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
+								i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
+						break;
+					}
+				}
+			}
+		} catch (Exception e) {
+			try {
+				if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+					for (int i = 0 ; i <= 35; ++i) {
+						if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.Check) {
+							p.getInventory().clear(i);
+							CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.ON.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Amount"), (short) 1, 
+									(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.ON.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.ON.Name"), 
+									i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.ON.Lore"));
+							break;
+						}
+					}
+				}
+			} catch (Exception e1) {
+				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Unknown-Error")) {
+		    		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		    	}
 			}
 		}
 	}
 	
 	public static void swithPVItemsOnJoinToOFF(Player p) {
-		for (int i = 0 ; i <= 35; ++i) {
-			if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.CheckTwo) {
-				p.getInventory().clear(i);
-				CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
-						(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
-						i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
-				break;
+		try {
+			if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+				for (int i = 0 ; i <= 35; ++i) {
+					if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.CheckTwo) {
+						p.getInventory().clear(i);
+						CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
+								(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
+								i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
+						break;
+					}
+				}
+			}
+		} catch (Exception e) {
+			try {
+				if (ConfigGPlayerVisibility.getConfig().getBoolean("PV.Enable")) {
+					for (int i = 0 ; i <= 35; ++i) {
+						if (p.getInventory().getItem(i).getItemMeta().getDisplayName() == CustomJoinItem.CheckTwo) {
+							p.getInventory().clear(i);
+							CustomJoinItem.CreateItems(Material.getMaterial(ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Material.Meterial")), ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Amount"), (short) 1, 
+									(byte) ConfigGPlayerVisibility.getConfig().getInt("PV.OFF.Material.Data"), ConfigGPlayerVisibility.getConfig().getString("PV.OFF.Name"), 
+									i, p, ConfigGPlayerVisibility.getConfig().getStringList("PV.OFF.Lore"));
+							break;
+						}
+					}
+				}
+			} catch (Exception e1) {
+				for (String msg: ConfigMPlugin.getConfig().getStringList("Error.Unknown-Error")) {
+		    		PlaceHolderMessageUtils.ReplaceCharMessagePlayer(msg, p);
+		    	}
 			}
 		}
 	}
