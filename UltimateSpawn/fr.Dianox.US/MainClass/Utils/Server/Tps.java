@@ -16,6 +16,9 @@ public class Tps implements Runnable {
 		}
 		int target = (TICK_COUNT - 1 - ticks) % TICKS.length;
 		long elapsed = System.currentTimeMillis() - TICKS[target];
+		if (elapsed < 0) {
+			elapsed = 0;
+		}
 		return ticks / (elapsed / 1000.0D);
 	}
 	
